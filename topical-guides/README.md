@@ -1,2 +1,4 @@
-Docs that are more in-depth than the tutorials, similar to the docs at
-clojure.org.
+Docs which are more in-depth and comprehensive than the tutorials.
+
+Topical guides are not reference material, which can already be found
+at Clojuredocs.
