@@ -10,7 +10,6 @@ What's *not* here:
     [clojure.org/cheatsheet](http://clojure.org/cheatsheet), or with
     tooltips at
     [jafingerhut.github.com/](http://jafingerhut.github.com/).
-
   * API reference docs. Those can be found (with examples) at
     [Clojuredocs](http://clojuredocs.org/).
 
