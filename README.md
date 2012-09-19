@@ -23,5 +23,4 @@ If you are the primary author of a document, please make sure there's
 an `# Author` section near the end with your name in it.
 
 If you are contributing to a document, please make sure there's a `#
-Contributors` section near the end (after the `# Author` section) with
-your name in it.
+Contributors` section near the end with your name in it.
