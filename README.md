@@ -16,6 +16,9 @@ What's *not* here:
 All docs in the clojure-docs-collection are distributed under the
 *{TBD}* license and are copyright their respective primary author(s).
 
+For some guidance on writing great documentation, see
+<http://jacobian.org/writing/great-documentation/>.
+
 If you are the primary author of a document, please make sure there's
 an `# Author` section near the end with your name in it.
 
