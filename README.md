@@ -1,4 +1,4 @@
-# Clojure Docs Collection
+# CDS: Clojure Docs Site
 
 An assorted collection of tutorials, overviews, topical guides, and
 other documentation (all by various authors) for the Clojure
