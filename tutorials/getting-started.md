@@ -12,7 +12,7 @@ Then install the [Leiningen](http://leiningen.org/) project management
 tool. Clojure programs are typically developed inside their own
 project directory, and Leiningen manages projects for you. Lein takes
 care of pulling in dependencies (including Clojure itself), running
-the repl, running your program and its tests, packaging your programs
+the repl, running your program and its tests, packaging your program
 for distribution, and other administrative tasks.
 
 
