@@ -23,8 +23,9 @@ and are copyright their respective primary author(s).
 For some guidance on writing great documentation, see
 <http://jacobian.org/writing/great-documentation/>.
 
-If you are the primary author of a document, please make sure there's
-an `# Author` section near the end with your name in it.
-
-If you are contributing to a document, please make sure there's a `#
-Contributors` section near the end with your name in it.
+If you are the primary author of a substantial document, you might
+include your name in an `# Author` section near the end of it. If you
+have made substantial contributions to an existing document, perhaps
+add your name to a `# Contributors` section. Otherwise, all
+contributors are encouraged to add their name to the CONTRIBUTORS
+file.
