@@ -1,4 +1,4 @@
-% Files and Directories
+# Files and Directories
 
 Note that for the examples below, "io" is an alias for
 clojure.java.io. That is, it's assumed your `ns` macro contains:
@@ -37,14 +37,14 @@ Overwrites the file if it already exists.
 An io/file is a java.io.File object (a file or a directory). You can
 call a number of functions on it, including:
 
-Method name     Description
---------------  ---------------------------------
-`exists`        Does the file exist?
-`isDirectory`   Is the File object a directory?
-`getName`       The basename of the file.
-`getParent`     The dirname of the file.
-`getPath`       Filename with directory.
-`mkdir`         Create this directory on disk.
+    ------------  ---------------------------------
+    exists        Does the file exist?
+    isDirectory   Is the File object a directory?
+    getName       The basename of the file.
+    getParent     The dirname of the file.
+    getPath       Filename with directory.
+    mkdir         Create this directory on disk.
+    ------------  ---------------------------------
 
 To read about more available methods, see [the java.io.File
 docs](http://docs.oracle.com/javase/7/docs/api/java/io/File.html).
