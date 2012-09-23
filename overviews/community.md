@@ -66,6 +66,7 @@ You can also find recorded talks at <http://blip.tv/clojure>.
   * [Clojuredocs](http://clojuredocs.org/) --- clojure.core documentation, with examples
   * [cheatsheets with tooltips](http://jafingerhut.github.com/)
   * [Planet Clojure](http://planet.clojure.in/) --- aggregator of selected Clojure-related blog posts
+  * [Clojure at Rosetta Code](http://rosettacode.org/wiki/Category:Clojure)
   * [Clojure Confluence wiki](http://dev.clojure.org/dashboard.action) --- It
     has three main sections:
     [Community](http://dev.clojure.org/display/community/Home),
