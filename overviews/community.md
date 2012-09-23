@@ -60,7 +60,7 @@ See also <http://blip.tv/clojure>.
 
 ## Websites
 
-  * [Clojure](http://clojure.org/) --- the main website
+  * [Clojure.org](http://clojure.org/) --- the main website
   * [Clojars](https://clojars.org/) --- 3rd-party library repository. For more about
     Clojars, see its [About page](https://github.com/ato/clojars-web/wiki/About).
   * [Clojuredocs](http://clojuredocs.org/) --- clojure.core documentation, with examples
