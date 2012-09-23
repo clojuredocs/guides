@@ -3,4 +3,5 @@
 A collection of tutorials, guides, and other documentation for
 the Clojure programming language.
 
-The project is currently hosted [here](https://github.com/uvtc/cds).
+The project source is currently hosted
+[here](https://github.com/uvtc/cds).
