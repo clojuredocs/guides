@@ -12,7 +12,7 @@
 
 `#clojure` at freenode.
 
-You can find irc logs at <http://clojure-log.n01se.net/>.
+IRC logs at <http://clojure-log.n01se.net/>.
 
 
 ## Code repositories
@@ -40,7 +40,7 @@ and the Confluence wiki.
 
 ## User Groups
 
-You can find a list of user groups at
+See the list of user groups at
 <http://dev.clojure.org/display/community/Clojure+User+Groups>.
 
 
@@ -55,7 +55,7 @@ often features Clojure-related talks is
 ## Videos
 
 Videos of talks are often made available at <http://www.infoq.com/>.
-You can also find recorded talks at <http://blip.tv/clojure>.
+See also <http://blip.tv/clojure>.
 
 
 ## Websites
