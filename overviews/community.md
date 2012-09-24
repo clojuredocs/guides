@@ -46,10 +46,12 @@ See the list of user groups at
 
 ## Conferences
 
-The main yearly conference is called "[Clojure
-conj](http://clojure-conj.org/)".  Another popular conference that
-often features Clojure-related talks is
-[strangeloop](https://thestrangeloop.com/).
+In no particular order:
+
+  * [Clojure/conj](http://clojure-conj.org/), aka "the Conj"
+  * [strangeloop](https://thestrangeloop.com/)
+  * [EuroClojure](http://euroclojure.com/)
+  * [Clojure/West](http://clojurewest.org/)
 
 
 ## Videos
