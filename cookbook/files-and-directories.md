@@ -18,8 +18,8 @@ or else in the repl you've loaded it:
 (def a-long-string (slurp "foo.txt"))
 ```
 
-Note, you can pass urls to `slurp` as well. [see
-also](http://clojuredocs.org/clojure_core/clojure.core/slurp)
+Note, you can pass urls to `slurp` as well. See also [slurp at
+Clojuredocs](http://clojuredocs.org/clojure_core/clojure.core/slurp).
 
 
 **Read a file one line at a time:**
