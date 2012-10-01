@@ -12,6 +12,8 @@ or else in the repl you've loaded it:
     (require '[clojure.java.io :as io])
 
 
+***
+
 **Read a file into one long string:**
 
 ```clojure
@@ -25,8 +27,12 @@ and return the resulting sequence:
 
 ```clojure
 (with-open [rdr (io/reader "foo.txt")]
-  (map my-func (line-seq rdr)))
+  (doall (map my-func (line-seq rdr))))
 ```
+
+The `doall` is needed because the `map` call is lazy. The lines that
+`line-seq` gives you have no trailing newlines (and empty lines will
+give you empty strings ("")).
 
 
 **Write a long string out to a new file:**
