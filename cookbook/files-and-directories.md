@@ -12,13 +12,15 @@ or else in the repl you've loaded it:
     (require '[clojure.java.io :as io])
 
 
-***
-
 **Read a file into one long string:**
 
 ```clojure
-(slurp "foo.txt")
+(def a-long-string (slurp "foo.txt"))
 ```
+
+Note, you can pass urls to `slurp` as well. [see
+also](http://clojuredocs.org/clojure_core/clojure.core/slurp)
+
 
 **Read a file one line at a time:**
 
@@ -31,8 +33,8 @@ and return the resulting sequence:
 ```
 
 The `doall` is needed because the `map` call is lazy. The lines that
-`line-seq` gives you have no trailing newlines (and empty lines will
-give you empty strings ("")).
+`line-seq` gives you have no trailing newlines (and empty lines in the
+file will yield empty strings ("")).
 
 
 **Write a long string out to a new file:**
@@ -44,7 +46,11 @@ multi-line string.
 Bye.")
 ```
 
-Overwrites the file if it already exists.
+Overwrites the file if it already exists. To append, use
+
+```clojure
+(spit "foo.txt" "file content" :append true)
+```
 
 
 **Write a file one line at a time:**
