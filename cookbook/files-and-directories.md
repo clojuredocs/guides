@@ -90,14 +90,14 @@ call a number of functions on it, including:
 To read about more available methods, see [the java.io.File
 docs](http://docs.oracle.com/javase/7/docs/api/java/io/File.html).
 
-**Get a list of the filenames and dirs --- as `File` objects --- in a
+**Get a list of the files and dirs --- as `File` objects --- in a
 given directory:**
 
 ```clojure
 (.listFiles (io/file "path/to/some-dir"))
 ```
 
-Same, but just the names (strings), not File objects:
+Same, but just the *names* (strings), not File objects:
 
 ```clojure
 (.list (io/file "path/to/some-dir"))
