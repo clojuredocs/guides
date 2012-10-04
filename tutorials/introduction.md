@@ -474,6 +474,7 @@ Getting values from data structures:
 (def m {:a 1 :b 2}
 (get m :a)            ;=> 1
 (m :a)                ;=> 1       (same)
+(:a m)                ;=> 1       (same!)
 (get m :x 44)         ;=> 44      (if no :x, 44 is the default)
 (keys m)              ;=> (:a :b)
 (vals m)              ;=> (1 2)
@@ -488,9 +489,8 @@ Getting values from data structures:
 (s :z)                ;=> nil
 ```
 
-"Changing" values in data structures.  Of course, data structures are
-values and can't be mutated, but we *can* get a modified copy of the
-data structure:
+Of course, data structures are values and can't be mutated, but we
+*can* get a new modified copy of the data structure:
 
 ```clojure
 ;; Vectors
