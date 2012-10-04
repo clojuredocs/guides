@@ -6,5 +6,5 @@ the Clojure programming language.
 To get started, see
 [tutorials/getting-started](tutorials/getting-started.html).
 
-The project source is currently hosted
-[here](https://github.com/uvtc/cds).
+The project source is currently [hosted at
+github](https://github.com/uvtc/cds).
