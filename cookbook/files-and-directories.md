@@ -1,4 +1,4 @@
-# Files and Directories
+% Files and Directories
 
 Note that for the examples below, "io" is an alias for
 clojure.java.io. That is, it's assumed your `ns` macro contains:

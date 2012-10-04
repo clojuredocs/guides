@@ -1,10 +1,7 @@
-# Getting Started with Clojure
+% Getting Started with Clojure
 
 Clojure is a wonderfully simple language and you are going to love
-it. ☺
-
-For an overview of Clojure and its ecosystem, see the [overview
-introduction](../overviews/intro.md).
+it. `:)`
 
 To quickly get started, first make sure you've got Java installed.
 
@@ -16,7 +13,7 @@ the repl, running your program and its tests, packaging your program
 for distribution, and other administrative tasks.
 
 
-## Trying out the REPL
+# Trying out the REPL
 
 Although lein facilitates managing your projects, you can also run it
 on its own (outside of any particular project directory). Once you
@@ -27,35 +24,37 @@ repl:
 
 You should be greeted with a "`user=>`" prompt. Try it out:
 
-```
+```clojure
 user=> (+ 1 1)
-2
+; 2
 user=> (distinct [:a :b :a :c :a :d])
-(:a :b :c :d)
+; (:a :b :c :d)
 user=> (dotimes [i 3]
   #_=>   (println (rand-nth ["Fabulous!" "Marvelous!" "Inconceivable!"])
   #_=>            i))
-Marvelous! 0
-Fabulous! 1
-Inconceivable! 2
-nil
+; Marvelous! 0
+; Fabulous! 1
+; Inconceivable! 2
+; nil
 ```
 
 
-## Your first project
+# Your first project
 
 Create your first Clojure program like so:
 
-    lein new app my-proj
-    cd my-proj
-    # Have a look at the "-main" function in src/my_proj/core.clj.
-    lein run
+```bash
+lein new app my-proj
+cd my-proj
+# Have a look at the "-main" function in src/my_proj/core.clj.
+lein run
+```
 
 and see the output from that `println` function call in
 my_proj/core.clj!
 
 
-## Interactive Development
+# Interactive Development
 
 In your project directory, start up a repl (`lein repl`) and
 run your `-main` function to see its output in the repl:
@@ -79,3 +78,8 @@ Back in the repl, reload your source file and run `-main` again:
     my-proj.core=> (-main)
 
 to see your changes.
+
+
+# Next stop
+
+Next stop: [the basic Clojure languge tutorial](introduction.html).

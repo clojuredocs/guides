@@ -24,7 +24,7 @@ Clojure is a general-purpose programming language, and a quite
 practical one at that.
 
 Clojure source code files use the ".clj" filename extension and
-are usually organized into [*projects*](../overviews/projects.md).
+are usually organized into [*projects*](../overviews/projects.html).
 
 The syntax for Clojure is like Lisp and is very simple: code is made
 up of expressions which are evaluated to some value. Here are some

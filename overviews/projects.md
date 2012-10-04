@@ -1,4 +1,4 @@
-# Projects
+% Projects
 
 When creating a program written in Clojure, it's customary to organize
 all your code and other resources into a self-contained "project"

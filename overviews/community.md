@@ -1,6 +1,6 @@
-# Clojure Community
+% Clojure Community
 
-## Mailing Lists
+# Mailing Lists
 
   * [Clojure user mailing
     list](https://groups.google.com/forum/?fromgroups#!forum/clojure)
@@ -8,14 +8,14 @@
     list](https://groups.google.com/forum/?fromgroups#!forum/clojure-dev)
 
 
-## IRC
+# IRC
 
 `#clojure` at freenode.
 
 IRC logs at <http://clojure-log.n01se.net/>.
 
 
-## Code repositories
+# Code repositories
 
 Most folks host their projects at github, and most pure Clojure
 library distributions (with the exception of contrib) are available at
@@ -23,7 +23,7 @@ library distributions (with the exception of contrib) are available at
 [Leiningen](http://leiningen.org/)).
 
 
-## Core development
+# Core development
 
 See the [Clojure Confluence
 wiki](http://dev.clojure.org/display/design/Home) for full details on
@@ -38,13 +38,13 @@ pull-requests are not accepted. All core development happens via JIRA
 and the Confluence wiki.
 
 
-## User Groups
+# User Groups
 
 See the list of user groups at
 <http://dev.clojure.org/display/community/Clojure+User+Groups>.
 
 
-## Conferences
+# Conferences
 
 In no particular order:
 
@@ -54,13 +54,13 @@ In no particular order:
   * [Clojure/West](http://clojurewest.org/)
 
 
-## Videos
+# Videos
 
 Videos of talks are often made available at <http://www.infoq.com/>.
 See also <http://blip.tv/clojure>.
 
 
-## Websites
+# Websites
 
   * [Clojure.org](http://clojure.org/) --- the main website
   * [Clojars](https://clojars.org/) --- 3rd-party library repository. For more about
@@ -76,7 +76,7 @@ See also <http://blip.tv/clojure>.
     [Documentation](http://dev.clojure.org/display/doc/Home).
 
 
-## Forums
+# Forums
 
 A small amount of discussion happens at
 <http://www.reddit.com/r/clojure>.
