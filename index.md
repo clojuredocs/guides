@@ -8,4 +8,4 @@ To get started, see
 [tutorials/getting-started](tutorials/getting-started.html).
 
 The project source is currently [hosted at
-github](https://github.com/uvtc/cds).
+github](https://github.com/clojuredocs/cds).
