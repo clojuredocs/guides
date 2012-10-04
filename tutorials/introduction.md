@@ -490,7 +490,7 @@ Getting values from data structures:
 ```
 
 Of course, data structures are values and can't be mutated, but we
-*can* get a new modified copy of the data structure:
+*can* get a new modified copy of a data structure:
 
 ```clojure
 ;; Vectors
