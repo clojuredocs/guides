@@ -24,15 +24,15 @@ and are copyright their respective primary author(s).
 For some guidance on writing great documentation, see
 <http://jacobian.org/writing/great-documentation/>.
 
+If you are the primary author of a substantial document, you might
+include your name in a `# Contributors` section near the end of it,
+noting that you are the original author. If you have made substantial
+contributions to an existing document, you might add your name to the
+`# Contributors` section. Otherwise, all contributors are encouraged
+to add their name to the CONTRIBUTORS file.
+
 Note to potential contributors: if you'd like to make changes to an
 existing document, please attempt to stay true to the author's
 original style and intent. If you chafe at this idea, you might
 consider writing your own separate document for inclusion in this
 collection. `:)`
-
-If you are the primary author of a substantial document, you might
-include your name in an `# Author` section near the end of it. If you
-have made substantial contributions to an existing document, perhaps
-add your name to a `# Contributors` section. Otherwise, all
-contributors are encouraged to add their name to the CONTRIBUTORS
-file.
