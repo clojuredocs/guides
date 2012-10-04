@@ -520,12 +520,14 @@ you can do with these core data structures.
 
 As you've seen, Clojure provides a handy literal syntax for regular
 expressions: `#"regex here"`. Clojure uses the same regular expression
-syntax as Java, which is nearly the same as what Perl 5 uses. You can
-read more about the specifics in the Java [java.util.regex Pattern
+syntax as Java, which is nearly the same as what Perl 5 (and Python,
+and Ruby) uses. You can read more about the specifics in the Java
+[java.util.regex Pattern
 docs](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
-Clojure provides a number of functions for working with strings,
-and a number of those can use regexes ... XXX see next section.
+Clojure provides a number of functions for working with strings, and a
+number of those can make use of regexes. See the next section for some
+examples.
 
 
 
