@@ -489,8 +489,12 @@ Getting values from data structures:
 (s :z)                ;=> nil
 ```
 
-Of course, data structures are values and can't be mutated, but we
-*can* get a new modified copy of a data structure:
+Data structures in Clojure are actually *immutable* --- you can't
+change them. Though it may sound batty, it actually works out nicely
+in practice, and we'll read more about in the
+[Immutability](#values-immutability-and-persistence) section
+below. For now, just note that data structures can't be mutated, but
+we *can* get a new modified copy of a data structure:
 
 ```clojure
 ;; Vectors
@@ -499,15 +503,22 @@ Of course, data structures are values and can't be mutated, but we
 (conj v  :d)          ;=> [:a :b :c :d]
 (conj li :d)          ;=> (:d :a :b :c)
 
+v   ;=> is still [:a :b :c]
+li  ;=> is still (:a :b :c)
+
 ;; Maps
 (def m {:a 1 :b 2})
 (assoc m :c 3)        ;=> {:a 1 :c 3 :b 2}
 (dissoc m :b)         ;=> {:a 1}
 
+m   ;=> is still {:a 1 :b 2}
+
 ;; Sets
 (def s #{:a :b})
 (conj s :c)           ;=> #{:a :c :b}
 (disj s :a)           ;=> #{:b}
+
+s   ;=> is still #{:a :b}
 ```
 
 See the [cheatsheet](http://clojure.org/cheatsheet) for much more
