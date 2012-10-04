@@ -23,6 +23,12 @@ and are copyright their respective primary author(s).
 For some guidance on writing great documentation, see
 <http://jacobian.org/writing/great-documentation/>.
 
+Note to potential contributors: if you'd like to make changes to an
+existing document, please attempt to stay true to the author's
+original style and intent. If you chafe at this idea, you might
+consider writing your own separate document for inclusion in this
+collection. `:)`
+
 If you are the primary author of a substantial document, you might
 include your name in an `# Author` section near the end of it. If you
 have made substantial contributions to an existing document, perhaps
