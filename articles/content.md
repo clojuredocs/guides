@@ -8,6 +8,8 @@ layout: article
 [Clojure Documentation](https://github.com/clojuredocs/cds) is organized as a number of guides, covering all kinds of topics.
 
 
+
+
 ## Tutorials
 
 ###  [Getting started](/articles/tutorials/getting_started.html)
@@ -122,6 +124,17 @@ TBD
 ### [Leiningen Plugins](/articles/ecosystem/leiningen/plugins.html)
 
 TBD
+
+
+## Cookbooks
+
+
+### [Data Structures](/articles/cookbooks/data-structures.html)
+
+### [Files and Directories](/articles/cookbooks/files-and-directories.html)
+
+### [Date and Time](/articles/cookbooks/date-and-time.html)
+
 
 
 
