@@ -322,6 +322,56 @@ names.
 
 
 
+## Let and Locals
+
+You don't have to create a top-level var for every symbol in your
+program.  Often you just want some local names (we don't call them
+"variables" since we know that values don't vary) to use in a section
+of your code. For this we use the `let` expression, and it's locals
+are lexically scoped within it:
+
+{% highlight clojure %}
+(let [width  10
+      height 20]
+  (println "hello from inside the `let`.")
+  (* width height))
+{% endhighlight %}
+
+The first thing inside the `let` is a binding vector. In it, you
+specify the local names you'd like to make available inside the `let`,
+along with their values.
+
+> **Formatting note:** Your readers might appreciate you vertically
+> lining up the values used in the binding vector, as we've done
+> above with 10 and 20.
+
+These local names are symbols that refer directly to the values you
+set them to (no vars are involved, like they are when using `def`).
+
+You can re-set the symbols in the binding vector multiple times
+(building it up into the value you need), if you find it useful:
+
+{% highlight clojure %}
+(let [x 2
+      x (* x x)
+      x (+ x 1)]
+  x)
+;=> 5
+{% endhighlight %}
+
+The `let` expression itself evaluates to the last expression in its
+body.  You can put other things inside the `let` (like our `println`
+expression, in the previous example), but the value of the `let` is
+its last expression.
+
+> Note that the `println` expression just evaluates to nil. We don't
+> use its value for anything --- we only care about its *side-effects*
+> (printing out to the console). More about
+> [Side-Effects](#side-effects) shortly.
+
+
+
+
 ### Special Forms
 
 If an expression starts with an open paren, Clojure first checks to
@@ -807,55 +857,6 @@ refers to the value 42.
 
 When you type in "`the-answer`", Clojure automatically looks up the
 var, then from there finds and returns the value 42.
-
-
-
-## Let and Locals
-
-You don't have to create a top-level var for every symbol in your
-program.  Often you just want some local names (we don't call them
-"variables" since we know that values don't vary) to use in a section
-of your code. For this we use the `let` expression, and it's locals
-are lexically scoped within it:
-
-{% highlight clojure %}
-(let [width  10
-      height 20]
-  (println "hello from inside the `let`.")
-  (* width height))
-{% endhighlight %}
-
-The first thing inside the `let` is a binding vector. In it, you
-specify the local names you'd like to make available inside the `let`,
-along with their values.
-
-> **Formatting note:** Your readers might appreciate you vertically
-> lining up the values used in the binding vector, as we've done
-> above with 10 and 20.
-
-These local names are symbols that refer directly to the values you
-set them to (no vars are involved, like they are when using `def`).
-
-You can re-set the symbols in the binding vector multiple times
-(building it up into the value you need), if you find it useful:
-
-{% highlight clojure %}
-(let [x 2
-      x (* x x)
-      x (+ x 1)]
-  x)
-;=> 5
-{% endhighlight %}
-
-The `let` expression itself evaluates to the last expression in its
-body.  You can put other things inside the `let` (like our `println`
-expression, in the previous example), but the value of the `let` is
-its last expression.
-
-> Note that the `println` expression just evaluates to nil. We don't
-> use its value for anything --- we only care about its *side-effects*
-> (printing out to the console). More about
-> [Side-Effects](#side-effects) shortly.
 
 
 
