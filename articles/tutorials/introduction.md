@@ -3,14 +3,14 @@ title: "Introduction to Clojure"
 layout: article
 ---
 
-This is a brief (*brief* I say!) beginner's introduction to
+This is a brief beginner's introduction to
 Clojure. If you haven't already done so, have a look at the [Getting
 Started](/articles/tutorials/getting-started.html) tutorial. Before continuing, make sure
 you've got Java and [Leiningen](http://leiningen.org) installed, and can create a new project
 and run a REPL in it.
 
 This introduction is a whirlwind tutorial of most of the basics of
-Clojure. It's goal is to rapidly get you acquainted with the core
+Clojure. Its goal is to rapidly get you acquainted with the core
 areas of the language without wasting your time and without getting
 too bogged down in details or advanced topics (the various topics will
 get more comprehensive coverage in the topic guides anyway).
