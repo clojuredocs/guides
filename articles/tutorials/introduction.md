@@ -56,7 +56,7 @@ Expressions in (various types of) brackets are often referred to as
 "forms".
 
 As you can see, when Clojure sees something in parentheses, unless
-it's a "*special* form" (for example, `(if ...)`), Clojure assumes
+it's a "*special* form" (something that requires special treatment from the compiler, such as `(if ...)`), Clojure assumes
 it's a regular function call. More about that in the
 [Evaluation](#evaluation) section, below.
 
@@ -126,7 +126,7 @@ compiler will let you know about it. `:)`
 As we go along, type those expressions into your REPL to see them
 evaluated. These too:
 
-```clojure
+{% highlight clojure %}
 1        ; integer
 1N       ; arbitrary-precision integer
 1.2      ; float/double/decimal
@@ -138,16 +138,16 @@ evaluated. These too:
 1/3      ; Rational number, or "ratio".
 \a       ; The character "a".
 "hi"     ; A string.
-```
+{% endhighlight %}
 
 Strings can span multiple lines --- just hit Enter and keep typing. If
 you want to include a double-quote mark in a string, backslash-escape
 it.
 
-```clojure
+{% highlight clojure %}
 #"^foo\d?$"   ; A regular expression.
 :foo          ; A keyword.
-```
+{% endhighlight %}
 
 We'll have more to say about [regular
 expressions](#regular-expressions) later on.
@@ -157,9 +157,9 @@ where in other languages you might use little strings as identifiers
 (for example, as the keys in a hashmap). More about keywords in the
 next section ([Data Structures](#data-structures)).
 
-```clojure
+{% highlight clojure %}
 'foo   ; A symbol.
-```
+{% endhighlight %}
 
 A *symbol* is an object that represents the *name* of something. The
 single quote mark is there to keep Clojure from trying to figure out
@@ -187,11 +187,11 @@ will become clearer later on when we briefly mention
 Clojure comes out of the box with nice literal syntax for the various
 core data structures:
 
-```clojure
+{% highlight clojure %}
 [1 2 3]            ; A vector (can access items by index).
 [1 :two "three"]   ; Put anything into them you like.
 {:a 1 :b 2}        ; A hashmap (or just "map", for short).
-````
+{% endhighlight %}
 
 A hashmap is your typical hash/dictionary data structure. In the above
 example, the keys are :a and :b, and the values are 1 and 2. One key-value
@@ -201,10 +201,10 @@ Although it's most common to use keywords (as shown above) for hashmap
 keys, you can use any values you like for the keys as well as the
 values.
 
-```clojure
+{% highlight clojure %}
 #{:a :b :c}        ; A set (unordered, and contains no duplicates).
 '(1 2 3)           ; A list (linked-list)
-```
+{% endhighlight %}
 
 You generally don't use lists very often for typical sequential data
 in your programs:
@@ -228,12 +228,12 @@ list.
 
 Nesting data structures works like you'd expect:
 
-```clojure
+{% highlight clojure %}
 #{:a
   [1 2 3]
   {:foo 11 :bar 12}
   #{"shirt" "coat" "hat"}}
-```
+{% endhighlight %}
 
 We will see how to get at values inside nested data strucures a little
 later on.
@@ -271,14 +271,14 @@ So far you've been typing various literal values (expressions) into
 the repl and Clojure has evaluated them and repeated their resulting
 values back to you (printed them out in the repl):
 
-```clojure
+{% highlight clojure %}
 user=> "hi"
 ; "hi"
 user=> :foo
 ; :foo
 user=> [1 2 3]
 ; [1 2 3]
-```
+{% endhighlight %}
 
 Clojure evaluates the expressions you give it and tries to come up
 with a resulting value. If the expression starts with an open paren,
@@ -293,15 +293,13 @@ If the symbol right after the open paren names a function, Clojure
 evaluates all of its function arguments first, then applies the
 function to the values of those args:
 
-```clojure
-(my-func arg1
-         arg2
-         arg3)
-```
+{% highlight clojure %}
+(my-func arg1 arg2 arg3)
+{% endhighlight %}
 
 You can nest function calls as deep as tasteful discretion allows:
 
-```clojure
+{% highlight clojure %}
 (my-func (my-func2 arg1
                    arg2)
          (other-func arg-a
@@ -311,7 +309,7 @@ You can nest function calls as deep as tasteful discretion allows:
                                  arg-yy
                                  arg-zz))
                      arg-b))
-```
+{% endhighlight %}
 
 Note that your code will be easiest to read if you line up args to
 functions vertically (as shown above). Your editor should take care of
@@ -328,8 +326,8 @@ names.
 
 If an expression starts with an open paren, Clojure first checks to
 see if it's a special form. Special forms are any parenthesized forms
-which don't follow the regular evaluation rule that functions do
-(described in the previous section).
+which don't follow the regular evaluation rule and get special treatment
+from the Clojure compiler.
 
 There aren't too many special forms to remember. Some examples of
 special forms are `def`, `let`, `if`, `and`, and `or`. We'll cover
