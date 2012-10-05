@@ -76,7 +76,8 @@ For some guidance on writing great documentation, see
 
 ### Toolchain
 
-[README-tools.md](README-tools.md) covers development environment setup.
+[README-tools.md](cds/blob/master/README-tools.md) covers development
+environment setup.
 
 
 ### Contributors List
