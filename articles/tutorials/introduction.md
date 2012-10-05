@@ -113,10 +113,10 @@ those cases later on as they come up.
 
 Clojure has support for the following kinds of scalar values:
 
-```clojure
+{% highlight clojure %}
 nil
 true, false
-```
+{% endhighlight %}
 
 `nil` is like Python's None, or Java's null. It's just another value.
 Incidentally, there's no "undefined" value in Clojure --- if you try
@@ -606,11 +606,11 @@ always stays the letter "a". It's immutable. The value 10 is always
 In Clojure, *all scalars and core data structures are like this*. They
 are values. They are immutable. The map
 
-```clojure
+{% highlight clojure %}
 {:name "John"
  :hit-points 200
  :super-power :resourcefulness}
-```
+{% endhighlight %}
 
 is a value. If you want to "change" John's hit-points, you don't
 change anything per se, but rather, you just conjure up a whole new
@@ -668,11 +668,11 @@ in the [Cheatsheet](http://clojure.org/cheatsheet).
 Note that they are all *expressions* in Clojure, and evaluate to
 something.  So, for example, this `if` expression:
 
-```clojure
+{% highlight clojure %}
 (if motor-turning?
   "yes"
   "no")
-```
+{% endhighlight %}
 
 Evaluates to either the value "yes" or the value "no".
 
@@ -686,18 +686,18 @@ Clojure than in imperative languages like Python and Java. The
 functions that Clojure provides often makes looping unnecessary.
 For example, where in Python you might do something like this:
 
-```python
+{% highlight python %}
 specific_stuff = []
 for i in my_items:
     if is_what_i_want(i):
         specific_stuff.append(i)
-```
+{% endhighlight %}
 
 in Clojure you lose the loop and it becomes:
 
-```clojure
+{% highlight clojure %}
 (def specific-stuff (filter what-i-want? my-items))
-```
+{% endhighlight %}
 
 This sort of thing comes up again and again, and we'll cover more
 examples of it in the [Bread and Butter
@@ -717,22 +717,22 @@ truthy.
 This means that zero, the empty string, and empty core data structures
 are all true:
 
-```clojure
+{% highlight clojure %}
 (if   0 :t :f)  ;=> :t
 (if  "" :t :f)  ;=> :t
 (if  [] :t :f)  ;=> :t
 (if  {} :t :f)  ;=> :t
 (if #{} :t :f)  ;=> :t
-```
+{% endhighlight %}
 
 If you want to check if one of those is *empty*, you could use the
 `empty?` function, though, the docs recommend using this idiom:
 
-```clojure
+{% highlight clojure %}
 (if (seq my-stuff)
   "still has stuff left"
   "all gone")
-```
+{% endhighlight %}
 
 
 
@@ -741,31 +741,31 @@ If you want to check if one of those is *empty*, you could use the
 You'll often check for equality using `=` (and likewise inequality
 using `not=`), for example:
 
-```clojure
+{% highlight clojure %}
 (if (= tries max-tries)
   "you're done"
   "keep going")
-```
+{% endhighlight %}
 
 `=` recursively checks equality of nested data structures (and
 considers lists and vectors containing the same values in the same
 order as equal), for example:
 
-```clojure
+{% highlight clojure %}
 user=> (= {:a  [1 2 3] :b #{:x :y} :c {:foo 1 :bar 2}}
   #_=>    {:a '(1 2 3) :b #{:y :x} :c {:bar 2 :foo 1}})
 ; true
-```
+{% endhighlight %}
 
 There's also a double-equals function `==` that is more forgiving
 across various types of numbers:
 
-```clojure
+{% highlight clojure %}
 user=> (= 4 4.0)
 ; false
 user=> (== 4 4.0)
 ; true
-```
+{% endhighlight %}
 
 See the docs for
 [=](http://clojuredocs.org/clojure_core/clojure.core/=) and
@@ -791,13 +791,13 @@ greater than the second arg. The main one is `compare`.
 
 ## Define
 
-The word "variable" isn't often used in Clojure because you don't
-often *vary* anything. You have symbols which refer to values. For
+The word "variable" isn't often used in Clojure because mutation in Clojure
+happens differently. You have symbols which refer to values. For
 example, from the top of this tutorial:
 
-```clojure
+{% highlight clojure %}
 (def the-answer 42)
-```
+{% endhighlight %}
 
 The thing being defined here (behind the scenes) is officially called
 a *Var*. The symbol "`the-answer`" refers to that var which itself
@@ -818,12 +818,12 @@ program.  Often you just want some local names (we don't call them
 of your code. For this we use the `let` expression, and it's locals
 are lexically scoped within it:
 
-```clojure
+{% highlight clojure %}
 (let [width  10
       height 20]
   (println "hello from inside the `let`.")
   (* width height))
-```
+{% endhighlight %}
 
 The first thing inside the `let` is a binding vector. In it, you
 specify the local names you'd like to make available inside the `let`,
@@ -839,13 +839,13 @@ set them to (no vars are involved, like they are when using `def`).
 You can re-set the symbols in the binding vector multiple times
 (building it up into the value you need), if you find it useful:
 
-```clojure
+{% highlight clojure %}
 (let [x 2
       x (* x x)
       x (+ x 1)]
   x)
 ;=> 5
-```
+{% endhighlight %}
 
 The `let` expression itself evaluates to the last expression in its
 body.  You can put other things inside the `let` (like our `println`
@@ -865,31 +865,31 @@ its last expression.
 
 You can create a function using `fn`, and give it a name using `def`:
 
-```clojure
+{% highlight clojure %}
 (def my-func
   (fn [a b]
     (println "adding them!")
     (+ a b)))
-```
+{% endhighlight %}
 
 As you might guess, this actually creates the symbol `my-func` which
 refers to a var which itself refers to the function (which is a
 value). Call it:
 
-```clojure
+{% highlight clojure %}
 (my-func 10 20)   ; Returns/evaluates-to 30.
-```
+{% endhighlight %}
 
 But for creating top-level functions, it's more convenient to use
 `defn` (which uses `def` under the hood):
 
-```clojure
+{% highlight clojure %}
 (defn my-func
   "Docstring goes here."
   [a b]
   (println "adding them!")
   (+ a b))
-```
+{% endhighlight %}
 
 A few points to note:
 
@@ -905,32 +905,32 @@ A few points to note:
 
 Functions can return data structures instead of just scalars:
 
-```clojure
+{% highlight clojure %}
 (defn foo
   [x]
   [x (+ x 2) (* x 2)])
-```
+{% endhighlight %}
 
 and you can of course pass them data structures as well:
 
-```clojure
+{% highlight clojure %}
 (defn bar
   [x]
   (println x))
 
 (bar {:a 1 :b 2})
 (bar [1 2 3])
-```
+{% endhighlight %}
 
 To define a function to take, say, two or more arguments:
 
-```clojure
+{% highlight clojure %}
 (defn baz
   [a b & the-rest]
   (println a)
   (println b)
   (println the-rest))
-```
+{% endhighlight %}
 
 Any additional args you pass beyond the first two get packaged into a
 sequence assigned to `the-rest`. To have that function take *zero* or
@@ -942,7 +942,7 @@ more arguments, change the parameter vector to just `[& the-rest]`.
 
 Your author likes to write his functions in a top-down fashion:
 
-```clojure
+{% highlight clojure %}
 ;; BROKEN pseudocode
 
 (do-it)
@@ -956,13 +956,13 @@ Your author likes to write his functions in a top-down fashion:
   (... (my-func-b ...)))
 
 (defn my-func-b ...)
-```
+{% endhighlight %}
 
 but Clojure doesn't like that because it wants to have at least
 *heard* about a function before you write a call to it. To let Clojure
 know about a function's existence, use `declare`:
 
-```clojure
+{% highlight clojure %}
 ;; pseudocode
 
 (do-it)
@@ -980,7 +980,7 @@ know about a function's existence, use `declare`:
   (... (my-func-b ...)))
 
 (defn my-func-b ...)
-```
+{% endhighlight %}
 
 
 ## Side-effects
@@ -1000,18 +1000,18 @@ pass it one or more values, and it returns one or more values.
 If you want to make an expression that has some side-effects before
 it evaluates to a value, use `do`:
 
-```clojure
+{% highlight clojure %}
 (do
   (println "Spinning up warp drive, captain ...")
   (spin-up-warp-drive)
   (get-engine-temperature))
-```
+{% endhighlight %}
 
 There are a handful of functions/macros/special-forms in Clojure for
 making use of side-effects, and they are spelled with a "do" at the
 beginning. Try these on for size:
 
-```clojure
+{% highlight clojure %}
 (def my-items ["shirt" "coat" "hat"])
 
 (doseq [i my-items]
@@ -1019,7 +1019,7 @@ beginning. Try these on for size:
 
 (dotimes [i (range 10)]
   (println "counting:" i))
-```
+{% endhighlight %}
 
 There's also `dorun` and `doall`, both of which are discussed below in
 the section on [Laziness](#laziness).
@@ -1046,7 +1046,7 @@ values to locals in `let` expressions and function definitions.  Using
 you'd like to assign some values in it to locals. Where you *could* do
 this:
 
-```clojure
+{% highlight clojure %}
 (def games [:chess :checkers :backgammon :cards])
 
 (let [game-a (games 0)
@@ -1055,15 +1055,15 @@ this:
       game-d (games 3)]
   ...
   ...)
-```
+{% endhighlight %}
 
 Destructuring allows you to instead write:
 
-```clojure
+{% highlight clojure %}
 (let [[game-a game-b game-c game-d] games]
   ...
   ...)
-```
+{% endhighlight %}
 
 The thing to the left of "games" in the binding vector is referred to
 as the "binding form". In the above case, the binding form is a
@@ -1077,11 +1077,11 @@ corresponding items listed in the binding form.
 If you want to omit one or more of the values in the `games`, you
 can do so like this:
 
-```clojure
+{% highlight clojure %}
 (let [[_ my-game _ your-game] games]
   ...
   ...)
-```
+{% endhighlight %}
 
 The underscore is just used as a placeholder. It's a valid identifier,
 but conventionally used when you don't care what value it gets. Above,
@@ -1090,7 +1090,7 @@ my-game gets :checkers and your-game gets :cards.
 Destructuring also works for maps in additon to vectors. For example,
 instead of:
 
-```clojure
+{% highlight clojure %}
 (def concert {:band     "The Blues Brothers"
               :location "Palace Hotel Ballroom"
               :promos   "Ladies night, tonight"
@@ -1102,26 +1102,26 @@ instead of:
       perks    (concert :perks)]
   ...
   ...)
-```
+{% endhighlight %}
 
 you *could* do:
 
-```clojure
+{% highlight clojure %}
 (let [{band     :band
        location :location
        promos   :promos
        perks    :perks} concert]
   ...
   ...)
-```
+{% endhighlight %}
 
 but an even better shortcut that destructuring provides for that is:
 
-```clojure
+{% highlight clojure %}
 (let [{:keys [band location promos perks]} concert]
   ...
   ...)
-```
+{% endhighlight %}
 
 
 ## Laziness
@@ -1178,7 +1178,7 @@ With `map` you can apply a function to every value in a collection.
 The result is a new collection. You can often use `map` instead of
 manually looping over a collection. Some examples using `map`:
 
-```clojure
+{% highlight clojure %}
 (map inc [10 20 30])     ;=> (11 21 31)
 (map str [10 20 30])     ;=> ("10" "20" "30")
 ;; You can define the function to be used on-the-fly:
@@ -1189,15 +1189,15 @@ manually looping over a collection. Some examples using `map`:
 ;; to mulitple collections in a coordinated way:
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3])
 ;=> (":a1" ":b2" ":c3")
-```
+{% endhighlight %}
 
 When working on more than one collection at a time, `map` is smart
 enough to stop when the shorter of the colls runs out of items:
 
-```clojure
+{% highlight clojure %}
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3 4 5 6 7])
 ;=> (":a1" ":b2" ":c3")
-```
+{% endhighlight %}
 
 
 ### filter and remove
@@ -1205,18 +1205,18 @@ enough to stop when the shorter of the colls runs out of items:
 Use `filter` with a predicate function to pare down a collection to
 just the values for which `(the-pred the-value)` returns true:
 
-```clojure
+{% highlight clojure %}
 (filter odd? (range 10))
 ;=> (1 3 5 7 9)
-```
+{% endhighlight %}
 
 Use `remove` for the opposite effect (which amounts to *removing* the
 items for which `(pred val)` returns true):
 
-```clojure
+{% highlight clojure %}
 (remove odd? (range 10))
 ;=> (0 2 4 6 8)
-```
+{% endhighlight %}
 
 You will often find yourself using these functions instead
 of writing loops like in imperative languages.
@@ -1229,21 +1229,21 @@ of writing loops like in imperative languages.
 for example, `max`, but the values you'd like to pass to it are in a
 collection. `apply` "unpacks" the items in the coll:
 
-```clojure
+{% highlight clojure %}
 (max 1 5 2 8 3)
 ;=> 8
 (max [1 5 2 8 3]) ;; ERROR
 (apply max [1 5 2 8 3])
 ;=> 8
-```
+{% endhighlight %}
 
 A nice feature of `apply` is that you can supply extra args which
 you'd like to be treated as if they were part of the collection:
 
-```clojure
+{% highlight clojure %}
 (apply max 4 55 [1 5 2 8 3])
 ;=> 55
-```
+{% endhighlight %}
 
 
 ### for
@@ -1252,14 +1252,14 @@ you'd like to be treated as if they were part of the collection:
 needing to resort to manually looping). `for` is similar to Python's
 "list comprehensions". Some examples of using `for`:
 
-```clojure
+{% highlight clojure %}
 (for [i (range 10)] i)
 ;=> (0 1 2 3 4 5 6 7 8 9)
 (for [i (range 10)] (* i i))
 ;=> (0 1 4 9 16 25 36 49 64 81)
 (for [i (range 10) :when (odd? i)] [i (str "<" i ">")])
 ;=> ([1 "<1>"] [3 "<3>"] [5 "<5>"] [7 "<7>"] [9 "<9>"])
-```
+{% endhighlight %}
 
 Notice we snuck a "`:when (odd? i)`" in there. `for` even supports a
 `:let` modifier in there to set up your values before getting to the
@@ -1274,7 +1274,7 @@ second items in a coll and get a result. Then you apply it to the
 result you just got and the 3rd item in the coll. Then the result of
 *that* and the 4th. And so on.  The process looks something like this:
 
-```clojure
+{% highlight clojure %}
 (reduce + [1 2 3 4 5])
 ; 1 + 2  [3 4 5]
 ;   3    [3 4 5]
@@ -1284,28 +1284,28 @@ result you just got and the 3rd item in the coll. Then the result of
 ;  10    [5]
 ; 10 + 5
 ;  15
-```
+{% endhighlight %}
 
 And, of course, you can supply your own function if you like:
 
-```clojure
+{% highlight clojure %}
 (reduce (fn [x y] ...) [...])
-```
+{% endhighlight %}
 
 A nice additional feature of `reduce` is that you can supply a value
 for it to start off with:
 
-```clojure
+{% highlight clojure %}
 (reduce + 10 [1 2 3 4 5])
 ;=> 25
-```
+{% endhighlight %}
 
 This by itself is pretty handy. But it gets even better. Since you can
 supply an initial argument, and you can supply your own function, you
 can use a *data structure* as that initial argument and have your
 function "build it up" as you go. For example:
 
-```clojure
+{% highlight clojure %}
 (reduce (fn [accum x]
           (assoc accum
                  (keyword x)
@@ -1313,7 +1313,7 @@ function "build it up" as you go. For example:
         {}
         ["hi" "hello" "bye"])
 ;=> {:bye "bye-10" :hello "hello-41" :hi "hi-29"}
-```
+{% endhighlight %}
 
 Building up some accumulator using `reduce` and your own custom
 function is a fairly common pattern (and once again allows us to
@@ -1327,7 +1327,7 @@ With `partial` you can create a function which wraps another one and
 passes it some standard arguments every time, along with the ones you
 supply right when you call it. For example:
 
-```clojure
+{% highlight clojure %}
 user=> (defn lots-of-args [a b c d] (str/join "-" [a b c d]))
 ; #'user/lots-of-args
 user=> (lots-of-args 10 20 30 40)
@@ -1338,7 +1338,7 @@ user=> (fewer-args 40)
 ; "10-20-30-40"
 user=> (fewer-args 99)
 ; "10-20-30-99"
-```
+{% endhighlight %}
 
 `comp` is for composing a function from other ones. That is, `(comp
 foo bar baz)` gives you a function that will first call baz on
@@ -1346,7 +1346,7 @@ whatever you pass it, then bar on the result of that, then foo on the
 result of *that*, and finally returns the result.  Here's a silly
 example:
 
-```clojure
+{% highlight clojure %}
 (defn wrap-in-stars  [s] (str "*" s "*"))
 (defn wrap-in-equals [s] (str "=" s "="))
 (defn wrap-in-ats    [s] (str "@" s "@"))
@@ -1357,26 +1357,26 @@ example:
 
 (wrap-it "hi")
 ;=> "@=*hi*=@"
-```
+{% endhighlight %}
 
 `(iterate foo x)` yields an infinite lazy list consisting
 of:
 
-```
+{% highlight clojure %}
 (x
  (foo x)
  (foo (foo x))
  (foo (foo (foo x)))
  ...)
-```
+{% endhighlight %}
 
 To just take the first, say, 5 values from an infinite list, try this:
 
-```clojure
+{% highlight clojure %}
 (defn square [x] (* x x))
 (take 5 (iterate square 2))
 ;=> (2 4 16 256 65536)
-```
+{% endhighlight %}
 
 
 
@@ -1397,7 +1397,7 @@ have or else loop again. When you loop again, you call the loop (using
 previously set up in the binding vector. The loop calling itself like
 this is called *recursion*. Here's a trivial example:
 
-```clojure
+{% highlight clojure %}
 (loop [accum []
        i     1]
   (if (= i 10)
@@ -1405,7 +1405,7 @@ this is called *recursion*. Here's a trivial example:
     (recur (conj accum i)
            (inc i))))
 ;=> [1 2 3 4 5 6 7 8 9]
-```
+{% endhighlight %}
 
 The state in this loop is carried in the `accum` vector, which we
 update each time through the loop. `i` is the counter, and we finally
@@ -1443,9 +1443,9 @@ Aside from vars (which is a sort of special reference type), there are
 
 You might typically create a reference type like this:
 
-```clojure
+{% highlight clojure %}
 (def my-atom (atom {}))
-```
+{% endhighlight %}
 
 This reference type is an atom, and its state is a hashmap (an empty
 one, for now). Here, the `my-atom` symbol refers to a var which refers
@@ -1456,7 +1456,7 @@ Although you *still* can't literally change the value of the atom, you
 the value of the atom, you "deref" it, or just use the shorter "@"
 syntax. Here's an (atom-specific) example:
 
-```clojure
+{% highlight clojure %}
 user=> (def my-atom (atom {:foo 1}))
 ; #'user/my-atom
 user=> @my-atom
@@ -1465,7 +1465,7 @@ user=> (swap! my-atom update-in [:foo] inc)
 ; {:foo 2}
 user=> @my-atom
 ; {:foo 2}
-```
+{% endhighlight %}
 
 ... and we've just changed the state of the atom. (Note, `swap!` is a
 function used only for atoms. There are other specific functions for
