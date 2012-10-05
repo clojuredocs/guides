@@ -126,8 +126,10 @@ TBD
 TBD
 
 
+
 ## Cookbooks
 
+### [Strings](/articles/cookbooks/strings.html)
 
 ### [Data Structures](/articles/cookbooks/data-structures.html)
 
