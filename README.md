@@ -52,10 +52,11 @@ Target audience: from developers who already have some familiarity with the lang
 a while.
 
 
-### Tool guides
+### Tools & Ecosystem guides
 
 This kind of guides covers key Clojure ecosystem tools such as [Leiningen](http://leiningen.org), [Clojars](http://clojars.org), [REPLy](),
-nREPL, Emacs, VimClojure, Counterclockwise, La Clojure and so on.
+nREPL, Emacs, VimClojure, Counterclockwise, La Clojure, etc. It also covers important ecosystem projects that are not tools: books,
+ClojureSphere, ClojureWerkz, Flatland and so on.
 
 Target audience: all developers using or interested in the language.
 
