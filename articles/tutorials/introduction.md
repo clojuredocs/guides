@@ -3,6 +3,8 @@ title: "Introduction to Clojure"
 layout: article
 ---
 
+## Introduction
+
 This is a brief beginner's introduction to
 Clojure. If you haven't already done so, have a look at the [Getting
 Started](/articles/tutorials/getting-started.html) tutorial. Before continuing, make sure
