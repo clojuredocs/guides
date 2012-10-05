@@ -789,7 +789,7 @@ greater than the second arg. The main one is `compare`.
 
 
 
-## Define
+## Vars
 
 The word "variable" isn't often used in Clojure because mutation in Clojure
 happens differently. You have symbols which refer to values. For
