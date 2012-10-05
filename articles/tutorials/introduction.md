@@ -33,24 +33,24 @@ The syntax for Clojure is like Lisp and is very simple: code is made
 up of expressions which are evaluated to some value. Here are some
 examples of expressions:
 
-```clojure
-5                      ; evaluates to 5
-"hi"                   ; evaluates to the string "hi"
+{% highlight clojure %}
+5                      ;= 5
+"hi"                   ;= "hi"
 [1 2 3]                ; evaluates to the vector `[1 2 3]`
 (+ 1 2)                ; evaluates to the sum of 1 and 2
 (if true "yes" "no")   ; evaluates to the string "yes"
 (println "hello!")     ; evaluates to nil (but also prints "hello!")
-```
+{% endhighlight %}
 
 (A semicolon starts a single-line comment.)
 
 Expressions can contain sub-expressions:
 
-```clojure
+{% highlight clojure %}
 (+ 1
    (* 2 3)
    (/ 10 2))   ; 1 + (2 * 3) + (10 / 2) ==> 12
-```
+{% endhighlight %}
 
 Expressions in (various types of) brackets are often referred to as
 "forms".
@@ -97,9 +97,9 @@ can try things out while following along.
 
 Identifiers are used to names things. For example, in
 
-```clojure
+{% highlight clojure %}
 (def the-answer 42)
-```
+{% endhighlight %}
 
 we've named something "the-answer" and given it the value 42.
 
@@ -209,10 +209,10 @@ values.
 You generally don't use lists very often for typical sequential data
 in your programs:
 
-```clojure
+{% highlight clojure %}
 (def my-stuff '("shirt" "coat" "hat"))  ; Works fine, but ...
 (def my-stuff ["shirt" "coat" "hat"])   ; this is more typical usage.
-```
+{% endhighlight %}
 
 Lists are most often used when treating code itself as just a bunch of
 nested lists --- see [Macros](#macros).

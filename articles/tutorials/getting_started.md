@@ -28,7 +28,7 @@ repl:
 
 You should be greeted with a "`user=>`" prompt. Try it out:
 
-```clojure
+<pre>
 user=> (+ 1 1)
 ; 2
 user=> (distinct [:a :b :a :c :a :d])
@@ -40,19 +40,19 @@ user=> (dotimes [i 3]
 ; Fabulous! 1
 ; Inconceivable! 2
 ; nil
-```
+</pre>
 
 
 ## Your first project
 
 Create your first Clojure program like so:
 
-```bash
+{% highlight bash %}
 lein new app my-proj
 cd my-proj
 # Have a look at the "-main" function in src/my_proj/core.clj.
 lein run
-```
+{% endhighlight %}
 
 and see the output from that `println` function call in
 my_proj/core.clj!
