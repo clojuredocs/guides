@@ -76,7 +76,7 @@ For some guidance on writing great documentation, see
 
 ### Toolchain
 
-`README-tools.md` covers development environment setup.
+[README-tools.md](README-tools.md) covers development environment setup.
 
 
 ### Contributors List
