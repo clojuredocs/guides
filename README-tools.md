@@ -14,6 +14,9 @@ Then install dependencies
 
     bundle install --binstubs
 
+Then install Pygments (this assumes you have Python and pip installed):
+
+    pip install pygments
 
 
 ## How To Run A Development Server
