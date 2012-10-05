@@ -74,6 +74,13 @@ For some guidance on writing great documentation, see
 
 ## Contributing
 
+### Toolchain
+
+`README-tools.md` covers development environment setup.
+
+
+### Contributors List
+
 If you are the primary author of a substantial document, you might
 include your name in a `# Contributors` section near the end of it,
 noting that you are the original author. If you have made substantial
