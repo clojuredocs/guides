@@ -340,10 +340,10 @@ We'll cover those a little bit later on.
 If for whatever reason you'd rather Clojure *not* treat something like
 `(+ 1 2 3)` as a function call, you can "quote" it like so:
 
-```clojure
+{% highlight clojure %}
 user=> '(+ 1 2 3)
 ; (+ 1 2 3)
-```
+{% endhighlight %}
 
 This causes Clojure to then regard it simply as a 4-element list;
 the first element of which is the symbol for some function.  Reasons
@@ -358,9 +358,9 @@ and to keep them from colliding with other function names.
 All function names live in a namespace. All the core functions
 we've been using thus far are in the clojure.core namespace:
 
-```clojure
+{% highlight clojure %}
 (clojure.core/println "hi")
-```
+{% endhighlight %}
 
 That's the fully-qualified name of `println`. You'd normally have to
 use the fully-qualified name for functions (or else use an alias to
@@ -383,10 +383,10 @@ the rest of the file.
 In the repl, you can make use of libraries --- and at the same time
 provide a handy alias for them --- by *requiring* them like so:
 
-```clojure
+{% highlight clojure %}
 user=> (require '[clojure.string :as str])
 ; nil
-```
+{% endhighlight %}
 
 Now we can use all the functions in the clojure.string library by
 prefixing them with "str/". We'll do exactly this in the section below
@@ -402,17 +402,17 @@ strings](#functions-for-working-with-strings).
 There are functions for creating the various data structures without
 using the usual literal syntax:
 
-```clojure
+{% highlight clojure %}
 (list 1 2 3)            ;=> '(1 2 3)
 (vector 1 2 3)          ;=> [1 2 3]
 (hash-map :a 1 :b 2)    ;=> {:a 1 :b 2}
 (hash-set :a :b :c)     ;=> #{:a :b :c}
-```
+{% endhighlight %}
 
 And there are various functions for converting between vectors, sets,
 and maps:
 
-```clojure
+{% highlight clojure %}
 (def my-vec [1 2 3])
 (set my-vec)                   ;=> #{1 2 3}
 
@@ -427,7 +427,7 @@ and maps:
 ;; And for fun:
 (zipmap [:a :b :c] [1 2 3])    ;=> {:c 3 :b 2 :a 1}
 (apply hash-map [:a 1 :b 2])   ;=> {:a 1 :b 2}
-```
+{% endhighlight %}
 
 (We cover `apply` in the [Bread and Butter
 functions](#bread-and-butter-functions) section.)
@@ -458,7 +458,7 @@ structure).  More about `seq` when we get to [Laziness](#laziness).
 
 Getting values from data structures:
 
-```clojure
+{% highlight clojure %}
 ;; Vectors
 (def v [:a :b :c])
 (nth v 1)             ;=> :b
@@ -488,7 +488,7 @@ Getting values from data structures:
 (def s #{:a :b :c})
 (s :a)                ;=> :a
 (s :z)                ;=> nil
-```
+{% endhighlight %}
 
 Data structures in Clojure are actually *immutable* --- you can't
 change them. Though it may sound batty, it actually works out nicely
@@ -497,7 +497,7 @@ in practice, and we'll read more about in the
 below. For now, just note that data structures can't be mutated, but
 we *can* get a new modified copy of a data structure:
 
-```clojure
+{% highlight clojure %}
 ;; Vectors
 (def v   [:a :b :c])
 (def li '(:a :b :c))
@@ -520,7 +520,7 @@ m   ;=> is still {:a 1 :b 2}
 (disj s :a)           ;=> #{:b}
 
 s   ;=> is still #{:a :b}
-```
+{% endhighlight %}
 
 See the [cheatsheet](http://clojure.org/cheatsheet) for much more
 you can do with these core data structures.
@@ -549,7 +549,7 @@ There are a number of functions for working with strings listed in the
 Strings section of the cheatsheet. Here are some examples of a few of
 them:
 
-```clojure
+{% highlight clojure %}
 user=> (str "hi" "there")
 ; "hithere"
 user=> (count "hello")
@@ -564,7 +564,7 @@ user=> (str/join " " ["hello" "there"])
 ; "hello there"
 user=> (str/replace "hello there" "ll" "LL")
 ; "heLLo there"
-```
+{% endhighlight %}
 
 Some of them make optional use of regexes. There's more in the
 cheatsheet. Try them out!
@@ -572,7 +572,7 @@ cheatsheet. Try them out!
 Incidentally, since strings are sequential, any function that works on
 sequentials works on strings. For example:
 
-```clojure
+{% highlight clojure %}
 user=> (first "hello")
 ; \h
 user=> (last "hello")
@@ -588,7 +588,7 @@ user=> (doseq [letter "hello"] (println letter))
 ; l
 ; o
 ; nil
-```
+{% endhighlight %}
 
 Again, see the cheatsheet for more.
 
