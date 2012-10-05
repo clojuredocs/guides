@@ -82,18 +82,18 @@ environment setup.
 
 ### Contributors List
 
-If you are the primary author of a substantial document, you might
-include your name in a `# Contributors` section near the end of it,
-noting that you are the original author. If you have made substantial
-contributions to an existing document, you might add your name to the
-`# Contributors` section. Otherwise, all contributors are encouraged
+If you are the primary author of a substantial document, you are
+encouraged to include your name in a `# Contributors` section near the
+end of it, noting that you are the original author. If you have made
+substantial contributions to an existing document, you might add your
+name to the `# Contributors` section. All contributors are encouraged
 to add their name to the CONTRIBUTORS file.
 
-Note to potential contributors: if you'd like to make changes to an
-existing document, please attempt to stay true to the author's
-original style and intent. If you chafe at this idea, you might
-consider writing your own separate document for inclusion in this
-collection. `:)`
+When making changes to an existing document, please attempt to stay
+true to the author's original style and intent. If you chafe at this
+idea, you might consider writing your own separate document for
+inclusion in this collection. `:)`
+
 
 
 ## License
