@@ -20,6 +20,28 @@ What's *not* here:
     at [Clojuredocs](http://clojuredocs.org/).
 
 
+## Install Dependencies
+
+CDS reuses the [ClojureWerkz docslate](http://github.com/clojurewerkz/docslate) toolchain.
+
+With [Bundler](http://getbundler.com):
+
+    bundle install --binstubs
+
+
+## How To Run A Development Server
+
+    ./bin/jekyll --server
+
+
+## How To Regenerate The Site
+
+In order to modify contents and launch dev environment, run:
+
+      ./bin/jekyll
+
+
+
 ## License
 
 All docs in the clojure-docs-collection are distributed under the
