@@ -330,8 +330,8 @@ which don't follow the regular evaluation rule and get special treatment
 from the Clojure compiler.
 
 There aren't too many special forms to remember. Some examples of
-special forms are `def`, `let`, `if`, `and`, and `or`. We'll cover
-those a little bit later on.
+special forms are `def`, `let`, `if` and Java interoperability forms such as `(.toString obj)`.
+We'll cover those a little bit later on.
 
 
 
