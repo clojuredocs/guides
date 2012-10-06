@@ -98,6 +98,16 @@ This guide covers:
 TBD
 
 
+### [Clojure Community](/articles/ecosystem/community.html)
+
+This guide covers:
+
+ * Planet Clojure, mailing lists, IRC channel
+ * Clojure conferences
+ * Local Clojure user groups
+ * Other Clojure community resources
+
+
 ### [Data Processing (Overview)](/articles/ecosystem/data_processing.html)
 
 TBD
