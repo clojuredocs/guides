@@ -27,11 +27,13 @@ linking to other relevant resources.
 
 ## Structure
 
-CDS is structured as a number of guides. They broadly fall into 3 categories:
+CDS is structured as a number of guides. They broadly fall into 4 categories:
 
- * Tutorials
- * Language guides
- * Tool guides
+  * Tutorials
+  * Language guides
+  * Tool guides
+  * Cookbooks
+
 
 ### Tutorials
 
@@ -63,6 +65,13 @@ nREPL, Emacs, VimClojure, Counterclockwise, La Clojure, etc. It also covers impo
 ClojureSphere, ClojureWerkz, Flatland and so on.
 
 Target audience: all developers using or interested in the language.
+
+
+
+### Cookbooks
+
+Concise Clojure example code, categorized by subject.
+
 
 
 
