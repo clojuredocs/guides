@@ -12,9 +12,9 @@ manifold collection of guides for the Clojure language.
 
 ## Tutorials
 
-###  [Getting started](/articles/tutorials/getting_started.html)
+### [Getting started](/articles/tutorials/getting_started.html)
 
-If you're new to Clojure and looking for a place to start, this is it.
+If you're new to Clojure, this is a good place to start.
 
 
 ### [Introduction](/articles/tutorials/introduction.html)
