@@ -81,19 +81,19 @@ TBD
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](/articles/ecosystem/leiningen/getting_started.html)
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
 
-TBD
+This guide covers:
 
+ * What is Leiningen and what it can do for you
+ * How to create a project with Leiningen
+ * How to manage project dependencies
+ * Accessing the REPL
+ * How to run tests for your project
+ * How to run the app
+ * How to compile your code and dependencies into a single JAR for deployment ("überjar")
+ * How to share (publish) a library
 
-### [Leiningen Overview](/articles/ecosystem/leiningen/overview.html)
-
-TBD
-
-
-### [Using Leiningen](/articles/ecosystem/leiningen/using.html)
-
-TBD
 
 
 ### [Clojure Libraries](/articles/ecosystem/libraries.html)
@@ -101,12 +101,12 @@ TBD
 TBD
 
 
-### [Web Development (Overview)](/articles/ecosystem/web_development.html)
+### [Data Processing (Overview)](/articles/ecosystem/data_processing.html)
 
 TBD
 
 
-### [Data Processing (Overview)](/articles/ecosystem/data_processing.html)
+### [Web Development (Overview)](/articles/ecosystem/web_development.html)
 
 TBD
 
@@ -123,7 +123,12 @@ TBD
 
 ### [Leiningen Plugins](/articles/ecosystem/leiningen/plugins.html)
 
-TBD
+This guide covers:
+
+ * What Leiningen plugins can do
+ * How to install Leiningen plugins
+ * How to develop plugins
+ * How to distribute plugins
 
 
 
@@ -131,11 +136,19 @@ TBD
 
 ### [Strings](/articles/cookbooks/strings.html)
 
+TBD
+
 ### [Data Structures](/articles/cookbooks/data-structures.html)
+
+TBD
 
 ### [Files and Directories](/articles/cookbooks/files-and-directories.html)
 
+TBD
+
 ### [Date and Time](/articles/cookbooks/date-and-time.html)
+
+TBD
 
 
 
