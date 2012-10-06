@@ -29,9 +29,9 @@ or else in the repl you've loaded it:
 
 **Read a file into one long string:**
 
-```clojure
+{% highlight clojure %}
 (def a-long-string (slurp "foo.txt"))
-```
+{% endhighlight %}
 
 Note, you can pass urls to `slurp` as well. See also [slurp at
 Clojuredocs](http://clojuredocs.org/clojure_core/clojure.core/slurp).
@@ -42,10 +42,10 @@ Clojuredocs](http://clojuredocs.org/clojure_core/clojure.core/slurp).
 Suppose you'd like to call `my-func` on every line in a file,
 and return the resulting sequence:
 
-```clojure
+{% highlight clojure %}
 (with-open [rdr (io/reader "foo.txt")]
   (doall (map my-func (line-seq rdr))))
-```
+{% endhighlight %}
 
 The `doall` is needed because the `map` call is lazy. The lines that
 `line-seq` gives you have no trailing newlines (and empty lines in the
@@ -54,18 +54,18 @@ file will yield empty strings ("")).
 
 **Write a long string out to a new file:**
 
-```clojure
+{% highlight clojure %}
 (spit "foo.txt"
       "A long
 multi-line string.
 Bye.")
-```
+{% endhighlight %}
 
 Overwrites the file if it already exists. To append, use
 
-```clojure
+{% highlight clojure %}
 (spit "foo.txt" "file content" :append true)
-```
+{% endhighlight %}
 
 
 **Write a file one line at a time:**
@@ -73,24 +73,24 @@ Overwrites the file if it already exists. To append, use
 Suppose you'd like to write out every item in a vector, one item per
 line:
 
-```clojure
+{% highlight clojure %}
 (with-open [wrtr (io/writer "foo.txt")]
   (doseq [i my-vec]
     (.write wrtr (str i "\n"))))
-```
+{% endhighlight %}
 
 
 **Check if a file exists:**
 
-```clojure
+{% highlight clojure %}
 (.exists (io/file "filename.txt"))
-```
+{% endhighlight %}
 
 **Is it a directory?**
 
-```clojure
+{% highlight clojure %}
 (.isDirectory (io/file "path/to/something"))
-```
+{% endhighlight %}
 
 An io/file is a java.io.File object (a file or a directory). You can
 call a number of functions on it, including:
@@ -108,14 +108,14 @@ docs](http://docs.oracle.com/javase/7/docs/api/java/io/File.html).
 **Get a list of the files and dirs --- as `File` objects --- in a
 given directory:**
 
-```clojure
+{% highlight clojure %}
 (.listFiles (io/file "path/to/some-dir"))
-```
+{% endhighlight %}
 
 Same, but just the *names* (strings), not File objects:
 
-```clojure
+{% highlight clojure %}
 (.list (io/file "path/to/some-dir"))
-```
+{% endhighlight %}
 
 The results of those calls are seqable.
