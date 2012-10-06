@@ -163,15 +163,24 @@ This guide covers:
 
 TBD
 
-### [Data Structures](/articles/cookbooks/data-structures.html)
+### [Data Structures](/articles/cookbooks/data_structures.html)
 
 TBD
 
-### [Files and Directories](/articles/cookbooks/files-and-directories.html)
+### [Files and Directories](/articles/cookbooks/files_and_directories.html)
 
-TBD
+This cookbook covers:
 
-### [Date and Time](/articles/cookbooks/date-and-time.html)
+ * Reading and writing text and binary files
+ * Listing directory contents
+ * Creating files and directories
+ * Moving files and directories
+ * Removing files and directories
+ * Accessing file metadata
+ * Other operations on files and directories
+
+
+### [Date and Time](/articles/cookbooks/date_and_time.html)
 
 TBD
 
