@@ -3,10 +3,10 @@ title: "Clojure Documentation: all language guides"
 layout: article
 ---
 
-## TOC
+## Listing of All Guides
 
-[Clojure Documentation](https://github.com/clojuredocs/cds) is organized as a number of guides, covering all kinds of topics.
-
+[CDS](https://github.com/clojuredocs/cds) is a categorized and
+manifold collection of guides for the Clojure language.
 
 
 
@@ -14,16 +14,13 @@ layout: article
 
 ###  [Getting started](/articles/tutorials/getting_started.html)
 
-TBD
+If you're new to Clojure and looking for a place to start, this is it.
 
 
 ### [Introduction](/articles/tutorials/introduction.html)
 
-This guide covers:
-
- * This thing
- * That thing
- * This other thing
+A swift introduction to the Clojure language, covering most of the
+basics.
 
 
 
