@@ -121,7 +121,25 @@ TBD
 TBD
 
 
-### [Leiningen Plugins](/articles/ecosystem/leiningen/plugins.html)
+### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md)
+
+This guide covers:
+
+ * What are Leiningen profiles
+ * How to use them
+
+
+### [Distributing Libraries with Leiningen and Clojars](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md)
+
+This guide covers:
+
+ * How Clojure libraries are distributed
+ * How to publish Clojure libraries to clojars.org
+ * How to publish Clojure libraries to Maven Central
+ * How to publish Clojure libraries to your own Maven repository
+
+
+### [Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md)
 
 This guide covers:
 
