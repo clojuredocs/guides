@@ -52,10 +52,9 @@ Videos of talks are often made available on [InfoQ](http://www.infoq.com) and [C
 In no particular order:
 
   * [Clojure/conj](http://clojure-conj.org/), aka "the Conj"
-  * [StrangeLoop](https://thestrangeloop.com/)
   * [EuroClojure](http://euroclojure.com/)
   * [Clojure/West](http://clojurewest.org/)
-
+  * [StrangeLoop](https://thestrangeloop.com/) (not about Clojure but often has strong Clojure community presence)
 
 ## User Groups
 
