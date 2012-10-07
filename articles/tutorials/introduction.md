@@ -180,6 +180,7 @@ will become clearer later on when we briefly mention
 > Types](#reference-types) section.
 
 
+
 ## Data Structures
 
 Clojure comes out of the box with nice literal syntax for the various
@@ -352,11 +353,8 @@ for wanting to do this will become clearer later on.
 
 ## Let and Locals
 
-You don't have to create a top-level var for every symbol in your
-program.  Often you just want some local names (we don't call them
-"variables" since we know that values don't vary) to use in a section
-of your code. For this we use the `let` expression, and it's locals
-are lexically scoped within it:
+When you want some lexically-scoped named values to use in a section
+of your code, you can use the `let` expression:
 
 {% highlight clojure %}
 (let [width  10
@@ -374,7 +372,7 @@ along with their values.
 > above with 10 and 20.
 
 These local names are symbols that refer directly to the values you
-set them to (no vars are involved, like they are when using `def`).
+set them to.
 
 You can re-set the symbols in the binding vector multiple times
 (building it up into the value you need), if you find it useful:
@@ -389,8 +387,8 @@ You can re-set the symbols in the binding vector multiple times
 
 The `let` expression itself evaluates to the last expression in its
 body.  You can put other things inside the `let` (like our `println`
-expression, in the previous example), but the value of the `let` is
-its last expression.
+expression, in the previous example), but the overall value of the
+`let` is its last expression.
 
 > Note that the `println` expression just evaluates to nil. We don't
 > use its value for anything --- we only care about its *side-effects*
@@ -854,9 +852,11 @@ refers to the value 42.
 
     the-answer (a symbol)  →  a var  →  42 (a value)
 
-When you type in "`the-answer`", Clojure automatically looks up the
-var, then from there finds and returns the value 42.
+When Clojure sees "`the-answer`", it automatically looks up the var,
+then from there finds and returns the value 42.
 
+Recall that locals (discussed earlier) don't involve vars at all:
+those symbols refer directly to their values.
 
 
 
