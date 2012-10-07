@@ -320,6 +320,36 @@ names.
 
 
 
+### Special Forms
+
+If an expression starts with an open paren, Clojure first checks to
+see if it's a special form. Special forms are any parenthesized forms
+which don't follow the regular evaluation rule and get special treatment
+from the Clojure compiler.
+
+There aren't too many special forms to remember. Some examples of
+special forms are `def`, `let`, `if` and Java interoperability forms such as `(.toString obj)`.
+We'll cover those a little bit later on.
+
+
+
+### Quoting
+
+If for whatever reason you'd rather Clojure *not* treat something like
+`(+ 1 2 3)` as a function call, you can "quote" it like so:
+
+{% highlight clojure %}
+user=> '(+ 1 2 3)
+; (+ 1 2 3)
+{% endhighlight %}
+
+This causes Clojure to then regard it simply as a 4-element list;
+the first element of which is the symbol for some function.  Reasons
+for wanting to do this will become clearer later on.
+
+
+
+
 ## Let and Locals
 
 You don't have to create a top-level var for every symbol in your
@@ -367,35 +397,6 @@ its last expression.
 > (printing out to the console). More about
 > [Side-Effects](#side-effects) shortly.
 
-
-
-
-### Special Forms
-
-If an expression starts with an open paren, Clojure first checks to
-see if it's a special form. Special forms are any parenthesized forms
-which don't follow the regular evaluation rule and get special treatment
-from the Clojure compiler.
-
-There aren't too many special forms to remember. Some examples of
-special forms are `def`, `let`, `if` and Java interoperability forms such as `(.toString obj)`.
-We'll cover those a little bit later on.
-
-
-
-### Quoting
-
-If for whatever reason you'd rather Clojure *not* treat something like
-`(+ 1 2 3)` as a function call, you can "quote" it like so:
-
-{% highlight clojure %}
-user=> '(+ 1 2 3)
-; (+ 1 2 3)
-{% endhighlight %}
-
-This causes Clojure to then regard it simply as a 4-element list;
-the first element of which is the symbol for some function.  Reasons
-for wanting to do this will become clearer later on.
 
 
 
