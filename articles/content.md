@@ -3,7 +3,7 @@ title: "Clojure Documentation: all language guides"
 layout: article
 ---
 
-## Listing of All Guides
+## Overview
 
 [CDS](https://github.com/clojuredocs/cds) is a categorized and
 manifold collection of guides for the Clojure language and its ecosystem.
@@ -273,6 +273,12 @@ This guide covers:
  * Working with Joda Time and `clj-time`
  * Instant literals (Clojure 1.4+)
 
+
+## License
+
+All the content is distributed under the
+[CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license
+and are copyright their respective primary author(s).
 
 
 ## Tell Us What You Think!
