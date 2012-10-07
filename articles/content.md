@@ -1,5 +1,5 @@
 ---
-title: "Clojure Documentation: all language guides"
+title: "All language guides"
 layout: article
 ---
 

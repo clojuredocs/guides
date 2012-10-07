@@ -1,5 +1,5 @@
 ---
-title: "Clojure Documentation Site: Community"
+title: "About"
 layout: article
 ---
 
