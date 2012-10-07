@@ -115,11 +115,6 @@ recommend to friends.
   * [clj-http](https://clojars.org/clj-http): An idiomatic Clojure
     http client wrapping the apache client.
 
-### RSS
-  
-  * [clj-rss](https://clojars.org/clj-rss): RSS feed generation
-    library.
-
 
 ## Logging
 
@@ -134,11 +129,20 @@ recommend to friends.
 
 ## Web Development
 
-  * [compojure](https://github.com/weavejester/compojure): A concise routing library for Ring.
+  * [Noir](http://webnoir.org/): a popular Clojure Web framework suitable for services that generate HTML and pure API endpoints
 
-  * [ring](https://github.com/ring-clojure): foundational web application library.
+  * [compojure](https://github.com/weavejester/compojure): A concise routing library for Ring
 
-  * [friend](https://github.com/cemerick/friend): Authentication and authorization library for Web apps.
+  * [Liberator](https://github.com/clojure-liberator/liberator): a Clojure library for building RESTful applications
+
+  * [ring](https://github.com/ring-clojure): foundational web application library
+
+  * [friend](https://github.com/cemerick/friend): Authentication and authorization library for Web apps
+
+### RSS
+  
+  * [clj-rss](https://clojars.org/clj-rss): RSS feed generation library
+
 
 
 ## Data Stores
