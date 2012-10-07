@@ -152,17 +152,6 @@ This guide covers:
  * How to share (publish) a library
 
 
-### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html)
-
-A manually-curated categorized directory of available Clojure
-libraries and tools.
-
-
-### [Library Creation and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
-
-This guide covers creating and distributing libraries yourself.
-
-
 ### [Clojure Community](/articles/ecosystem/community.html) (Complete)
 
 This guide covers:
@@ -171,6 +160,12 @@ This guide covers:
  * Clojure conferences
  * Local Clojure user groups
  * Other Clojure community resources
+
+
+### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) (Complete)
+
+A curated and highly opinionated categorized directory of available Clojure libraries and tools.
+
 
 
 ### [Data Processing (Overview)](/articles/ecosystem/data_processing.html) (TBD)
@@ -207,6 +202,14 @@ This guide covers:
  * Books on ClojureScript
 
 
+### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
+
+This guide covers:
+
+ * Basic setup for library development
+ * How to publish a library to Clojars
+
+
 ### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) (Semi-complete)
 
 This guide covers:
@@ -215,7 +218,7 @@ This guide covers:
  * How to use them
 
 
-### [Distributing Libraries with Leiningen and Clojars](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) (Complete)
+### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) (Complete)
 
 This guide covers:
 
