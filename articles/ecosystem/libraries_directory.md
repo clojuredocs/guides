@@ -64,7 +64,7 @@ recommend to friends.
 
 ## Testing
 
-  * clojure.test: Easy, quick, standard.
+  * clojure.test: the standard unit testing library that ships with Clojure
 
   * [Midje](https://clojars.org/midje): A more featureful test framework.
 
@@ -73,27 +73,22 @@ recommend to friends.
 
 ### Creating
 
-  * [hiccup](https://clojars.org/hiccup): Easily generate HTML from
-    Clojure data structures.
+  * [hiccup](https://clojars.org/hiccup): Generates HTML from Clojure data structures.
 
-  * [markdown-clj](https://clojars.org/markdown-clj): Clojure
-    based Markdown parsers for both Clojure and ClojureScript.
+  * [markdown-clj](https://clojars.org/markdown-clj): Clojure based Markdown parsers for both Clojure and ClojureScript.
 
 
 ### Parsing
 
   * [TagSoup](http://home.ccil.org/~cowan/XML/tagsoup/): {Java} A tool for parsing
-    html as it's found in the wild: poor, nasty, and brutish. In your project.clj,
-    you want something like `[org.ccil.cowan.tagsoup/tagsoup "1.2.1"]`
+    html as it's found in the wild: poor, nasty, and brutish.
 
 
 ## JSON
 
-  * [data.json](https://github.com/clojure/data.json)
-    {contrib}: JSON parser/generator to/from Clojure data structures.
+  * [cheshire](https://clojars.org/cheshire): very efficient Clojure JSON and SMILE (binary JSON) encoding/decoding.
 
-  * [cheshire](https://clojars.org/cheshire): Clojure JSON and JSON
-    SMILE (binary json format) encoding/decoding.
+  * [data.json](https://github.com/clojure/data.json): JSON parser/generator to/from Clojure data structures.
 
 
 ## File formats
