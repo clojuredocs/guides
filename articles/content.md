@@ -6,18 +6,25 @@ layout: article
 ## Listing of All Guides
 
 [CDS](https://github.com/clojuredocs/cds) is a categorized and
-manifold collection of guides for the Clojure language.
+manifold collection of guides for the Clojure language and its ecosystem.
 
+CDS recognizes that different Clojure users have different level of expertise
+and separates content into several groups:
+
+ * Tutorials
+ * Core language guides
+ * Ecosystem (tools, libraries, community, books) guides
+ * Cookbooks
 
 
 ## Tutorials
 
-### [Getting started](/articles/tutorials/getting_started.html)
+### [Getting started](/articles/tutorials/getting_started.html) (Semi-complete)
 
 If you're new to Clojure, this is a good place to start.
 
 
-### [Introduction](/articles/tutorials/introduction.html)
+### [Introduction](/articles/tutorials/introduction.html) (Semi-complete)
 
 A swift introduction to the Clojure language, covering most of the
 basics.
@@ -26,59 +33,107 @@ basics.
 
 ## Clojure Language Guides
 
-### [clojure.core Overview](/articles/language/core_overview.html)
+### [Functions](/articles/language/functions.html) (In progress)
 
-TBD
-
-
-### [Functions](/articles/language/functions.html)
-
-TBD
-
-
-### [Interoperability with Java](/articles/language/interop.html)
+Functions are at the heard of Clojure.
 
 This guide covers:
 
- * Java Interop
- * This awesome feature
- * That common problem
+ * How to define functions
+ * How to invoke functions
+ * Multi-arity functions
+ * Variadic functions
+ * Higher order functions
+ * Other topics related to functions
 
 
-### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html)
+### [clojure.core Overview](/articles/language/core_overview.html) (TBD)
 
-TBD
+`clojure.core` is the core Clojure library.
 
+This guide covers:
 
-### [Sequences](/articles/language/sequences.html)
-
-TBD
-
-
-### [Namespaces](/articles/language/namespaces.html)
-
-TBD
+ * Key functions of `clojure.core`
+ * Key macros of `clojure.core`
+ * Key vars of `clojure.core`
 
 
-### [Concurrency & Polymorphism](/articles/language/concurrency_and_polymorphism.html)
+### [Interoperability with Java](/articles/language/interop.html) (TBD)
 
-TBD
+Clojure is a symbiotic language with direct interoperability with the host
+platform, the JVM.
+
+This guide covers:
+
+ * How to instantiate Java classes
+ * How to invoke Java methods
+ * How to extend Java classes with proxy
+ * How to implement Java interfaces with reify
+ * How to generate Java classes with gen-class
 
 
-### [Macros and Metaprogramming](/articles/language/macros.html)
+### [Namespaces](/articles/language/namespaces.html) (TBD)
 
-TBD
+Namespaces organize Clojure functions.
+
+This guide covers:
+
+ * Clojure namespaces
+ * How to use functions in other namespaces
+ * `require` vs `refer` vs `use`
+ * How code compilation works in Clojure
 
 
-### [Laziness](/articles/language/laziness.html)
+### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (TBD)
 
-TBD
+This guide covers:
 
+ * What are polymorphic functions
+ * Type-based polymoprhism with protocols
+ * Ad-hoc polymorphism with multimethods
+ * How to create your own data types that behave like core Clojure data types
+
+
+### [Sequences](/articles/language/sequences.html) (TBD)
+
+This guide covers:
+
+
+### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
+
+This guide covers:
+
+ * An overview of concurrency hazards
+ * Clojure's approach to state and identity
+ * Immutable data structures
+ * Reference types (atoms, vars, agents, refs)
+ * Using Clojure functions with `java.util.concurrent` abstractions
+ * The Reducers framework (Clojure 1.5+)
+ * Other topics related to concurrency and runtime parallelism
+
+
+### [Macros and Metaprogramming](/articles/language/macros.html) (TBD)
+
+This guide covers:
+
+ * Clojure macros
+ * Clojure compilation process
+ * Other topics related to metaprogramming
+
+
+### [Laziness](/articles/language/laziness.html) (TBD)
+
+This guide covers:
+
+ * What are lazy sequences
+ * Pitfalls with lazy sequences
+ * How to create functions that produce lazy sequences
+ * How to force evaluation
 
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Semi-complete)
 
 This guide covers:
 
@@ -93,12 +148,18 @@ This guide covers:
 
 
 
-### [Clojure Libraries](/articles/ecosystem/libraries.html)
+### [Clojure Libraries](/articles/ecosystem/libraries.html) (TBD)
 
-TBD
+This guide covers:
+
+ * How Clojure libraries are used
+ * How Clojure libraries are distributed
+ * Popular library repositories
+ * Popular resources that make finding libraries easier
+ * How to publish your libraries
 
 
-### [Clojure Community](/articles/ecosystem/community.html)
+### [Clojure Community](/articles/ecosystem/community.html) (Complete)
 
 This guide covers:
 
@@ -108,27 +169,41 @@ This guide covers:
  * Other Clojure community resources
 
 
-### [Data Processing (Overview)](/articles/ecosystem/data_processing.html)
+### [Data Processing (Overview)](/articles/ecosystem/data_processing.html) (TBD)
 
-TBD
+This guide covers:
+
+ * An overview of why Clojure is an excellent choice for data processing
+ * Popular tools and libraries in the area
 
 
 ### [Web Development (Overview)](/articles/ecosystem/web_development.html)
 
-TBD
+This guide covers:
+
+ * Popular tools and libraries in the area
 
 
-### [Editors & IDEs](/articles/ecosystem/development_tools.html)
+### [Editors & IDEs](/articles/ecosystem/development_tools.html) (TBD)
 
-TBD
+This guide covers:
+
+ * An overview of development tools
+ * A brief intro to Emacs, nREPL, SLIME/Swank
+ * A brief intro to VimClojure
+ * A brief intro to Counterclockwise (Eclipse plugin)
+ * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html)
+### [Books](/articles/ecosystem/books.html) (TBD)
 
-TBD
+This guide covers:
+
+ * Books on Clojure
+ * Books on ClojureScript
 
 
-### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md)
+### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) (Semi-complete)
 
 This guide covers:
 
@@ -136,7 +211,7 @@ This guide covers:
  * How to use them
 
 
-### [Distributing Libraries with Leiningen and Clojars](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md)
+### [Distributing Libraries with Leiningen and Clojars](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) (Complete)
 
 This guide covers:
 
@@ -146,7 +221,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md)
+### [Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
 
 This guide covers:
 
@@ -159,15 +234,25 @@ This guide covers:
 
 ## Cookbooks
 
-### [Strings](/articles/cookbooks/strings.html)
+### [Strings](/articles/cookbooks/strings.html) (TBD)
 
-TBD
+This cookbook covers:
 
-### [Data Structures](/articles/cookbooks/data_structures.html)
+ * How to work with strings
+ * How to work with regular expressions
+ * How to work with characters
 
-TBD
+### [Data Structures](/articles/cookbooks/data_structures.html) (TBD)
 
-### [Files and Directories](/articles/cookbooks/files_and_directories.html)
+This cookbook covers:
+
+ * Vectors
+ * Maps
+ * Lists
+ * Sets
+ * Generic operations on sequences
+
+### [Files and Directories](/articles/cookbooks/files_and_directories.html) (TBD)
 
 This cookbook covers:
 
@@ -180,15 +265,19 @@ This cookbook covers:
  * Other operations on files and directories
 
 
-### [Date and Time](/articles/cookbooks/date_and_time.html)
+### [Date and Time](/articles/cookbooks/date_and_time.html) (TBD)
 
-TBD
+This guide covers:
 
+ * Working with JDK dates
+ * Working with Joda Time and `clj-time`
+ * Instant literals (Clojure 1.4+)
 
 
 
 ## Tell Us What You Think!
 
-Please take a moment to tell us what you think about this guide on Twitter or the [Project Name mailing list](/)
+Please take a moment to tell us what you think about this guide [on Twitter](https://twitter.com/clojuredocs) or the [Clojure mailing list](https://groups.google.com/group/clojure)
 
-Let us know what was unclear or what has not been covered. Maybe you do not like the guide style or grammar or discover spelling mistakes. Reader feedback is key to making the documentation better.
+Let us know what was unclear or what has not been covered. Maybe you do not like the guide style or grammar or discover spelling mistakes.
+Reader feedback is key to making the documentation better.
