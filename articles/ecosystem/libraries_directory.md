@@ -171,6 +171,11 @@ There is also []().
   * [route-one](https://github.com/clojurewerkz/route-one): a tiny Clojure library that generates HTTP resource routes (as in Ruby on Rails, Jersey, and so on)
 
 
+### Internationalization (i18n), Localization (l10n)
+
+  * [Tower](https://github.com/ptaoussanis/tower): a simple, idiomatic internationalization and localization story for Clojure
+
+
 ### RSS
   
   * [clj-rss](https://clojars.org/clj-rss): RSS feed generation library
@@ -191,13 +196,13 @@ There is also []().
 
 ### MongoDB
       
-  * [Monger](https://clojuremongodb.info): Monger is an idiomatic [Clojure MongoDB driver](http://clojuremongodb.info) for a more civilized age.
+  * [Monger](https://clojuremongodb.info): Monger is an idiomatic [Clojure MongoDB driver](http://clojuremongodb.info) for a more civilized age with solid documentation
 
   * [congomongo](https://github.com/aboekhoff/congomongo): Basic wrapper for the MongoDB Java driver
 
 ### Riak
 
-  * [Welle](https://clojureriak.info): An expressive Clojure client for Riak.
+  * [Welle](https://clojureriak.info): An expressive Clojure client for Riak with solid documentation
 
 ### Redis
 
@@ -205,7 +210,7 @@ There is also []().
 
 ### Neo4J
 
-  * [Neocons](https://clojureneo4j.info): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info).
+  * [Neocons](https://clojureneo4j.info): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info)  with solid documentation
 
   * [Borneo](https://github.com/wagjo/borneo)
 
@@ -215,7 +220,7 @@ There is also []().
 
 ### Memcached, Couchbase, Kestrel
 
-  * [Spyglass](http://clojurememcached.info): Spyglass is a very fast Clojure client for Memcached and Couchbase
+  * [Spyglass](http://clojurememcached.info): Spyglass is a very fast Clojure client for Memcached and Couchbase with solid documentation
 
 ### Apache Cassandra
 
