@@ -33,12 +33,6 @@ article pre {
 strong {
   color: #cb4b16; }
 
-.highlight {
-  line-height: 25px;
-  padding: 3px 4px;
-  background-color: #f7f7f9;
-  border: 1px solid #e1e1e8; }
-
 .jumbotron {
   position: relative; }
 
@@ -133,6 +127,11 @@ h2 {
   .container-fluid footer {
     padding-left: 0px;
     border-top: 1px solid #e5e5e5; } }
-.container {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7); }
+
+.container-fluid.content {
+  margin-top: 50px;
+}
+
+blockquote p {
+  font-size: 1em !important;
+}

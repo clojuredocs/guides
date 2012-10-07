@@ -29,7 +29,7 @@
     </script>
   </head>
   <body style='height: 100%'>
-    <div class='navbar navbar-fixed-top'>
+    <div class='navbar navbar-inverse navbar-fixed-top'>
       <div class='navbar-inner'>
         <div class='container-fluid'>
           <a class='btn btn-navbar' data-target='.nav-collapse' data-toggle='collapse'>
@@ -57,12 +57,12 @@
         </div>
       </div>
     </div>
-    <div class='container'>
+    <div class='container-fluid'>
       {{ content }}
-      <footer class='footer'>
-        <p>This website was developed by the
-          &nbsp;<a href='http://github.com/clojuredocs'>Clojure Documentation Team</a>.</p>
-      </footer>
     </div>
+    <footer class='footer'>
+      <p>This website was developed by the
+        &nbsp;<a href='http://github.com/clojuredocs'>Clojure Documentation Team</a>.</p>
+    </footer>
   </body>
 </html>
