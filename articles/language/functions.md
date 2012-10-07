@@ -354,6 +354,43 @@ and the `->` macro:
 {% endhighlight %}
 
 
+## Maps as Functions
+
+Clojure maps are also functions that take keys and look up values for them:
+
+{% highlight clojure %}
+({:age 42 :name "Joe"} :name)    ;= "Joe"
+({:age 42 :name "Joe"} :age)     ;= 42
+({:age 42 :name "Joe"} :unknown) ;= nil
+{% endhighlight %}
+
+Note that this is **not true** for Clojure records, which are almost identical to maps in other
+cases.
+
+
+## Sets as Functions
+
+{% highlight clojure %}
+(#{1 2 3} 1)  ;= 1
+(#{1 2 3} 10) ;= 10
+
+(#{:us :au :ru :uk} :uk) ;= :uk
+(#{:us :au :ru :uk} :cn) ;= nil
+{% endhighlight %}
+
+This is often used to check if a value is in a set:
+
+{% highlight clojure %}
+(when (countries :in)
+  (comment ...))
+
+(if (countries :in)
+  (comment Implement positive case)
+  (comment Implement negative case))
+{% endhighlight %}
+
+because everything but `false` and `nil` evaluates to `true` in Clojure.
+
 
 ## Wrapping Up
 
