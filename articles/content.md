@@ -31,6 +31,14 @@ A swift introduction to the Clojure language, covering most of the
 basics.
 
 
+### [Using Libraries](/articles/tutorials/libraries_usage.html)
+
+A quick guide outlining what code changes are required to use the
+various libs described in the [Categories of Clojure
+Libraries](/articles/ecosystem/libraries_categories.html) guide.
+
+
+
 
 ## Clojure Language Guides
 
