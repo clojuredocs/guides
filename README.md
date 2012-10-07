@@ -1,9 +1,9 @@
 # CDS: A Clojure Doc Site
 
-An assorted collection of tutorials, guides, and
-other documentation (by various authors) for the Clojure
-programming language. Currently available [here, in lovely
-html](http://www.unexpected-vortices.com/clojure/cds/index.html).
+An assorted collection of tutorials, guides, and other documentation
+(by various authors) for the Clojure programming language and its
+ecosystem. Read the guides online at <http://clojure-doc.org/>.
+
 
 ## Goals
 
