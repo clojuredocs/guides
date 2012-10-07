@@ -3,8 +3,6 @@ title: "Getting Started with Clojure"
 layout: article
 ---
 
-## Getting Started
-
 Clojure is a wonderfully simple language and you are going to love
 it. `:)`
 
