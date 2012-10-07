@@ -164,6 +164,12 @@ This guide covers:
  * How to publish your libraries
 
 
+### [Clojure Library Directory](/articles/ecosystem/libraries-directory.html)
+
+A manually-curated categorized directory of available Clojure
+libraries and tools.
+
+
 ### [Clojure Community](/articles/ecosystem/community.html) (Complete)
 
 This guide covers:
