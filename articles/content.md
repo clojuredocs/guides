@@ -160,18 +160,6 @@ This guide covers:
  * How to share (publish) a library
 
 
-
-### [Clojure Libraries](/articles/ecosystem/libraries.html) (TBD)
-
-This guide covers:
-
- * How Clojure libraries are used
- * How Clojure libraries are distributed
- * Popular library repositories
- * Popular resources that make finding libraries easier
- * How to publish your libraries
-
-
 ### [Categories of Clojure Libraries](/articles/ecosystem/libraries_categories.html)
 
 This guide surveys and marks distinctions between the different types
@@ -184,6 +172,11 @@ third-party Clojure (and even Java) libraries.
 
 A manually-curated categorized directory of available Clojure
 libraries and tools.
+
+
+### [Library Creation and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
+
+This guide covers creating and distributing libraries yourself.
 
 
 ### [Clojure Community](/articles/ecosystem/community.html) (Complete)
