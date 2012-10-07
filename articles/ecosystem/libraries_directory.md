@@ -13,7 +13,7 @@ endeavor to keep it up-to-date, consisting of libraries you'd
 recommend to friends. `:)`
 
 For help on how to use the various libraries available in your code,
-see the [libraries-usage tutorial](../tutorials/libraries-usage.html).
+see the [libraries-usage tutorial](../tutorials/libraries_usage.html).
 
 Conventions in this document:
 
