@@ -338,7 +338,7 @@ Documentation
     plug-in](https://github.com/fogus/lein-marginalia).
 
 
-### Generating API Dcs
+### Generating API Docs
 
   * [codox](https://github.com/weavejester/codox): See the [compojure
     api docs](http://weavejester.github.com/compojure/) for an
