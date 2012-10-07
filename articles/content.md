@@ -263,7 +263,7 @@ This cookbook covers:
  * Sets
  * Generic operations on sequences
 
-### [Files and Directories](/articles/cookbooks/files_and_directories.html) (TBD)
+### [Files and Directories](/articles/cookbooks/files_and_directories.html)
 
 This cookbook covers:
 
