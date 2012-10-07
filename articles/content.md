@@ -6,7 +6,8 @@ layout: article
 ## Overview
 
 [CDS](https://github.com/clojuredocs/cds) is a categorized and
-manifold collection of guides for the Clojure language and its ecosystem.
+manifold collection of guides for the Clojure programming language and
+its ecosystem.
 
 CDS recognizes that different Clojure users have different level of expertise
 and separates content into several groups:
@@ -35,7 +36,7 @@ basics.
 
 ### [Functions](/articles/language/functions.html) (In progress)
 
-Functions are at the heard of Clojure.
+Functions are at the heart of Clojure.
 
 This guide covers:
 
@@ -60,8 +61,8 @@ This guide covers:
 
 ### [Interoperability with Java](/articles/language/interop.html) (TBD)
 
-Clojure is a symbiotic language with direct interoperability with the host
-platform, the JVM.
+The Clojure language implementation is symbiotic with its host
+platform (the JVM), providing direct interoperability.
 
 This guide covers:
 
