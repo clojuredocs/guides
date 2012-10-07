@@ -146,17 +146,136 @@ Sometimes function arguments are data structures: vectors, sequences, maps. To a
 data structure, you may do something like this:
 
 {% highlight clojure %}
+(defn currency-of
+  [m]
+  (let [currency (get m :currency)]
+    currency))
 {% endhighlight %}
 
 For vector arguments:
 
 {% highlight clojure %}
+(defn currency-of
+  [pair]
+  (let [amount   (first  pair)
+        currency (second pair)]
+    currency))
 {% endhighlight %}
 
 However, this is boilerplate code that has little to do with what the function really does. Clojure
 lets developer **destructure** parts of arguments, for both maps and sequences.
 
-TBD
+### Positional Destructuring
+
+Destructuring over vectors (**positional destructuring**) works like this: you replace the argument
+with a vector that has "placeholders" (symbols) in positions you want to bind. For example, if the
+argument is known to be a pair and you need second argument, it would look like this:
+
+{% highlight clojure %}
+(defn currency-of
+  [[amount currency]]
+  currency)
+{% endhighlight %}
+
+In the example above the first element in the pair is bound to `amount` and the second one is bound to
+`currency`. So far so good. However, notice that we do not use the `amount` local. In that case, we can
+ignore it by replacing it with an underscore:
+
+{% highlight clojure %}
+(defn currency-of
+  [[_ currency]]
+  currency)
+{% endhighlight %}
+
+Destructuring can nest (destructure deeper than one level):
+
+{% highlight clojure %}
+(defn first-first
+  [[[i _] _]]
+  i)
+{% endhighlight %}
+
+While this article does not cover `let` and locals, it is worth demonstrating that positional destructuring works
+exactly the same way for let bindings:
+
+{% highlight clojure %}
+(let [pair         [10 :gbp]
+      [_ currency] pair]
+  currency)
+{% endhighlight %}
+
+
+### Map Destructuring
+
+Destructuring over maps and records (**map destructuring**) works slightly differently:
+
+{% highlight clojure %}
+(defn currency-of
+  [{currency :currency}]
+  currency)
+{% endhighlight %}
+
+In this case example, we want to bind the value for key `:currency` to `currency`. Keys don't have to be
+keywords:
+
+{% highlight clojure %}
+(defn currency-of
+  [{currency "currency"}]
+  currency)
+{% endhighlight %}
+
+{% highlight clojure %}
+(defn currency-of
+  [{currency 'currency}]
+  currency)
+{% endhighlight %}
+
+When destructuring multiple keys at once, it is more convenient to use a slightly different syntax:
+
+{% highlight clojure %}
+(defn currency-of
+  [{:keys [currency amount]}]
+  currency)
+{% endhighlight %}
+
+The example above assumes that map keys will be keywords and we are interested in two values: `currency`
+and `amount`. The same can be done for strings:
+
+{% highlight clojure %}
+(defn currency-of
+  [{:strs [currency amount]}]
+  currency)
+{% endhighlight %}
+
+and symbols:
+
+{% highlight clojure %}
+(defn currency-of
+  [{:syms [currency amount]}]
+  currency)
+{% endhighlight %}
+
+In practice, keywords are very commonly used for map keys so destructuring with `{:keys [...]}` is very common
+as well.
+
+Map destructuring also lets us specify default values for keys that may be missing:
+
+{% highlight clojure %}
+(defn currency-of
+  [{:keys [currency amount] :or {currency :gbp}}]
+  currency)
+{% endhighlight %}
+
+This is very commonly used for implementing functions that take "extra options" (faking named arguments support).
+
+
+Just like with positional destructuring, map destructuring works exactly the same way for let bindings:
+
+{% highlight clojure %}
+(let [money               {:currency :gbp :amount 10}
+     {currency :currency} money]
+  currency)
+{% endhighlight %}
 
 
 ## Variadic Functions
@@ -203,10 +322,37 @@ args:  (192.0.0.76 service:xyz)
 
 As you can see, optional arguments (`args`) are packed into a list.
 
+### Extra Arguments (aka Named Parameters)
+
+TBD
+
 
 ## Higher Order Functions
 
 TBD
+
+
+
+## Keywords as Functions
+
+In Clojure, keywords can be used as functions. They take a map or record and look themselves up in it:
+
+{% highlight clojure %}
+(:age {:age 27 :name "Michael"}) ;= 27
+{% endhighlight %}
+
+This is commonly used with higher order functions:
+
+{% highlight clojure %}
+(map :age [{:age 45 :name "Joe"} {:age 42 :name "Jill"} {:age 17 :name "Matt"}]) ;= (45 42 17)
+{% endhighlight %}
+
+and the `->` macro:
+
+{% highlight clojure %}
+(-> [{:age 45 :name "Joe"} {:age 42 :name "Jill"}] first :name) ;= "Joe"
+{% endhighlight %}
+
 
 
 ## Wrapping Up
