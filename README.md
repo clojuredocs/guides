@@ -107,6 +107,6 @@ inclusion in this collection. `:)`
 
 ## License
 
-All docs in the clojure-docs-collection are distributed under the
+All the content is distributed under the
 [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license
 and are copyright their respective primary author(s).
