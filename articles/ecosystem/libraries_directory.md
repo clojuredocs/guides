@@ -434,6 +434,8 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
 ## Tooling
 
+ * [Leiningen](http://leiningen.org): the Clojure build tool
+
  * [tools.nrepl](https://github.com/clojure/tools.nrepl): nREPL interface
 
  * [java.jmx](https://github.com/clojure/java.jmx): nice JMX interface
