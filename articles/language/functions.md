@@ -120,17 +120,88 @@ calls another version (*2-arity*) with a default parameter. This is a common use
 argument values. Clojure is a hosted language and JVM (and JavaScript VMs, for that matter) does not support default argument
 values, however, it does support *method overloading* and Clojure takes advantage of this.
 
-Arities in Clojure can only differ by the number of arguments, not types. This is because Clojure is strongly dynamicall
+Arities in Clojure can only differ by the number of arguments, not types. This is because Clojure is strongly dynamically typed language and type information about
+parameters may or may not be available to the compiler.
+
+A larger example:
+
+{% highlight clojure %}
+(defn range
+  ([]
+    (range 0 Double/POSITIVE_INFINITY 1))
+  ([end]
+    (range 0 end 1))
+  ([start end]
+    (range start end 1))
+  ([start end step]
+    (comment Omitted for clarity)))
+{% endhighlight %}
 
 
-## Variadic Functions
-
-TBD
 
 
 ## Destructuring of Function Arguments
 
+Sometimes function arguments are data structures: vectors, sequences, maps. To access parts of such
+data structure, you may do something like this:
+
+{% highlight clojure %}
+{% endhighlight %}
+
+For vector arguments:
+
+{% highlight clojure %}
+{% endhighlight %}
+
+However, this is boilerplate code that has little to do with what the function really does. Clojure
+lets developer **destructure** parts of arguments, for both maps and sequences.
+
 TBD
+
+
+## Variadic Functions
+
+Variadic functions are functions that take varying number of arguments (some arguments are optional). Two examples
+of such function in `clojure.core` are `clojure.core/str` and `clojure.core/format`:
+
+{% highlight clojure %}
+(str "a" "b")     ;= "ab"
+(str "a" "b" "c") ;= "abc"
+
+(format "Hello, %s" "world")              ;= "Hello, world"
+(format "Hello, %s %s" "Clojure" "world") ;= "Hello, Clojure world"
+{% endhighlight %}
+
+To define a variadic function, prefix optional arguments with an ampersand (`&`):
+
+{% highlight clojure %}
+(defn log
+  [message & args]
+  (comment ...))
+{% endhighlight %}
+
+In the example above, one argument is requried and the rest is optional. Variadic functions
+are invoked as usual:
+
+{% highlight clojure %}
+(defn log
+  [message & args]
+  (println "args: " args))
+
+(log "message from " "192.0.0.76")
+{% endhighlight %}
+
+Running the example above in the REPL produces:
+
+{% highlight clojure %}
+user=> (log "message from " "192.0.0.76")
+args:  (192.0.0.76)
+
+user=> (log "message from " "192.0.0.76" "service:xyz")
+args:  (192.0.0.76 service:xyz)
+{% endhighlight %}
+
+As you can see, optional arguments (`args`) are packed into a list.
 
 
 ## Higher Order Functions
