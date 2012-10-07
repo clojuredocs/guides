@@ -162,7 +162,7 @@ recommend to friends.
       
   * [Monger](https://clojuremongodb.info): Monger is an idiomatic [Clojure MongoDB driver](http://clojuremongodb.info) for a more civilized age.
 
-  * [congomongo](https://clojars.org/congomongo): Basic wrapper for [MongoDB](http://www.mongodb.org).
+  * [congomongo](https://github.com/aboekhoff/congomongo): Basic wrapper for the MongoDB Java driver
 
 ### Riak
 
@@ -188,34 +188,16 @@ recommend to friends.
 
 ## I/O
 
-### Stdin and Stdout
-
-  * To read user input from stdin in the repl, use `read-line`.
-
-  * clojure.pprint/pprint for pretty printing.
-
-
-### Terminal
-
-  * [clojure-lanterna](https://clojars.org/clojure-lanterna): for
-    creating TUIs (terminal-based user-interfaces), like ncurses. It's
-    a Clojure-friendly wrapper around the Java
-    [lanterna](https://code.google.com/p/lanterna/) library.
-
-
 ### Files
 
-  * To read the complete contents of a file to a string: `slurp`.
+File I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
-  * To write a string to file: `spit`.
-
-  * clojure.java.io
-
-  * [fs](https://clojars.org/fs): utilities for working with the file
-    system.
+  * [fs](https://clojars.org/fs): utilities for working with the file system
 
 
-### Process Management
+### Standard Streams, Subprocesses
+
+Standard streams I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
   * clojure.java.shell: Conveniently launch a sub-process providing
     its stdin and collecting its stdout.
@@ -224,15 +206,19 @@ recommend to friends.
     An alternative to clojure.java.shell.
 
 
-## Graphics
+### REPL and Terminal
+
+  * [REPLy](https://github.com/trptcolin/reply): a Swiss army knife of interactive editing, and better REPL for Clojure
+
+  * [clojure-lanterna](https://clojars.org/clojure-lanterna): for creating TUIs (terminal-based user-interfaces), like ncurses.
+
+
+## Graphics and GUI
 
   * [Quil](https://clojars.org/quil): For making drawings, animations,
     and artwork ([some
     examples](https://github.com/quil/quil/blob/master/examples/gen_art/README.md)). Wraps
     the ["Processing"](http://www.processing.org/) graphics environment.
-
-
-### GUI (Graphical User Interface)
 
   * [seesaw](https://clojars.org/seesaw): A Swing wrapper/DSL.
 
@@ -240,20 +226,19 @@ recommend to friends.
 
 ## Documentation
 
-  * [Marginalia](https://github.com/fogus/marginalia): View a
-    project's docstrings side-by-side with its code. To see an
-    example, see [the Marginalia
-    site](http://fogus.me/fun/marginalia/). It's probably most common
-    to use it via the [Marginalia Leiningen
-    plug-in](https://github.com/fogus/lein-marginalia).
+### Literate Programming
+
+  * [Marginalia](https://github.com/fogus/marginalia): literate programming implementation for Clojure. See [the Marginalia
+    site](http://fogus.me/fun/marginalia/) for an example.
+
+  * [Marginalia Leiningen plug-in](https://github.com/fogus/lein-marginalia)
 
 
-### Generating API Docs
+### Generating API Reference
 
-  * [codox](https://github.com/weavejester/codox): See the [compojure
+  * [Codox](https://github.com/weavejester/codox): from the author of Compojure. See [compojure
     api docs](http://weavejester.github.com/compojure/) for an
     example.
 
-  * [Autodoc](http://tomfaulhaber.github.com/autodoc/): Currently used
-    to generate the official [Clojure API
-    docs](http://clojure.github.com/).
+  * [Autodoc](http://tomfaulhaber.github.com/autodoc/): used
+    to generate the official [Clojure API reference](http://clojure.github.com/).
