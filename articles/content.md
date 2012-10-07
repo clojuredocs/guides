@@ -98,6 +98,10 @@ This guide covers:
 
 This guide covers:
 
+ * Sequences in Clojure
+ * Key operations on sequences
+ * Sequence vs Seq
+
 
 ### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
 
