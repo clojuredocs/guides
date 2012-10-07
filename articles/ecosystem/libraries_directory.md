@@ -12,7 +12,6 @@ This directory is manually curated by the Clojure community. Please endeavor to 
 consisting of **high quality** libraries with adequate documentation.
 
 For more comprehensive overview of the Clojure library ecosystem, please see [ClojureSphere](http://clojuresphere.com/).
-There is also []().
 
 
 ## Support Libraries
