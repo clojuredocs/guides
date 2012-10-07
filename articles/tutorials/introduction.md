@@ -491,13 +491,13 @@ structure).  More about `seq` when we get to [Laziness](#laziness).
 >
 >     literal  long name  short name
 >     -------  ---------  ------------------
->     `()`     list       *{no short name}*
->     `[]`     vector     vec
->     `{}`     hash-map   *{no short name}*
->     `#{}`    hash-set   set
+>     ()       list       *{no short name}*
+>     []       vector     vec
+>     {}       hash-map   *{no short name}*
+>     #{}      hash-set   set
 >
-> You might even think of `seq` as the short name for `list`, but
-> that's probably pushing it, since there are a few differences.  `:)`
+> You might think of `seq` as the short name for `list`, but that's
+> probably pushing it, since there are a few differences.  `:)`
 
 
 
