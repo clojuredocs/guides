@@ -4,7 +4,7 @@ layout: article
 ---
 
 Clojure is a wonderfully simple language and you are going to love
-it. `:)`
+it.
 
 To quickly get started, first make sure you've got Java installed.
 

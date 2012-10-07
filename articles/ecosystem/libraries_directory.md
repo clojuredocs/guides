@@ -10,7 +10,7 @@ This directory is not comprehensive.
 
 This directory is manually curated by the Clojure community. Please
 endeavor to keep it up-to-date, consisting of libraries you'd
-recommend to friends. `:)`
+recommend to friends.
 
 For help on how to use the various libraries available in your code,
 see the [libraries-usage tutorial](../tutorials/libraries_usage.html).
