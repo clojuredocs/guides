@@ -148,12 +148,12 @@ it.
 {% endhighlight %}
 
 We'll have more to say about [regular
-expressions](#regular-expressions) later on.
+expressions](#regular_expressions) later on.
 
 Keywords are just scalars that evaluate to themselves and are useful
 where in other languages you might use little strings as identifiers
 (for example, as the keys in a hashmap). More about keywords in the
-next section ([Data Structures](#data-structures)).
+next section ([Data Structures](#data_structures)).
 
 {% highlight clojure %}
 'foo   ; A symbol.
@@ -393,7 +393,7 @@ expression, in the previous example), but the overall value of the
 > Note that the `println` expression just evaluates to nil. We don't
 > use its value for anything --- we only care about its *side-effects*
 > (printing out to the console). More about
-> [Side-Effects](#side-effects) shortly.
+> [Side-Effects](#side_effects) shortly.
 
 
 
@@ -438,7 +438,7 @@ user=> (require '[clojure.string :as str])
 Now we can use all the functions in the clojure.string library by
 prefixing them with "str/". We'll do exactly this in the section below
 on [Functions for working with
-strings](#functions-for-working-with-strings).
+strings](#functions_for_working_with_strings).
 
 
 
@@ -477,7 +477,7 @@ and maps:
 {% endhighlight %}
 
 (We cover `apply` in the [Bread and Butter
-functions](#bread-and-butter-functions) section.)
+functions](#bread_and_butter_functions) section.)
 
 If you need to convert to a sequential collection (list or vector),
 but don't need to access by index, you can use `seq` instead of `vec`
@@ -540,7 +540,7 @@ Getting values from data structures:
 Data structures in Clojure are actually *immutable* --- you can't
 change them. Though it may sound batty, it actually works out nicely
 in practice, and we'll read more about in the
-[Immutability](#values-immutability-and-persistence) section
+[Immutability](#values_immutability_and_persistence) section
 below. For now, just note that data structures can't be mutated, but
 we *can* get a new modified copy of a data structure:
 
@@ -748,7 +748,7 @@ in Clojure you lose the loop and it becomes:
 
 This sort of thing comes up again and again, and we'll cover more
 examples of it in the [Bread and Butter
-functions](#bread-and-butter-functions) section.
+functions](#bread_and_butter_functions) section.
 
 
 
@@ -1024,7 +1024,7 @@ the section on [Laziness](#laziness).
 
 We say that `let` expressions and function bodies (and also `loop`
 expressions, which you'll read about later in [Looping and
-Recursion](#looping-and-recursion)) have an "implicit do": within them
+Recursion](#looping_and_recursion)) have an "implicit do": within them
 you can list expressions one after another, and they all get evaluated
 in order, but the last one is what determines the overall resulting
 value of the overall expression.
