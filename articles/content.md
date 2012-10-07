@@ -1,5 +1,5 @@
 ---
-title: "All language guides"
+title: "Listing of All CDS Guides"
 layout: article
 ---
 
