@@ -177,7 +177,7 @@ will become clearer later on when we briefly mention
 > generic sense. A symbol refers to an object (it is not the object
 > itself).  Clojure *also* happens to support something called
 > *reference types*. We'll cover them later on in the [Reference
-> Types](#reference-types) section.
+> Types](#reference_types) section.
 
 
 
