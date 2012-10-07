@@ -71,7 +71,7 @@ the value function returns:
     (/ (Math/floor (* d factor)) factor)))
 {% endhighlight %}
 
-In the example above, we use preconditions to check that both arguments are not nil. The `not-nil` macro is not
+In the example above, we use preconditions to check that both arguments are not nil. The `not-nil?` macro (or function) is not
 demonstrated in this example and assumed to be implemented elsewhere.
 
 
@@ -120,7 +120,7 @@ calls another version (*2-arity*) with a default parameter. This is a common use
 argument values. Clojure is a hosted language and JVM (and JavaScript VMs, for that matter) does not support default argument
 values, however, it does support *method overloading* and Clojure takes advantage of this.
 
-Arities in Clojure can only differ by the number of arguments, not types. This is because Clojure is strongly dynamically typed.
+Arities in Clojure can only differ by the number of arguments, not types. This is because Clojure is strongly dynamicall
 
 
 ## Variadic Functions
