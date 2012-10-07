@@ -394,4 +394,17 @@ because everything but `false` and `nil` evaluates to `true` in Clojure.
 
 ## Wrapping Up
 
-TBD
+Functions are at the heart of Clojure. They are defined using the `defn` macro, can have multiple arities,
+be variadic and support parameter destructuring. Function arguments and return value can optionally be
+type hinted.
+
+Functions are first class values and can be passed to other functions (called Higher Order Functions or HOFs).
+This is fundamental to functional programming techniques.
+
+Several core data types behave like functions. When used reasonably, this can lead to more concise, readable
+code.
+
+
+## Contributors
+
+Michael Klishin <michael@defprotocol.org>, 2012 (original author)
