@@ -577,7 +577,7 @@ you can do with these core data structures.
 
 
 
-# Regular Expressions
+## Regular Expressions
 
 As you've seen, Clojure provides a handy literal syntax for regular
 expressions: `#"regex here"`. Clojure uses the same regular expression
