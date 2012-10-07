@@ -1,5 +1,5 @@
 ---
-title: "Listing of All CDS Guides"
+title: "Listing of All CDS Documents"
 layout: article
 ---
 
@@ -20,7 +20,7 @@ and separates content into several groups:
 
 ## Tutorials
 
-### [Getting started](/articles/tutorials/getting_started.html) (Semi-complete)
+### [Getting Started](/articles/tutorials/getting_started.html) (Semi-complete)
 
 If you're new to Clojure, this is a good place to start.
 
@@ -288,7 +288,7 @@ and are copyright their respective primary author(s).
 
 ## Tell Us What You Think!
 
-Please take a moment to tell us what you think about this guide [on Twitter](https://twitter.com/clojuredocs) or the [Clojure mailing list](https://groups.google.com/group/clojure)
+Please take a moment to tell us what you think about this guide [on Twitter](https://twitter.com/clojuredocs) or the [Clojure mailing list](https://groups.google.com/group/clojure).
 
 Let us know what was unclear or what has not been covered. Maybe you do not like the guide style or grammar or discover spelling mistakes.
 Reader feedback is key to making the documentation better.
