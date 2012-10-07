@@ -152,14 +152,6 @@ This guide covers:
  * How to share (publish) a library
 
 
-### [Categories of Clojure Libraries](/articles/ecosystem/libraries_categories.html)
-
-This guide surveys and marks distinctions between the different types
-of libraries available for use with Clojure, including its core
-fundamental library, standard library, contrib libraries, and
-third-party Clojure (and even Java) libraries.
-
-
 ### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html)
 
 A manually-curated categorized directory of available Clojure
