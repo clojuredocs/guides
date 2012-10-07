@@ -149,25 +149,14 @@ recommend to friends.
 
 ### Relational Databases, JDBC
 
-  * [java.jdbc](https://github.com/clojure/java.jdbc) {contrib}: Basic wrapper for JDBC.
-    Supports many databases including
-    [Apache Derby](http://search.maven.org/#search|ga|1|g:"org.apache" a:"derby"),
-    [HSQLDB](http://search.maven.org/#search|ga|1|g:"org.hsqldb" a:"hsqldb"),
-    Microsoft SQL Server via both the
-    [jTDS driver](http://search.maven.org/#search|ga|1|g:"net.sourceforge.jtds" a:"jtds") and the
-    [Microsoft JDBC4 driver](http://www.microsoft.com/en-us/download/details.aspx?id=11774) (not on Maven),
-    [MySQL](http://search.maven.org/#search|ga|1|mysql-connector-java),
-    [PostgreSQL](http://search.maven.org/#search|ga|1|g:"postgresql" a:"postgresql") and
-    [SQLite](http://search.maven.org/#search|ga|1|sqlite-jdbc).
-    See the java.jdbc documentation for example dependencies for using these databases as well as basic usage.
-    [java.jdbc examples](https://github.com/uvtc/clojure-dining-car/blob/master/examples/java.jdbc.md).
+  * [java.jdbc](https://github.com/clojure/java.jdbc) {contrib}: Basic wrapper for JDBC. Works with all JDBC databases (MySQL, PostgreSQL, Oracle, SQL Server, etc).
 
   * [Korma](https://clojars.org/korma): ["Tasty SQL for Clojure"](http://sqlkorma.com/docs)
 
 
 ### CouchDB
 
-  * [Clutch](https://clojars.org/com.ashafa/clutch): [Apache CouchDB](http://couchdb.apache.org/) client.
+  * [Clutch](https://github.com/clojure-clutch/clutch): [Apache CouchDB](http://couchdb.apache.org/) client.
 
 ### MongoDB
       
