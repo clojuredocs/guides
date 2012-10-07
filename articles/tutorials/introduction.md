@@ -102,7 +102,7 @@ Identifiers are used to names things. For example, in
 we've named something "the-answer" and given it the value 42.
 
 We'll mostly use lowercase letters, numbers, and dashes to name
-things, although some other characters are allowed too. We'll discuss
+things, although some other characters are allowed too. We'll note
 those cases later on as they come up.
 
 
