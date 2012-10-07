@@ -151,10 +151,6 @@ There is also []().
 
   * [JSoup](http://jsoup.org/): a HTML and XML parser that handles real world inputs
 
-  * [Urly](http://github.com/michaelklishin/urly): unifies `java.net.URL`, `java.net.URI` and string URIs, provides parsing and manipulation helpers
-
-  * [Exploding Fish](https://github.com/wtetzner/exploding-fish): a URI library for Clojure
-
   * [Crawlista](http://github.com/michaelklishin/crawlista): a support library for applications that crawl the Web
 
   * [TagSoup](http://home.ccil.org/~cowan/XML/tagsoup/): a tool for parsing
@@ -164,6 +160,15 @@ There is also []().
 ### Data Validation
 
   * [Validateur](http://clojurevalidations.info): functional validations library inspired by Ruby's ActiveModel
+
+
+### URIs, URLs
+
+  * [Urly](http://github.com/michaelklishin/urly): unifies `java.net.URL`, `java.net.URI` and string URIs, provides parsing and manipulation helpers
+
+  * [Exploding Fish](https://github.com/wtetzner/exploding-fish): a URI library for Clojure
+
+  * [route-one](https://github.com/clojurewerkz/route-one): a tiny Clojure library that generates HTTP resource routes (as in Ruby on Rails, Jersey, and so on)
 
 
 ### RSS
@@ -198,17 +203,15 @@ There is also []().
 
   * [Carmine](https://github.com/ptaoussanis/carmine): a great Clojure client for Redis
 
-### Neo4J (REST API)
+### Neo4J
 
   * [Neocons](https://clojureneo4j.info): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info).
+
+  * [Borneo](https://github.com/wagjo/borneo)
 
 ### ElasticSearch
 
   * [Elastisch](http://clojureelasticsearch.info): Elastisch is a minimalistic [Clojure client for ElasticSearch](http://clojureelasticsearch.info) with solid documentation.
-
-  * [clj-esearch](https://github.com/mpenet/clj-esearch): 
-
-  * []()
 
 ### Memcached, Couchbase, Kestrel
 
@@ -217,8 +220,6 @@ There is also []().
 ### Apache Cassandra
 
   * [Cassaforte](http://github.com/clojurewerkz/cassaforte): A young Clojure client for Apache Cassandra
-
-  * [casyn](https://github.com/mpenet/casyn): Clojure client for Cassandra using Async Thrift
 
 ### Amazon DynamoDB
 
@@ -243,6 +244,11 @@ There is also []().
  * [Aleph](https://github.com/ztellman/aleph): asynchronous communication in Clojure
 
 
+## Application Servers
+
+ * [Immutant](http://immutant.org/): a feature rich and integrated application platform for Clojure from Red Hat
+
+
 ## Messaging
 
 ### RabbitMQ
@@ -261,6 +267,16 @@ There is also []().
 
  * [Bandalore](https://github.com/cemerick/bandalore): a Clojure client library for Amazon's Simple Queue Service
 
+### HornetQ
+
+ * [hornetq-clj](https://github.com/hugoduncan/hornetq-clj): a tiny HornetQ client
+
+
+## Data Processing, Computation
+
+ * [Twitter Storm](http://storm-project.net/): distributed realtime computation system
+
+ * [Cascalog](https://github.com/nathanmarz/cascalog): data processing on Hadoop without the hassle
 
 
 
@@ -276,7 +292,10 @@ There is also []().
 
  * [jclouds](http://www.jclouds.org/): unified APIs for dozens of cloud (IaaS) providers
 
+ * [clj-ssh](https://github.com/hugoduncan/clj-ssh): an SSH client
+
  * [ssh-transport](https://github.com/pallet/ssh-transport): executes commands over SSH
+
 
 
 ## I/O
@@ -312,11 +331,26 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
 
 
+## Concurrency and Parallelism
+
+  * [java.util.concurrent](http://docs.oracle.com/javase/7/docs/technotes/guides/concurrency/index.html): a comprehensive, very mature set of concurrency primitives built into the JDK
+  * [Okku](https://github.com/gaverhae/okku): Akka API for Clojure
+
+
+
 ## Mathematics
 
   * [math.numeric-tower](https://github.com/clojure/math.numeric-tower): various utility math functions
 
   * [math.combinatorics](https://github.com/clojure/math.combinatorics) common combinatorial functions
+
+
+
+## Email
+
+  * [Postal](https://github.com/drewr/postal): generate and send email with Clojure
+
+  * [Mailer](https://github.com/clojurewerkz/mailer): generate and send email using Postal and Moustache templates
 
 
 
@@ -399,8 +433,8 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
  * [java.jmx](https://github.com/clojure/java.jmx): nice JMX interface
 
- * [test.benchmark](https://github.com/clojure/test.benchmark)
+ * [test.benchmark](https://github.com/clojure/test.benchmark): a benchmarking library
 
- * [tools.trace](https://github.com/clojure/tools.trace)
+ * [tools.trace](https://github.com/clojure/tools.trace): a tracing library
 
- * []()
+ * [criterium](https://github.com/hugoduncan/criterium): a benchmarking library that tries to address common benchmarking pitfalls
