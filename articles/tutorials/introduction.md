@@ -444,7 +444,7 @@ strings](#functions-for-working-with-strings).
 
 
 
-## Functions for creating data structures
+## Functions for Creating Data Structures
 
 There are functions for creating the various data structures without
 using the usual literal syntax:
@@ -501,7 +501,7 @@ structure).  More about `seq` when we get to [Laziness](#laziness).
 
 
 
-## Functions for working with data structures
+## Functions For Working With Data Structures
 
 Getting values from data structures:
 
@@ -590,7 +590,7 @@ examples.
 
 
 
-## Functions for working with strings
+## Functions For Working With Strings
 
 There are a number of functions for working with strings listed in the
 Strings section of the cheatsheet. Here are some examples of a few of
@@ -706,7 +706,7 @@ become clear as we continue.
 
 
 
-## Control structures
+## Control Structures
 
 Clojure has most of the usual control structures you'd expect to find,
 for example: `if`, `and`, `or`, and `cond`.  You can find them listed
@@ -846,9 +846,9 @@ Near the top of this tutorial is the following definition:
 
 The thing being defined here (behind the scenes) is officially called
 a *Var*. The symbol "`the-answer`" refers to that var which itself
-refers to the value 42.
+refers to the value 42:
 
-the-answer (a symbol) → a var → 42 (a value)
+the-answer (a symbol) → a var → 42 (a value).
 
 When Clojure sees "`the-answer`", it automatically looks up the var,
 then from there finds and returns the value 42.
@@ -859,7 +859,7 @@ those symbols refer directly to their values.
 
 
 
-## Functions: Defining your own.
+## Functions: Defining Your Own
 
 You can create a function using `fn`, and give it a name using `def`:
 
@@ -1502,7 +1502,7 @@ the rest of your code is compiled.
 This tutorial does not discuss macros further.
 
 
-## Not Covered in this tutorial
+## Not Covered In This Tutorial
 
 To keep this tutorial down to a manageable length, advanced topics or
 other far (or not so far) corners not covered herein include but
