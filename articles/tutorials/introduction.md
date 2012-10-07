@@ -838,9 +838,7 @@ greater than the second arg. The main one is `compare`.
 
 ## Vars
 
-The word "variable" isn't often used in Clojure because mutation in Clojure
-happens differently. You have symbols which refer to values. For
-example, from the top of this tutorial:
+Near the top of this tutorial is the following definition:
 
 {% highlight clojure %}
 (def the-answer 42)
@@ -850,7 +848,7 @@ The thing being defined here (behind the scenes) is officially called
 a *Var*. The symbol "`the-answer`" refers to that var which itself
 refers to the value 42.
 
-    the-answer (a symbol)  →  a var  →  42 (a value)
+the-answer (a symbol) → a var → 42 (a value)
 
 When Clojure sees "`the-answer`", it automatically looks up the var,
 then from there finds and returns the value 42.
