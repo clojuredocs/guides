@@ -108,9 +108,9 @@ as a collection.
 Functions in Clojure can have multiple *arities*, or sets of arguments:
 
 {% highlight clojure %}
-(defn tax-rate
+(defn tax-amount
   ([amount]
-     (tax-rate amount 35))
+     (tax-amount amount 35))
   ([amount rate]
      (Math/round (double (* amount (/ rate 100))))))
 {% endhighlight %}
