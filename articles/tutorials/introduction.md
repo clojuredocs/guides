@@ -3,11 +3,12 @@ title: "Introduction to Clojure"
 layout: article
 ---
 
-This is a brief beginner's introduction to
-Clojure. If you haven't already done so, have a look at the [Getting
-Started](/articles/tutorials/getting-started.html) tutorial. Before continuing, make sure
-you've got Java and [Leiningen](http://leiningen.org) installed, and can create a new project
-and run a REPL in it.
+This is a brief beginner's introduction to Clojure. If you haven't
+already done so, have a look at the [Getting
+Started](/articles/tutorials/getting_started.html) tutorial. Before
+continuing, make sure you've got Java and
+[Leiningen](http://leiningen.org) installed, and can create a new
+project and run a REPL in it.
 
 This introduction is a whirlwind tutorial of most of the basics of
 Clojure. Its goal is to rapidly get you acquainted with the core
@@ -25,10 +26,6 @@ simple language, and you're going to love it. `:)`
 
 Clojure is a general-purpose programming language, and a quite
 practical one at that.
-
-Clojure source code files use the ".clj" filename extension and are
-usually organized into *projects* using the
-[Leiningen](http://leiningen.org/) project management tool.
 
 The syntax for Clojure is like Lisp and is very simple: code is made
 up of expressions which are evaluated to some value. Here are some
