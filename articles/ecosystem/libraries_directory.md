@@ -224,7 +224,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 ### Apache Cassandra
 
   * [Cassaforte](http://github.com/clojurewerkz/cassaforte): A young Clojure client for Apache Cassandra
+
   * [casyn](https://github.com/mpenet/casyn): Cassandra client with support for asynchronous operations
+
   * [clj-hector](https://github.com/pingles/clj-hector): A simple Clojure client for Cassandra that wraps Hector
 
 ### Amazon DynamoDB
@@ -381,6 +383,8 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 ### Monads
 
   * [algo.monads](https://github.com/clojure/algo.monads): macros for defining monads, and definition of the most common monads
+
+  * [protocol-monads](https://github.com/jduey/protocol-monads): A protocol based monad implementation for clojure
 
 ### Memoization
 
