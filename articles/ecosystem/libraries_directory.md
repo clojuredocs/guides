@@ -225,8 +225,6 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Cassaforte](http://github.com/clojurewerkz/cassaforte): A young Clojure client for Apache Cassandra
 
-  * [casyn](https://github.com/mpenet/casyn): Cassandra client with support for asynchronous operations
-
   * [clj-hector](https://github.com/pingles/clj-hector): A simple Clojure client for Cassandra that wraps Hector
 
 ### Amazon DynamoDB
