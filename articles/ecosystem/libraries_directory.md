@@ -305,6 +305,14 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
  * [ssh-transport](https://github.com/pallet/ssh-transport): executes commands over SSH
 
 
+## Monitoring, metrics
+
+ * [clj-statsd](https://github.com/pyr/clj-statsd): simple client library to interface with statsd
+
+ * [pulse](https://github.com/heroku/pulse): Real-time Heroku operations dashboard
+
+ * [riemann](https://github.com/aphyr/riemann): A network event stream processing system, in Clojure.
+
 
 ## I/O
 
