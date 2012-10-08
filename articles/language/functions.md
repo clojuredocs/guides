@@ -75,6 +75,41 @@ In the example above, we use preconditions to check that both arguments are not 
 demonstrated in this example and assumed to be implemented elsewhere.
 
 
+## Anonymous Functions
+
+Anonymous functions are defined using the `fn` special form:
+
+{% highlight clojure %}
+(fn [x]
+  (* 2 x))
+{% endhighlight %}
+
+Anonymous functions can be assigned to locals, passed between functions (higher order functions are covered later in this document)
+and returned from functions:
+
+{% highlight clojure %}
+(let [f (fn [x]
+          (* 2 x))]
+  (map f (range 0 10)))
+{% endhighlight %}
+
+There is also a reader macro for anonymous functions:
+
+{% highlight clojure %}
+(let [f #(* 2 %)]
+  (map f (range 0 10)))
+{% endhighlight %}
+
+The `%` in the example above means "the first argument". To refer to more than one argument, use `%1`, `%2` and so on:
+
+{% highlight clojure %}
+;; an anonymous function that takes 3 arguments and adds them together
+(let [f #(+ %1 %2 %3)]
+  (f 1 2 3))
+{% endhighlight %}
+
+Please **use this reader macro sparingly**; excessive use may lead to unreadable code.
+
 
 ## How To Invoke Functions
 
