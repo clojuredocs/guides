@@ -381,9 +381,10 @@ user=> (job-info :job "Engineer")
 No name specified
 {% endhighlight %}
 
-Without the use of a variadic argument list, you would have to call the function with a single map argument such as {:name "Robert" :job "Engineer}.
+Without the use of a variadic argument list, you would have to call the function with a single map argument such as `{:name "Robert" :job "Engineer}`.
 
-Keyword default values are assigned by use of the :or keyword followed by a map of keywords to their default value. Keywords not present and not given a default will be nil.
+Keyword default values are assigned by use of the `:or` keyword followed by a map of keywords to their default value.
+Keywords not present and not given a default will be nil.
 
 ## Higher Order Functions
 
