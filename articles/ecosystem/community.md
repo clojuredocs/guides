@@ -47,7 +47,7 @@ Videos of talks are often made available on [InfoQ](http://www.infoq.com) and [C
 
 ## Forums
 
- * [Clojure Reddit](http://www.reddit.com/r/clojure)
+ * [r/Clojure subreddit](http://www.reddit.com/r/clojure)
 
 
 ## Conferences
