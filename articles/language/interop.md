@@ -20,49 +20,49 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## How to Instantiate Java Classes
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How to Invoke Java Methods
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How to Access Java Fields
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How to Set Java Fields
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Determining Classes of Java Objects
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Extending Java Classes With proxy
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Implementing Java Interfaces With reify
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## gen-class and How to Implement Java Classes in Clojure
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How To Extend Protocols to Java Classes
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Wrapping Up
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)

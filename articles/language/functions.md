@@ -386,9 +386,11 @@ Without the use of a variadic argument list, you would have to call the function
 Keyword default values are assigned by use of the `:or` keyword followed by a map of keywords to their default value.
 Keywords not present and not given a default will be nil.
 
+
+
 ## Higher Order Functions
 
-TBD
+TBD: [How to contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 

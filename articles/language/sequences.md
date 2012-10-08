@@ -18,24 +18,24 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Core Collection Types
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Key Operations on Collections
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## The Seq Abstraction
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Wrapping Up
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)

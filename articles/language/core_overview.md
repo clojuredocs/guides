@@ -23,55 +23,55 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ### let
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### def
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### declare
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### defn
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### ns
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### if
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### when
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### for
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### doseq
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### apply
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### require
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### import
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### loop, recur
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 
@@ -79,152 +79,152 @@ TBD
 
 ### count
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### conj
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### get
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### assoc
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### dissoc
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### first
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### rest
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### empty?
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### empty
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### contains?
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### some
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### keys
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### vals
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### map
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### filter
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### remove
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### every?
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### get-in
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### update-in
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### assoc-in
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### select-keys
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### take
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### drop
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### take-while
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### drop-while
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ## Macros
 
 ### -> and ->> (the Threading Macros)
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Reference Types
 
 ### deref
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### atom
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### swap!
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### reset!
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### agent
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### ref
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### dosync
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### alter
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### commute
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### binding
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 
@@ -232,4 +232,4 @@ TBD
 
 ### *clojure-version*
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)

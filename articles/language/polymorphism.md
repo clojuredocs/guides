@@ -18,24 +18,24 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Type-based Polymorphism With Protocols
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Ad-hoc Polymorphism with Multimethods
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How To Create Custom Data Type That Core Functions Can Work With
 
-TBD 
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute) 
 
 
 ## Wrapping U
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)

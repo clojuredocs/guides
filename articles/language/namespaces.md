@@ -18,24 +18,24 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## Defining a Namespace
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How to Use Functions From Other Namespaces
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## `require` vs `refer`, `use`
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 ## How Code Compilation Works in Clojure
 
-TBD
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
