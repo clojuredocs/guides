@@ -33,7 +33,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 ## Date and Time
 
   * [clj-time](https://clojars.org/clj-time): A date and time library for Clojure
-  
+
 
 ## Testing
 
@@ -95,7 +95,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [data.csv](https://github.com/clojure/data.csv): a CSV parser
 
-  
+
 ## Templating
 
   * [Stencil](https://clojars.org/stencil): [Mustache](http://mustache.github.com/) for Clojure (logic-less templates). Fast.
@@ -176,7 +176,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 
 ### RSS
-  
+
   * [clj-rss](https://clojars.org/clj-rss): RSS feed generation library
 
 
@@ -194,7 +194,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Clutch](https://github.com/clojure-clutch/clutch): [Apache CouchDB](http://couchdb.apache.org/) client.
 
 ### MongoDB
-      
+
   * [Monger](https://clojuremongodb.info): Monger is an idiomatic [Clojure MongoDB driver](http://clojuremongodb.info) for a more civilized age with solid documentation
 
   * [congomongo](https://github.com/aboekhoff/congomongo): Basic wrapper for the MongoDB Java driver
@@ -224,6 +224,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 ### Apache Cassandra
 
   * [Cassaforte](http://github.com/clojurewerkz/cassaforte): A young Clojure client for Apache Cassandra
+  * [casyn](https://github.com/mpenet/casyn): Cassandra client with support for asynchronous operations
+  * [clj-hector](https://github.com/pingles/clj-hector): A simple Clojure client for Cassandra that wraps Hector
 
 ### Amazon DynamoDB
 
@@ -261,7 +263,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ### ZeroMQ
 
- * [Jlich](https://github.com/mpenet/jilch): Clojure ZeroMQ Library using JeroMQ, no native dependencies
+ * [Jilch](https://github.com/mpenet/jilch): Clojure ZeroMQ Library using JeroMQ, no native dependencies
 
 ### Beanstalk
 
