@@ -124,6 +124,29 @@ arguments. To calculate the area of a triangle, we multiple base by height and d
 
 In this example we used **Clojure ratio** data type. We could have used doubles as well.
 
+Putting it all together:
+
+{% highlight clojure %}
+(defmulti area (fn [shape & _]
+                 shape))
+
+(defmethod area :square
+  [_ side]
+  (* side side))
+
+(defmethod area :circle
+  [_ radius]
+  (* radius Math/PI Math/PI))
+
+(defmethod area :triangle
+  [_ b h]
+  (* 1/2 b h))
+
+(area :square 4)     ;= 16
+(area :circle 3)     ;= 29.608813203268074
+(area :triangle 3 5) ;= 15/2
+{% endhighlight %}
+
 
 ### Second Example: Content Serialization
 
