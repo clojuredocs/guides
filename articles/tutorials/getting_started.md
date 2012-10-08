@@ -27,7 +27,7 @@ repl:
 
 You should be greeted with a "`user=>`" prompt. Try it out:
 
-<pre>
+{% highlight clojure %}
 user=> (+ 1 1)
 ; 2
 user=> (distinct [:a :b :a :c :a :d])
@@ -39,7 +39,7 @@ user=> (dotimes [i 3]
 ; Fabulous! 1
 ; Inconceivable! 2
 ; nil
-</pre>
+{% endhighlight %}
 
 
 ## Your first project
