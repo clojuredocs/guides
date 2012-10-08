@@ -71,6 +71,7 @@ This guide covers:
  * How to extend Java classes with proxy
  * How to implement Java interfaces with reify
  * How to generate Java classes with gen-class
+ * Other topics related to interop
 
 
 ### [Namespaces](/articles/language/namespaces.html) (TBD)
@@ -95,10 +96,11 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Sequences](/articles/language/sequences.html) (TBD)
+### [Collections and Sequences](/articles/language/sequences.html) (TBD)
 
 This guide covers:
 
+ * Collections in Clojure
  * Sequences in Clojure
  * Key operations on sequences
  * Sequence vs Seq
