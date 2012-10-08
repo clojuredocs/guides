@@ -39,7 +39,10 @@ Videos of talks are often made available on [InfoQ](http://www.infoq.com) and [C
   * [Clojure.org](http://clojure.org/): the official website
   * [Planet Clojure](http://planet.clojure.in/): aggregator of selected Clojure-related blog posts
   * [Clojure at Rosetta Code](http://rosettacode.org/wiki/Category:Clojure)
-  * [Clojure Confluence wiki](http://dev.clojure.org/dashboard.action): separated into [Community](http://dev.clojure.org/display/community/Home), [Design](http://dev.clojure.org/display/design/Home), and [Documentation](http://dev.clojure.org/display/doc/Home).
+  * [Clojure Confluence wiki](http://dev.clojure.org/dashboard.action), which consists of three main areas:
+    [Community](http://dev.clojure.org/display/community/Home),
+    [Design](http://dev.clojure.org/display/design/Home), and
+    [Documentation](http://dev.clojure.org/display/doc/Home).
 
 
 ## Forums
