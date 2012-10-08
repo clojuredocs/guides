@@ -34,7 +34,7 @@ basics.
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) (In progress)
+### [Functions](/articles/language/functions.html) (Semi-Complete)
 
 Functions are at the heart of Clojure.
 
@@ -86,7 +86,7 @@ This guide covers:
  * How code compilation works in Clojure
 
 
-### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (TBD)
+### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (In Progress)
 
 This guide covers:
 
