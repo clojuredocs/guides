@@ -9,7 +9,9 @@ This is a categorized and annotated directory of available Clojure
 libraries and tools. This directory is **not comprehensive and highly opinionated**.
 
 This directory is manually curated by the Clojure community. Please endeavor to keep it up-to-date,
-consisting of **high quality** libraries with adequate documentation.
+consisting of **high quality** libraries with adequate documentation. There are many more libraries in the Clojure
+ecosystem, but some lack documentation and/or are useful primarily to experienced developers. Such projects
+are not included in this document.
 
 For more comprehensive overview of the Clojure library ecosystem, please see [ClojureSphere](http://clojuresphere.com/).
 
@@ -199,6 +201,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [congomongo](https://github.com/aboekhoff/congomongo): Basic wrapper for the MongoDB Java driver
 
+  * [Mongoika](https://github.com/yuushimizu/Mongoika)
+
 ### Riak
 
   * [Welle](https://clojureriak.info): An expressive Clojure client for Riak with solid documentation
@@ -216,6 +220,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 ### ElasticSearch
 
   * [Elastisch](http://clojureelasticsearch.info): Elastisch is a minimalistic [Clojure client for ElasticSearch](http://clojureelasticsearch.info) with solid documentation.
+
+  * [Esperanto](https://github.com/drewr/esperanto)
 
 ### Memcached, Couchbase, Kestrel
 
