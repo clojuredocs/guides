@@ -60,7 +60,7 @@ a while.
 
 ### Tools & Ecosystem guides
 
-These guides cover key Clojure ecosystem tools such as [Leiningen](http://leiningen.org), [Clojars](http://clojars.org), [REPLy](),
+These guides cover key Clojure ecosystem tools such as [Leiningen](http://leiningen.org), [Clojars](http://clojars.org), [REPLy](https://github.com/trptcolin/reply),
 nREPL, Emacs, VimClojure, Counterclockwise, La Clojure, etc. It also covers important ecosystem projects that are not tools: books,
 ClojureSphere, ClojureWerkz, Flatland and so on.
 
