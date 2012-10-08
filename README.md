@@ -82,7 +82,7 @@ here's what 2 people could produce in about 6 months in their spare time:
 
  * [Monger documentation](http://clojuremongodb.info)
  * [Neocons documentation](http://clojurneo4j.info)
- * [Riak documentation](http://clojurriak.info)
+ * [Welle documentation](http://clojurriak.info)
  * [Elastisch documentation](http://clojureelasticsearch.info)
  * [Langohr documentation](http://clojurerabbitmq.info)
  * [Quartzite documentation](http://clojurequartz.info)
