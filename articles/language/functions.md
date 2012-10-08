@@ -359,8 +359,31 @@ As you can see, optional arguments (`args`) are packed into a list.
 
 ### Extra Arguments (aka Named Parameters)
 
-TBD
+Named parameters are achieved through the use of destructuring a variadic function.
 
+Approaching named parameters from the standpoint of destructuring a variadic function allows for more clearly readable function invocations.  This is an example of named parameters:
+
+{% highlight clojure %}
+(defn job-info
+  [& {:keys [name job income] :or {job "unemployed" income "$0.00"}}]
+  (if name
+    [name job income]
+    (println "No name specified")))
+{% endhighlight %}
+
+Using the function looks like this:
+
+{% highlight clojure %}
+user=> (job-info :name "Robert" :job "Engineer")
+["Robert" "Engineer" "$0.00"]
+
+user=> (job-info :job "Engineer")
+No name specified
+{% endhighlight %}
+
+Without the use of a variadic argument list, you would have to call the function with a single map argument such as {:name "Robert" :job "Engineer}.
+
+Keyword default values are assigned by use of the :or keyword followed by a map of keywords to their default value. Keywords not present and not given a default will be nil.
 
 ## Higher Order Functions
 
