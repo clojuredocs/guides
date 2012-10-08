@@ -81,8 +81,8 @@ First of all: you **can** contribute to Clojure documentation even if you have 1
 here's what 2 people could produce in about 6 months in their spare time:
 
  * [Monger documentation](http://clojuremongodb.info)
- * [Neocons documentation](http://clojurneo4j.info)
- * [Welle documentation](http://clojurriak.info)
+ * [Neocons documentation](http://clojureneo4j.info)
+ * [Welle documentation](http://clojureriak.info)
  * [Elastisch documentation](http://clojureelasticsearch.info)
  * [Langohr documentation](http://clojurerabbitmq.info)
  * [Quartzite documentation](http://clojurequartz.info)
