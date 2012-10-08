@@ -75,18 +75,73 @@ Concise Clojure example code, categorized by subject.
 
 
 
-## Resources
+## How To Contribute
 
-For some guidance on writing great documentation, see
-<http://jacobian.org/writing/great-documentation/>.
+First of all: you **can** contribute to Clojure documentation even if you have 15 minutes to spare a day. To give you an example,
+here's what 2 people could produce in about 6 months in their spare time:
 
+ * [Monger documentation](http://clojuremongodb.info)
+ * [Neocons documentation](http://clojurneo4j.info)
+ * [Riak documentation](http://clojurriak.info)
+ * [Elastisch documentation](http://clojureelasticsearch.info)
+ * [Langohr documentation](http://clojurerabbitmq.info)
+ * [Quartzite documentation](http://clojurequartz.info)
 
-## Contributing
+No contribution is too small: feel free to suggest grammar improvements, better code examples, submit pull requests with just
+one new paragraph or even a couple of spelling corrections. Editing and proof-reading is also a great way to contribute.
+
+If you found a mistake you'd like to report and do not want to make edits and go through the pull request process,
+please post your findings on the [Clojure mailing list](https://groups.google.com/group/clojure).
+
+Thank you!
+
 
 ### Toolchain
 
 [README-tools.md](cds/blob/master/README-tools.md) covers development
-environment setup.
+environment setup and how to run a local server.
+
+
+### Contributing To Existing Guides
+
+First, pick a topic that sounds interesting. Writing documentation takes some effort and
+working on something that is interesting will motivate you. Next, find the article you want
+to contribute to under `./articles/`. It is a Markdown file with inline code snippets.
+
+At the top of each article you will usually find what it is supposed to cover. Please stick
+to that list.
+
+Then fork the repository, create a [topic branch](http://git-scm.com/book/en/Git-Branching-Branching-Workflows), and
+start writing.
+
+When writing, periodically view results in the browser (see the Toolchain section about running a local server) and make
+sure code examples are rendered correctly and there are no serious formatting issues. If you are not a Markdown or CSS guru,
+it's OK, but submitting changes that seriously break formatting and force maintainers to work on fixing them is not
+very productive (or nice).
+
+After making the changes you want, run them by a fellow developer, edit them a couple
+of times and **submit a pull request on GitHub*. Please be patient. It may take a while for
+CDS maintainers to get to your pull request, read your changes and suggest improvements.
+
+Don't get discouraged if asked to do more edits or even completely rewrite some parts from scratch.
+All good documentation out there is a result of dozens of edits, corrections, sometimes ground-up
+rewrites. This is normal. We want Clojure documentation to be high quality just like the language and
+`clojure.core`.
+
+For some guidance on writing great documentation, see <http://jacobian.org/writing/great-documentation/>.
+
+
+
+### Contributing New Guides
+
+If you feel there may be a guide missing, please run your idea by other CDS contributors on the [Clojure mailing list](https://groups.google.com/group/clojure).
+
+
+### What You Must Not Do
+
+Please respect copyright of other Clojure-related content out there. **You must not** copy content from clojure.org, books on Clojure, blogs and
+other sources unless you are the primary author of them and understand the implications.
+
 
 
 ### Contributors List
@@ -96,12 +151,7 @@ encouraged to include your name in a `# Contributors` section near the
 end of it, noting that you are the original author. If you have made
 substantial contributions to an existing document, you might add your
 name to the `# Contributors` section. All contributors are encouraged
-to add their name to the CONTRIBUTORS file.
-
-When making changes to an existing document, please attempt to stay
-true to the author's original style and intent. If you chafe at this
-idea, you might consider writing your own separate document for
-inclusion in this collection. `:)`
+to add their name to the `CONTRIBUTORS.md` file.
 
 
 
