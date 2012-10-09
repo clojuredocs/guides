@@ -59,7 +59,7 @@ This guide covers:
  * Key vars of `clojure.core`
 
 
-### [Interoperability with Java](/articles/language/interop.html) (TBD)
+### [Interoperability with Java](/articles/language/interop.html) (In Progress)
 
 The Clojure language implementation is symbiotic with its host
 platform (the JVM), providing direct interoperability.
