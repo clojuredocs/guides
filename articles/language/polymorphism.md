@@ -43,7 +43,187 @@ The former is implemented using *protocols*, a feature first introduced in Cloju
 
 ## Type-based Polymorphism With Protocols
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+It is common for polymorphic functions to *dispatch* (pick implementation) on the type of the first argument. For example,
+in Java or Ruby, when calling `#toString` or `#to_s` on an object, the exact implementation is located using that object's
+type.
+
+Because this is a common case and because JVM can optimize this dispatch logic very well, Clojure 1.2 introduced a new
+feature called *protocols*. Protocols are simply groups of functions. Each of the functions can have different
+implementations for different data types.
+
+Protocols are defined using the `clojure.core/defprotocol` special form. The example below defines a protocol for working with URLs and URIs.
+While URLs and URIs are not the same thing, some operations make sense for both:
+
+{% highlight clojure %}
+(defprotocol URLLike
+  "Unifies operations on URLs and URIs"
+  (^String protocol-of  [input] "Returns protocol of given input")
+  (^String host-of      [input] "Returns host of given input")
+  (^String port-of      [input] "Returns port of given input")
+  (^String user-info-of [input] "Returns user information of given input")
+  (^String path-of      [input] "Returns path of given input")
+  (^String query-of     [input] "Returns query string of given input")
+  (^String fragment-of  [input] "Returns fragment of given input"))
+{% endhighlight %}
+
+`clojure.core/defprotocol` takes the name of the protocol and one or more lists of 
+**function name**, **argument list**, **documentation string**:
+
+{% highlight clojure %}
+(^String protocol-of  [input] "Returns protocol of given input")
+(^String host-of      [input] "Returns host of given input")
+{% endhighlight %}
+
+The example above uses return type hints. This makes sense in the example but is not necessary. It could have been written
+it as
+
+{% highlight clojure %}
+(defprotocol URLLike
+  "Unifies operations on URLs and URIs"
+  (protocol-of  [input] "Returns protocol of given input")
+  (host-of      [input] "Returns hostname of given input")
+  (port-of      [input] "Returns port of given input")
+  (user-info-of [input] "Returns user information (username:password) of given input")
+  (path-of      [input] "Returns path of given input")
+  (query-of     [input] "Returns query string of given input")
+  (fragment-of  [input] "Returns fragment of given input"))
+{% endhighlight %}
+
+There are 3 ways URIs and URLs are commonly represented on the JVM:
+
+ * `java.net.URI` instances
+ * `java.net.URL` instances
+ * Strings
+
+When a new protocol imlementation is added for a type, it is called **extending the protocol**. The most common way to extend
+a protocol is via the `clojure.core/extend-protocol`:
+
+{% highlight clojure %}
+(import java.net.URI)
+(import java.net.URL)
+
+(extend-protocol URLLike
+  URI
+  (protocol-of [^URI input]
+    (when-let [s (.getScheme input)]
+      (.toLowerCase s)))
+  (host-of [^URI input]
+    (-> input .getHost .toLowerCase))
+  (port-of [^URI input]
+    (.getPort input))
+  (user-info-of [^URI input]
+    (.getUserInfo input))
+  (path-of [^URI input]
+    (.getPath input))
+  (query-of [^URI input]
+    (.getQuery input))
+  (fragment-of [^URI input]
+    (.getFragment input))
+
+  URL
+  (protocol-of [^URL input]
+    (protocol-of (.toURI input)))
+  (host-of [^URL input]
+    (host-of (.toURI input)))
+  (port-of [^URL input]
+    (.getPort input))
+  (user-info-of [^URL input]
+    (.getUserInfo input))
+  (path-of [^URL input]
+    (.getPath input))
+  (query-of [^URL input]
+    (.getQuery input))
+  (fragment-of [^URL input]
+    (.getRef input)))
+{% endhighlight %}
+
+Protocol functions are used just like regular Clojure functions:
+
+{% highlight clojure %}
+(protocol-of (URI. "http://clojure-doc.org")) ;= "http"
+(protocol-of (URL. "http://clojure-doc.org")) ;= "http"
+
+(path-of (URL. "http://clojure-doc.org/articles/content.html")) ;= "/articles/content.html"
+(path-of (URI. "http://clojure-doc.org/articles/content.html")) ;= "/articles/content.html"
+{% endhighlight %}
+
+### Using Protocols From Different Namespaces
+
+Protocol functions are required and used the same way as regular protocol functions. Consider a
+namespace that looks like this
+
+{% highlight clojure %}
+(ns superlib.url-like
+  (:import [java.net URL URI]))
+
+(defprotocol URLLike
+  "Unifies operations on URLs and URIs"
+  (^String protocol-of  [input] "Returns protocol of given input")
+  (^String host-of      [input] "Returns host of given input")
+  (^String port-of      [input] "Returns port of given input")
+  (^String user-info-of [input] "Returns user information of given input")
+  (^String path-of      [input] "Returns path of given input")
+  (^String query-of     [input] "Returns query string of given input")
+  (^String fragment-of  [input] "Returns fragment of given input"))
+
+(extend-protocol URLLike
+  URI
+  (protocol-of [^URI input]
+    (when-let [s (.getScheme input)]
+      (.toLowerCase s)))
+  (host-of [^URI input]
+    (-> input .getHost .toLowerCase))
+  (port-of [^URI input]
+    (.getPort input))
+  (user-info-of [^URI input]
+    (.getUserInfo input))
+  (path-of [^URI input]
+    (.getPath input))
+  (query-of [^URI input]
+    (.getQuery input))
+  (fragment-of [^URI input]
+    (.getFragment input))
+
+  URL
+  (protocol-of [^URL input]
+    (protocol-of (.toURI input)))
+  (host-of [^URL input]
+    (host-of (.toURI input)))
+  (port-of [^URL input]
+    (.getPort input))
+  (user-info-of [^URL input]
+    (.getUserInfo input))
+  (path-of [^URL input]
+    (.getPath input))
+  (query-of [^URL input]
+    (.getQuery input))
+  (fragment-of [^URL input]
+    (.getRef input)))
+{% endhighlight %}
+
+To use `superlib.url-like/path-of` and other functions, you require them as regular functions:
+
+{% highlight clojure %}
+(ns myapp
+  (:require [superlib.url-like] :refer [host-of scheme-of]))
+
+(host-of (java.net.URI. "https://twitter.com/cnn/"))
+{% endhighlight %}
+
+
+### Extending Protocols For Core Clojure Data Types
+
+TBD
+
+
+### Protocols and Custom Data Types
+
+TBD: cover extend-type, extend
+
+
+### Partial Implementation of Protocols
+
+With protocols, it is possible to only implement certain functions for certain types.
 
 
 ## Ad-hoc Polymorphism with Multimethods
@@ -148,10 +328,9 @@ Putting it all together:
 {% endhighlight %}
 
 
-### Second Example: Content Serialization
+### Second Example: TBD
 
-TBD: content serialization in Welle uses multimethods and is a real world example even beginners
-can relate to. MK.
+TBD: an example that demonstrates deriving
 
 
 ## How To Create Custom Data Type That Core Functions Can Work With
