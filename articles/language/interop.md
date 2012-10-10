@@ -282,7 +282,26 @@ It is possible to implement Java interfaces in Clojure. It is
 typically needed to interact with Java libraries that take arguments
 implementing a particular interface.
 
-Interfaces are implemented using the `reify` special form:
+Interfaces are implemented using the `reify` special form.
+
+Given the following Java interface:
+
+{% highlight java %}
+public
+interface FilenameFilter {
+    /**
+     * Tests if a specified file should be included in a file list.
+     *
+     * @param   dir    the directory in which the file was found.
+     * @param   name   the name of the file.
+     * @return  <code>true</code> if and only if the name should be
+     * included in the file list; <code>false</code> otherwise.
+     */
+    boolean accept(File dir, String name);
+}
+{% endhighlight %}
+
+here is how to implement it in Clojure:
 
 {% highlight clojure %}
 ;; a FileFilter implementation that accepts everything
