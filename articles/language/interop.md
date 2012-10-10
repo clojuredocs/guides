@@ -63,6 +63,10 @@ In Java, classes can be nested inside other classes. They are called *inner clas
 separated from their outer class by a dollar sign (`$`):
 
 {% highlight clojure %}
+(import java.util.Map$Entry)
+
+Map$Entry ;= java.util.Map$Entry
+
 ;; this example assumes RabbitMQ Java client is on classpath
 (import com.rabbitmq.client.AMQP$BasicProperties)
 
@@ -261,8 +265,9 @@ an array of longs, for example, pass `"[[J"` to `Class/forName`. Below is the fu
   </tbody>
 </table>
 
-If this does not make much sense, don't worry. Just remember to come back to this guide when you
-need to extend a protocol for an array of primitives.
+If this does not make much sense, don't worry. Just remember to come
+back to this guide when you need to extend a protocol for an array of
+primitives.
 
 
 
@@ -273,7 +278,64 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ## Implementing Java Interfaces With reify
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+It is possible to implement Java interfaces in Clojure. It is
+typically needed to interact with Java libraries that take arguments
+implementing a particular interface.
+
+Interfaces are implemented using the `reify` special form:
+
+{% highlight clojure %}
+;; a FileFilter implementation that accepts everything
+(reify java.io.FilenameFilter
+  (accept [dir name]
+    true))
+{% endhighlight %}
+
+`reify` takes an interface (fully-qualified name or short name) and one or more
+method implementations that mimic function definitions without the `defn` and with
+*this* (as in Java, JavaScript or *self* in Ruby, Python) reference being the first argument:
+
+{% highlight clojure %}
+(accept [this dir name]
+  true)
+{% endhighlight %}
+
+With `reify`, generally there is no need to add type hints on arguments: Clojure
+compiler typically will detect the best matching method (by name and number of arguments).
+
+`reify` returns a *Java class instance*. Clojure compiler will generate a class that implements
+the interface and instantiate it. To demonstrate that reified objects indeed implement
+the interface:
+
+{% highlight clojure %}
+(let [ff (reify java.io.FilenameFilter
+           (accept [this dir name]
+             true))]
+  (instance? java.io.FileFilter ff)) ;= true
+{% endhighlight %}
+
+### Example 1
+
+The following example demonstrates how instances created with `reify` are passed around
+as regular Java objects:
+
+{% highlight clojure %}
+(import java.io.File)
+
+;; a file filter implementation that keeps only .clj files
+(let [ff (reify java.io.FilenameFilter
+           (accept [this dir name]
+             (.endsWith name ".clj")))
+    dir  (File. "/Users/antares/Development/ClojureWerkz/neocons.git/")]
+  (into [] (.listFiles dir ff))) ;= [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
+{% endhighlight %}
+
+
+### Clojure Functions Implement Runnable and Callable
+
+Note that Clojure functions implement `java.lang.Runnable` and
+`java.util.concurrent.Callable` directly so you can pass functions to
+various classes in `java.util.concurrent`, for example.
 
 
 ## gen-class and How to Implement Java Classes in Clojure
