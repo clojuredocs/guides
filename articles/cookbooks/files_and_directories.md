@@ -5,13 +5,12 @@ layout: article
 
 ## What This Cookbook Covers
 
-This cookbook covers working with files and directories from Clojure, using functions in the `clojure.java.io` namespace
-as well as parts of the JDK via interoperability.
+This cookbook covers working with files and directories from Clojure,
+using functions in the `clojure.java.io` namespace as well as parts of
+the JDK via interoperability.
 
 
-## Overview
-
-TBD
+## Preliminaries
 
 Note that for the examples below, "io" is an alias for
 clojure.java.io. That is, it's assumed your `ns` macro contains:
@@ -27,7 +26,11 @@ or else in the repl you've loaded it:
 {% endhighlight %}
 
 
-**Read a file into one long string:**
+
+## Recipes
+
+
+### Read a file into one long string
 
 {% highlight clojure %}
 (def a-long-string (slurp "foo.txt"))
@@ -37,7 +40,7 @@ Note, you can pass urls to `slurp` as well. See also [slurp at
 Clojuredocs](http://clojuredocs.org/clojure_core/clojure.core/slurp).
 
 
-**Read a file one line at a time:**
+### Read a file one line at a time
 
 Suppose you'd like to call `my-func` on every line in a file,
 and return the resulting sequence:
@@ -52,7 +55,7 @@ The `doall` is needed because the `map` call is lazy. The lines that
 file will yield empty strings ("")).
 
 
-**Write a long string out to a new file:**
+### Write a long string out to a new file
 
 {% highlight clojure %}
 (spit "foo.txt"
@@ -68,7 +71,7 @@ Overwrites the file if it already exists. To append, use
 {% endhighlight %}
 
 
-**Write a file one line at a time:**
+### Write a file one line at a time
 
 Suppose you'd like to write out every item in a vector, one item per
 line:
@@ -80,13 +83,13 @@ line:
 {% endhighlight %}
 
 
-**Check if a file exists:**
+### Check if a file exists
 
 {% highlight clojure %}
 (.exists (io/file "filename.txt"))
 {% endhighlight %}
 
-**Is it a directory?**
+Is it a directory? :
 
 {% highlight clojure %}
 (.isDirectory (io/file "path/to/something"))
@@ -105,8 +108,10 @@ call a number of functions on it, including:
 To read about more available methods, see [the java.io.File
 docs](http://docs.oracle.com/javase/7/docs/api/java/io/File.html).
 
-**Get a list of the files and dirs --- as `File` objects --- in a
-given directory:**
+
+### Get a list of the files and dirs in a given directory
+
+As `File` objects:
 
 {% highlight clojure %}
 (.listFiles (io/file "path/to/some-dir"))
