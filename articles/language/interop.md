@@ -130,6 +130,9 @@ or (typically) to sugared version, `ClassName/methodName`:
 
 {% highlight clojure %}
 (Math/floor 5.677) ;= 5.0
+
+(Boolean/valueOf "false") ;= false
+(Boolean/valueOf "true")  ;= true
 {% endhighlight %}
 
 
@@ -144,17 +147,123 @@ It is possible to chain method calls using the `..` special form:
 
 ## How to Access Java Fields
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+Public mutable fields are not common in Java libraries but sometimes you need to access them.
+It's done with the same dot special form:
+
+{% highlight clojure %}
+(import java.awt.Point)
+
+(let [pt (Point. 0 10)]
+  (. pt x)) ;= 0
+
+(let [pt (Point. 0 10)]
+  (. pt y)) ;= 10
+{% endhighlight %}
+
+and just like with instance methods, it is much more common to see the following version:
+
+{% highlight clojure %}
+(import java.awt.Point)
+
+(let [pt (Point. 0 10)]
+  (.x pt)) ;= 0
+
+(let [pt (Point. 0 10)]
+  (.y pt)) ;= 10
+{% endhighlight %}
 
 
 ## How to Set Java Fields
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+To set a public mutable field, use `clojure.core/set!` that takes a field in the dot notation
+demonstrated earlier and a new value:
+
+{% highlight clojure %}
+(let [pt (Point. 0 10)]
+  (set! (.y pt) 100)
+  (.y pt)) ;= 100
+{% endhighlight %}
+
+Fortunately, mutable public fields are rare to meet in the JVM ecosystem so you won't need
+to do this often.
 
 
 ## Determining Classes of Java Objects
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+To get class of a particular value, pass it to `clojure.core/class`:
+
+{% highlight clojure %}
+(class 1)      ;= java.lang.Long
+(class 1.0)    ;= java.lang.Double
+(class "docs") ;= java.lang.String
+(class (java.net.URI. "http://github.com")) ;= java.net.URI
+{% endhighlight %}
+
+As this example demonstrates, Clojure strings are JVM strings, integer literals are compiled
+as longs and floating point literals are compiled as doubles.
+
+
+## How To Get a Java Class Reference By Name
+
+To obtain a class reference by its string name (fully qualified), use `Class/forName` via Java interop:
+
+{% highlight clojure %}
+(Class/forName "java.util.Date") ;= java.util.Date
+{% endhighlight %}
+
+### Array Types, Primitives
+
+JVM has what is called **primitive types** (numerics, chars, booleans) that are not "real" objects.
+In addition, array types have pretty obscure internal names. If you need to obtain a reference to
+an array of longs, for example, pass `"[[J"` to `Class/forName`. Below is the full table:
+
+<table class="table-striped table-bordered table">
+  <thead>
+    <tr>
+      <th>Internal JVM class name</th>
+      <th>Array of ? (type)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>"[[S"</td>
+      <td>short</td>
+    </tr>
+    <tr>
+      <td>"[[I"</td>
+      <td>integer</td>
+    </tr>
+    <tr>
+      <td>"[[J"</td>
+      <td>long</td>
+    </tr>
+    <tr>
+      <td>"[[F"</td>
+      <td>float</td>
+    </tr>
+    <tr>
+      <td>"[[D"</td>
+      <td>double</td>
+    </tr>
+    <tr>
+      <td>"[[B"</td>
+      <td>byte</td>
+    </tr>
+    <tr>
+      <td>"[[C"</td>
+      <td>char</td>
+    </tr>
+    <tr>
+      <td>"[[Z"</td>
+      <td>boolean</td>
+    </tr>
+  </tbody>
+</table>
+
+If this does not make much sense, don't worry. Just remember to come back to this guide when you
+need to extend a protocol for an array of primitives.
+
 
 
 ## Extending Java Classes With proxy
