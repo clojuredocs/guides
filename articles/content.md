@@ -251,6 +251,11 @@ This cookbook covers:
  * How to work with regular expressions
  * How to work with characters
 
+### [Mathematics](/articles/cookbooks/math.html) (incomplete)
+
+Includes coverage of facilities for doing math with Clojure.
+
+
 ### [Data Structures](/articles/cookbooks/data_structures.html) (TBD)
 
 This cookbook covers:
