@@ -34,7 +34,7 @@ basics.
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) (Semi-Complete)
+### [Functions](/articles/language/functions.html) (Mostly Complete)
 
 Functions are at the heart of Clojure.
 
@@ -48,7 +48,7 @@ This guide covers:
  * Other topics related to functions
 
 
-### [clojure.core Overview](/articles/language/core_overview.html) (TBD)
+### [clojure.core Overview](/articles/language/core_overview.html) (In Progress)
 
 `clojure.core` is the core Clojure library.
 
