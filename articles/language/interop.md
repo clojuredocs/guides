@@ -287,7 +287,7 @@ Interfaces are implemented using the `reify` special form:
 {% highlight clojure %}
 ;; a FileFilter implementation that accepts everything
 (reify java.io.FilenameFilter
-  (accept [dir name]
+  (accept [this dir name]
     true))
 {% endhighlight %}
 
