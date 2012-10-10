@@ -23,9 +23,9 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ### let
 
-(let ...) allows binding of locals and defines an explicit scope for those bindings. The bindings are defined as a vector of [symbol value] pairs.
+`let` allows binding of locals and defines an explicit scope for those bindings. The bindings are defined as a vector of [symbol value] pairs.
 
-The body of a (let ...) statement also provides an implicit (do ...) that allows for multiple statements in the body of (let ...).
+The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
 
 A basic example:
 {% highlight clojure %}
@@ -50,11 +50,11 @@ todo - link to destructuring
 
 ### def
 
-(def ...) takes a symbol and an optional init value. If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding. 
+`def` takes a symbol and an optional init value. If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding. 
 
 A root binding is a value that is shared across all threads.
 
-The (let ...) form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use (def ...) within another form.
+The `let` form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use `def` within another form.
 
 
 {% highlight clojure %}
@@ -64,7 +64,7 @@ The (let ...) form is the preferred method of creating local bindings. It is str
 
 ### declare
 
-(declare ...) provides a simple way of creating 'forward declarations'. (declare ...) defs the supplied symbols with no init values. This allows for referencing of a var before it has been supplied a value.
+`declare` provides a simple way of creating 'forward declarations'. `declare` defs the supplied symbols with no init values. This allows for referencing of a var before it has been supplied a value.
 
 There are much better methods of value-based dispatch or code architecture in general, but this presents a simple situation forward declarations would be necessary.
 
@@ -89,13 +89,13 @@ There are much better methods of value-based dispatch or code architecture in ge
 
 No matter which order you put func<10 and func<20 in, there will be a reference to a var that does not yet exist when the compiler does the initial evaluation of top-level forms.
 
-(declare ...) defines the var with no binding so that the the var exists when it is referenced later in the code.
+`declare` defines the var with no binding so that the the var exists when it is referenced later in the code.
 
 ### defn
 
-(defn ...) allows for succinct definition of a function and metadata about its argslist and doc-string. (defn ...) inherently allows for quick documentation of functions that can be retrieved with (doc ..). This feature should be used almost universally.
+`defn` allows for succinct definition of a function and metadata about its argslist and doc-string. `defn` inherently allows for quick documentation of functions that can be retrieved with `doc`. This feature should be used almost universally.
 
-Without (defn ..), a var would be directly bound to a function definition and explicit metadata about the doc string and argslits would be added manually.
+Without `defn`, a var would be directly bound to a function definition and explicit metadata about the doc string and argslits would be added manually.
 
 {% highlight clojure %}
 (def func (fn [x] x))
@@ -120,9 +120,9 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### if
 
-(if ...) is the primary method of conditional execution and other conditionals are built upon (if ...).
+`if` is the primary method of conditional execution and other conditionals are built upon `if`.
 
-(if ...) is an expression that takes 2 expressions, and an optional third.  If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
+`if` is an expression that takes 2 expressions, and an optional third.  If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
 
 If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
 
@@ -146,7 +146,7 @@ user=> (if (nil? (= 1 2)) "second" "third") ;; differentiate between nil and fal
 
 ### when
 
-(when ...) provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. When does not provide an 'else'.
+`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. When does not provide an 'else'.
 
 {% highlight clojure %}
 user=> (when (= 1 2) (print "hey") 10)
@@ -159,9 +159,9 @@ hey
 
 ### for
 
-(for ...) allows for list comprehensions. (for ...) takes a vector of pairs of [binding collection]. (for ...) then assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
+`for` allows for list comprehensions. `for` takes a vector of pairs of [binding collection]. `for` then assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
 
-(for ...) allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
+`for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
 
 {% highlight clojure %}
 (for [x [1 2 3] y [4 5 6]] 
@@ -194,9 +194,9 @@ hey
 
 ### doseq
 
-(doseq ...) is similar to (for ...) except it does not return a sequence of results. (doseq ...) is generally intended for execution of side-effects in the body, and thusly returns nil.
+`doseq` is similar to `for` except it does not return a sequence of results. `doseq` is generally intended for execution of side-effects in the body, and thusly returns nil.
 
-(doseq ...) supports the same bindings as for - :let :when :while. For examples of these, see for.
+`doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
 
 {% highlight clojure %}
 (doseq [x [1 2 3] y [4 5 6]]
@@ -208,7 +208,7 @@ hey
 
 ### apply
 
-(apply ...) effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
+`apply` effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
 
 {% highlight clojure %}
 (str ["Hel" "lo"])
@@ -218,7 +218,7 @@ user> (apply str ["Hel" "lo"]) ;; same as (str "Hel" "lo")
 "Hello"
 {% endhighlight %}
 
-(apply ...) prepends any supplied arguments to the form as well.
+`apply` prepends any supplied arguments to the form as well.
 
 {% highlight clojure %}
 (map + [[1 2 3] [1 2 3]]) ;; This attempts to add 2 vectors with +
@@ -251,7 +251,7 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### count
 
-Returns a count of the number of items in a collection. Nil returns a value of 0.
+Returns a count of the number of items in a collection. An argument of nil returns 0.
 
 {% highlight clojure %}
 (count "Hello")
@@ -261,7 +261,7 @@ Returns a count of the number of items in a collection. Nil returns a value of 0
 ;; 7
 {% endhighlight %}
 
-Note that count does not return in constant time for all collections. This can be determined with (counted? ...). Lazy sequences must be realized to get a count of the items.
+Note that count does not return in constant time for all collections. This can be determined with `counted?`. Keep in mind that zazy sequences must be realized to get a count of the items. This is often not intended and can cause a variety of otherwise cryptic errors.
 
 {% highlight clojure %}
 (counted? "Hello")
@@ -276,11 +276,74 @@ Note that count does not return in constant time for all collections. This can b
 
 ### conj
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`conj` is short for "conjoin". As the name implies, `conj` takes a collection and argument(s) and returns the collection with those arguments added.
+
+Adding items to a collection occurs at different places depending on the concrete type of collection.
+
+List addition occurs at the beginning of the list. This is because accessing the head of the list is a constant time operation, and accessing the tail requires traversal of the entire list.
+
+{% highlight clojure %}
+(conj '(1 2) 3)
+;; (3 1 2)
+{% endhighlight %}
+
+Vectors have constant time access across the entire data structure. `'conj' thusly appends to the end of a vector.
+
+{% highlight clojure %}
+(conj [1 2] 3)
+;; [1 2 3]
+{% endhighlight %}
+
+Hash-maps do not have guaranteed ordering, so the location that items are added is irrelevant. Sorted maps are sorted directly by the comparator and indifferent to location of addition. For maps, `conj` requires a vector of a pair of [key value] to be added to the map.
+
+{% highlight clojure %}
+(conj {:a 1 :b 2 :c 3} [:d 4])
+;; {:d 4, :a 1, :c 3, :b 2}
+
+(conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13])
+;; {:giraffes 13, :ants 400, :cats 1, :dogs 2}
+{% endhighlight %}
+
+Sets also do not have guaranteed ordering. `conj` returns a set with the item added. As the concept of sets implies, added items will not duplicate equivalent items if they are present in the set.
+
+{% highlight clojure %}
+(conj #{1 4} 5)
+;; #{1 4 5}
+
+(conj #{:a :b :c} :b :c :d :e)
+;; #{:a :c :b :d :e}
+{% endhighlight %}
 
 ### get
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`get` returns the value for the specified key in a map, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
+
+{% highlight clojure %}
+(get {:a 1 :b 2 :c 3} :b) ;; val of a key in a map
+;; 2
+
+(get [10 15 20 25] 2) ;; index of a vector
+;; 20
+
+(get #{1 10 100 2 20 200} 1) ;; in a set, returns the value itself if present
+;; 1
+
+(get {:a 1 :b 2} :c) ;; returns nil if key is not present
+;; nil
+
+(get [1 2 3 4] 4) ;; vector does not have an _index_ of 4. nil is returned
+;; nil
+{% endhighlight %}
+
+`get` also supports a default return value supplied as the last argument.
+
+{% highlight clojure %}
+(get [1 2 3 4] 4 "Not Found") ;; index 4 does not exist. return default value
+;; "Not Found"
+
+(get {:a 1 :b 2} :c 3) ;; key :c does not exist, so return default value of 3
+;; 3
+{% endhighlight %}
 
 ### assoc
 
