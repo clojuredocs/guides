@@ -7,8 +7,10 @@ ecosystem. Read the guides online at <http://clojure-doc.org/>.
 
 ## Goals
 
-The goal is to eventually have these documents hosted at
-doc.clojure.org.
+The goal is to produce quality technical documentation with limited
+duplication between guides, and eventually have these documents hosted
+at doc.clojure.org.
+
 
 What's *not* here:
 
