@@ -73,6 +73,9 @@ Map$Entry ;= java.util.Map$Entry
 AMQP$BasicProperties ;= com.rabbitmq.client.AMQP$BasicProperties
 {% endhighlight %}
 
+Note that if you need to use both a class and one or more of its inner classes, they all need to be imported separately.
+As far as JVM is concerned, they are all separate classes, there is no "imports hierarchy".
+
 
 ## How to Instantiate Java Classes
 
