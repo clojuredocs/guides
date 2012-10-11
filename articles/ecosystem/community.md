@@ -11,9 +11,16 @@ layout: article
 
 ## IRC
 
-`#clojure` at `irc.freenode.net`.
+### Main Channel
+
+`#clojure` on `irc.freenode.net`.
 
 Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.net/).
+
+
+### Documentation Channel
+
+`#clojure-doc` on `irc.freenode.net`.
 
 
 ## Code repositories

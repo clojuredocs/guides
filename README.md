@@ -7,8 +7,10 @@ ecosystem. Read the guides online at <http://clojure-doc.org/>.
 
 ## Goals
 
-The goal is to eventually have these documents hosted at
-doc.clojure.org.
+The goal is to produce quality technical documentation with limited
+duplication between guides, and eventually have these documents hosted
+at doc.clojure.org.
+
 
 What's *not* here:
 
@@ -91,7 +93,8 @@ No contribution is too small: feel free to suggest grammar improvements, better 
 one new paragraph or even a couple of spelling corrections. Editing and proof-reading is also a great way to contribute.
 
 If you found a mistake you'd like to report and do not want to make edits and go through the pull request process,
-please post your findings on the [Clojure mailing list](https://groups.google.com/group/clojure).
+please post your findings on the [Clojure mailing list](https://groups.google.com/group/clojure),
+or else find us on `#clojure-doc` (IRC) at freenode.
 
 Thank you!
 

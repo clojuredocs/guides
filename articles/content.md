@@ -34,7 +34,7 @@ basics.
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) (Semi-Complete)
+### [Functions](/articles/language/functions.html) (Mostly Complete)
 
 Functions are at the heart of Clojure.
 
@@ -48,7 +48,7 @@ This guide covers:
  * Other topics related to functions
 
 
-### [clojure.core Overview](/articles/language/core_overview.html) (TBD)
+### [clojure.core Overview](/articles/language/core_overview.html) (In Progress)
 
 `clojure.core` is the core Clojure library.
 
@@ -59,7 +59,7 @@ This guide covers:
  * Key vars of `clojure.core`
 
 
-### [Interoperability with Java](/articles/language/interop.html) (TBD)
+### [Interoperability with Java](/articles/language/interop.html) (In Progress)
 
 The Clojure language implementation is symbiotic with its host
 platform (the JVM), providing direct interoperability.
@@ -250,6 +250,11 @@ This cookbook covers:
  * How to work with strings
  * How to work with regular expressions
  * How to work with characters
+
+### [Mathematics](/articles/cookbooks/math.html) (incomplete)
+
+Includes coverage of facilities for doing math with Clojure.
+
 
 ### [Data Structures](/articles/cookbooks/data_structures.html) (TBD)
 
