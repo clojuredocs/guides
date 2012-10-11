@@ -112,6 +112,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [clj-http](https://github.com/dakrone/clj-http) <sub>[clojars](https://clojars.org/clj-http)</sub>: An idiomatic Clojure http client wrapping the apache client.
 
+  * [clj-http-lite](https://github.com/hiredman/clj-http-lite) <sub>[clojars](https://clojars.org/clj-http-lite)</sub>: A lightweight version of clj-http having almost same API, but without any Apache dependencies.
 
 ## Logging
 
