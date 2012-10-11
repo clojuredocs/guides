@@ -294,7 +294,7 @@ Vectors have constant time access across the entire data structure. `'conj' thus
 ;; [1 2 3]
 {% endhighlight %}
 
-Hash-maps do not have guaranteed ordering, so the location that items are added is irrelevant. Sorted maps are sorted directly by the comparator and indifferent to location of addition. For maps, `conj` requires a vector of a pair of [key value] to be added to the map.
+Maps do not have guaranteed ordering, so the location that items are added is irrelevant. `conj` requires vectors of [key value] pairs to be added to the map.
 
 {% highlight clojure %}
 (conj {:a 1 :b 2 :c 3} [:d 4])
@@ -316,7 +316,7 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 ### get
 
-`get` returns the value for the specified key in a map, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
+`get` returns the value for the specified key in a map or record, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
 
 {% highlight clojure %}
 (get {:a 1 :b 2 :c 3} :b) ;; val of a key in a map
@@ -333,6 +333,10 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 (get [1 2 3 4] 4) ;; vector does not have an _index_ of 4. nil is returned
 ;; nil
+
+(defrecord Hand [index middle ring pinky thumb])
+(get (Hand. 3 4 3.5 2 2) :index)
+;; 3
 {% endhighlight %}
 
 `get` also supports a default return value supplied as the last argument.
@@ -347,27 +351,142 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 ### assoc
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`assoc` takes a key and a value and returns a collection of the same type as the supplied collection with the key mapped to the new value.
+
+`assoc` is similar to get in how it works with maps, records or vectors. When applied to a map or record, the same type is returned with the key/value pairs added or modified.  When applied to a vector, a vector is returned with the key acting as an index and the index being replaced by the value.
+
+Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
+
+{% highlight clojure %}
+(assoc {:a 1} :b 2)
+;; {:b 2, :a 1}
+
+(assoc {:a 1 :b 45 :c 3} :b 2)
+;; {:a 1, :c 3, :b 2}
+
+(defrecord Hand [index middle ring pinky thumb])
+(assoc (Hand. 3 4 3.5 2 2) :index 3.75)
+;; #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
+{% endhighlight %}
+
+When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector. The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
+
+{% highlight clojure %}
+(assoc [1 2 76] 2 3)
+;; [1 2 3]
+
+(assoc [1 2 3] 5 6) ;; index 5 does not exist. valid indexes for this vector are: 0, 1, 2
+;; IndexOutOfBoundsException   clojure.lang.PersistentVector.assocN (PersistentVector.java:136)
+{% endhighlight %}
 
 ### dissoc
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
+
+{% highlight clojure %}
+(dissoc {:a 1 :b 2 :c 3} :b)
+;; {:a 1, :c 3}
+
+(dissoc {:a 1 :b 14 :c 390 :d 75 :e 2 :f 51} :b :c :e)
+;; {:a 1, :f 51, :d 75}
+
+
+;; note that a map is returned, not a record.
+(defrecord Hand [index middle ring pinky ring])
+(dissoc (Hand. 3 4 3.5 2 2) :ring) ;; always be careful with the bandsaw!
+;; {:index 3, :middle 4, :pinky 2, :thumb 2}
+{% endhighlight %}
 
 ### first
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`first` returns the first item in the collection. `first` returns nil if the argument is empty or is nil.
+
+Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
+
+{% highlight clojure %}
+(first (range 10))
+;; 0
+
+(first [:floor :piano :seagull])
+;; :floor
+
+(first [])
+;; nil
+{% endhighlight %}
 
 ### rest
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`rest` returns a seq of items starting with the second element in the collection. `rest` returns an empty seq if the collection only contains a single item.
+
+`rest` should also not be relied on when using maps and sets unless you are sure ordering is guaranteed.
+
+{% highlight clojure %}
+(rest [13 1 16 -4])
+;; (1 16 -4)
+
+(rest '(:french-fry))
+;;()
+{% endhighlight %}
+
+The behaviour of `rest` should be contrasted with `next`. `next` returns nil if the collection only has a single item. This is important when considering "truthiness" of values since an empty seq is "true" but nil is not.
+
+{% highlight clojure %}
+(if (rest '("stuff"))
+  (print "Does this print?")) ;; yes, it prints.
+  
+  
+;; INFINITE LOOP!!!
+;; "done" is never reached because (rest x) is always a "true" value
+(defn inf [x]
+  (if (rest x)
+    (inf (rest x))
+    "done"))
+{% endhighlight %}
 
 ### empty?
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`empty?` returns true if the collection has no items, or false if it has 1 or more items.
+
+{% highlight clojure %}
+(empty? [])
+;; true
+
+(empty? '(1 2 3))
+;; false
+{% endhighlight %}
+
+Be careful of mistypes. This can be a source of great confusion:
+
+{% highlight clojure %}
+(if (empty [1 2 3]) ;; empty returns an empty seq, which is true! use empty? here.
+  "It's empty"
+  "It's not empty")
+;; "It's empty"
+{% endhighlight %}
 
 ### empty
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`empty` returns an empty collection of the same type as the collection provided.
+
+{% highlight clojure %}
+(empty [1 2 3])
+;; []
+
+(empty {:a 1 :b 2 :c 3})
+;; {}
+{% endhighlight %}
+
+### not-empty
+
+`not-empty` returns nil if the collection has no items. If the collection contains items, the collection is returned.
+
+{% highlight clojure %}
+(not-empty '(:mice :elephants :children))
+;; (:mice :elephants :children)
+
+(not-empty '())
+nil
+{% endhighlight %}
 
 ### contains?
 
