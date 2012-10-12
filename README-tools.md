@@ -10,7 +10,8 @@ First, install [Bundler](http://gembundler.com). Ruby 1.9.3 or JRuby are recomme
 
     gem install bundler
 
-Then install dependencies (Jekyll, GitHub-flavored Markdown processors, etc) with Bundler:
+Then install dependencies (Jekyll, GitHub-flavored Markdown processors, etc) with Bundler
+by running the following in the CDS repository root:
 
     bundle install --binstubs
 
