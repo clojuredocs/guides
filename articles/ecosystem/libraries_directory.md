@@ -119,8 +119,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Timbre](https://clojars.org/com.taoensso/timbre):
     Simple, flexible, all-Clojure logging. No XML!
 
-  * [tools.logging](https://github.com/clojure/tools.logging/)
-    {contrib}: standard general-purpose logging.
+  * [tools.logging](https://github.com/clojure/tools.logging/): standard general-purpose logging.
 
   * [clj-log](https://clojars.org/clj-log): s-expression logger.
 
@@ -186,7 +185,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ### Relational Databases, JDBC
 
-  * [java.jdbc](https://github.com/clojure/java.jdbc) {contrib}: Basic wrapper for JDBC. Works with all JDBC databases (MySQL, PostgreSQL, Oracle, SQL Server, etc).
+  * [java.jdbc](https://github.com/clojure/java.jdbc): Basic wrapper for JDBC. Works with all JDBC databases (MySQL, PostgreSQL, Oracle, SQL Server, etc).
 
   * [Korma](https://clojars.org/korma): ["Tasty SQL for Clojure"](http://sqlkorma.com/docs)
 
