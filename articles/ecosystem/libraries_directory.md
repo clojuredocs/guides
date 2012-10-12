@@ -6,11 +6,11 @@ layout: article
 ## Overview
 
 This is a categorized and annotated directory of available Clojure
-libraries and tools. This directory is **not comprehensive and highly opinionated**.
+libraries and tools. This directory is **not comprehensive and is necessarily highly opinionated**.
 
 This directory is manually curated by the Clojure community. Please endeavor to keep it up-to-date,
 consisting of **high quality** libraries with adequate documentation. There are many more libraries in the Clojure
-ecosystem, but some lack documentation and/or are useful primarily to experienced developers. Such projects
+ecosystem, but some lack documentation and/or are useful primarily to experienced developers and such projects
 are not included in this document.
 
 For more comprehensive overview of the Clojure library ecosystem, please see [ClojureSphere](http://clojuresphere.com/).
