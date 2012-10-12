@@ -1,5 +1,5 @@
 ---
-title: "Doing with Mathematics in Clojure"
+title: "Mathematics with Clojure"
 layout: article
 ---
 
