@@ -7,7 +7,7 @@
    1. navigate to the "Install new Software" tab under the help menu
    2. paste in the CCW update URL: http://ccw.cgrand.net/updatesite in the "Work with:" text field
    3. check the "Clojure Programming" checkbox and hit the "Next" button
-3. Restart Eclipse when prompted
+3. Follow the instructions on the screen and restart Eclipse for changes to take effect.
 
 Counterclockwise takes care of setting up Clojure and Leiningen for you. And once the plugin is installed, you will be 
 able to create a new Clojure project or a new Leiningen project. 
