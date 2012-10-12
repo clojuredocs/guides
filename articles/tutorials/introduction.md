@@ -3,6 +3,28 @@ title: "Introduction to Clojure"
 layout: article
 ---
 
+## About this tutorial
+
+This guide covers:
+
+ * Clojure language basics
+ * Expressions, identifiers (locals, vars)
+ * `let` forms
+ * Salars
+ * Functions
+ * Basic data types
+ * Introduction to immutable data structures
+ * Overview of Clojure reference types (vars, atoms, agents, refs)
+ * Looping and recursion
+ * Basics of Clojure macros
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
+(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+
+
+
+## Overview
+
 This is a brief beginner's introduction to Clojure. If you haven't
 already done so, have a look at the [Getting
 Started](/articles/tutorials/getting_started.html) tutorial. Before
