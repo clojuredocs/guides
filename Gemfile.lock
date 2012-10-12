@@ -21,7 +21,7 @@ GEM
     maruku (0.6.0)
       syntax (>= 1.0.0)
     posix-spawn (0.3.6)
-    redcarpet (2.2.1)
+    rdiscount (1.6.8)
     syntax (1.0.0)
 
 PLATFORMS
@@ -31,4 +31,4 @@ DEPENDENCIES
   RedCloth
   haml
   jekyll
-  redcarpet
+  rdiscount

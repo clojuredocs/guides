@@ -1,5 +1,5 @@
 ---
-title: "Mathematics with Clojure"
+title: "Doing with Mathematics in Clojure"
 layout: article
 ---
 
@@ -19,17 +19,17 @@ and
 contrib libraries. It's assumed that either you have the following in
 your source code's `ns` macro:
 
-``` clojure
+{% highlight clojure %}
 (:require [clojure.math.numeric-tower :as math]
           [clojure.math.combinatorics :as combo])
-```
+{% endhighlight %}
 
 or else in the repl you've loaded them like so:
 
-``` clojure
+{% highlight clojure %}
 (require '[clojure.math.numeric-tower :as math])
 (require '[clojure.math.combinatorics :as combo])
-```
+{% endhighlight %}
 
 
 

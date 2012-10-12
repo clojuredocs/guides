@@ -12,4 +12,3 @@ _site/*
 _source/*
 deploy.sh
 repl*
-_cache/*

@@ -6,12 +6,11 @@ CDS reuses the [ClojureWerkz docslate](http://github.com/clojurewerkz/docslate) 
 
 ## Install Tools & Dependencies
 
-First, install [Bundler](http://gembundler.com). Ruby 1.9.3 or JRuby are recommended:
+First, install [Bundler](http://getbundler.com). Ruby 1.9.3 or JRuby are recommended:
 
     gem install bundler
 
-Then install dependencies (Jekyll, GitHub-flavored Markdown processors, etc) with Bundler
-by running the following in the CDS repository root:
+Then install dependencies
 
     bundle install --binstubs
 
