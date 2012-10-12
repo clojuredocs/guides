@@ -23,9 +23,10 @@ This guide covers Clojure 1.4.
 
 ## Overview
 
-Clojure functions are organized into *namespaces*. Clojure namespaces are very similar to
-Java packages and Python modules. Namespaces are basically maps (dictionaries) that map names
-to *vars*. In many cases, those vars store functions in them.
+Clojure functions are organized into *namespaces*. Clojure namespaces
+are very similar to Java packages and Python modules. Namespaces are
+basically maps (dictionaries) that map names to *vars*. In many cases,
+those vars store functions in them.
 
 
 ## Defining a Namespace
@@ -105,7 +106,7 @@ An example with `(:require ...)`:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
-  (:require clojure.set)
+  (:require clojure.set))
 
 ;; now it is possible to do
 ;; (clojure.set/difference #{1 2 3} #{3 4 5})
@@ -117,7 +118,7 @@ as a different alias:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
-  (:require [clojure.set :as cs])
+  (:require [clojure.set :as cs]))
 
 ;; now it is possible to do
 ;; (cs/difference #{1 2 3} #{3 4 5})
@@ -128,7 +129,7 @@ One more example with two required namespaces:
 ``` clojure
 (ns megacorp.profitd.scheduling
   (:require [clojure.set  :as cs]
-            [clojure.walk :as walk])
+            [clojure.walk :as walk]))
 ```
 
 To make functions in `clojure.set` available in the defined namespace via short names
@@ -137,7 +138,7 @@ to *refer* to certain functions:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
-  (:require [clojure.set :refer [difference intersection]])
+  (:require [clojure.set :refer [difference intersection]]))
 
 ;; now it is possible to do
 ;; (difference #{1 2 3} #{3 4 5})
@@ -153,9 +154,51 @@ When vars are defined using the [def](http://clojuredocs.org/clojure_core/clojur
 added to the current namespace. 
 
 
+
+
 ### The :refer-clojure Helper Form
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+Functions like `clojure.core/get` and macros like `clojure.core/defn` can be used without
+namespace qualification because they reside in the `clojure.core` namespace and Clojure
+compiler automatically *refers* all vars in it. This leaders to a problem: if your
+namespace defines a function with the same name (e.g. `find`), you will get a warning
+from the compiler, like this:
+
+```
+WARNING: find already refers to: #'clojure.core/find in namespace: megacorp.profitd.scheduling, being replaced by: #'megacorp.profitd.scheduling/find
+```
+
+This means that in the `megacorp.profitd.scheduling` namespace, `find` already refers to
+a value which happens to be `clojure.core/find`, but it is being replaced by a
+different value. Remember, Clojure is a very dynamic language and namespaces are
+basically maps, as far as the implementation goes. Most of the time, however,
+replacing vars like this is not intentional and Clojure compiler emits a warning.
+
+To solve this problem, you can exclude certain `clojure.core` functions from being
+referred using the `(:refer-clojure ...)` form with the `ns`:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:refer-clojure :exclude [find]))
+
+(defn find
+  "Finds a needle in the haystack"
+  [^String haystack]
+  (comment ...))
+```
+
+In this case, to use `clojure.core/find`, you will have to use its fully
+qualified name: `clojure.core/find`:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:refer-clojure :exclude [find]))
+
+(defn find
+  "Finds a needle in the haystack"
+  [^String haystack]
+  (clojure.core/find haystack :needle))
+```
 
 
 ### The :use Helper Form
