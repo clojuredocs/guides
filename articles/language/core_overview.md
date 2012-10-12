@@ -28,25 +28,25 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
 
 A basic example:
-{% highlight clojure %}
+```clojure
 (let [x 1 y 2] (println x y)) ;; 1 2
-{% endhighlight %}
+```
 
 Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
 
 This example basically demonstrates the lexical scoping of the let form.
-{% highlight clojure %}
+```clojure
 (let [x 1]
   (println x) ;; prints 1
   (let [x 2]
     (println x))) ;; prints 2
-{% endhighlight %}
+```
 
 Let bindings are immutable and can be destructured.
 
-{% highlight clojure %}
+```clojure
 todo - link to destructuring
-{% endhighlight %}
+```
 
 ### def
 
@@ -57,10 +57,10 @@ A root binding is a value that is shared across all threads.
 The `let` form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use `def` within another form.
 
 
-{% highlight clojure %}
+```clojure
 ;; todo - reference to var documentation, basic example
 ;; todo - metadata
-{% endhighlight %}
+```
 
 ### declare
 
@@ -68,7 +68,7 @@ The `let` form is the preferred method of creating local bindings. It is strongl
 
 There are much better methods of value-based dispatch or code architecture in general, but this presents a simple situation forward declarations would be necessary.
 
-{% highlight clojure %}
+```clojure
 (declare func<10 func<20)
 
 ;; without declare you will receive an error similar to:
@@ -85,7 +85,7 @@ There are much better methods of value-based dispatch or code architecture in ge
    (< x 10) (func10 x)
    (< x 20) "More than 10, less than 20"
    :else "too far!"))
-{% endhighlight %}
+```
 
 No matter which order you put func<10 and func<20 in, there will be a reference to a var that does not yet exist when the compiler does the initial evaluation of top-level forms.
 
@@ -97,7 +97,7 @@ No matter which order you put func<10 and func<20 in, there will be a reference 
 
 Without `defn`, a var would be directly bound to a function definition and explicit metadata about the doc string and argslits would be added manually.
 
-{% highlight clojure %}
+```clojure
 (def func (fn [x] x))
 
 ;; same as:
@@ -108,11 +108,11 @@ Without `defn`, a var would be directly bound to a function definition and expli
 
 ;;same as
 (defn func "documentation!" [x] x)
-{% endhighlight %}
+```
 
-{% highlight clojure %}
+```clojure
 ;; todo - link to doc and metadata
-{% endhighlight %}
+```
 
 ### ns
 
@@ -127,7 +127,7 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
 
 
-{% highlight clojure %}
+```clojure
 user=> (if 0 "second") ;; 0 is a 'true' value. Only false or nil are 'false'
 "second"
 
@@ -142,20 +142,20 @@ nil
 
 user=> (if (nil? (= 1 2)) "second" "third") ;; differentiate between nil and false if needed
 "third"
-{% endhighlight %}
+```
 
 ### when
 
-`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. When does not provide an 'else'.
+`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. `when` does not provide an 'else'.
 
-{% highlight clojure %}
+```clojure
 user=> (when (= 1 2) (print "hey") 10)
 nil
 
 user=> (when (< 10 11) (print "hey") 10)
 hey
 10
-{% endhighlight %}
+```
 
 ### for
 
@@ -163,16 +163,16 @@ hey
 
 `for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
 
-{% highlight clojure %}
+```clojure
 (for [x [1 2 3] y [4 5 6]] 
   [x y])
   
 ;; ([1 4] [1 5] [1 6] [2 4] [2 5] [2 6] [3 4] [3 5] [3 6])
-{% endhighlight %}
+```
 
 :when only evaluates the body when a true value is returned by the expression provided
 
-{% highlight clojure %}
+```clojure
 (for [x [1 2 3] y [4 5 6]
       :when (and
              (even? x)
@@ -180,17 +180,17 @@ hey
   [x y])
   
 ;; ([2 5])
-{% endhighlight %}
+```
 
 :while evaluates the body until a non-true value is reached. Note that the rightmost collection is fully bound to y before a non-true value of (< x 2) is reached. This demonstrates the order of the comprehension.
 
-{% highlight clojure %}
+```clojure
 (for [x [1 2 3] y [4 5 6]
       :while (< x 2)]
   [x y])
   
 ;; ([1 4] [1 5] [1 6])
-{% endhighlight %}
+```
 
 ### doseq
 
@@ -198,29 +198,29 @@ hey
 
 `doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
 
-{% highlight clojure %}
+```clojure
 (doseq [x [1 2 3] y [4 5 6]]
   (println [x y]))
   
 ;; [1 4][1 5][1 6][2 4][2 5][2 6][3 4][3 5][3 6]
 ;; nil
-{% endhighlight %}
+```
 
 ### apply
 
 `apply` effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
 
-{% highlight clojure %}
+```clojure
 (str ["Hel" "lo"])
 "[\"Hel\" \"lo\"]" ;; not what we want, str is operating on the vector
 
 user> (apply str ["Hel" "lo"]) ;; same as (str "Hel" "lo")
 "Hello"
-{% endhighlight %}
+```
 
 `apply` prepends any supplied arguments to the form as well.
 
-{% highlight clojure %}
+```clojure
 (map + [[1 2 3] [1 2 3]]) ;; This attempts to add 2 vectors with +
 ;; ClassCastException   java.lang.Class.cast (Class.java:2990)
 
@@ -229,7 +229,7 @@ user> (apply str ["Hel" "lo"]) ;; same as (str "Hel" "lo")
 
 (apply + 1 2 3 [4 5 6]) ;; same as  (+ 1 2 3 4 5 6)
 ;; 21
-{% endhighlight %}
+```
 
 Note that apply can not be used with macros.
 
@@ -253,17 +253,17 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 Returns a count of the number of items in a collection. An argument of nil returns 0.
 
-{% highlight clojure %}
+```clojure
 (count "Hello")
 ;; 5
 
 (count [1 2 3 4 5 6 7])
 ;; 7
-{% endhighlight %}
+```
 
 Note that count does not return in constant time for all collections. This can be determined with `counted?`. Keep in mind that zazy sequences must be realized to get a count of the items. This is often not intended and can cause a variety of otherwise cryptic errors.
 
-{% highlight clojure %}
+```clojure
 (counted? "Hello")
 ;; false
 
@@ -272,7 +272,7 @@ Note that count does not return in constant time for all collections. This can b
 
 (counted? [1 2 3 4 5]) ;; Constant time return of (count)
 ;; true 
-{% endhighlight %}
+```
 
 ### conj
 
@@ -282,43 +282,43 @@ Adding items to a collection occurs at different places depending on the concret
 
 List addition occurs at the beginning of the list. This is because accessing the head of the list is a constant time operation, and accessing the tail requires traversal of the entire list.
 
-{% highlight clojure %}
+```clojure
 (conj '(1 2) 3)
 ;; (3 1 2)
-{% endhighlight %}
+```
 
 Vectors have constant time access across the entire data structure. `'conj' thusly appends to the end of a vector.
 
-{% highlight clojure %}
+```clojure
 (conj [1 2] 3)
 ;; [1 2 3]
-{% endhighlight %}
+```
 
 Maps do not have guaranteed ordering, so the location that items are added is irrelevant. `conj` requires vectors of [key value] pairs to be added to the map.
 
-{% highlight clojure %}
+```clojure
 (conj {:a 1 :b 2 :c 3} [:d 4])
 ;; {:d 4, :a 1, :c 3, :b 2}
 
 (conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13])
 ;; {:giraffes 13, :ants 400, :cats 1, :dogs 2}
-{% endhighlight %}
+```
 
 Sets also do not have guaranteed ordering. `conj` returns a set with the item added. As the concept of sets implies, added items will not duplicate equivalent items if they are present in the set.
 
-{% highlight clojure %}
+```clojure
 (conj #{1 4} 5)
 ;; #{1 4 5}
 
 (conj #{:a :b :c} :b :c :d :e)
 ;; #{:a :c :b :d :e}
-{% endhighlight %}
+```
 
 ### get
 
 `get` returns the value for the specified key in a map or record, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
 
-{% highlight clojure %}
+```clojure
 (get {:a 1 :b 2 :c 3} :b) ;; val of a key in a map
 ;; 2
 
@@ -337,17 +337,17 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 (defrecord Hand [index middle ring pinky thumb])
 (get (Hand. 3 4 3.5 2 2) :index)
 ;; 3
-{% endhighlight %}
+```
 
 `get` also supports a default return value supplied as the last argument.
 
-{% highlight clojure %}
+```clojure
 (get [1 2 3 4] 4 "Not Found") ;; index 4 does not exist. return default value
 ;; "Not Found"
 
 (get {:a 1 :b 2} :c 3) ;; key :c does not exist, so return default value of 3
 ;; 3
-{% endhighlight %}
+```
 
 ### assoc
 
@@ -357,7 +357,7 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
 
-{% highlight clojure %}
+```clojure
 (assoc {:a 1} :b 2)
 ;; {:b 2, :a 1}
 
@@ -367,23 +367,23 @@ Since maps and records can not contain multiple equivalent keys, supplying `asso
 (defrecord Hand [index middle ring pinky thumb])
 (assoc (Hand. 3 4 3.5 2 2) :index 3.75)
 ;; #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
-{% endhighlight %}
+```
 
 When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector. The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
 
-{% highlight clojure %}
+```clojure
 (assoc [1 2 76] 2 3)
 ;; [1 2 3]
 
 (assoc [1 2 3] 5 6) ;; index 5 does not exist. valid indexes for this vector are: 0, 1, 2
 ;; IndexOutOfBoundsException   clojure.lang.PersistentVector.assocN (PersistentVector.java:136)
-{% endhighlight %}
+```
 
 ### dissoc
 
 `dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
 
-{% highlight clojure %}
+```clojure
 (dissoc {:a 1 :b 2 :c 3} :b)
 ;; {:a 1, :c 3}
 
@@ -395,7 +395,7 @@ When using `assoc` with a vector, the key is the index and the value is the valu
 (defrecord Hand [index middle ring pinky ring])
 (dissoc (Hand. 3 4 3.5 2 2) :ring) ;; always be careful with the bandsaw!
 ;; {:index 3, :middle 4, :pinky 2, :thumb 2}
-{% endhighlight %}
+```
 
 ### first
 
@@ -403,7 +403,7 @@ When using `assoc` with a vector, the key is the index and the value is the valu
 
 Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
 
-{% highlight clojure %}
+```clojure
 (first (range 10))
 ;; 0
 
@@ -412,7 +412,7 @@ Note that for collections that do not guarantee order like some maps and sets, t
 
 (first [])
 ;; nil
-{% endhighlight %}
+```
 
 ### rest
 
@@ -420,17 +420,17 @@ Note that for collections that do not guarantee order like some maps and sets, t
 
 `rest` should also not be relied on when using maps and sets unless you are sure ordering is guaranteed.
 
-{% highlight clojure %}
+```clojure
 (rest [13 1 16 -4])
 ;; (1 16 -4)
 
 (rest '(:french-fry))
 ;;()
-{% endhighlight %}
+```
 
 The behaviour of `rest` should be contrasted with `next`. `next` returns nil if the collection only has a single item. This is important when considering "truthiness" of values since an empty seq is "true" but nil is not.
 
-{% highlight clojure %}
+```clojure
 (if (rest '("stuff"))
   (print "Does this print?")) ;; yes, it prints.
   
@@ -441,52 +441,52 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
   (if (rest x)
     (inf (rest x))
     "done"))
-{% endhighlight %}
+```
 
 ### empty?
 
 `empty?` returns true if the collection has no items, or false if it has 1 or more items.
 
-{% highlight clojure %}
+```clojure
 (empty? [])
 ;; true
 
 (empty? '(1 2 3))
 ;; false
-{% endhighlight %}
+```
 
 Be careful of mistypes. This can be a source of great confusion:
 
-{% highlight clojure %}
+```clojure
 (if (empty [1 2 3]) ;; empty returns an empty seq, which is true! use empty? here.
   "It's empty"
   "It's not empty")
 ;; "It's empty"
-{% endhighlight %}
+```
 
 ### empty
 
 `empty` returns an empty collection of the same type as the collection provided.
 
-{% highlight clojure %}
+```clojure
 (empty [1 2 3])
 ;; []
 
 (empty {:a 1 :b 2 :c 3})
 ;; {}
-{% endhighlight %}
+```
 
 ### not-empty
 
 `not-empty` returns nil if the collection has no items. If the collection contains items, the collection is returned.
 
-{% highlight clojure %}
+```clojure
 (not-empty '(:mice :elephants :children))
 ;; (:mice :elephants :children)
 
 (not-empty '())
 nil
-{% endhighlight %}
+```
 
 ### contains?
 
