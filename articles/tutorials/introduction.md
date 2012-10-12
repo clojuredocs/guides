@@ -17,7 +17,7 @@ too bogged down in details or advanced topics (the various topics will
 get more comprehensive coverage in the topic guides anyway).
 
 As we said in the Getting Started tutorial, Clojure is a wonderfully
-simple language, and you're going to love it. 
+simple language, and you're going to love it.
 
 
 
@@ -119,7 +119,7 @@ true, false
 `nil` is like Python's None, or Java's null. It's just another value.
 Incidentally, there's no "undefined" value in Clojure --- if you try
 to use a symbol which you haven't defined, then it's undefined and the
-compiler will let you know about it. 
+compiler will let you know about it.
 
 As we go along, type those expressions into your REPL to see them
 evaluated. These too:
@@ -497,7 +497,7 @@ structure).  More about `seq` when we get to [Laziness](#laziness).
 >     #{}      hash-set   set
 >
 > You might think of `seq` as the short name for `list`, but that's
-> probably pushing it, since there are a few differences.  
+> probably pushing it, since there are a few differences.
 
 
 
@@ -678,7 +678,7 @@ Clojure data structures are said to be *persistent*.
 And, again: this works just fine because to you the data structures
 are all immutable. There is no "action at a distance". Other functions
 can't change the value of a data structure you're working on because
-values don't change. 
+values don't change.
 
 > Note that, of course, Clojure doesn't do any unnecessary copying.
 > For example, when you pass a large data structure to a function
@@ -1015,7 +1015,7 @@ beginning. Try these on for size:
 (doseq [i my-items]
   (println i))
 
-(dotimes [i (range 10)]
+(dotimes [i 10]
   (println "counting:" i))
 ```
 
