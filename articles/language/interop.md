@@ -303,7 +303,7 @@ Interfaces are implemented using the `reify` special form.
 
 Given the following Java interface:
 
-{% highlight java %}
+``` java
 public
 interface FilenameFilter {
     /**
