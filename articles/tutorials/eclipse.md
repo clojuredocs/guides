@@ -2,7 +2,7 @@
 
 ## Installing Eclipse
 
-1. Download the latest release of Eclipse [here](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor)
+1. Download the latest release of Eclipse from the [official site](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor).
 2. Install Counterclockwise plugin.
    1. navigate to the "Install new Software" tab under the help menu
    2. paste in the CCW update URL: http://ccw.cgrand.net/updatesite in the "Work with:" text field
