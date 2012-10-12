@@ -195,6 +195,16 @@ Fortunately, mutable public fields are rare to meet in the JVM ecosystem so you 
 to do this often.
 
 
+## How To Work With Enums
+
+[Enums (enumeration) type](http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html) values are accessed
+the same way as fields, except on enum classes and not objects:
+
+{% highlight clojure %}
+java.util.concurrent.TimeUnit/MILLISECONDS ;= #< MILLISECONDS>
+{% endhighlight %}
+
+
 ## Determining Classes of Java Objects
 
 To get class of a particular value, pass it to `clojure.core/class`:
