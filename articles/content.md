@@ -12,29 +12,33 @@ its ecosystem.
 CDS recognizes that different Clojure users have different level of expertise
 and separates content into several groups:
 
- * Tutorials
- * Core language guides
- * Ecosystem (tools, libraries, community, books) guides
- * Cookbooks
+ * [Tutorials](#tutorials)
+ * [Core language guides](#clojure_language_guides)
+ * [The Ecosystem](#ecosystem) (tools, libraries, community, books) guides
+ * [Cookbooks](#cookbooks)
 
 
 ## Tutorials
 
-### [Getting Started](/articles/tutorials/getting_started.html) (Semi-complete)
+### [Getting Started](/articles/tutorials/getting_started.html) (Partially Complete)
 
 If you're new to Clojure, this is a good place to start.
 
 
-### [Introduction](/articles/tutorials/introduction.html) (Semi-complete)
+### [Introduction](/articles/tutorials/introduction.html) (Partially Complete)
 
 A swift introduction to the Clojure language, covering most of the
 basics.
 
 
+### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) (Partially Complete)
+
+A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
+
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) (Mostly Complete)
+### [Functions](/articles/language/functions.html) (Partially Complete)
 
 Functions are at the heart of Clojure.
 
@@ -59,7 +63,7 @@ This guide covers:
  * Key vars of `clojure.core`
 
 
-### [Interoperability with Java](/articles/language/interop.html) (In Progress)
+### [Interoperability with Java](/articles/language/interop.html) (Partially Complete)
 
 The Clojure language implementation is symbiotic with its host
 platform (the JVM), providing direct interoperability.
@@ -74,7 +78,7 @@ This guide covers:
  * Other topics related to interop
 
 
-### [Namespaces](/articles/language/namespaces.html) (TBD)
+### [Namespaces](/articles/language/namespaces.html) (In Progress)
 
 Namespaces organize Clojure functions.
 
@@ -86,7 +90,7 @@ This guide covers:
  * How code compilation works in Clojure
 
 
-### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (In Progress)
+### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (Partially Complete)
 
 This guide covers:
 
