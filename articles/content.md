@@ -12,10 +12,10 @@ its ecosystem.
 CDS recognizes that different Clojure users have different level of expertise
 and separates content into several groups:
 
- * Tutorials
- * Core language guides
- * Ecosystem (tools, libraries, community, books) guides
- * Cookbooks
+ * [Tutorials](#tutorials)
+ * [Core language guides](#clojure_language_guides)
+ * [The Ecosystem](#ecosystem) (tools, libraries, community, books) guides
+ * [Cookbooks](#cookbooks)
 
 
 ## Tutorials
@@ -30,6 +30,10 @@ If you're new to Clojure, this is a good place to start.
 A swift introduction to the Clojure language, covering most of the
 basics.
 
+
+### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) (Partially Complete)
+
+A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 
 ## Clojure Language Guides
