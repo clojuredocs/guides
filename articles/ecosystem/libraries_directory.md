@@ -6,11 +6,11 @@ layout: article
 ## Overview
 
 This is a categorized and annotated directory of available Clojure
-libraries and tools. This directory is **not comprehensive and is necessarily highly opinionated**.
+libraries and tools. This directory is **not comprehensive and highly opinionated**.
 
 This directory is manually curated by the Clojure community. Please endeavor to keep it up-to-date,
 consisting of **high quality** libraries with adequate documentation. There are many more libraries in the Clojure
-ecosystem, but some lack documentation and/or are useful primarily to experienced developers and as such
+ecosystem, but some lack documentation and/or are useful primarily to experienced developers. Such projects
 are not included in this document.
 
 For more comprehensive overview of the Clojure library ecosystem, please see [ClojureSphere](http://clojuresphere.com/).
@@ -27,9 +27,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ## Applications & Environment
 
-  * [tools.cli](https://github.com/clojure/tools.cli) {contrib}: a command line argument parser for Clojure
+  * [tools.cli](https://github.com/clojure/tools.cli): a command line argument parser for Clojure
 
-  * [environ](https://clojars.org/environ): manage environment settings from a number of different sources
+  * [environ](https://clojars.org/environ): Manage environment settings from a number of different sources
 
 
 ## Date and Time
@@ -45,12 +45,12 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [expectations](https://github.com/jaycfields/expectations) ([at clojars](https://clojars.org/expectations)): a minimalist's testing framework
 
-  * [test.generative](https://github.com/clojure/test.generative) {contrib}: generative testing, a la QuickCheck
+  * [test.generative](https://github.com/clojure/test.generative): generative testing, a la QuickCheck
 
 
 ## Namespaces and Code-as-Data
 
- * [tools.namespace](https://github.com/clojure/tools.namespace) {contrib}
+ * [tools.namespace](https://github.com/clojure/tools.namespace)
 
  * [builtitude](https://github.com/Raynes/bultitude) ([at clojars](https://clojars.org/bultitude))
 
@@ -66,7 +66,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [cheshire](https://github.com/dakrone/cheshire/) ([at clojars](https://clojars.org/cheshire)): very efficient Clojure JSON and SMILE (binary JSON) encoding/decoding.
 
-  * [data.json](https://github.com/clojure/data.json) {contrib}: JSON parser/generator to/from Clojure data structures.
+  * [data.json](https://github.com/clojure/data.json): JSON parser/generator to/from Clojure data structures.
 
 ### Protocol Buffers
 
@@ -82,7 +82,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ### XML
 
-  * [data.xml](https://github.com/clojure/data.xml) {contrib}: a library for reading and writing XML
+  * [data.xml](https://github.com/clojure/data.xml): a library for reading and writing XML
 
 ### Binary Formats
 
@@ -95,7 +95,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Pantomime](http://github.com/michaelklishin/pantomime) ([at clojars](https://clojars.org/pantomime)): a tiny Clojure library that deals with Internet media types (MIME types) and content type detection
 
-  * [data.csv](https://github.com/clojure/data.csv) {contrib}: a CSV parser
+  * [data.csv](https://github.com/clojure/data.csv): a CSV parser
 
 
 ## Templating
@@ -359,9 +359,9 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
 ## Mathematics
 
-  * [math.numeric-tower](https://github.com/clojure/math.numeric-tower) {contrib}: various utility math functions
+  * [math.numeric-tower](https://github.com/clojure/math.numeric-tower): various utility math functions
 
-  * [math.combinatorics](https://github.com/clojure/math.combinatorics) {contrib}: common combinatorial functions
+  * [math.combinatorics](https://github.com/clojure/math.combinatorics) common combinatorial functions
 
 
 
@@ -385,7 +385,7 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
 ### Caching
 
-  * [core.cache](https://github.com/clojure/core.cache) {contrib}: the Clojure API for various cache implementations
+  * [core.cache](https://github.com/clojure/core.cache): the Clojure API for various cache implementations
 
 ### UUIDs
 
@@ -393,13 +393,13 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
 ### Monads
 
-  * [algo.monads](https://github.com/clojure/algo.monads) {contrib}: macros for defining monads, and definition of the most common monads
+  * [algo.monads](https://github.com/clojure/algo.monads): macros for defining monads, and definition of the most common monads
 
   * [protocol-monads](https://github.com/jduey/protocol-monads): A protocol based monad implementation for clojure
 
 ### Memoization
 
-  * [core.memoize](https://github.com/clojure/core.memoize) {contrib}
+  * [core.memoize](https://github.com/clojure/core.memoize)
 
 ### Other
 
@@ -451,12 +451,12 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
  * [Leiningen](http://leiningen.org): the Clojure build tool
 
- * [tools.nrepl](https://github.com/clojure/tools.nrepl) {contrib}: nREPL interface
+ * [tools.nrepl](https://github.com/clojure/tools.nrepl): nREPL interface
 
- * [java.jmx](https://github.com/clojure/java.jmx) {contrib}: nice JMX interface
+ * [java.jmx](https://github.com/clojure/java.jmx): nice JMX interface
 
- * [test.benchmark](https://github.com/clojure/test.benchmark) {contrib}: a benchmarking library
+ * [test.benchmark](https://github.com/clojure/test.benchmark): a benchmarking library
 
- * [tools.trace](https://github.com/clojure/tools.trace) {contrib}: a tracing library
+ * [tools.trace](https://github.com/clojure/tools.trace): a tracing library
 
  * [criterium](https://github.com/hugoduncan/criterium) ([at clojars](https://clojars.org/criterium)): a benchmarking library that tries to address common benchmarking pitfalls
