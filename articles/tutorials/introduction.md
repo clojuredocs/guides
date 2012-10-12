@@ -733,7 +733,7 @@ Clojure than in imperative languages like Python and Java. The
 functions that Clojure provides often makes looping unnecessary.
 For example, where in Python you might do something like this:
 
-{% highlight python %}
+``` python
 specific_stuff = []
 for i in my_items:
     if is_what_i_want(i):

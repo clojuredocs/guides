@@ -46,7 +46,7 @@ user=> (dotimes [i 3]
 
 Create your first Clojure program like so:
 
-{% highlight bash %}
+``` bash
 lein new app my-proj
 cd my-proj
 # Have a look at the "-main" function in src/my_proj/core.clj.
