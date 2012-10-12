@@ -58,7 +58,7 @@ implementations for different data types.
 Protocols are defined using the `clojure.core/defprotocol` special form. The example below defines a protocol for working with URLs and URIs.
 While URLs and URIs are not the same thing, some operations make sense for both:
 
-{% highlight clojure %}
+``` clojure
 (defprotocol URLLike
   "Unifies operations on URLs and URIs"
   (^String protocol-of  [input] "Returns protocol of given input")
@@ -68,20 +68,20 @@ While URLs and URIs are not the same thing, some operations make sense for both:
   (^String path-of      [input] "Returns path of given input")
   (^String query-of     [input] "Returns query string of given input")
   (^String fragment-of  [input] "Returns fragment of given input"))
-{% endhighlight %}
+```
 
 `clojure.core/defprotocol` takes the name of the protocol and one or more lists of 
 **function name**, **argument list**, **documentation string**:
 
-{% highlight clojure %}
+``` clojure
 (^String protocol-of  [input] "Returns protocol of given input")
 (^String host-of      [input] "Returns host of given input")
-{% endhighlight %}
+```
 
 The example above uses return type hints. This makes sense in the example but is not necessary. It could have been written
 it as
 
-{% highlight clojure %}
+``` clojure
 (defprotocol URLLike
   "Unifies operations on URLs and URIs"
   (protocol-of  [input] "Returns protocol of given input")
@@ -91,7 +91,7 @@ it as
   (path-of      [input] "Returns path of given input")
   (query-of     [input] "Returns query string of given input")
   (fragment-of  [input] "Returns fragment of given input"))
-{% endhighlight %}
+```
 
 There are 3 ways URIs and URLs are commonly represented on the JVM:
 
@@ -102,7 +102,7 @@ There are 3 ways URIs and URLs are commonly represented on the JVM:
 When a new protocol imlementation is added for a type, it is called **extending the protocol**. The most common way to extend
 a protocol is via the `clojure.core/extend-protocol`:
 
-{% highlight clojure %}
+``` clojure
 (import java.net.URI)
 (import java.net.URL)
 
@@ -139,24 +139,24 @@ a protocol is via the `clojure.core/extend-protocol`:
     (.getQuery input))
   (fragment-of [^URL input]
     (.getRef input)))
-{% endhighlight %}
+```
 
 Protocol functions are used just like regular Clojure functions:
 
-{% highlight clojure %}
+``` clojure
 (protocol-of (URI. "http://clojure-doc.org")) ;= "http"
 (protocol-of (URL. "http://clojure-doc.org")) ;= "http"
 
 (path-of (URL. "http://clojure-doc.org/articles/content.html")) ;= "/articles/content.html"
 (path-of (URI. "http://clojure-doc.org/articles/content.html")) ;= "/articles/content.html"
-{% endhighlight %}
+```
 
 ### Using Protocols From Different Namespaces
 
 Protocol functions are required and used the same way as regular protocol functions. Consider a
 namespace that looks like this
 
-{% highlight clojure %}
+``` clojure
 (ns superlib.url-like
   (:import [java.net URL URI]))
 
@@ -203,16 +203,16 @@ namespace that looks like this
     (.getQuery input))
   (fragment-of [^URL input]
     (.getRef input)))
-{% endhighlight %}
+```
 
 To use `superlib.url-like/path-of` and other functions, you require them as regular functions:
 
-{% highlight clojure %}
+``` clojure
 (ns myapp
   (:require [superlib.url-like] :refer [host-of scheme-of]))
 
 (host-of (java.net.URI. "https://twitter.com/cnn/"))
-{% endhighlight %}
+```
 
 
 ### Extending Protocols For Core Clojure Data Types
@@ -246,10 +246,10 @@ In total, we need 4 functions:
 
 we will start with the latter and define a *multimethod* (not related to methods on Java objects or object-oriented programming):
 
-{% highlight clojure %}
+``` clojure
 (defmulti area (fn [shape & _]
                  shape))
-{% endhighlight %}
+```
 
 Our multimethod has a name and a *dispatch function* that takes arguments passed to the multimethod and returns
 a value. The returned value will define what implementation of multimethod is used. In Java or Ruby, method implementation
@@ -258,59 +258,59 @@ called *ad-hoc polymorphism*.
 
 An alternative way of doing the same thing is to pass `clojure.core/first` instead of an anonymous function:
 
-{% highlight clojure %}
+``` clojure
 (defmulti area first)
-{% endhighlight %}
+```
 
 Next lets implement our area multimethod for squares:
 
-{% highlight clojure %}
+``` clojure
 (defmulti area (fn [shape & _]
                  shape))
 
 (defmethod area :square
   [_ side]
   (* side side))
-{% endhighlight %}
+```
 
 Here `defmethod` defines a particular implementation of the multimethod `area`, the one that will be used if dispatch function
 returns `:square`. Lets try it out. Multimethods are invoked like regular Clojure functions:
 
-{% highlight clojure %}
+``` clojure
 (area :square 4)     ;= 16
-{% endhighlight %}
+```
 
 In this case, we pass dispatch value as the first argument, our dispatch function returns it unmodified and
 that's how the exact implementation is looked up.
 
 Implementation for circles looks very similar, we choose `:circle` as a reasonable dispatch value:
 
-{% highlight clojure %}
+``` clojure
 (defmethod area :circle
   [_ radius]
   (* radius Math/PI Math/PI))
 
 (area :circle 3)     ;= 29.608813203268074
-{% endhighlight %}
+```
 
 For the record, `Math/PI` in this example refers to `java.lang.Math/PI`, a field that stores the value of Pi.
 
 Finally, an implementation for triangles. Here you can see that exact implementations can take different number of
 arguments. To calculate the area of a triangle, we multiple base by height and divide it by 2:
 
-{% highlight clojure %}
+``` clojure
 (defmethod area :triangle
   [_ b h]
   (* 1/2 b h))
 
 (area :triangle 3 5) ;= 15/2
-{% endhighlight %}
+```
 
 In this example we used **Clojure ratio** data type. We could have used doubles as well.
 
 Putting it all together:
 
-{% highlight clojure %}
+``` clojure
 (defmulti area (fn [shape & _]
                  shape))
 
@@ -329,7 +329,7 @@ Putting it all together:
 (area :square 4)     ;= 16
 (area :circle 3)     ;= 29.608813203268074
 (area :triangle 3 5) ;= 15/2
-{% endhighlight %}
+```
 
 
 ### Second Example: TBD
