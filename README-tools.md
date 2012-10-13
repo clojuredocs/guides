@@ -1,12 +1,15 @@
 # Tools Used to Create CDS
 
 CDS reuses the [ClojureWerkz docslate](http://github.com/clojurewerkz/docslate) toolchain.
+The clojure-doc.org site is generated using jekyll. To run the site generator yourself, you'll need to first have Ruby installed.
+
+If installing Ruby from source, a prerequisite is the libyaml dev package.
 
 
 
 ## Install Tools & Dependencies
 
-First, install [Bundler](http://gembundler.com). Ruby 1.9.3 or JRuby are recommended:
+Install [Bundler](http://gembundler.com). Ruby 1.9.3 or JRuby are recommended:
 
     gem install bundler
 
