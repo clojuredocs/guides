@@ -1,5 +1,5 @@
 ---
-title: "Clojure namespaces"
+title: "Clojure namespaces and vars"
 layout: article
 ---
 
@@ -7,10 +7,12 @@ layout: article
 
 This guide covers:
 
- * Clojure namespaces
+ * An overview of Clojure namespaces and vars
+ * How to define namespaces
  * How to use functions in other namespaces
- * `require` vs `refer` vs `use`
- * How code compilation works in Clojure
+ * `require`, `refer` and `use`
+ * Common compilation errors and typical problems that cause them
+ * Namespaces and their relation to code compilation in Clojure
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
 (including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
@@ -161,7 +163,7 @@ It is possible to refer to all functions in a namespace (usually not necessary):
 
 Under the hood, Clojure keeps **current namespace** a special var, [*ns*](http://clojuredocs.org/clojure_core/clojure.core/*ns*).
 When vars are defined using the [def](http://clojuredocs.org/clojure_core/clojure.core/def) special form, they are
-added to the current namespace. 
+added to the current namespace.
 
 
 
@@ -249,6 +251,33 @@ need it, it is a good idea to let `(:use ...)` go.
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
+### Documentation and Metadata
+
+Namespaces can have documentation strings. You can add one with the optional
+`ns` macro parameter:
+
+``` clojure
+(ns superlib.core
+  "Core functionality of Superlib.
+
+   Other parts of Superlib depend on functions and macros in this namespace."
+  (:require [clojure.set :refer [union difference]]))
+```
+
+or metadata:
+
+``` clojure
+(ns ^{:doc "Core functionality of Superlib.
+            Other parts of Superlib depend on functions and macros in this namespace."
+      :author "Joe Smith"}
+   superlib.core
+  (:require [clojure.set :refer [union difference]]))
+```
+
+metadata can contain any additional keys such as `:author` for various tools
+(e.g. [Codox](https://clojars.org/codox), [Cadastre](https://clojars.org/cadastre) or [lein-clojuredocs](https://clojars.org/lein-clojuredocs)) to use.
+
+
 ## How to Use Functions From Other Namespaces in the REPL
 
 The `ns` macro is how you usually require functions from other namespaces.
@@ -301,6 +330,22 @@ or conditionally load other libraries (e.g. the most suitable JSON parser or key
 In all cases, to trigger compilation, you need to require the namespace.
 
 
+
+## How to Look up and Invoke a Function by Name
+
+It is possible to look up a function in particular namespace by name with `clojure.core/resolve` that takes
+quoted names of the namespace and function. The returned value can be used just like any other
+function, for example, passed as an argument to a higher order function:
+
+``` clojure
+(resolve 'clojure.set 'difference) ;= #'clojure.set/difference
+
+(let [f (resolve 'clojure.set 'difference)]
+   (f #{1 2 3} #{3 4 5 6})) ;= #{1 2}
+```
+
+
+
 ## Compiler Exceptions
 
 This section describes some common compilation errors.
@@ -337,6 +382,19 @@ means that compilation was triggered from the REPL and not a Clojure source file
 
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+
+## Temporarily Overriding Vars in Namespaces
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+
+## Getting Information About and Programmatically Manipulating Namespaces
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
 
 
 ## Wrapping Up
