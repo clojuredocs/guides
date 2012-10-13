@@ -301,6 +301,44 @@ or conditionally load other libraries (e.g. the most suitable JSON parser or key
 In all cases, to trigger compilation, you need to require the namespace.
 
 
+## Compiler Exceptions
+
+This section describes some common compilation errors.
+
+
+### ClassNotFoundException
+
+This exception means that JVM could not load a class. It is either misspelled or not on the classpath.
+Potentially your project has unsatisfied dependency (some dependencies may be optional).
+
+Example:
+
+``` clojure
+user=> (import java.uyil.concurrent.TimeUnit)
+ClassNotFoundException java.uyil.concurrent.TimeUnit  java.net.URLClassLoader$1.run (URLClassLoader.java:366)
+```
+
+In the example above, `java.uyil.concurrent.TimeUnit` should have been `java.util.concurrent.TimeUnit`.
+
+
+### CompilerException java.lang.RuntimeException: No such var
+
+This means that somewhere in the code a non-existent var is used. It may be a typo, an
+incorrect macro-generated var name or a similar issue. Example:
+
+``` clojure
+user=> (clojure.java.io/resouce "thought_leaders_quotes.csv")
+CompilerException java.lang.RuntimeException: No such var: clojure.java.io/resouce, compiling:(NO_SOURCE_PATH:1)
+```
+
+In the example above, `clojure.java.io/resouce` should have been `clojure.java.io/resource`. `NO_SOURCE_PATH`
+means that compilation was triggered from the REPL and not a Clojure source file.
+
+
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
 ## Wrapping Up
 
 Namespaces are basically maps (dictionaries) that map names to
