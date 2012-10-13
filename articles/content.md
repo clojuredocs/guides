@@ -31,6 +31,11 @@ A swift introduction to the Clojure language, covering most of the
 basics.
 
 
+### [Emacs for Clojure Development](/articles/tutorials/emacs.html) (Partially Complete)
+
+A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
+
+
 ### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) (Partially Complete)
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
