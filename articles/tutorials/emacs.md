@@ -10,7 +10,9 @@ workflow to use while developing a simple library.
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4.
+This guide covers Clojure 1.4 and Emacs 24. Most packages should work
+on earlier versions of Emacs, but they will be more work to install
+since the package manager is new in 24.
 
 ## Installing Emacs ##
 
@@ -43,19 +45,17 @@ You will find that Homebrew has created a Emacs.app for you which you
 can copy to your /Applications folder for easy launching. I tried
 symlinking, but it didnt work for me.
 
-### Ubuntu ###
+### Debian/Ubuntu ###
 
-Things are rather straightforward on Ubuntu:
+Newer Debian-based systems (post-wheezy) ship Emacs 24 in apt:
 
 ```bash
 $ sudo aptitude install emacs24
 ```
 
-or
-
-```bash
-$ sudo apt-get install emacs24
-```
+On older systems you can add unofficial package sources for
+`emacs-snapshot`, either for [Debian](http://emacs.naquadah.org/) or
+[Ubuntu](https://launchpad.net/~cassou/+archive/emacs).
 
 ## Configuring Emacs ##
 
