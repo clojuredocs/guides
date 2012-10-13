@@ -32,6 +32,7 @@ This guide covers Clojure 1.4.
 The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
 
 A basic example:
+
 ``` clojure
 (let [x 1 y 2] (println x y)) ;; 1 2
 ```
@@ -39,6 +40,7 @@ A basic example:
 Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
 
 This example basically demonstrates the lexical scoping of the let form.
+
 ``` clojure
 (let [x 1]
   (println x) ;; prints 1
@@ -494,47 +496,168 @@ nil
 
 ### contains?
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`contains` returns  true if the provided value is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
+
+```clojure
+(contains? {:a 1 :b 2 :c 3} :c)
+;; true
+
+(contains? ["John" "Mary" "Paul"] 2) ;; true if index 2 exists
+;; true
+
+(contains? ["John" "Mary" "Paul"] 5) ;; false if index 5 does not exist
+;; false
+
+(contains? ["John" "Mary" "Paul"] "Paul") ;; "Paul" does not exist as an index
+;; false
+
+(contains? '(1 2 3) 0) ;; lists always return false. Contain won't traverse a collection for a result.
+;; false
+```
 
 ### some
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`some` will apply a predicate to each value in a collection until a non-false/nil result is returned then immediately return that result.
+
+Since collections are "true" values, this makes it possible to return the first result itself rather than simply `true`.
+
+```clojure
+(some even? [1 2 3 4 5])
+;; true
+
+(some #(if (even? %) %) [1 2 3 4 5]) ;; predicate returns the value rather than simply true
+;; 2
+```
+
+Since maps can be used as functions, you can use a map as a predicate. This will return the value of the first key in the collection that is also in the map.
+
+```clojure
+(some {:a 1 :b 5} [:h :k :d :b])
+;; 5
+```
+
+Sets can also be used as functions and will return the first item in the collection that is present in the set.
+
+```clojure
+(some #{4} (range 20))
+;; 4
+```
+
+### every?
+
+`every` returns true if the predicate returns true for every item in the collection, otherwise it returns false.
+
+```clojure
+(every? even? (range 0 10 2))
+;; true
+
+;; set can be used to see if collection only contains items in the set.
+(every? #{2 3 4} [2 3 4 2 3 4])
+;; true
+```
 
 ### keys
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`key`s returns a sequence of the keys in a map or record.
+
+```clojure
+(keys {1 "one" 2 "two" 3 "three"})
+;; (1 2 3)
+
+(defrecord Hand [index middle ring pinky thumb])
+(keys (Hand. 2 4 3 1 2))
+;; (:index :middle :ring :pinky :thumb)
+```
 
 ### vals
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`vals` returns a sequence of vals in a map or record.
+
+```clojure
+(vals {:meows 20 :barks 2 :moos 5})
+;; (5 2 20)
+
+(defrecord Hand [index middle ring pinky thumb])
+(vals (Hand. 1 2 3 4 5))
+;; (1 2 3 4 5)
+```
 
 ### map
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### iterate
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### reduce
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### reductions
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ### filter
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`filters` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`
+
+```clojure
+(filter even? (range 10))
+;; (0 2 4 6 8)
+
+(filter #(if (< (count %) 5) %) ["Paul" "Celery" "Computer" "Rudd" "Tayne"])
+;; ("Paul" "Rudd")
+```
+
+When using sets with `filter`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`.
+
+In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned. This will cause that item to /not/ be included in the returned lazy-sequence.
+
+```clojure
+(filter #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
+;; (:nothing :something)
+```
 
 ### remove
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`remove` returns a lazy sequence of items that return `false` or `nil` for the provided predicate. Contrast to `filter`.
 
-### every?
+```clojure
+(remove even? (range 10))
+;; (1 3 5 7 9)
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+(remove {:a 1 :b 2} [:h :k :z :b :s]) ;; relative complement. probably useless?
+;; (:h :k :z :s)
+```
+
+When using sets with `remove`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`. This will cause that item to be included in the returned lazy-sequence.
+
+In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned.
+
+```clojure
+(remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
+;; (:things :someone nil false :pigeons)
+```
 
 ### get-in
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ### update-in
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ### assoc-in
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ### select-keys
 
@@ -556,12 +679,25 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
-## Macros
-
-### -> and ->> (the Threading Macros)
+### partition
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
+### partition-all
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+## Macros
+
+### ->
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### ->>
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ## Reference Types
 
