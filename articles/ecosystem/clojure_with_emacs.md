@@ -3,9 +3,14 @@ title: "Clojure with Emacs"
 layout: article
 ---
 
-In my opinion the best environment for developing Clojure on any \*nix
-platform is Emacs. This guide will explain how to get it installed,
-and a basic workflow to use while developing.
+Emacs has traditionally been one of the best development environments
+for functional languages and Lisps in particular. This guide will
+explain how to get it installed, and give an example of a basic
+workflow to use while developing a simple library.
+
+## What Version of Clojure Does This Guide Cover?
+
+This guide covers Clojure 1.4.
 
 ## Installing Emacs ##
 
