@@ -25,8 +25,10 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 ## Code repositories
 
-Most folks host their projects at github, and most pure Clojure library distributions (with the exception of contrib)
-are available at [Clojars](https://clojars.org/) (via [Leiningen](http://leiningen.org/)).
+Most folks host their projects at
+[GitHub](https://github.com/languages/Clojure), and most pure Clojure
+library distributions (with the exception of contrib) are available at
+[Clojars](https://clojars.org/).
 
 
 ## Documentation
