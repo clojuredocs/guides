@@ -1,7 +1,7 @@
 # Tools Used to Create CDS
 
 CDS reuses the [ClojureWerkz docslate](http://github.com/clojurewerkz/docslate) toolchain.
-The clojure-doc.org site is generated using jekyll. To run the site generator yourself, you'll need to first have Ruby installed.
+The clojure-doc.org site is generated using jekyll. To run the site generator yourself, you'll need to first have Ruby installed. Python is also required, as syntax-highlighting of code blocks is handled by pygments.
 
 If installing Ruby from source, a prerequisite is the libyaml dev package.
 
@@ -24,7 +24,7 @@ by running the following in the CDS repository root:
 > run the gem-installed `jekyll` to view your local version of
 > the site.
 
-Then install Pygments (this assumes you have Python and pip installed):
+Then install Pygments via your OS-specific package installer, or else using `pip` (assuming you've installed pip):
 
     pip install pygments
 
