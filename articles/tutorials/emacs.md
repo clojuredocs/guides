@@ -561,7 +561,7 @@ beginning (thanks to Mikael Sundberg for this suggestion):
 
 ## Contributors
 
-Gareth Jones <gareth.e.jones@gmail.com>, 2012 (original author)
+[Gareth Jones](http://blog.gaz-jones.com), 2012 (original author)
 
 Thanks to [Phil Hagelberg](http://technomancy.us/), [Mikael
 Sundberg](http://cleancode.se/), and [Jake
