@@ -474,50 +474,6 @@ When you are finished with the repl (or if for some reason it has
 gotten into a bad state), you can simply kill the `*slime-repl nil*`
 buffer (and re-run `cojure-jack-in` to start another).
 
-## Creating a library jar ##
-
-Now you have a `parse-args` function, how could you go about actually
-using it in an application? Leiningen comes with a very handy `jar`
-command.
-
-```bash
-$ lein jar
-```
-
-This will create a jar file from your project using the version
-information inside of your `project.clj` file that you can then re-use
-in other projects. If you are creating a library that you want to be
-publicly available, you should create a [clojars](http://clojars.org/)
-account and publish it there. Again, Leiningen provides a command to
-make this trivial however you need to specifically reference it in
-your `plugins` (in either `project.clj` or `~/.lein/profiles.clj`:
-
-```clojure
-:plugins [[lein-clojars "0.9.1"]]
-```
-
-This gives you a `push` command. See the documentation
-[here](https://github.com/ato/lein-clojars) for more details. Having
-pushed to clojars, it is simply a matter of adding the dependency to
-your new project, for example:
-
-```clojure
-:dependencies [[command-line-args "1.0.0"]]
-```
-
-If this is a private project, you will need to publish the jar to your
-local maven repository (local as in the maven repo your devs
-use). This can be easily achieved by `lein install` on your build
-server on a RC build, for example.
-
-## Summary ##
-
-There are a whole lot more things you can do with Leiningen, and [the
-official
-tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
-goes through things in more detail. Hopefully I have given a taste of
-why it is such a great tool.
-
 ## Appendix ##
 
 Here are all the commands I have used that are not documented at the
