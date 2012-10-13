@@ -45,6 +45,24 @@ You will find that Homebrew has created a Emacs.app for you which you
 can copy to your /Applications folder for easy launching. I tried
 symlinking, but it didnt work for me.
 
+If you have customizations to your environment (say in `.profile` or
+your shell-specific config) you can add this function to fix the path
+issues when launching Emacs from the GUI on OS X
+([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
+
+```lisp
+;; fix the PATH variable
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
+```
+
+This makes sure that all of the stuff you have on your PATH actually
+gets respected in the GUI Emacs, no matter how you start it.
+
 ### Debian/Ubuntu ###
 
 Newer Debian-based systems (post-wheezy) ship Emacs 24 in apt:
@@ -78,7 +96,7 @@ which you can look at for inspiration for Clojure specific things. You
 will certainly want to add clojure-mode, and clojure-test-mode to your
 list of packages to install:
 
-```scheme
+```lisp
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -88,24 +106,6 @@ list of packages to install:
                       clojure-test-mode)
 ```
                       
-Something you really should add to your init.el file is a function to
-fix the path issues when running the GUI Emacs ([Thanks to Steve
-Purcell on the Clojure mailing list for
-this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
-
-```scheme
-;; fix the PATH variable
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(if window-system (set-exec-path-from-shell-PATH))
-```
-
-This makes sure that all of the stuff you have on your PATH actually
-gets respected in the GUI Emacs, no matter how you start it.
-
 Start emacs:
 
 ```bash
@@ -118,7 +118,7 @@ packages. Unless you have any actual *errors* this is all fine.
 To look at the other packages available for installation you can do
 (from inside Emacs):
 
-```scheme
+```lisp
 M-x package-list-packages
 ```
 
