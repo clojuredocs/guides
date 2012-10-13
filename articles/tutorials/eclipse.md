@@ -118,7 +118,7 @@ now we'll simply paste it under dependencies in our `project.clj`:
 ```
 
 In the package explorer view on the left expand "Leiningen dependencies"
-and see thath the clj-http jar included there. You will now have to kill our current REPL
+and see that the clj-http jar included there. You will now have to kill our current REPL
 if it is running. To do that navigate to the terminal view next to it and press the stop button.
 When we start a new instance of the REPL, the library will be available for use.
 
