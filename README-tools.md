@@ -18,6 +18,12 @@ by running the following in the CDS repository root:
 
     bundle install --binstubs
 
+> As an alternative to bundler, if you like you can manually
+> (via `gem install`) install all the dependencies listed in
+> path/to/cds/Gemfile, and then later (from the cds directory)
+> run the gem-installed `jekyll` to view your local version of
+> the site.
+
 Then install Pygments (this assumes you have Python and pip installed):
 
     pip install pygments
