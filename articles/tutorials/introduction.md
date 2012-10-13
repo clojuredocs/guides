@@ -273,8 +273,8 @@ the various abstract data types.
 Some of the Clojure abstractions are:
 
   * Collection: lists, vectors, maps, and sets are all collections.
-  * Sequential: all the collections, and strings too.
-  * Associative: hashmaps are associative.
+  * Sequential: lists and vectors are collections with ordering.
+  * Associative: hashmaps associate keys with values. vectors associate numeric indices with values.
   * Indexed: you can index into vectors.
 
 In the docs for the various functions, you'll often see, for example,
