@@ -242,7 +242,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
+### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
 
 This guide covers:
 
