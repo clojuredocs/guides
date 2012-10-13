@@ -152,8 +152,20 @@ or (typically) to sugared version, `ClassName/methodName`:
 It is possible to chain method calls using the `..` special form:
 
 ``` clojure
-(.. (Date.) getTime toString) ;= "1349821993809"
+(.. (java.util.Date.) getTime toString) ;= "1349821993809"
 ```
+
+
+### Multiple Calls
+
+If you need to call a bunch of side-effecting methods on one object, you
+can use the `doto` macro:
+
+``` clojure
+(doto (java.util.Stack.) (.push 42) (.push 13) (.push 7)) ;= #<Stack [42, 13, 7]>
+```
+
+Notice that this macro returns it's first argument as a result.
 
 
 ## How to Access Java Fields
@@ -190,6 +202,8 @@ To set a public mutable field, use `clojure.core/set!` that takes a field in the
 demonstrated earlier and a new value:
 
 ``` clojure
+(import java.awt.Point)
+
 (let [pt (Point. 0 10)]
   (set! (.y pt) 100)
   (.y pt)) ;= 100
