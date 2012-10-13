@@ -156,16 +156,19 @@ It is possible to chain method calls using the `..` special form:
 ```
 
 
-### Multiple Calls
+### Multiple Calls On the Same Object
 
-If you need to call a bunch of side-effecting methods on one object, you
+If you need to call a bunch of methods on a mutable object, you
 can use the `doto` macro:
 
 ``` clojure
-(doto (java.util.Stack.) (.push 42) (.push 13) (.push 7)) ;= #<Stack [42, 13, 7]>
+(doto (java.util.Stack.)
+  (.push 42)
+  (.push 13)
+  (.push 7)) ;= #<Stack [42, 13, 7]>
 ```
 
-Notice that this macro returns it's first argument as a result.
+The `doto` macro returns its first argument as a result.
 
 
 ## How to Access Java Fields
