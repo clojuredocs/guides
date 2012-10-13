@@ -3,6 +3,19 @@ title: "Getting Started with Clojure"
 layout: article
 ---
 
+## About this tutorial
+
+This guide covers:
+
+ * The REPL
+ * Leiningen, Creating a Sample Project
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
+(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+
+
+## Overview
+
 Clojure is a wonderfully simple language and you are going to love
 it.
 
@@ -27,7 +40,7 @@ repl:
 
 You should be greeted with a "`user=>`" prompt. Try it out:
 
-{% highlight clojure %}
+``` clojure
 user=> (+ 1 1)
 ; 2
 user=> (distinct [:a :b :a :c :a :d])
@@ -39,19 +52,19 @@ user=> (dotimes [i 3]
 ; Fabulous! 1
 ; Inconceivable! 2
 ; nil
-{% endhighlight %}
+```
 
 
 ## Your first project
 
 Create your first Clojure program like so:
 
-{% highlight bash %}
+``` bash
 lein new app my-proj
 cd my-proj
 # Have a look at the "-main" function in src/my_proj/core.clj.
 lein run
-{% endhighlight %}
+```
 
 and see the output from that `println` function call in
 my_proj/core.clj!
