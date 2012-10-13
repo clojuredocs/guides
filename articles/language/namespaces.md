@@ -146,6 +146,16 @@ to *refer* to certain functions:
 
 The `:refer` feature of the `:require` form is new in Clojure 1.4.
 
+It is possible to refer to all functions in a namespace (usually not necessary):
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require [clojure.set :refer :all]))
+
+;; now it is possible to do
+;; (difference #{1 2 3} #{3 4 5})
+```
+
 
 ### The Current Namespace
 
@@ -203,7 +213,35 @@ qualified name: `clojure.core/find`:
 
 ### The :use Helper Form
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+In Clojure versions before 1.4, there was no `:refer` support for the
+`(:require ...)` form. Instead, a separate form was used: `(:use ...)`:
+
+``` clojure
+(ns megacorp.profitd.scheduling-test
+  (:use clojure.test))
+```
+
+In the example above, **all** functions in `clojure.test` are made available
+in the current namespace. This practice (known as *naked use*) works for `clojure.test` in
+test namespaces, but in general not a good idea. `(:use ...)` supports limiting
+functions that will be referred:
+
+``` clojure
+(ns megacorp.profitd.scheduling-test
+  (:use clojure.test :only [deftest testing is]))
+```
+
+which is a pre-1.4 alternative of
+
+``` clojure
+(ns megacorp.profitd.scheduling-test
+  (:require clojure.test :refer [deftest testing is]))
+```
+
+It is highly recommended to use `(:require ... :refer [...])` on Clojure 1.4
+and later releases. `(:use ...)` is a thing of the past and now that
+`(:require ...)` with `:refer` is capable of doing the same thing when you
+need it, it is a good idea to let `(:use ...)` go.
 
 
 ### The :gen-class Helper Form
@@ -211,14 +249,42 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
-## How to Use Functions From Other Namespaces
+## How to Use Functions From Other Namespaces in the REPL
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+The `ns` macro is how you usually require functions from other namespaces.
+However, it is not very convenient in the REPL. For that case, `clojure.core/require`
+can be used directly:
 
+``` clojure
+;; will be available as clojure.set, e.g. clojure.set/difference
+(require 'clojure.set)
 
-## `require` vs `refer`, `use`
+;; will be available as io, e.g. io/resource
+(require '[clojure.java.io :as io])
+```
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+It takes a quoted *libspec*. *libspec* is either a namespace name or
+a collection (typically a vector) of `[name :as alias]` or `[name :refer [fns]]`:
+
+``` clojure
+(require '[clojure.set :refer [difference]])
+
+(difference #{1 2 3} #{3 4 5 6}) ;= #{1 2}
+```
+
+The `:as` and `:refer` options can be used together:
+
+``` clojure
+(require '[clojure.set :as cs :refer [difference]])
+
+(difference #{1 2 3} #{3 4 5 6}) ;= #{1 2}
+(cs/union #{1 2 3} #{3 4 5 6})   ;= #{1 2 3 4 5 6}
+```
+
+`clojure.core/use` does the same thing as `clojure.core/require` with the
+`:refer` option discussed. It is not generally recommended with Clojure
+versions starting with 1.4. Just use `clojure.core/require` with `:refer`
+instead.
 
 
 ## Namespaces and Class Generation
@@ -226,7 +292,49 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
-## How Code Compilation Works in Clojure
+## Namespaces and Code Compilation in Clojure
+
+Clojure is a compiled language: code is compiled when it is loaded (usually with `clojure.core/require`).
+
+A namespace can contain vars or be used purely to extend protocols, add multimethod implementations
+or conditionally load other libraries (e.g. the most suitable JSON parser or key/value store implementation).
+In all cases, to trigger compilation, you need to require the namespace.
+
+
+## Compiler Exceptions
+
+This section describes some common compilation errors.
+
+
+### ClassNotFoundException
+
+This exception means that JVM could not load a class. It is either misspelled or not on the classpath.
+Potentially your project has unsatisfied dependency (some dependencies may be optional).
+
+Example:
+
+``` clojure
+user=> (import java.uyil.concurrent.TimeUnit)
+ClassNotFoundException java.uyil.concurrent.TimeUnit  java.net.URLClassLoader$1.run (URLClassLoader.java:366)
+```
+
+In the example above, `java.uyil.concurrent.TimeUnit` should have been `java.util.concurrent.TimeUnit`.
+
+
+### CompilerException java.lang.RuntimeException: No such var
+
+This means that somewhere in the code a non-existent var is used. It may be a typo, an
+incorrect macro-generated var name or a similar issue. Example:
+
+``` clojure
+user=> (clojure.java.io/resouce "thought_leaders_quotes.csv")
+CompilerException java.lang.RuntimeException: No such var: clojure.java.io/resouce, compiling:(NO_SOURCE_PATH:1)
+```
+
+In the example above, `clojure.java.io/resouce` should have been `clojure.java.io/resource`. `NO_SOURCE_PATH`
+means that compilation was triggered from the REPL and not a Clojure source file.
+
+
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
