@@ -89,9 +89,12 @@ Namespaces organize Clojure functions.
 
 This guide covers:
 
- * Clojure namespaces
+ * An overview of Clojure namespaces
+ * How to define a namespace
  * How to use functions in other namespaces
- * `require` vs `refer` vs `use`
+ * `require`, `refer` and `use`
+ * How to Look up and invoke a function by name
+ * Common compilation exceptions and their causes
  * How code compilation works in Clojure
 
 
