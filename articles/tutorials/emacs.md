@@ -130,29 +130,6 @@ all the packages you are interested in, press 'x' for 'eXecute' to
 install. A better idea is to simply add the package to the var
 `my-packages` in your init.el and restart emacs.
 
-## Installing Leiningen ##
-
-Leiningen is the answer to your Clojure build / dependency problems,
-even though building a tool on top of Maven and Ant sounds like the
-likely *cause* of all your build / dependency problems. It was also
-written by Phil Hagelberg (and friends).
-
-It lives [here](https://github.com/technomancy/leiningen) and
-can be installed with the following commands:
-
-```bash
-$ curl https://raw.github.com/technomancy/leiningen/preview/bin/lein -o /usr/local/bin/lein
-$ chmod +x /usr/local/bin/lein
-```
-
-When you run your first lein command it will download and install a
-bunch of other stuff it requires so there is no specific installation
-command.
-
-So you now have a basic working setup of Emacs for Clojure
-development. Now lets learn a bit more about how to use Emacs and try
-creating a project.
-
 Start up Emacs (if it's not already running):
 
 ```bash
@@ -237,7 +214,8 @@ into a map of key-value pairs. The functionality is irrelevant and not
 particularly useful, it serves purely to illustrate the development
 flow.
 
-Create a new project:
+If you don't have [Leiningen](http://leiningen.org) yet, get it
+installed and then use it to create a new project:
 
 ```bash
 $ lein new command-line-args
@@ -268,9 +246,8 @@ Alternatively we could have used `nrepl-jack-in`, but there is
 currently no support for `clojure-test-mode` and we will be using
 that to run our tests from Emacs.
 
-At this point we are ready to start coding. One thing to note is the
-folder structure of your project is set up for you in the style of a
-maven project:
+At this point we are ready to start coding. Take a look at the project
+structure:
 
 ```
 + doc
