@@ -75,10 +75,10 @@ Expressions can contain sub-expressions:
 Expressions in (various types of) brackets are often referred to as
 "forms".
 
-As you can see, when Clojure sees something in parentheses, unless
-it's a "*special* form" (something that requires special treatment from the compiler, such as `(if ...)`), Clojure assumes
-it's a regular function call. More about that in the
-[Evaluation](#evaluation) section, below.
+When Clojure sees something in parentheses, Clojure assumes it's a
+regular function call. There are exceptions to this rule with macros
+and special forms; more about that in the [Evaluation](#evaluation)
+section, below.
 
 Clojure is not whitespace-sensitive. Also, commas count as whitespace,
 so you can omit them (for example, you can write a vector as `[1 2 3]`
@@ -303,8 +303,8 @@ user=> [1 2 3]
 
 Clojure evaluates the expressions you give it and tries to come up
 with a resulting value. If the expression starts with an open paren,
-Clojure treats it as either a *special form* (discussed below) or else
-a function call.
+Clojure treats it as either a macro, a *special form* (discussed
+below) or else a function call.
 
 
 
@@ -343,16 +343,34 @@ names.
 
 
 
-### Special Forms
+### Macros and Special Forms
 
 If an expression starts with an open paren, Clojure first checks to
-see if it's a special form. Special forms are any parenthesized forms
-which don't follow the regular evaluation rule and get special treatment
-from the Clojure compiler.
+see if it's a macro or special form. These are forms which don't
+follow the regular evaluation rule and get special treatment from the
+Clojure compiler.
 
-There aren't too many special forms to remember. Some examples of
-special forms are `def`, `let`, `if` and Java interoperability forms such as `(.toString obj)`.
-We'll cover those a little bit later on.
+Macros are like functions which take as arguments regular Clojure code
+(which is, after all, just a list of expressions and (usually nested)
+other lists), and returns the code transformed / expanded in some
+useful way.
+
+You write macros to add new syntax to the Clojure language, and
+usually it's only done when necessary, after you've already gotten as
+far as you can with plain functions.
+
+Macros are created using `defmacro`. Writing them involves
+manipulating lists (Clojure code), just like you've already
+seen. Though quoting and unquoting is used to control evaluation of
+the code you're handling.
+
+Macro calls in your code get expanded at compile-time, right before
+the rest of your code is compiled. Certain Clojure built-ins like
+`let`, `def`, and `if` are written as special forms which are
+hard-coded into the compiler rather than macros, but this is an
+implementation detail; the effect is the same.
+
+This tutorial does not discuss macros further.
 
 
 
@@ -1500,28 +1518,6 @@ type, and its state is represented by a value.
 We won't discuss reference types further in this tutorial. Perhaps
 someone will write a good topical guide...
 
-
-
-## Macros
-
-Macros are like functions which take as arguments regular Clojure code
-(which is, after all, just a list of expressions and (usually nested)
-other lists), and returns the code transformed / expanded in some
-useful way.
-
-You write macros to add new syntax to the Clojure language, and
-usually it's only done when necessary, after you've already gotten as
-far as you can with plain functions.
-
-Macros are created using `defmacro`. Writing them involves
-manipulating lists (Clojure code), just like you've already
-seen. Though quoting and unquoting is used to control evaluation of
-the code you're handling.
-
-Macro calls in your code get expanded at compile-time, right before
-the rest of your code is compiled.
-
-This tutorial does not discuss macros further.
 
 
 ## Not Covered In This Tutorial
