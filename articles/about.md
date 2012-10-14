@@ -23,7 +23,7 @@ News and announcements are posted [on Twitter](http://twitter.com/clojuredocs).
 
 ## Reporting Issues
 
-If you find a bug, poor default, missing feature or find any part of the API inconvenient, please [file an issue](http://github.com/clojuredocs/cds/issues) on Github.
+If you find a mistake, poor grammar, important topic not covered or outdated example, please [file an issue](http://github.com/clojuredocs/cds/issues) on Github.
 
 
 ## Contributing
