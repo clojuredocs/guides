@@ -83,7 +83,7 @@ This guide covers:
  * Other topics related to interop
 
 
-### [Namespaces](/articles/language/namespaces.html) (In Progress)
+### [Namespaces](/articles/language/namespaces.html) (Partially Complete)
 
 Namespaces organize Clojure functions.
 
@@ -108,14 +108,15 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Collections and Sequences](/articles/language/sequences.html) (TBD)
+### [Collections and Sequences](/articles/language/collections_and_sequences.html) (In Progress)
 
 This guide covers:
 
  * Collections in Clojure
  * Sequences in Clojure
- * Key operations on sequences
- * Sequence vs Seq
+ * Core collection types
+ * Key operations on collections and sequences
+ * Other topics related to collections and sequences
 
 
 ### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
