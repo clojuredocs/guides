@@ -46,7 +46,7 @@ can copy to your /Applications folder for easy launching. I tried
 symlinking, but it didnt work for me.
 
 If you have customizations to your environment (say in `.profile` or
-your shell-specific config) you can add this function to fix the path
+your shell-specific config) you can add [this](https://gist.github.com/3887459) function to fix the path
 issues when launching Emacs from the GUI on OS X
 ([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
