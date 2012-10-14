@@ -151,6 +151,12 @@ This guide covers:
  * How to force evaluation
 
 
+### [Glossary](/articles/language/glossary.html) (Incomplete)
+
+This guide includes definitons of various Clojure-related terminology.
+
+
+
 ## The Ecosystem
 
 ### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Semi-complete)
