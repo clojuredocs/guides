@@ -155,7 +155,7 @@ This guide covers:
  * How to force evaluation
 
 
-### [Glossary](/articles/language/glossary.html) (Incomplete)
+### [Glossary](/articles/language/glossary.html) (Partially Complete)
 
 This guide includes definitons of various Clojure-related terminology.
 
@@ -163,7 +163,7 @@ This guide includes definitons of various Clojure-related terminology.
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Semi-complete)
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Complete)
 
 This guide covers:
 
@@ -219,7 +219,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html) (TBD)
+### [Books](/articles/ecosystem/books.html) (Complete)
 
 This guide covers:
 
