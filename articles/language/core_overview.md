@@ -1,5 +1,5 @@
 ---
-title: "Overview of clojure.core"
+title: "Overview of clojure.core, the standard Clojure library"
 layout: article
 ---
 
@@ -27,14 +27,16 @@ This guide covers Clojure 1.4.
 
 ### let
 
-`let` allows binding of locals and defines an explicit scope for those bindings. The bindings are defined as a vector of [symbol value] pairs.
+`let` allows binding of locals (roughly equivalent to variables in many other languages) and defines an explicit scope for those bindings.
+The bindings are defined as a vector of [symbol value] pairs.
 
 The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
 
 A basic example:
 
 ``` clojure
-(let [x 1 y 2] (println x y)) ;; 1 2
+(let [x 1 y 2]
+  (println x y)) ;; 1 2
 ```
 
 Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
@@ -50,9 +52,7 @@ This example basically demonstrates the lexical scoping of the let form.
 
 Let bindings are immutable and can be destructured.
 
-``` clojure
-todo - link to destructuring
-```
+TBD: link to the section about destructuring
 
 ### def
 
@@ -253,7 +253,7 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
 
-## Sequences
+## Collections and Sequences
 
 ### count
 
@@ -496,7 +496,7 @@ nil
 
 ### contains?
 
-`contains` returns  true if the provided value is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
+`contains` returns true if the provided *key* is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
 
 ```clojure
 (contains? {:a 1 :b 2 :c 3} :c)
