@@ -388,7 +388,35 @@ as regular Java objects:
 
 Note that Clojure functions implement `java.lang.Runnable` and
 `java.util.concurrent.Callable` directly so you can pass functions to
-various classes in `java.util.concurrent`, for example.
+methods found in various classes from the `java.util.concurrent` package.
+
+For example, to run a function in a new thread:
+
+``` clojure
+(let [t (Thread. (fn []
+                   (println "I am running in a separate thread")))]
+  (.start t))
+```
+
+Or submit a function for execution to a thread pool (in JDK terms: an execution service):
+
+``` clojure
+(let [pool (Executors/newFixedThreadPool 16)]
+  (.submit pool (cast Callable (fn []
+                                  (println "I am executed in a thread pool")))))
+```
+
+Note that without the cast, Clojure compiler would not be able to determine
+which exact version of the method we intend to invoke, because `java.util.concurrent.ExecutionService/submit`
+has two versions, one for `Runnable` and one for `Callable`. They work very much the same but return
+slightly different results (`Callable` produces a value while `Runnable` always returns nil when
+executed).
+
+The exception we would get without the case is
+
+```
+CompilerException java.lang.IllegalArgumentException: More than one matching method found: submit, compiling:(NO_SOURCE_PATH:2)
+```
 
 
 ## gen-class and How to Implement Java Classes in Clojure
