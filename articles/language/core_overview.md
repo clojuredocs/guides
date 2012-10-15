@@ -602,6 +602,21 @@ TODO: Simple image accompaniment.
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TODO: Simple image accompaniment.
 
+### juxt
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### comp
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
+### fnil
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
+
 ### filter
 
 `filters` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`
