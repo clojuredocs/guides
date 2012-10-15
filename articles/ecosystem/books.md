@@ -33,10 +33,10 @@ By Chas Emerick, Brian Carper, and Christophe Grand.
 
 An excellent introductory book. Friendly to newcomers to the language and functional programming in general.
 
-#### Links
+#### Where You Can Buy It
 
  * [Official Site](http://www.clojurebook.com/)
- * On [O'Reilly](http://shop.oreilly.com/product/0636920013754.do), eBook (Kindle, ePub, PDF) or paperback.
+ * From [O'Reilly](http://shop.oreilly.com/product/0636920013754.do), eBook (Kindle, ePub, PDF) or paperback.
  * [Kindle version on Amazon](http://www.amazon.com/Clojure-Programming-ebook/dp/B007Q4T040/ref=tmm_kin_title_0?ie=UTF8&qid=1350284538&sr=8-1)
  * [Paperback on Amazon](http://www.amazon.com/Clojure-Programming-Chas-Emerick/dp/1449394701/ref=sr_1_1?ie=UTF8&qid=1350284538&sr=8-1&keywords=Clojure)
 
@@ -53,9 +53,9 @@ By Stuart Halloway and Aaron Bedra.
 2nd edition of the oldest book about Clojure. Updated for Clojure 1.3+ and includes new content, for example, introduction
 to `test.generative`, a Clojure testing framework similar to QuickCheck. A good book for beginners.
 
-#### Links
+#### Where You Can Buy It
 
- * On [Pragmatic Programmers](http://pragprog.com/book/shcloj2/programming-clojure), eBook (Kindle, ePub, PDF) or paperback.
+ * From [Pragmatic Programmers](http://pragprog.com/book/shcloj2/programming-clojure), eBook (Kindle, ePub, PDF) or paperback.
  * [Paperback on Amazon](http://www.amazon.com/Programming-Clojure-Stuart-Halloway/dp/1934356867/ref=sr_1_4?ie=UTF8&qid=1350284538&sr=8-4&keywords=Clojure)
 
 
@@ -71,10 +71,10 @@ By Michael Fogus and Chris Houser.
 It's not an overstatement to say that this is a legendary book in the Clojure community. Covers "the what and why of Clojure".
 To really appreciate it, however, you will need to have some real Clojure experience under your belt.
 
-#### Links
+#### Where You Can Buy It
 
  * [Official Site](http://joyofclojure.com/)
- * On [Manning](http://www.manning.com/fogus/), eBook (Kindle, ePub, PDF) or paperback.
+ * From [Manning](http://www.manning.com/fogus/), eBook (Kindle, ePub, PDF) or paperback.
  * [Paperback on Amazon](http://www.amazon.com/The-Joy-Clojure-Thinking-Way/dp/1935182641/ref=sr_1_2?ie=UTF8&qid=1350284538&sr=8-2&keywords=Clojure)
 
 
@@ -89,9 +89,9 @@ By Luke VanderHart, Stuart Sierra.
 
 A good introductory book.
 
-#### Links
+#### Where You Can Buy It
 
- * On [Apress](http://www.apress.com/9781430272311), eBook or paperback.
+ * From [Apress](http://www.apress.com/9781430272311), eBook or paperback.
  * [Kindle version on Amazon](http://www.amazon.com/Practical-Clojure-Experts-Source-ebook/dp/B003VM7G3S/ref=sr_1_12?ie=UTF8&qid=1350284538&sr=8-12&keywords=Clojure)
  * [Paperback on Amazon](http://www.amazon.com/Practical-Clojure-Experts-Voice-Source/dp/1430272317/ref=sr_1_6?ie=UTF8&qid=1350284538&sr=8-6&keywords=Clojure)
 
@@ -111,9 +111,9 @@ Contains many practical examples. The last chapter on metaprogramming and DSLs i
 keep this in mind.
 
 
-#### Links
+#### Where You Can Buy It
 
- * On [Manning](http://www.manning.com/rathore/), eBook (Kindle, ePub, PDF) or paperback.
+ * From [Manning](http://www.manning.com/rathore/), eBook (Kindle, ePub, PDF) or paperback.
  * [Paperback on Amazon](http://www.amazon.com/Clojure-Action-Amit-Rathore/dp/1935182595/ref=sr_1_3?ie=UTF8&qid=1350284538&sr=8-3&keywords=Clojure)
 
 
@@ -131,9 +131,9 @@ and includes several updates.
 
 **This book covers Clojure 1.2**.
 
-#### Links
+#### Where You Can Buy It
 
- * On [Pragmatic Programmers](http://pragprog.com/book/shcloj/programming-clojure)
+ * From [Pragmatic Programmers](http://pragprog.com/book/shcloj/programming-clojure)
  * [Paperback on Amazon](http://www.amazon.com/Programming-Clojure-Pragmatic-Programmers-Halloway/dp/1934356336/ref=sr_1_7?ie=UTF8&qid=1350284538&sr=8-7&keywords=Clojure)
 
 
@@ -149,6 +149,6 @@ By Stuart Sierra and Luke VanderHart.
 
 The first book about ClojureScript, a Clojure implementation that compiles to JavaScript.
 
-#### Links
+#### Where You Can Buy It
 
- * On [O'Reilly](http://shop.oreilly.com/product/0636920025139.do), eBook (Kindle, ePub, PDF) or paperback.
+ * From [O'Reilly](http://shop.oreilly.com/product/0636920025139.do), eBook (Kindle, ePub, PDF) or paperback.
