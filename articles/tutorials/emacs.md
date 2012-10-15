@@ -3,6 +3,8 @@ title: "Clojure with Emacs"
 layout: article
 ---
 
+## Overview
+
 Emacs has traditionally been one of the best development environments
 for functional languages and Lisps in particular. This guide will
 explain how to get it installed, and give an example of a basic
@@ -10,7 +12,9 @@ workflow to use while developing a simple library.
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4.
+This guide covers Clojure 1.4 and Emacs 24. Most packages should work
+on earlier versions of Emacs, but they will be more work to install
+since the package manager is new in 24.
 
 ## Installing Emacs ##
 
@@ -43,19 +47,35 @@ You will find that Homebrew has created a Emacs.app for you which you
 can copy to your /Applications folder for easy launching. I tried
 symlinking, but it didnt work for me.
 
-### Ubuntu ###
+If you have customizations to your environment (say in `.profile` or
+your shell-specific config) you can add [this](https://gist.github.com/3887459) function to fix the path
+issues when launching Emacs from the GUI on OS X
+([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
-Things are rather straightforward on Ubuntu:
+```lisp
+;; fix the PATH variable
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
+```
+
+This makes sure that all of the stuff you have on your PATH actually
+gets respected in the GUI Emacs, no matter how you start it.
+
+### Debian/Ubuntu ###
+
+Newer Debian-based systems (post-wheezy) ship Emacs 24 in apt:
 
 ```bash
 $ sudo aptitude install emacs24
 ```
 
-or
-
-```bash
-$ sudo apt-get install emacs24
-```
+On older systems you can add unofficial package sources for
+`emacs-snapshot`, either for [Debian](http://emacs.naquadah.org/) or
+[Ubuntu](https://launchpad.net/~cassou/+archive/emacs).
 
 ## Configuring Emacs ##
 
@@ -78,7 +98,7 @@ which you can look at for inspiration for Clojure specific things. You
 will certainly want to add clojure-mode, and clojure-test-mode to your
 list of packages to install:
 
-```scheme
+```lisp
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -88,24 +108,6 @@ list of packages to install:
                       clojure-test-mode)
 ```
                       
-Something you really should add to your init.el file is a function to
-fix the path issues when running the GUI Emacs ([Thanks to Steve
-Purcell on the Clojure mailing list for
-this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
-
-```scheme
-;; fix the PATH variable
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(if window-system (set-exec-path-from-shell-PATH))
-```
-
-This makes sure that all of the stuff you have on your PATH actually
-gets respected in the GUI Emacs, no matter how you start it.
-
 Start emacs:
 
 ```bash
@@ -118,7 +120,7 @@ packages. Unless you have any actual *errors* this is all fine.
 To look at the other packages available for installation you can do
 (from inside Emacs):
 
-```scheme
+```lisp
 M-x package-list-packages
 ```
 
@@ -129,29 +131,6 @@ package with the keyboard and press 'i' for 'install'. After selecting
 all the packages you are interested in, press 'x' for 'eXecute' to
 install. A better idea is to simply add the package to the var
 `my-packages` in your init.el and restart emacs.
-
-## Installing Leiningen ##
-
-Leiningen is the answer to your Clojure build / dependency problems,
-even though building a tool on top of Maven and Ant sounds like the
-likely *cause* of all your build / dependency problems. It was also
-written by Phil Hagelberg (and friends).
-
-It lives [here](https://github.com/technomancy/leiningen) and
-can be installed with the following commands:
-
-```bash
-$ curl https://raw.github.com/technomancy/leiningen/preview/bin/lein -o /usr/local/bin/lein
-$ chmod +x /usr/local/bin/lein
-```
-
-When you run your first lein command it will download and install a
-bunch of other stuff it requires so there is no specific installation
-command.
-
-So you now have a basic working setup of Emacs for Clojure
-development. Now lets learn a bit more about how to use Emacs and try
-creating a project.
 
 Start up Emacs (if it's not already running):
 
@@ -237,7 +216,8 @@ into a map of key-value pairs. The functionality is irrelevant and not
 particularly useful, it serves purely to illustrate the development
 flow.
 
-Create a new project:
+If you don't have [Leiningen](http://leiningen.org) yet, get it
+installed and then use it to create a new project:
 
 ```bash
 $ lein new command-line-args
@@ -268,9 +248,8 @@ Alternatively we could have used `nrepl-jack-in`, but there is
 currently no support for `clojure-test-mode` and we will be using
 that to run our tests from Emacs.
 
-At this point we are ready to start coding. One thing to note is the
-folder structure of your project is set up for you in the style of a
-maven project:
+At this point we are ready to start coding. Take a look at the project
+structure:
 
 ```
 + doc
@@ -497,50 +476,6 @@ When you are finished with the repl (or if for some reason it has
 gotten into a bad state), you can simply kill the `*slime-repl nil*`
 buffer (and re-run `cojure-jack-in` to start another).
 
-## Creating a library jar ##
-
-Now you have a `parse-args` function, how could you go about actually
-using it in an application? Leiningen comes with a very handy `jar`
-command.
-
-```bash
-$ lein jar
-```
-
-This will create a jar file from your project using the version
-information inside of your `project.clj` file that you can then re-use
-in other projects. If you are creating a library that you want to be
-publicly available, you should create a [clojars](http://clojars.org/)
-account and publish it there. Again, Leiningen provides a command to
-make this trivial however you need to specifically reference it in
-your `plugins` (in either `project.clj` or `~/.lein/profiles.clj`:
-
-```clojure
-:plugins [[lein-clojars "0.9.1"]]
-```
-
-This gives you a `push` command. See the documentation
-[here](https://github.com/ato/lein-clojars) for more details. Having
-pushed to clojars, it is simply a matter of adding the dependency to
-your new project, for example:
-
-```clojure
-:dependencies [[command-line-args "1.0.0"]]
-```
-
-If this is a private project, you will need to publish the jar to your
-local maven repository (local as in the maven repo your devs
-use). This can be easily achieved by `lein install` on your build
-server on a RC build, for example.
-
-## Summary ##
-
-There are a whole lot more things you can do with Leiningen, and [the
-official
-tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
-goes through things in more detail. Hopefully I have given a taste of
-why it is such a great tool.
-
 ## Appendix ##
 
 Here are all the commands I have used that are not documented at the
@@ -561,7 +496,7 @@ beginning (thanks to Mikael Sundberg for this suggestion):
 
 ## Contributors
 
-Gareth Jones <gareth.e.jones@gmail.com>, 2012 (original author)
+[Gareth Jones](http://blog.gaz-jones.com), 2012 (original author)
 
 Thanks to [Phil Hagelberg](http://technomancy.us/), [Mikael
 Sundberg](http://cleancode.se/), and [Jake

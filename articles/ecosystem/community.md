@@ -3,6 +3,21 @@ title: "Clojure Community"
 layout: article
 ---
 
+## About this guide
+
+This guide covers:
+
+ * The Official Clojure mailing lists
+ * IRC channel
+ * Documentation sites
+ * Clojure User Groups around the globe
+ * Conferences about or related to Clojure
+ * Various Community sites about Clojure (subreddit, etc)
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
+(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+
+
 ## Mailing Lists
 
   * [Clojure user mailing list](https://groups.google.com/forum/?fromgroups#!forum/clojure)
@@ -23,12 +38,6 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 `#clojure-doc` on `irc.freenode.net`.
 
 
-## Code repositories
-
-Most folks host their projects at github, and most pure Clojure library distributions (with the exception of contrib)
-are available at [Clojars](https://clojars.org/) (via [Leiningen](http://leiningen.org/)).
-
-
 ## Documentation
 
   * [Clojure Documentation Site](http://clojure-doc.org)
@@ -36,9 +45,24 @@ are available at [Clojars](https://clojars.org/) (via [Leiningen](http://leining
   * [Clojure API cheatsheets with tooltips](http://jafingerhut.github.com/)
 
 
-## Videos
+## User Groups
 
-Videos of talks are often made available on [InfoQ](http://www.infoq.com) and [Clojure blip.tv channel](http://blip.tv/clojure).
+See the list of [Clojure User Groups](http://dev.clojure.org/display/community/Clojure+User+Groups).
+
+
+## Videos About Clojure
+
+Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure) and [Clojure blip.tv channel](http://blip.tv/clojure).
+
+
+
+## Code repositories
+
+Most folks host their projects at
+[GitHub](https://github.com/languages/Clojure), and most pure Clojure
+library distributions (with the exception of contrib) are available at
+[Clojars](https://clojars.org/).
+
 
 
 ## Websites
@@ -65,10 +89,6 @@ In no particular order:
   * [EuroClojure](http://euroclojure.com/)
   * [Clojure/West](http://clojurewest.org/)
   * [StrangeLoop](https://thestrangeloop.com/) (not about Clojure but often has strong Clojure community presence)
-
-## User Groups
-
-See the list of [Clojure User Groups](http://dev.clojure.org/display/community/Clojure+User+Groups).
 
 
 ## Core development

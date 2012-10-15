@@ -1,5 +1,5 @@
 ---
-title: "Overview of clojure.core, the standard Clojure library"
+title: "Collections and sequences in Clojure"
 layout: article
 ---
 
@@ -7,13 +7,11 @@ layout: article
 
 This guide covers:
 
- * Key functions of `clojure.core`
- * Key macros of `clojure.core`
- * Key vars of `clojure.core`
- * Essential special forms
-
-This guide is **by no means comprehensive** and does not try to explain each function/macro/form in depth. It is an overview,
-the goal is to briefly explain the purpose of each item and provide links to other articles with more information.
+ * Collections in Clojure
+ * Sequences in Clojure
+ * Core collection types
+ * Key operations on collections and sequences
+ * Other topics related to collections and sequences
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
 (including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
@@ -23,237 +21,240 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 This guide covers Clojure 1.4.
 
 
-## Fundamentals
+## Overview
 
-### let
+Clojure has two powerful abstractions: collections and sequences. When working with Clojure,
+many operations are expressed as a series of operations on collections or sequences.
 
-`let` allows binding of locals (roughly equivalent to variables in many other languages) and defines an explicit scope for those bindings.
-The bindings are defined as a vector of [symbol value] pairs.
+Most of Clojure's core library treats collections and sequences the same way, although
+sometimes a distinction has to be made (e.g. with lazy infinite sequences).
 
-The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
+`clojure.core` provides many fundamental operations on collections: such as `map`, `filter`,
+`remove`, `take` and `drop`. Basic operations on collections and sequences are combined
+ to implement more complex operations.
 
-A basic example:
+### Clojure Collections are Immutable (Persistent)
 
-``` clojure
-(let [x 1 y 2]
-  (println x y)) ;; 1 2
-```
+Clojure collections are *immutable* (*persistent*). The term *persistent data structures* has
+nothing to do with durably storing them on disk. What it means is that collections are
+mutated (updated) by producing new collections. To quote Wikipedia:
 
-Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
+> In computing, a persistent data structure is a data structure that always preserves
+> the previous version of itself when it is modified. Such data structures are effectively
+> immutable, as their operations do not (visibly) update the structure in-place, but instead
+> always yield a new updated structure.
 
-This example basically demonstrates the lexical scoping of the let form.
-
-``` clojure
-(let [x 1]
-  (println x) ;; prints 1
-  (let [x 2]
-    (println x))) ;; prints 2
-```
-
-Let bindings are immutable and can be destructured.
-
-TBD: link to the section about destructuring
-
-### def
-
-`def` takes a symbol and an optional init value. If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding.
-
-A root binding is a value that is shared across all threads.
-
-The `let` form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use `def` within another form.
+Clojure's persistent data structures are implemented as trees and tries and
+have `O(log32 n)` access complexity where `n` is the number of elements.
 
 
-``` clojure
-;; todo - reference to var documentation, basic example
-;; todo - metadata
-```
+## The Collection Abstraction
 
-### declare
+Clojure has a collection abstraction with several key operations supported for
+all collection implementations. They are
 
-`declare` provides a simple way of creating 'forward declarations'. `declare` defs the supplied symbols with no init values. This allows for referencing of a var before it has been supplied a value.
+ * `=`: checks value equality of a collection compared to other collections
+ * `count`: returns number of elements in a collection
+ * `conj`: adds an item to a collection in the most efficient way
+ * `empty`: returns an empty collection of the same type as the argument
+ * `seq`: gets a sequence of a collection
 
-There are much better methods of value-based dispatch or code architecture in general, but this presents a simple situation forward declarations would be necessary.
+These functions work on all core Clojure collection types.
 
-``` clojure
-(declare func<10 func<20)
 
-;; without declare you will receive an error similar to:
-;; "Unable to resolve symbol: func10 in this context"
+## Core Collection Types
 
-(defn func<10 [x]
-  (cond
-   (< x 10) (func10 (inc x))
-   (< x 20) (func20 x)
-   :else "too far!"))
+Clojure has several core collection types:
 
-(defn func<20 [x]
-  (cond
-   (< x 10) (func10 x)
-   (< x 20) "More than 10, less than 20"
-   :else "too far!"))
-```
+ * Maps (called hashes or dictionaries in some other languages)
+ * Vectors
+ * Lists
+ * Sets
 
-No matter which order you put func<10 and func<20 in, there will be a reference to a var that does not yet exist when the compiler does the initial evaluation of top-level forms.
+### Maps
 
-`declare` defines the var with no binding so that the the var exists when it is referenced later in the code.
-
-### defn
-
-`defn` allows for succinct definition of a function and metadata about its argslist and doc-string. `defn` inherently allows for quick documentation of functions that can be retrieved with `doc`. This feature should be used almost universally.
-
-Without `defn`, a var would be directly bound to a function definition and explicit metadata about the doc string and argslits would be added manually.
+Maps associate keys with values. Boths keys and values can be of any type, but
+keys must be comparable. There are several implementations of maps with
+different guarantees about ordering. Hash maps are typically instantiated with literals:
 
 ``` clojure
-(def func (fn [x] x))
-
-;; same as:
-(defn func [x] x)
-
-;; with metadata added by defn
-(def ^{:doc "documentation!"} ^{:arglists '([x])} func (fn [x] x))
-
-;;same as
-(defn func "documentation!" [x] x)
+{:language "Clojure" :creator "Rich Hickey"}
 ```
+
+Commas can be used in map literals (Clojure compiler treats the as whitespace):
 
 ``` clojure
-;; todo - link to doc and metadata
+{:language "Clojure", :creator "Rich Hickey"}
 ```
 
-### ns
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### if
-
-`if` is the primary method of conditional execution and other conditionals are built upon `if`.
-
-`if` is an expression that takes 2 expressions, and an optional third.  If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
-
-If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
-
+`clojure.core/sorted-map` and `clojure.core/array-map` produce ordered maps:
 
 ``` clojure
-user=> (if 0 "second") ;; 0 is a 'true' value. Only false or nil are 'false'
-"second"
+(sorted-map :language "Clojure" :creator "Rich Hickey") ;= {:creator "Rich Hickey", :language "Clojure"}
 
-user=> (if nil "second" "third")
-"third"
-
-user=> (if (< 10 9) "second" "third") ;; (< 9 10) returns false
-"third"
-
-user=> (if (seq '()) "second") ;; seq returns nil for an empty sequence
-nil
-
-user=> (if (nil? (= 1 2)) "second" "third") ;; differentiate between nil and false if needed
-"third"
+(array-map :language "Clojure" :creator "Rich Hickey")  ;= {:creator "Rich Hickey", :language "Clojure"}
 ```
 
-### when
-
-`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. `when` does not provide an 'else'.
+Unsurprisingly, map literals must contain an even number of forms (as many keys as values). Otherwise
+the code will not compile:
 
 ``` clojure
-user=> (when (= 1 2) (print "hey") 10)
-nil
-
-user=> (when (< 10 11) (print "hey") 10)
-hey
-10
+;; fails with java.lang.RuntimeException: Map literal must contain an even number of forms
+{:language "Clojure" :creator}
 ```
 
-### for
+In general, the only major difference between Clojure maps and maps/hashes/dictionaries in some other languages
+is that Clojure maps are *immutable*. When a Clojure map is modified, the result is a new map that internally
+has structural sharing (for efficiency reasons) but semantically is a separate immutable value.
 
-`for` allows for list comprehensions. `for` takes a vector of pairs of [binding collection]. `for` then assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
 
-`for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
+#### Maps As Functions
+
+Maps in Clojure can be used as functions on their keys. See the [Functions guide](http://localhost:4000/articles/language/functions.html#maps_as_functions)
+for more information.
+
+#### Keywords As Functions
+
+Keywords in Clojure can be used as functions on maps. See the [Functions guide](http://localhost:4000/articles/language/functions.html#keywords_as_functions)
+for more information.
+
+
+### Vectors
+
+Vectors are collections that offer efficient random access (by index). They are typically instantiated with
+literals:
 
 ``` clojure
-(for [x [1 2 3] y [4 5 6]]
-  [x y])
+[1 2 3 4]
 
-;; ([1 4] [1 5] [1 6] [2 4] [2 5] [2 6] [3 4] [3 5] [3 6])
+["clojure" "scala" "erlang" "f#" "haskell" "ocaml"]
 ```
 
-:when only evaluates the body when a true value is returned by the expression provided
+Commas can be used to separate vector elements (Clojure compiler treats the as whitespace):
 
 ``` clojure
-(for [x [1 2 3] y [4 5 6]
-      :when (and
-             (even? x)
-             (odd? y))]
-  [x y])
-
-;; ([2 5])
+["clojure", "scala", "erlang", "f#", "haskell", "ocaml"]
 ```
 
-:while evaluates the body until a non-true value is reached. Note that the rightmost collection is fully bound to y before a non-true value of (< x 2) is reached. This demonstrates the order of the comprehension.
+Unlike lists, vectors are not used for function invocation. They are, however, used to make certain
+forms (e.g. the list of locals in `let` or parameters in `defn`) stand out visually. This was
+an intentional decision in Clojure design.
+
+
+### Lists
+
+Lists in Clojure are singly linked lists. Access or modifications of list head is efficient, random access
+is not.
+
+Lists in Clojure are special because they represent code forms, from function calls to macro calls to special forms.
+Code is data in Clojure and it is represented primarily as lists:
 
 ``` clojure
-(for [x [1 2 3] y [4 5 6]
-      :while (< x 2)]
-  [x y])
-
-;; ([1 4] [1 5] [1 6])
+(empty? [])
 ```
 
-### doseq
+First item on the list is said to be in the *calling position*.
 
-`doseq` is similar to `for` except it does not return a sequence of results. `doseq` is generally intended for execution of side-effects in the body, and thusly returns nil.
-
-`doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
+When used as "just" data structures, lists are typically instantiated with literals with quoting:
 
 ``` clojure
-(doseq [x [1 2 3] y [4 5 6]]
-  (println [x y]))
+'(1 2 3 4)
 
-;; [1 4][1 5][1 6][2 4][2 5][2 6][3 4][3 5][3 6]
-;; nil
+'("clojure" "scala" "erlang" "f#" "haskell" "ocaml")
 ```
 
-### apply
-
-`apply` effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
+Commas can be used to separate list elements (Clojure compiler treats the as whitespace):
 
 ``` clojure
-(str ["Hel" "lo"])
-"[\"Hel\" \"lo\"]" ;; not what we want, str is operating on the vector
-
-user> (apply str ["Hel" "lo"]) ;; same as (str "Hel" "lo")
-"Hello"
+'("clojure", "scala", "erlang", "f#", "haskell", "ocaml")
 ```
 
-`apply` prepends any supplied arguments to the form as well.
+#### Lists and Metaprogramming in Clojure
+
+Metaprogramming in Clojure (and other Lisp dialects) is different from metaprogramming in, say, Ruby, because
+in Ruby metaprogramming is *primarily* about producing strings while in Clojure it is about producing
+*data structures* (mostly *lists*). For sophisticated DSLs, producing data structures directly lets
+developers avoid a lot of incidental complexity that string generation brings along.
+
+This topic is covered in detail in the [Macros and Metaprogramming](/articles/language/macros.html).
+
+
+### Sets
+
+Sets are collections that offer efficient membership check operation and only allow each element to appear in the collection
+once. They are typically instantiated with literals:
 
 ``` clojure
-(map + [[1 2 3] [1 2 3]]) ;; This attempts to add 2 vectors with +
-;; ClassCastException   java.lang.Class.cast (Class.java:2990)
+#{1 2 3 4}
 
-(apply map + [[1 2 3] [1 2 3]]) ;; same as (map + [1 2 3] [1 2 3])
-;; (2 4 6)
-
-(apply + 1 2 3 [4 5 6]) ;; same as  (+ 1 2 3 4 5 6)
-;; 21
+#{"clojure" "scala" "erlang" "f#" "haskell" "ocaml"}
 ```
 
-Note that apply can not be used with macros.
+Commas can be used to separate set elements (Clojure compiler treats the as whitespace):
 
-### require
+``` clojure
+#{"clojure", "scala", "erlang", "f#", "haskell", "ocaml"}
+```
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+#### Sets As Functions
 
-### import
+Sets in Clojure can be used as functions on their elements. See the [Functions guide](/articles/language/functions.html#sets_as_functions)
+for more information.
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
-### loop, recur
+#### Set Membership Checks
+
+The most common way of checking if an element is in a set is by using set as a function:
+
+``` clojure
+(#{1 2 3 4} 1)  ;= 1
+(#{1 2 3 4} 10) ;= nil
+
+(if (#{1 2 3 4} 1)
+  :hit
+  :miss) ;= :hit
+```
+
+
+
+## Sequences
+
+The sequence abstraction represents a sequential view of a collection or collection-like
+entity (computation result).
+
+`clojure.core/seq` is a function that produces a sequence over the given argument.
+Data types that `clojure.core/seq` can produce a sequence over are called *seqable*:
+
+ * Clojure collections
+ * Java maps
+ * All iterable types (types that implement `java.util.Iterable`)
+ * Java collections (`java.util.Set`, `java.util.List`, etc)
+ * Java arrays
+ * All types that implement `java.lang.CharSequence` interface, including Java strings
+ * All types that implement `clojure.lang.Seqable` interface
+ * nil
+
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
+## Key Operations on Collections and Sequences
 
-## Collections and Sequences
+Below is an overview of `clojure.core` functions that work on collections and sequences. Most of them
+work the same way for all types of collections, however, there are exception to this rule. For example,
+functions like `clojure.core/assoc`, `clojure.core/dissoc` and `clojure.core/get-in` only really
+make sense in the context of maps and other associative data structures (for example, records).
+
+`clojure.core/conj` adds elements to a collection in the most efficient manner, which depends on
+collection implementation details and won't be the same for vectors and lists.
+
+In general, Clojure design emphasizes that operations on collections and sequences should be uniform and
+follow the principle of least surprise. In real world projects, however, the difference between
+algorithmic complexity and other runtime characteristics of various collection types often cannot
+be ignored. Keep this in mind.
+
+You can find more information in the [clojure.core Overview](/articles/languages/core_overview.html) and [Clojure cheatsheet](http://clojure.org/cheatsheet).
+
 
 ### count
 
@@ -557,32 +558,7 @@ Sets can also be used as functions and will return the first item in the collect
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TODO: Simple image accompaniment.
 
-### iterate
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
 ### reduce
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-### reductions
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-### juxt
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-### comp
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-### fnil
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TODO: Simple image accompaniment.
@@ -663,72 +639,21 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
-### partition
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
-### partition-all
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-## Macros
-
-### ->
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-### ->>
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
-
-## Reference Types
-
-### deref
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### atom
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### swap!
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### reset!
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### agent
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### ref
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### dosync
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### alter
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### commute
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-### binding
+## Transients
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
+## Custom Collections and Sequences
 
-## Vars
+It is possible to develop custom collection types in Clojure or Java and have
+`clojure.core` functions work on them just like they do on builtin types.
 
-### *clojure-version*
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+## Wrapping Up
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)

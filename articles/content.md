@@ -40,6 +40,10 @@ A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workf
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
+### [VimClojure for Clojure Development](/articles/tutorials/vim.html) (TBD)
+
+A brief introduction to VimClojure and its features.
+
 
 ## Clojure Language Guides
 
@@ -83,7 +87,7 @@ This guide covers:
  * Other topics related to interop
 
 
-### [Namespaces](/articles/language/namespaces.html) (In Progress)
+### [Namespaces](/articles/language/namespaces.html) (Partially Complete)
 
 Namespaces organize Clojure functions.
 
@@ -108,14 +112,15 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Collections and Sequences](/articles/language/sequences.html) (TBD)
+### [Collections and Sequences](/articles/language/collections_and_sequences.html) (In Progress)
 
 This guide covers:
 
  * Collections in Clojure
  * Sequences in Clojure
- * Key operations on sequences
- * Sequence vs Seq
+ * Core collection types
+ * Key operations on collections and sequences
+ * Other topics related to collections and sequences
 
 
 ### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
@@ -150,9 +155,15 @@ This guide covers:
  * How to force evaluation
 
 
+### [Glossary](/articles/language/glossary.html) (Partially Complete)
+
+This guide includes definitons of various Clojure-related terminology.
+
+
+
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Semi-complete)
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Complete)
 
 This guide covers:
 
@@ -208,7 +219,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html) (TBD)
+### [Books](/articles/ecosystem/books.html) (Complete)
 
 This guide covers:
 
@@ -242,7 +253,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
+### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
 
 This guide covers:
 

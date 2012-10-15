@@ -457,6 +457,12 @@ This is often used to check if a value is in a set:
 because everything but `false` and `nil` evaluates to `true` in Clojure.
 
 
+## Clojure Functions As Comparators
+
+Clojure functions implement the [java.util.Comparator](http://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html)
+interface and can be used as comparators.
+
+
 ## Wrapping Up
 
 Functions are at the heart of Clojure. They are defined using the `defn` macro, can have multiple arities,
