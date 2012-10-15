@@ -37,14 +37,16 @@ or else in the repl you've loaded them like so:
 
 ### Simple Math
 
-    (+ 3 4)    ;=> 7
-    (- 3 4)    ;=> -1
-    (* 3 4)    ;=> 12
-    (/ 3 4)    ;=> 3/4 (an exact ratio)
-    (/ 3.0 4)  ;=> 0.75
+``` clojure
+(+ 3 4)    ;=> 7
+(- 3 4)    ;=> -1
+(* 3 4)    ;=> 12
+(/ 3 4)    ;=> 3/4  (an exact ratio)
+(/ 3.0 4)  ;=> 0.75
 
-    (inc 5)    ;=> 6
-    (dec 5)    ;=> 4
+(inc 5)    ;=> 6
+(dec 5)    ;=> 4
+```
 
 For doing integer division and getting remainders (modulus), see the
 docs for
@@ -60,10 +62,12 @@ math.numeric-tower](http://clojure.github.com/math.numeric-tower/).
 
 Use what the Java platform provides, for example:
 
-    Math/PI              ;=> 3.14159...
-    (Math/sin x)
-    (Math/cos x)
-    (Math/tan x)
+``` clojure
+Math/PI       ;=> 3.14159...
+(Math/sin x)
+(Math/cos x)
+(Math/tan x)
+```
 
 There are many more functions available, which you can read about in
 the [docs for
