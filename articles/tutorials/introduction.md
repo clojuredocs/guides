@@ -8,15 +8,15 @@ layout: article
 This guide covers:
 
  * Clojure language basics
- * Expressions, identifiers (locals, vars)
+ * expressions, identifiers (locals, vars)
  * `let` forms
- * Salars
- * Functions
- * Basic data types
- * Introduction to immutable data structures
- * Overview of Clojure reference types (vars, atoms, agents, refs)
- * Looping and recursion
- * Basics of Clojure macros
+ * scalars
+ * functions
+ * basic data types
+ * introduction to immutable data structures
+ * overview of Clojure reference types (vars, atoms, agents, refs)
+ * looping and recursion
+ * basics of Clojure macros
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
 (including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
@@ -30,11 +30,22 @@ already done so, have a look at the [Getting
 Started](/articles/tutorials/getting_started.html) tutorial. Before
 continuing, make sure you've got Java and
 [Leiningen](http://leiningen.org) installed, and can create a new
-project and run a REPL in it.
+project and run a REPL in it. The author expects you'll want to have a
+REPL running while following this introduction so you can type
+expressions into it as you go.
+
+> **Note:** In the code samples below, unless we're specifically
+> discussing the REPL, to reduce clutter we've usually omitted showing
+> the REPL prompt (ex. "`user=>`" or "`my-proj.core=>`").
+>
+> Additionally: In Clojure, a semicolon begins a single-line comment,
+> and in this document we use "`;=>`" (for trailing comments) and
+> "`;;=>`" (for comments on their own line) to indicate what the
+> previous expression evaluates to.
 
 This introduction is a whirlwind tutorial of most of the basics of
 Clojure. Its goal is to rapidly get you acquainted with the core
-areas of the language without wasting your time and without getting
+areas of the language without wasting your time and also without getting
 too bogged down in details or advanced topics (the various topics will
 get more comprehensive coverage in the topic guides anyway).
 
@@ -54,22 +65,20 @@ up of expressions which are evaluated to some value. Here are some
 examples of expressions:
 
 ``` clojure
-5                      ;= 5
-"hi"                   ;= "hi"
+5                      ;=> 5
+"hi"                   ;=> "hi"
 [1 2 3]                ; evaluates to the vector `[1 2 3]`
 (+ 1 2)                ; evaluates to the sum of 1 and 2
 (if true "yes" "no")   ; evaluates to the string "yes"
 (println "hello!")     ; evaluates to nil (but also prints "hello!")
 ```
 
-(A semicolon starts a single-line comment.)
-
 Expressions can contain sub-expressions:
 
 ``` clojure
 (+ 1
    (* 2 3)
-   (/ 10 2))   ; 1 + (2 * 3) + (10 / 2) ==> 12
+   (/ 10 2))   ;=> 1 + (2 * 3) + (10 / 2) = 12
 ```
 
 Expressions in (various types of) brackets are often referred to as
@@ -294,11 +303,11 @@ values back to you (printed them out in the repl):
 
 ``` clojure
 user=> "hi"
-; "hi"
+;; "hi"
 user=> :foo
-; :foo
+;; :foo
 user=> [1 2 3]
-; [1 2 3]
+;; [1 2 3]
 ```
 
 Clojure evaluates the expressions you give it and tries to come up
@@ -380,8 +389,8 @@ If for whatever reason you'd rather Clojure *not* treat something like
 `(+ 1 2 3)` as a function call, you can "quote" it like so:
 
 ``` clojure
-user=> '(+ 1 2 3)
-; (+ 1 2 3)
+'(+ 1 2 3)
+;;=> (+ 1 2 3)
 ```
 
 This causes Clojure to then regard it simply as a 4-element list;
@@ -422,7 +431,7 @@ You can re-set the symbols in the binding vector multiple times
       x (* x x)
       x (+ x 1)]
   x)
-;=> 5
+;;=> 5
 ```
 
 The `let` expression itself evaluates to the last expression in its
@@ -471,8 +480,7 @@ In the repl, you can make use of libraries --- and at the same time
 provide a handy alias for them --- by *requiring* them like so:
 
 ``` clojure
-user=> (require '[clojure.string :as str])
-; nil
+(require '[clojure.string :as str])
 ```
 
 Now we can use all the functions in the clojure.string library by
@@ -637,20 +645,20 @@ Strings section of the cheatsheet. Here are some examples of a few of
 them:
 
 ``` clojure
-user=> (str "hi" "there")
-; "hithere"
-user=> (count "hello")
-; 5
-user=> (require '[clojure.string :as str])
-; nil
-user=> (str/split "hello there" #" ")
-; ["hello" "there"]
-user=> (str/join ["hello" "there"])
-; "hellothere"
-user=> (str/join " " ["hello" "there"])
-; "hello there"
-user=> (str/replace "hello there" "ll" "LL")
-; "heLLo there"
+(str "hi" "there")
+;;=> "hithere"
+(count "hello")
+;;=> 5
+(require '[clojure.string :as str])
+;;=> nil
+(str/split "hello there" #" ")
+;;=> ["hello" "there"]
+(str/join ["hello" "there"])
+;;=> "hellothere"
+(str/join " " ["hello" "there"])
+;;=> "hello there"
+(str/replace "hello there" "ll" "LL")
+;;=> "heLLo there"
 ```
 
 Some of them make optional use of regexes. There's more in the
@@ -660,21 +668,21 @@ Incidentally, since strings are sequential, any function that works on
 sequentials works on strings. For example:
 
 ``` clojure
-user=> (first "hello")
-; \h
-user=> (last "hello")
-; \o
-user=> (rest "hello")
-; (\e \l \l \o)
-user=> (nth "hello" 1)
-; \e
-user=> (doseq [letter "hello"] (println letter))
-; h
-; e
-; l
-; l
-; o
-; nil
+(first "hello")
+;;=> \h
+(last "hello")
+;;=> \o
+(rest "hello")
+;;=> (\e \l \l \o)
+(nth "hello" 1)
+;;=> \e
+(doseq [letter "hello"] (println letter))
+;; h
+;; e
+;; l
+;; l
+;; o
+;;=> nil
 ```
 
 Again, see the cheatsheet for more.
@@ -839,19 +847,19 @@ considers lists and vectors containing the same values in the same
 order as equal), for example:
 
 ``` clojure
-user=> (= {:a  [1 2 3] :b #{:x :y} :c {:foo 1 :bar 2}}
-  #_=>    {:a '(1 2 3) :b #{:y :x} :c {:bar 2 :foo 1}})
-; true
+(= {:a  [1 2 3] :b #{:x :y} :c {:foo 1 :bar 2}}
+   {:a '(1 2 3) :b #{:y :x} :c {:bar 2 :foo 1}})
+;;=> true
 ```
 
 There's also a double-equals function `==` that is more forgiving
 across various types of numbers:
 
 ``` clojure
-user=> (= 4 4.0)
-; false
-user=> (== 4 4.0)
-; true
+(= 4 4.0)
+;;=> false
+(== 4 4.0)
+;;=> true
 ```
 
 See the docs for
@@ -1221,12 +1229,12 @@ manually looping over a collection. Some examples using `map`:
 (map str [10 20 30])     ;=> ("10" "20" "30")
 ;; You can define the function to be used on-the-fly:
 (map (fn [x] (str "=" x "=")) [10 20 30])
-;=> ("=10=" "=20=" "=30=")
+;;=> ("=10=" "=20=" "=30=")
 
 ;; And `map` knows how to apply the function you give it
 ;; to mulitple collections in a coordinated way:
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3])
-;=> (":a1" ":b2" ":c3")
+;;=> (":a1" ":b2" ":c3")
 ```
 
 When working on more than one collection at a time, `map` is smart
@@ -1234,7 +1242,7 @@ enough to stop when the shorter of the colls runs out of items:
 
 ``` clojure
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3 4 5 6 7])
-;=> (":a1" ":b2" ":c3")
+;;=> (":a1" ":b2" ":c3")
 ```
 
 
@@ -1245,7 +1253,7 @@ just the values for which `(the-pred the-value)` returns true:
 
 ``` clojure
 (filter odd? (range 10))
-;=> (1 3 5 7 9)
+;;=> (1 3 5 7 9)
 ```
 
 Use `remove` for the opposite effect (which amounts to *removing* the
@@ -1253,7 +1261,7 @@ items for which `(pred val)` returns true):
 
 ``` clojure
 (remove odd? (range 10))
-;=> (0 2 4 6 8)
+;;=> (0 2 4 6 8)
 ```
 
 You will often find yourself using these functions instead
@@ -1269,10 +1277,10 @@ collection. `apply` "unpacks" the items in the coll:
 
 ``` clojure
 (max 1 5 2 8 3)
-;=> 8
+;;=> 8
 (max [1 5 2 8 3]) ;; ERROR
 (apply max [1 5 2 8 3])
-;=> 8
+;;=> 8
 ```
 
 A nice feature of `apply` is that you can supply extra args which
@@ -1280,7 +1288,7 @@ you'd like to be treated as if they were part of the collection:
 
 ``` clojure
 (apply max 4 55 [1 5 2 8 3])
-;=> 55
+;;=> 55
 ```
 
 
@@ -1292,11 +1300,11 @@ needing to resort to manually looping). `for` is similar to Python's
 
 ``` clojure
 (for [i (range 10)] i)
-;=> (0 1 2 3 4 5 6 7 8 9)
+;;=> (0 1 2 3 4 5 6 7 8 9)
 (for [i (range 10)] (* i i))
-;=> (0 1 4 9 16 25 36 49 64 81)
+;;=> (0 1 4 9 16 25 36 49 64 81)
 (for [i (range 10) :when (odd? i)] [i (str "<" i ">")])
-;=> ([1 "<1>"] [3 "<3>"] [5 "<5>"] [7 "<7>"] [9 "<9>"])
+;;=> ([1 "<1>"] [3 "<3>"] [5 "<5>"] [7 "<7>"] [9 "<9>"])
 ```
 
 Notice we snuck a "`:when (odd? i)`" in there. `for` even supports a
@@ -1314,14 +1322,14 @@ result you just got and the 3rd item in the coll. Then the result of
 
 ``` clojure
 (reduce + [1 2 3 4 5])
-;; 1 + 2   [3 4 5]
-;; 3       [3 4 5]
-;; 3 + 3   [4 5]
-;; 6       [4 5]
-;; 6 + 4   [5]
-;; 10      [5]
-;; 10 + 5
-;; 15
+;;--> 1 + 2   [3 4 5]
+;;--> 3       [3 4 5]
+;;--> 3 + 3   [4 5]
+;;--> 6       [4 5]
+;;--> 6 + 4   [5]
+;;--> 10      [5]
+;;--> 10 + 5
+;;=>  15
 ```
 
 And, of course, you can supply your own function if you like:
@@ -1335,7 +1343,7 @@ for it to start off with:
 
 ``` clojure
 (reduce + 10 [1 2 3 4 5])
-;=> 25
+;;=> 25
 ```
 
 This by itself is pretty handy. But it gets even better. Since you can
@@ -1351,10 +1359,10 @@ function "build it up" as you go. For example:
         {}
         ["hi" "hello" "bye"])
 
-;; --> {}
-;; --> {:hi "hi-29"}
-;; --> {:hi "hi-29" :hello "hello-42"}
-;; ==> {:hi "hi-29" :hello "hello-42" :bye "bye-10"}
+;;--> {}
+;;--> {:hi "hi-29"}
+;;--> {:hi "hi-29" :hello "hello-42"}
+;;=>  {:hi "hi-29" :hello "hello-42" :bye "bye-10"}
 ```
 
 Building up some accumulator using `reduce` and your own custom
@@ -1370,16 +1378,16 @@ passes it some standard arguments every time, along with the ones you
 supply right when you call it. For example:
 
 ``` clojure
-user=> (defn lots-of-args [a b c d] (str/join "-" [a b c d]))
-; #'user/lots-of-args
-user=> (lots-of-args 10 20 30 40)
-; "10-20-30-40"
-user=> (def fewer-args (partial lots-of-args 10 20 30))
-; #'user/fewer-args
-user=> (fewer-args 40)
-; "10-20-30-40"
-user=> (fewer-args 99)
-; "10-20-30-99"
+(defn lots-of-args [a b c d] (str/join "-" [a b c d]))
+;;=> #'user/lots-of-args
+(lots-of-args 10 20 30 40)
+;;=> "10-20-30-40"
+(def fewer-args (partial lots-of-args 10 20 30))
+;;=> #'user/fewer-args
+(fewer-args 40)
+;;=> "10-20-30-40"
+(fewer-args 99)
+;;=> "10-20-30-99"
 ```
 
 `comp` is for composing a function from other ones. That is, `(comp
@@ -1398,10 +1406,10 @@ example:
                    wrap-in-stars))
 
 (wrap-it "hi")
-;; => "@=*hi*=@"
+;;=> "@=*hi*=@"
 ;; Which is the same as:
 (wrap-in-ats (wrap-in-equals (wrap-in-stars "hi")))
-;; => "@=*hi*=@"
+;;=> "@=*hi*=@"
 ```
 
 `(iterate foo x)` yields an infinite lazy list consisting
@@ -1420,7 +1428,7 @@ To just take the first, say, 5 values from an infinite list, try this:
 ``` clojure
 (defn square [x] (* x x))
 (take 5 (iterate square 2))
-;=> (2 4 16 256 65536)
+;;=> (2 4 16 256 65536)
 ```
 
 
@@ -1449,7 +1457,7 @@ this is called *recursion*. Here's a trivial example:
     accum
     (recur (conj accum i)
            (inc i))))
-;=> [1 2 3 4 5 6 7 8 9]
+;;=> [1 2 3 4 5 6 7 8 9]
 ```
 
 The state in this loop is carried in the `accum` vector, which we
@@ -1502,14 +1510,14 @@ the value of the atom, you "deref" it, or just use the shorter "@"
 syntax. Here's an (atom-specific) example:
 
 ``` clojure
-user=> (def my-atom (atom {:foo 1}))
-; #'user/my-atom
-user=> @my-atom
-; {:foo 1}
-user=> (swap! my-atom update-in [:foo] inc)
-; {:foo 2}
-user=> @my-atom
-; {:foo 2}
+(def my-atom (atom {:foo 1}))
+;;=> #'user/my-atom
+@my-atom
+;;=> {:foo 1}
+(swap! my-atom update-in [:foo] inc)
+;;=> {:foo 2}
+@my-atom
+;;=> {:foo 2}
 ```
 
 ... and we've just changed the state of the atom. (Note, `swap!` is a
