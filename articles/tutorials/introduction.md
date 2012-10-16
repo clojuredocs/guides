@@ -1398,10 +1398,10 @@ example:
                    wrap-in-stars))
 
 (wrap-it "hi")
-;; -->    "hi"
-;; -->   "*hi*"
-;; -->  "=*hi*="
-;; ==> "@=*hi*=@"
+;; => "@=*hi*=@"
+;; Which is the same as:
+(wrap-in-ats (wrap-in-equals (wrap-in-stars "hi")))
+;; => "@=*hi*=@"
 ```
 
 `(iterate foo x)` yields an infinite lazy list consisting
