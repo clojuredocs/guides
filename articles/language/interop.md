@@ -426,8 +426,110 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ## How To Extend Protocols to Java Classes
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+Clojure protocols can be extended to any java class (including
+Clojure's internal types) very easily using `extend`:
 
+Using the example of a json library, we can define our goal as getting
+to the point where the following works:
+
+``` clojure
+(json-encode (java.util.UUID/randomUUID))
+```
+
+First, let's start with the protocol for json encoding an object:
+
+``` clojure
+(defprotocol JSONable
+  (json-encode [obj]))
+```
+
+So, everything that is "JSONable" implements a `json-encode` method.
+
+Next, let's define a dummy method to do the "encoding" (in this
+example, it just prints to standard out instead, it doesn't actually
+do any json encoding):
+
+``` clojure
+(defn encode-fn
+  [x]
+  (prn x))
+```
+
+Now, define a method that will encode java objects by calling `bean`
+on them, then making each value of the bean map a string:
+
+``` clojure
+(defn encode-java-thing
+  [obj]
+  (encode-fn
+   (into {}
+         (map (fn [m]
+                [(key m) (str (val m))])
+              (bean obj)))))
+```
+
+Let's try it on an example object, a UUID:
+
+``` clojure
+(encode-java-thing (java.util.UUID/randomUUID))
+;; ⇒ {:mostSignificantBits "-6060053801408705927",
+;;    :leastSignificantBits "-7978739947533933755",
+;;    :class "class java.util.UUID"}
+```
+
+The next step is to extend the protocol to the java type, telling
+clojure which java type to extend, the protocol to implement and the
+method to use for the `json-encode` method:
+
+``` clojure
+(extend java.util.UUID
+  JSONable
+  {:json-encode encode-java-thing})
+```
+
+Now we can use `json-encode` for the object we've extended:
+
+``` clojure
+(json-encode (java.util.UUID/randomUUID))
+;; ⇒  {:mostSignificantBits "3097485598740136901",
+;;     :leastSignificantBits "-9000234678473924364",
+;;     :class "class java.util.UUID"}
+```
+
+You could also write the function inline in the extend block, for
+example, extending `nil` to return a warning string:
+
+``` clojure
+(extend nil
+  JSONable
+  {:json-encode (fn [x] "x is nil!")})
+
+(json-encode nil)
+;; ⇒  "x is nil!"
+```
+
+The `encode-java-thing` method can also be reused for other java types
+we may want to encode:
+
+``` clojure
+(extend java.net.URL
+  JSONable
+  {:json-encode encode-java-thing})
+
+(json-encode (java.net.URL. "http://aoeu.com"))
+;; ⇒  {:path "",
+;;     :protocol "http",
+;;     :authority "aoeu.com",
+;;     :host "aoeu.com",
+;;     :ref "",
+;;     :content "sun.net.www.protocol.http.HttpURLConnection$HttpInputStream@4ecac02f",
+;;     :class "class java.net.URL",
+;;     :defaultPort "80",
+;;     :port "-1",
+;;     :query "",
+;;     :file "",
+;;     :userInfo ""}
+```
 
 ## Wrapping Up
 
