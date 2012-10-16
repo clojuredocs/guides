@@ -1314,14 +1314,15 @@ result you just got and the 3rd item in the coll. Then the result of
 
 ``` clojure
 (reduce + [1 2 3 4 5])
-; 1 + 2  [3 4 5]
-;   3    [3 4 5]
-; 3 + 3  [4 5]
-;   6    [4 5]
-; 6 + 4  [5]
-;  10    [5]
-; 10 + 5
-;  15
+
+;; 1 + 2   [3 4 5]
+;; 3       [3 4 5]
+;; 3 + 3   [4 5]
+;; 6       [4 5]
+;; 6 + 4   [5]
+;; 10      [5]
+;; 10 + 5
+;; 15
 ```
 
 And, of course, you can supply your own function if you like:
@@ -1350,7 +1351,11 @@ function "build it up" as you go. For example:
                  (str x \- (rand-int 100))))
         {}
         ["hi" "hello" "bye"])
-;=> {:bye "bye-10" :hello "hello-41" :hi "hi-29"}
+
+;; --> {}
+;; --> {:hi "hi-29"}
+;; --> {:hi "hi-29" :hello "hello-42"}
+;; ==> {:hi "hi-29" :hello "hello-42" :bye "bye-10"}
 ```
 
 Building up some accumulator using `reduce` and your own custom
