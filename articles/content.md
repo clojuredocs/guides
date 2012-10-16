@@ -18,28 +18,29 @@ and separates content into several groups:
  * [Cookbooks](#cookbooks)
 
 For easier navigation of the menu on the left, guides marked with a
-star (✪) are considered relatively complete.
+mostly filled box (▣, 25a3) are considered relatively complete, and a
+half-filled box (◪, 25ea) indicates partially-complete.
 
 
 ## Tutorials
 
-### [Getting Started](/articles/tutorials/getting_started.html) (Partially Complete)
+### [Getting Started](/articles/tutorials/getting_started.html) ◪
 
 If you're new to Clojure, this is a good place to start.
 
 
-### [Introduction](/articles/tutorials/introduction.html) (Partially Complete)
+### [Introduction](/articles/tutorials/introduction.html) ◪
 
 A swift introduction to the Clojure language, covering most of the
 basics.
 
 
-### [Emacs for Clojure Development](/articles/tutorials/emacs.html) (Partially Complete)
+### [Emacs for Clojure Development](/articles/tutorials/emacs.html) ◪
 
 A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
 
 
-### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) (Partially Complete)
+### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) ◪
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
@@ -50,7 +51,7 @@ A brief introduction to VimClojure and its features.
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) (Partially Complete)
+### [Functions](/articles/language/functions.html) ◪
 
 Functions are at the heart of Clojure.
 
@@ -75,7 +76,7 @@ This guide covers:
  * Key vars of `clojure.core`
 
 
-### [Interoperability with Java](/articles/language/interop.html) (Partially Complete)
+### [Interoperability with Java](/articles/language/interop.html) ◪
 
 The Clojure language implementation is symbiotic with its host
 platform (the JVM), providing direct interoperability.
@@ -90,7 +91,7 @@ This guide covers:
  * Other topics related to interop
 
 
-### [Namespaces](/articles/language/namespaces.html) (Partially Complete)
+### [Namespaces](/articles/language/namespaces.html) ◪
 
 Namespaces organize Clojure functions.
 
@@ -105,7 +106,7 @@ This guide covers:
  * How code compilation works in Clojure
 
 
-### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) (Partially Complete)
+### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) ◪
 
 This guide covers:
 
@@ -158,7 +159,7 @@ This guide covers:
  * How to force evaluation
 
 
-### [Glossary](/articles/language/glossary.html) (Partially Complete)
+### [Glossary](/articles/language/glossary.html) ◪
 
 This guide includes definitons of various Clojure-related terminology.
 
@@ -166,7 +167,7 @@ This guide includes definitons of various Clojure-related terminology.
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) ✪
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) ▣
 
 This guide covers:
 
@@ -180,7 +181,7 @@ This guide covers:
  * How to share (publish) a library
 
 
-### [Clojure Community](/articles/ecosystem/community.html) ✪
+### [Clojure Community](/articles/ecosystem/community.html) ▣
 
 This guide covers:
 
@@ -190,7 +191,7 @@ This guide covers:
  * Other Clojure community resources
 
 
-### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) ✪
+### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) ▣
 
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
@@ -222,7 +223,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html) ✪
+### [Books](/articles/ecosystem/books.html) ▣
 
 This guide covers:
 
@@ -246,7 +247,7 @@ This guide covers:
  * How to use them
 
 
-### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) ✪
+### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) ▣
 
 This guide covers:
 
