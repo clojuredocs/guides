@@ -17,6 +17,9 @@ and separates content into several groups:
  * [The Ecosystem](#ecosystem) (tools, libraries, community, books) guides
  * [Cookbooks](#cookbooks)
 
+For easier navigation of the menu on the left, guides marked with a
+star (✪) are considered relatively complete.
+
 
 ## Tutorials
 
@@ -163,7 +166,7 @@ This guide includes definitons of various Clojure-related terminology.
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) (Complete)
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) ✪
 
 This guide covers:
 
@@ -177,7 +180,7 @@ This guide covers:
  * How to share (publish) a library
 
 
-### [Clojure Community](/articles/ecosystem/community.html) (Complete)
+### [Clojure Community](/articles/ecosystem/community.html) ✪
 
 This guide covers:
 
@@ -187,7 +190,7 @@ This guide covers:
  * Other Clojure community resources
 
 
-### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) (Complete)
+### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) ✪
 
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
@@ -219,7 +222,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html) (Complete)
+### [Books](/articles/ecosystem/books.html) ✪
 
 This guide covers:
 
@@ -243,7 +246,7 @@ This guide covers:
  * How to use them
 
 
-### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) (Complete)
+### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) ✪
 
 This guide covers:
 
