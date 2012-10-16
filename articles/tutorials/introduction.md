@@ -39,8 +39,8 @@ expressions into it as you go.
 > the REPL prompt (ex. "`user=>`" or "`my-proj.core=>`").
 >
 > Additionally: In Clojure, a semicolon begins a single-line comment,
-> and in this document we use "`;=>`" (for trailing comments) and
-> "`;;=>`" (for comments on their own line) to indicate what the
+> and in this document we use "`; ⇒`" (for trailing comments) and
+> "`;; ⇒`" (for comments on their own line) to indicate what the
 > previous expression evaluates to.
 
 This introduction is a whirlwind tutorial of most of the basics of
@@ -65,8 +65,8 @@ up of expressions which are evaluated to some value. Here are some
 examples of expressions:
 
 ``` clojure
-5                      ;=> 5
-"hi"                   ;=> "hi"
+5                      ; ⇒ 5
+"hi"                   ; ⇒ "hi"
 [1 2 3]                ; evaluates to the vector `[1 2 3]`
 (+ 1 2)                ; evaluates to the sum of 1 and 2
 (if true "yes" "no")   ; evaluates to the string "yes"
@@ -78,7 +78,7 @@ Expressions can contain sub-expressions:
 ``` clojure
 (+ 1
    (* 2 3)
-   (/ 10 2))   ;=> 1 + (2 * 3) + (10 / 2) = 12
+   (/ 10 2))   ; ⇒ 1 + (2 * 3) + (10 / 2) = 12
 ```
 
 Expressions in (various types of) brackets are often referred to as
@@ -390,7 +390,7 @@ If for whatever reason you'd rather Clojure *not* treat something like
 
 ``` clojure
 '(+ 1 2 3)
-;;=> (+ 1 2 3)
+;; ⇒ (+ 1 2 3)
 ```
 
 This causes Clojure to then regard it simply as a 4-element list;
@@ -431,7 +431,7 @@ You can re-set the symbols in the binding vector multiple times
       x (* x x)
       x (+ x 1)]
   x)
-;;=> 5
+;; ⇒ 5
 ```
 
 The `let` expression itself evaluates to the last expression in its
@@ -498,10 +498,10 @@ There are functions for creating the various data structures without
 using the usual literal syntax:
 
 ``` clojure
-(list 1 2 3)            ;=> '(1 2 3)
-(vector 1 2 3)          ;=> [1 2 3]
-(hash-map :a 1 :b 2)    ;=> {:a 1 :b 2}
-(hash-set :a :b :c)     ;=> #{:a :b :c}
+(list 1 2 3)            ; ⇒ '(1 2 3)
+(vector 1 2 3)          ; ⇒ [1 2 3]
+(hash-map :a 1 :b 2)    ; ⇒ {:a 1 :b 2}
+(hash-set :a :b :c)     ; ⇒ #{:a :b :c}
 ```
 
 And there are various functions for converting between vectors, sets,
@@ -509,19 +509,19 @@ and maps:
 
 ``` clojure
 (def my-vec [1 2 3])
-(set my-vec)                   ;=> #{1 2 3}
+(set my-vec)                   ; ⇒ #{1 2 3}
 
 (def my-map {:a 1 :b 2})
-(vec my-map)                   ;=> [[:a 1] [:b 2]]
-(flatten (vec my-map))         ;=> (:a 1 :b 2)
-(set my-map)                   ;=> #{[:b 2] [:a 1]}
+(vec my-map)                   ; ⇒ [[:a 1] [:b 2]]
+(flatten (vec my-map))         ; ⇒ (:a 1 :b 2)
+(set my-map)                   ; ⇒ #{[:b 2] [:a 1]}
 
 (def my-set #{:a :b :c :d})
-(vec my-set)                   ;=> [:a :c :b :d]
+(vec my-set)                   ; ⇒ [:a :c :b :d]
 
 ;; And for fun:
-(zipmap [:a :b :c] [1 2 3])    ;=> {:c 3 :b 2 :a 1}
-(apply hash-map [:a 1 :b 2])   ;=> {:a 1 :b 2}
+(zipmap [:a :b :c] [1 2 3])    ; ⇒ {:c 3 :b 2 :a 1}
+(apply hash-map [:a 1 :b 2])   ; ⇒ {:a 1 :b 2}
 ```
 
 (We cover `apply` in the [Bread and Butter
@@ -556,33 +556,33 @@ Getting values from data structures:
 ``` clojure
 ;; Vectors
 (def v [:a :b :c])
-(nth v 1)             ;=> :b
-(v 1)                 ;=> :b  (same)
-(first v)             ;=> :a
-(rest v)              ;=> (:b :c)
-(next v)              ;=> (:b :c)
-(last v)              ;=> :c
+(nth v 1)             ; ⇒ :b
+(v 1)                 ; ⇒ :b  (same)
+(first v)             ; ⇒ :a
+(rest v)              ; ⇒ (:b :c)
+(next v)              ; ⇒ (:b :c)
+(last v)              ; ⇒ :c
 
 ;; Lists
 ;; Same as vectors, but can't index.
 
 ;; Maps
 (def m {:a 1 :b 2}
-(get m :a)            ;=> 1
-(m :a)                ;=> 1       (same)
-(:a m)                ;=> 1       (same!)
-(get m :x 44)         ;=> 44      (if no :x, 44 is the default)
-(keys m)              ;=> (:a :b)
-(vals m)              ;=> (1 2)
+(get m :a)            ; ⇒ 1
+(m :a)                ; ⇒ 1       (same)
+(:a m)                ; ⇒ 1       (same!)
+(get m :x 44)         ; ⇒ 44      (if no :x, 44 is the default)
+(keys m)              ; ⇒ (:a :b)
+(vals m)              ; ⇒ (1 2)
 ;; Grab a key or a val from a single map entry:
-(key (first m))       ;=> :a
-(val (first m))       ;=> 1
+(key (first m))       ; ⇒ :a
+(val (first m))       ; ⇒ 1
 ;; Of course, note that maps are not ordered.
 
 ;; Sets
 (def s #{:a :b :c})
-(s :a)                ;=> :a
-(s :z)                ;=> nil
+(s :a)                ; ⇒ :a
+(s :z)                ; ⇒ nil
 ```
 
 Data structures in Clojure are actually *immutable* --- you can't
@@ -596,25 +596,25 @@ we *can* get a new modified copy of a data structure:
 ;; Vectors
 (def v   [:a :b :c])
 (def li '(:a :b :c))
-(conj v  :d)          ;=> [:a :b :c :d]
-(conj li :d)          ;=> (:d :a :b :c)
+(conj v  :d)          ; ⇒ [:a :b :c :d]
+(conj li :d)          ; ⇒ (:d :a :b :c)
 
-v   ;=> is still [:a :b :c]
-li  ;=> is still (:a :b :c)
+v   ; ⇒ is still [:a :b :c]
+li  ; ⇒ is still (:a :b :c)
 
 ;; Maps
 (def m {:a 1 :b 2})
-(assoc m :c 3)        ;=> {:a 1 :c 3 :b 2}
-(dissoc m :b)         ;=> {:a 1}
+(assoc m :c 3)        ; ⇒ {:a 1 :c 3 :b 2}
+(dissoc m :b)         ; ⇒ {:a 1}
 
-m   ;=> is still {:a 1 :b 2}
+m   ; ⇒ is still {:a 1 :b 2}
 
 ;; Sets
 (def s #{:a :b})
-(conj s :c)           ;=> #{:a :c :b}
-(disj s :a)           ;=> #{:b}
+(conj s :c)           ; ⇒ #{:a :c :b}
+(disj s :a)           ; ⇒ #{:b}
 
-s   ;=> is still #{:a :b}
+s   ; ⇒ is still #{:a :b}
 ```
 
 See the [cheatsheet](http://clojure.org/cheatsheet) for much more
@@ -646,19 +646,19 @@ them:
 
 ``` clojure
 (str "hi" "there")
-;;=> "hithere"
+;; ⇒ "hithere"
 (count "hello")
-;;=> 5
+;; ⇒ 5
 (require '[clojure.string :as str])
-;;=> nil
+;; ⇒ nil
 (str/split "hello there" #" ")
-;;=> ["hello" "there"]
+;; ⇒ ["hello" "there"]
 (str/join ["hello" "there"])
-;;=> "hellothere"
+;; ⇒ "hellothere"
 (str/join " " ["hello" "there"])
-;;=> "hello there"
+;; ⇒ "hello there"
 (str/replace "hello there" "ll" "LL")
-;;=> "heLLo there"
+;; ⇒ "heLLo there"
 ```
 
 Some of them make optional use of regexes. There's more in the
@@ -669,20 +669,20 @@ sequentials works on strings. For example:
 
 ``` clojure
 (first "hello")
-;;=> \h
+;; ⇒ \h
 (last "hello")
-;;=> \o
+;; ⇒ \o
 (rest "hello")
-;;=> (\e \l \l \o)
+;; ⇒ (\e \l \l \o)
 (nth "hello" 1)
-;;=> \e
+;; ⇒ \e
 (doseq [letter "hello"] (println letter))
 ;; h
 ;; e
 ;; l
 ;; l
 ;; o
-;;=> nil
+;; ⇒ nil
 ```
 
 Again, see the cheatsheet for more.
@@ -813,11 +813,11 @@ This means that zero, the empty string, and empty core data structures
 are all true:
 
 ``` clojure
-(if   0 :t :f)  ;=> :t
-(if  "" :t :f)  ;=> :t
-(if  [] :t :f)  ;=> :t
-(if  {} :t :f)  ;=> :t
-(if #{} :t :f)  ;=> :t
+(if   0 :t :f)  ; ⇒ :t
+(if  "" :t :f)  ; ⇒ :t
+(if  [] :t :f)  ; ⇒ :t
+(if  {} :t :f)  ; ⇒ :t
+(if #{} :t :f)  ; ⇒ :t
 ```
 
 If you want to check if one of those is *empty*, you could use the
@@ -849,7 +849,7 @@ order as equal), for example:
 ``` clojure
 (= {:a  [1 2 3] :b #{:x :y} :c {:foo 1 :bar 2}}
    {:a '(1 2 3) :b #{:y :x} :c {:bar 2 :foo 1}})
-;;=> true
+;; ⇒ true
 ```
 
 There's also a double-equals function `==` that is more forgiving
@@ -857,9 +857,9 @@ across various types of numbers:
 
 ``` clojure
 (= 4 4.0)
-;;=> false
+;; ⇒ false
 (== 4 4.0)
-;;=> true
+;; ⇒ true
 ```
 
 See the docs for
@@ -1225,16 +1225,16 @@ The result is a new collection. You can often use `map` instead of
 manually looping over a collection. Some examples using `map`:
 
 ``` clojure
-(map inc [10 20 30])     ;=> (11 21 31)
-(map str [10 20 30])     ;=> ("10" "20" "30")
+(map inc [10 20 30])     ; ⇒ (11 21 31)
+(map str [10 20 30])     ; ⇒ ("10" "20" "30")
 ;; You can define the function to be used on-the-fly:
 (map (fn [x] (str "=" x "=")) [10 20 30])
-;;=> ("=10=" "=20=" "=30=")
+;; ⇒ ("=10=" "=20=" "=30=")
 
 ;; And `map` knows how to apply the function you give it
 ;; to mulitple collections in a coordinated way:
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3])
-;;=> (":a1" ":b2" ":c3")
+;; ⇒ (":a1" ":b2" ":c3")
 ```
 
 When working on more than one collection at a time, `map` is smart
@@ -1242,7 +1242,7 @@ enough to stop when the shorter of the colls runs out of items:
 
 ``` clojure
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3 4 5 6 7])
-;;=> (":a1" ":b2" ":c3")
+;; ⇒ (":a1" ":b2" ":c3")
 ```
 
 
@@ -1253,7 +1253,7 @@ just the values for which `(the-pred the-value)` returns true:
 
 ``` clojure
 (filter odd? (range 10))
-;;=> (1 3 5 7 9)
+;; ⇒ (1 3 5 7 9)
 ```
 
 Use `remove` for the opposite effect (which amounts to *removing* the
@@ -1261,7 +1261,7 @@ items for which `(pred val)` returns true):
 
 ``` clojure
 (remove odd? (range 10))
-;;=> (0 2 4 6 8)
+;; ⇒ (0 2 4 6 8)
 ```
 
 You will often find yourself using these functions instead
@@ -1277,10 +1277,10 @@ collection. `apply` "unpacks" the items in the coll:
 
 ``` clojure
 (max 1 5 2 8 3)
-;;=> 8
+;; ⇒ 8
 (max [1 5 2 8 3]) ;; ERROR
 (apply max [1 5 2 8 3])
-;;=> 8
+;; ⇒ 8
 ```
 
 A nice feature of `apply` is that you can supply extra args which
@@ -1288,7 +1288,7 @@ you'd like to be treated as if they were part of the collection:
 
 ``` clojure
 (apply max 4 55 [1 5 2 8 3])
-;;=> 55
+;; ⇒ 55
 ```
 
 
@@ -1300,11 +1300,11 @@ needing to resort to manually looping). `for` is similar to Python's
 
 ``` clojure
 (for [i (range 10)] i)
-;;=> (0 1 2 3 4 5 6 7 8 9)
+;; ⇒ (0 1 2 3 4 5 6 7 8 9)
 (for [i (range 10)] (* i i))
-;;=> (0 1 4 9 16 25 36 49 64 81)
+;; ⇒ (0 1 4 9 16 25 36 49 64 81)
 (for [i (range 10) :when (odd? i)] [i (str "<" i ">")])
-;;=> ([1 "<1>"] [3 "<3>"] [5 "<5>"] [7 "<7>"] [9 "<9>"])
+;; ⇒ ([1 "<1>"] [3 "<3>"] [5 "<5>"] [7 "<7>"] [9 "<9>"])
 ```
 
 Notice we snuck a "`:when (odd? i)`" in there. `for` even supports a
@@ -1322,14 +1322,14 @@ result you just got and the 3rd item in the coll. Then the result of
 
 ``` clojure
 (reduce + [1 2 3 4 5])
-;;--> 1 + 2   [3 4 5]
-;;--> 3       [3 4 5]
-;;--> 3 + 3   [4 5]
-;;--> 6       [4 5]
-;;--> 6 + 4   [5]
-;;--> 10      [5]
-;;--> 10 + 5
-;;=>  15
+;; → 1 + 2   [3 4 5]
+;; → 3       [3 4 5]
+;; → 3 + 3   [4 5]
+;; → 6       [4 5]
+;; → 6 + 4   [5]
+;; → 10      [5]
+;; → 10 + 5
+;; ⇒  15
 ```
 
 And, of course, you can supply your own function if you like:
@@ -1343,7 +1343,7 @@ for it to start off with:
 
 ``` clojure
 (reduce + 10 [1 2 3 4 5])
-;;=> 25
+;; ⇒ 25
 ```
 
 This by itself is pretty handy. But it gets even better. Since you can
@@ -1359,10 +1359,10 @@ function "build it up" as you go. For example:
         {}
         ["hi" "hello" "bye"])
 
-;;--> {}
-;;--> {:hi "hi-29"}
-;;--> {:hi "hi-29" :hello "hello-42"}
-;;=>  {:hi "hi-29" :hello "hello-42" :bye "bye-10"}
+;; → {}
+;; → {:hi "hi-29"}
+;; → {:hi "hi-29" :hello "hello-42"}
+;; ⇒  {:hi "hi-29" :hello "hello-42" :bye "bye-10"}
 ```
 
 Building up some accumulator using `reduce` and your own custom
@@ -1379,15 +1379,15 @@ supply right when you call it. For example:
 
 ``` clojure
 (defn lots-of-args [a b c d] (str/join "-" [a b c d]))
-;;=> #'user/lots-of-args
+;; ⇒ #'user/lots-of-args
 (lots-of-args 10 20 30 40)
-;;=> "10-20-30-40"
+;; ⇒ "10-20-30-40"
 (def fewer-args (partial lots-of-args 10 20 30))
-;;=> #'user/fewer-args
+;; ⇒ #'user/fewer-args
 (fewer-args 40)
-;;=> "10-20-30-40"
+;; ⇒ "10-20-30-40"
 (fewer-args 99)
-;;=> "10-20-30-99"
+;; ⇒ "10-20-30-99"
 ```
 
 `comp` is for composing a function from other ones. That is, `(comp
@@ -1406,10 +1406,10 @@ example:
                    wrap-in-stars))
 
 (wrap-it "hi")
-;;=> "@=*hi*=@"
+;; ⇒ "@=*hi*=@"
 ;; Which is the same as:
 (wrap-in-ats (wrap-in-equals (wrap-in-stars "hi")))
-;;=> "@=*hi*=@"
+;; ⇒ "@=*hi*=@"
 ```
 
 `(iterate foo x)` yields an infinite lazy list consisting
@@ -1428,7 +1428,7 @@ To just take the first, say, 5 values from an infinite list, try this:
 ``` clojure
 (defn square [x] (* x x))
 (take 5 (iterate square 2))
-;;=> (2 4 16 256 65536)
+;; ⇒ (2 4 16 256 65536)
 ```
 
 
@@ -1457,7 +1457,7 @@ this is called *recursion*. Here's a trivial example:
     accum
     (recur (conj accum i)
            (inc i))))
-;;=> [1 2 3 4 5 6 7 8 9]
+;; ⇒ [1 2 3 4 5 6 7 8 9]
 ```
 
 The state in this loop is carried in the `accum` vector, which we
@@ -1511,13 +1511,13 @@ syntax. Here's an (atom-specific) example:
 
 ``` clojure
 (def my-atom (atom {:foo 1}))
-;;=> #'user/my-atom
+;; ⇒ #'user/my-atom
 @my-atom
-;;=> {:foo 1}
+;; ⇒ {:foo 1}
 (swap! my-atom update-in [:foo] inc)
-;;=> {:foo 2}
+;; ⇒ {:foo 2}
 @my-atom
-;;=> {:foo 2}
+;; ⇒ {:foo 2}
 ```
 
 ... and we've just changed the state of the atom. (Note, `swap!` is a
