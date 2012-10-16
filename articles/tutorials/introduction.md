@@ -1314,7 +1314,6 @@ result you just got and the 3rd item in the coll. Then the result of
 
 ``` clojure
 (reduce + [1 2 3 4 5])
-
 ;; 1 + 2   [3 4 5]
 ;; 3       [3 4 5]
 ;; 3 + 3   [4 5]
@@ -1399,7 +1398,10 @@ example:
                    wrap-in-stars))
 
 (wrap-it "hi")
-;=> "@=*hi*=@"
+;; -->    "hi"
+;; -->   "*hi*"
+;; -->  "=*hi*="
+;; ==> "@=*hi*=@"
 ```
 
 `(iterate foo x)` yields an infinite lazy list consisting
