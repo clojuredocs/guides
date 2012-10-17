@@ -367,6 +367,19 @@ the interface:
   (instance? java.io.FileFilter ff)) ;= true
 ```
 
+`reify` can be used to implement multiple interfaces at once:
+
+``` clojure
+(let [ff (reify java.io.FilenameFilter
+           (accept [this dir name]
+             true)
+
+           java.io.FileFilter
+           (accept [this dir]
+             true))]
+  (instance? java.io.FileFilter ff)) ;= true
+```
+
 ### Example 1
 
 The following example demonstrates how instances created with `reify` are passed around
