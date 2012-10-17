@@ -342,12 +342,15 @@ specify that a function is private, via its metadata or the `defn-` macro:
 ;; Implementation
 ;;
 
-(defn- data-stream
-  [source]
+(def ^{:private true}
+  source-name "supersource")
+
+(defn ^{:private true} sealed-deal?
+  [deal]
   (comment ...))
 
-(def ^{:private true} sealed-deal?
-  [deal]
+(defn- data-stream
+  [source]
   (comment ...))
 ```
 
