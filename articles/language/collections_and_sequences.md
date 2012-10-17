@@ -235,7 +235,96 @@ Data types that `clojure.core/seq` can produce a sequence over are called *seqab
  * nil
 
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+The sequence abstraction supports several operations:
+
+ * `first`
+ * `rest`
+ * `next`
+
+and there are two ways to produce a sequence:
+
+ * `seq` produces a sequence over its argument (often a collection)
+ * `lazy-seq` creates a *lazy sequence* (that is produced by performing computation)
+
+### seq, cons, list*
+
+`clojure.core/seq` takes a single argument and returns a sequential view over it:
+
+```clojure
+(seq [1 2 3])
+;; ⇒ (1 2 3)
+```
+
+When given an empty collection or sequence, `clojure.core/seq` returns nil:
+
+```clojure
+(seq [])
+;; ⇒ nil
+```
+
+this is commonly used in the following pattern:
+
+```clojure
+(if (seq xs)
+  (comment "Do something with this sequence")
+  (comment "Do something else"))
+```
+
+Another function that constructs sequences is `clojure.core/cons`. It prepends values to the head of
+the given sequence:
+
+``` clojure
+(cons 0 (range 1 3))
+;; ⇒ (0 1 2)
+```
+
+`clojure.core/list*` does the same for a number of values:
+
+``` clojure
+(list* 0 1 (range 2 5))
+;; ⇒ (0 1 2 3 4)
+```
+
+`clojure.core/cons` and `clojure.core/list*` are primarily used to produce lazy sequences and in metaprogramming (when writing
+macros). As far as metaprogramming goes, sequences and lists are the same and it is common to
+add items in the beginning of the list (into the *calling position*).
+
+Note that `clojure.core/cons` does not create cons cells and lists in Clojure are not implemented
+as linked cons cells (like in many other dialects of Lisp).
+
+
+### first, rest, next
+
+`clojure.core/first` returns the first item in the sequence. `clojure.core/next` and `clojure.core/rest`
+return the rest:
+
+``` clojure
+(first (seq [1 2 3 4 5 6]))
+;; ⇒ 1
+
+(rest (seq [1 2 3 4 5 6]))
+;; ⇒ (2 3 4 5 6)
+```
+
+the difference between them is what they return on a single element sequence:
+
+``` clojure
+(rest (seq [:one]))
+;; ⇒ ()
+(next (seq [:one]))
+;; ⇒ nil
+```
+
+
+
+
+### Lazy Sequences in Clojure
+
+*Lazy sequences* are produced by performing computation or I/O. They can be infinite
+or not have exact length (e.g. a sequence of all powers of 2 or an audio stream).
+
+Lazy sequences is an broad topic and covered in the [Laziness](/articles/language/laziness.html) guide.
+
 
 
 ## Key Operations on Collections and Sequences
