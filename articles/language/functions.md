@@ -397,6 +397,12 @@ Keywords not present and not given a default will be nil.
 TBD: [How to contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 
+## Private Functions
+
+Functions in Clojure can be private to their namespace.
+
+They are covered in more detail in the [Namespaces](/articles/language/namespaces.html) guide.
+
 
 ## Keywords as Functions
 

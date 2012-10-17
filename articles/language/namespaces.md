@@ -330,6 +330,27 @@ or conditionally load other libraries (e.g. the most suitable JSON parser or key
 In all cases, to trigger compilation, you need to require the namespace.
 
 
+## Private Vars
+
+Vars (and, in turn, functions defined with `defn`) can be private. There are two ways to
+specify that a function is private, via its metadata or the `defn-` macro:
+
+``` clojure
+(ns megacorp.superlib)
+
+;;
+;; Implementation
+;;
+
+(defn- data-stream
+  [source]
+  (comment ...))
+
+(def ^{:private true} sealed-deal?
+  [deal]
+  (comment ...))
+```
+
 
 ## How to Look up and Invoke a Function by Name
 
