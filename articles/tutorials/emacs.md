@@ -52,7 +52,7 @@ your shell-specific config) you can add [this](https://gist.github.com/3887459) 
 issues when launching Emacs from the GUI on OS X
 ([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
-```lisp
+```scheme
 ;; fix the PATH variable
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -98,7 +98,7 @@ which you can look at for inspiration for Clojure specific things. You
 will certainly want to add clojure-mode, and clojure-test-mode to your
 list of packages to install:
 
-```lisp
+```scheme
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -120,7 +120,7 @@ packages. Unless you have any actual *errors* this is all fine.
 To look at the other packages available for installation you can do
 (from inside Emacs):
 
-```lisp
+```
 M-x package-list-packages
 ```
 
