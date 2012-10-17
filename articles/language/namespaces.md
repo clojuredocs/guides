@@ -345,13 +345,26 @@ specify that a function is private, via its metadata or the `defn-` macro:
 (def ^{:private true}
   source-name "supersource")
 
-(defn ^{:private true} sealed-deal?
-  [deal]
-  (comment ...))
-
 (defn- data-stream
   [source]
   (comment ...))
+```
+
+
+## Constant Vars
+
+Var can be constant: this is done by setting the `:const` metadata key to `true`. This
+will cause Clojure compiler to compile it as a constant:
+
+``` clojure
+(ns megacorp.epicgame)
+
+;;
+;; Implementation
+;;
+
+(def ^{:const true}
+  default-score 100)
 ```
 
 
