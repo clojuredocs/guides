@@ -261,11 +261,14 @@ You can find more information in the [clojure.core Overview](/articles/languages
 Returns a count of the number of items in a collection. An argument of nil returns 0.
 
 ``` clojure
-(count "Hello") ;= 5
+(count "Hello") 
+;; ⇒ 5
 
-(count [1 2 3 4 5 6 7]) ;= 7
+(count [1 2 3 4 5 6 7]) 
+;; ⇒ 7
 
-(count nil) ;= 0
+(count nil) 
+;; ⇒ 0
 ```
 
 Note that count does not return in constant time for all collections. This can be determined with `counted?`.
@@ -273,13 +276,16 @@ Keep in mind that lazy sequences must be realized to get a count of the items. T
 can cause a variety of otherwise cryptic errors.
 
 ``` clojure
-(counted? "Hello") ;= false
+(counted? "Hello") 
+;; ⇒ false
 
 ;; will be fully realized when using (count (range 10))
-(counted? (range 10) ;= false
+(counted? (range 10) 
+;; ⇒ false
 
 ;; Constant time return of (count)
-(counted? [1 2 3 4 5]) ;= true
+(counted? [1 2 3 4 5]) 
+;; ⇒ true
 ```
 
 ### conj
@@ -292,30 +298,36 @@ List addition occurs at the beginning of the list. This is because accessing the
 the tail requires traversal of the entire list.
 
 ```clojure
-(conj '(1 2) 3) ;= (3 1 2)
+(conj '(1 2) 3) 
+;; ⇒ (3 1 2)
 ```
 
 Vectors have constant time access across the entire data structure. `'conj' thusly appends to the end of a vector.
 
 ```clojure
-(conj [1 2] 3) ;= [1 2 3]
+(conj [1 2] 3) 
+;; ⇒ [1 2 3]
 ```
 
 Maps do not have guaranteed ordering, so the location that items are added is irrelevant. `conj` requires vectors of [key value] pairs to be
 added to the map.
 
 ```clojure
-(conj {:a 1 :b 2 :c 3} [:d 4]) ;= {:d 4, :a 1, :c 3, :b 2}
+(conj {:a 1 :b 2 :c 3} [:d 4]) 
+;; ⇒ {:d 4, :a 1, :c 3, :b 2}
 
-(conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13]) ;= {:giraffes 13, :ants 400, :cats 1, :dogs 2}
+(conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13]) 
+;; ⇒ {:giraffes 13, :ants 400, :cats 1, :dogs 2}
 ```
 
 Sets also do not have guaranteed ordering. `conj` returns a set with the item added. As the concept of sets implies, added items will not duplicate equivalent items if they are present in the set.
 
 ```clojure
-(conj #{1 4} 5) ;= #{1 4 5}
+(conj #{1 4} 5) 
+;; ⇒ #{1 4 5}
 
-(conj #{:a :b :c} :b :c :d :e) ;= #{:a :c :b :d :e}
+(conj #{:a :b :c} :b :c :d :e) 
+;; ⇒ #{:a :c :b :d :e}
 ```
 
 ### get
@@ -325,32 +337,40 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 ```clojure
 ;; val of a key in a map
-(get {:a 1 :b 2 :c 3} :b) ;= 2
+(get {:a 1 :b 2 :c 3} :b) 
+;; ⇒ 2
 
 ;; index of a vector
-(get [10 15 20 25] 2) ;= 20
+(get [10 15 20 25] 2) 
+;; ⇒ 20
 
 ;; in a set, returns the value itself if present
-(get #{1 10 100 2 20 200} 1) ;= 1
+(get #{1 10 100 2 20 200} 1) 
+;; ⇒ 1
 
 ;; returns nil if key is not present
-(get {:a 1 :b 2} :c) ;= nil
+(get {:a 1 :b 2} :c)
+;; ⇒ nil
 
 ;; vector does not have an _index_ of 4. nil is returned
-(get [1 2 3 4] 4) ;= nil
+(get [1 2 3 4] 4) 
+;; ⇒ nil
 
 (defrecord Hand [index middle ring pinky thumb])
-(get (Hand. 3 4 3.5 2 2) :index) ;= 3
+(get (Hand. 3 4 3.5 2 2) :index) 
+;; ⇒ 3
 ```
 
 `get` also supports a default return value supplied as the last argument.
 
 ```clojure
 ;; index 4 does not exist. return default value
-(get [1 2 3 4] 4 "Not Found") ;= "Not Found"
+(get [1 2 3 4] 4 "Not Found") 
+;; ⇒ "Not Found"
 
 ;; key :c does not exist, so return default value of 3
-(get {:a 1 :b 2} :c 3) ;= 3
+(get {:a 1 :b 2} :c 3) 
+;; ⇒ 3
 ```
 
 ### assoc
@@ -362,12 +382,15 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
 
 ```clojure
-(assoc {:a 1} :b 2) ;= {:b 2, :a 1}
+(assoc {:a 1} :b 2) 
+;; ⇒ {:b 2, :a 1}
 
-(assoc {:a 1 :b 45 :c 3} :b 2) ;= {:a 1, :c 3, :b 2}
+(assoc {:a 1 :b 45 :c 3} :b 2) 
+;; ⇒ {:a 1, :c 3, :b 2}
 
 (defrecord Hand [index middle ring pinky thumb])
-(assoc (Hand. 3 4 3.5 2 2) :index 3.75) ;= #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
+(assoc (Hand. 3 4 3.5 2 2) :index 3.75) 
+;; ⇒ #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
 ```
 When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector.
 The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
@@ -384,14 +407,17 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 `dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
 
 ```clojure
-(dissoc {:a 1 :b 2 :c 3} :b) ;= {:a 1, :c 3}
+(dissoc {:a 1 :b 2 :c 3} :b) 
+;; ⇒ {:a 1, :c 3}
 
-(dissoc {:a 1 :b 14 :c 390 :d 75 :e 2 :f 51} :b :c :e) ;= {:a 1, :f 51, :d 75}
+(dissoc {:a 1 :b 14 :c 390 :d 75 :e 2 :f 51} :b :c :e) 
+;; ⇒ {:a 1, :f 51, :d 75}
 
 ;; note that a map is returned, not a record.
 (defrecord Hand [index middle ring pinky ring])
 ;; always be careful with the bandsaw!
-(dissoc (Hand. 3 4 3.5 2 2) :ring) ;= {:index 3, :middle 4, :pinky 2, :thumb 2}
+(dissoc (Hand. 3 4 3.5 2 2) :ring) 
+;; ⇒ {:index 3, :middle 4, :pinky 2, :thumb 2}
 ```
 
 ### first
@@ -401,11 +427,14 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
 
 ```clojure
-(first (range 10)) ;= 0
+(first (range 10)) 
+;; ⇒ 0
 
-(first [:floor :piano :seagull]) ;= :floor
+(first [:floor :piano :seagull]) 
+;; ⇒ :floor
 
-(first []) ;= nil
+(first []) 
+;; ⇒ nil
 ```
 
 ### rest
@@ -415,9 +444,11 @@ Note that for collections that do not guarantee order like some maps and sets, t
 `rest` should also not be relied on when using maps and sets unless you are sure ordering is guaranteed.
 
 ```clojure
-(rest [13 1 16 -4]) ;= (1 16 -4)
+(rest [13 1 16 -4]) 
+;; ⇒ (1 16 -4)
 
-(rest '(:french-fry)) ;= '()
+(rest '(:french-fry)) 
+;; ⇒ '()
 ```
 
 The behaviour of `rest` should be contrasted with `next`. `next` returns nil if the collection only has a single item. This is important when considering "truthiness" of values since an empty seq is "true" but nil is not.
@@ -441,9 +472,11 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 `empty?` returns true if the collection has no items, or false if it has 1 or more items.
 
 ```clojure
-(empty? []) ;= true
+(empty? []) 
+;; ⇒ true
 
-(empty? '(1 2 3)) ;= false
+(empty? '(1 2 3)) 
+;; ⇒ false
 ```
 
 Do not confuse `empty?` with `empty`. This can be a source of great confusion:
@@ -452,7 +485,7 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 (if (empty [1 2 3]) ;; empty returns an empty seq, which is true! use empty? here.
   "It's empty"
   "It's not empty")
-;; "It's empty"
+;; ⇒ "It's empty"
 ```
 
 ### empty
@@ -460,9 +493,11 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 `empty` returns an empty collection of the same type as the collection provided.
 
 ```clojure
-(empty [1 2 3]) ;= []
+(empty [1 2 3]) 
+;; ⇒ []
 
-(empty {:a 1 :b 2 :c 3}) ;= {}
+(empty {:a 1 :b 2 :c 3}) 
+;; ⇒ {}
 ```
 
 ### not-empty
@@ -470,9 +505,11 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 `not-empty` returns nil if the collection has no items. If the collection contains items, the collection is returned.
 
 ```clojure
-(not-empty '(:mice :elephants :children)) ;= (:mice :elephants :children)
+(not-empty '(:mice :elephants :children)) 
+;; ⇒ (:mice :elephants :children)
 
-(not-empty '()) ;= nil
+(not-empty '()) 
+;; ⇒ nil
 ```
 
 ### contains?
@@ -480,19 +517,24 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 `contains` returns true if the provided *key* is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
 
 ```clojure
-(contains? {:a 1 :b 2 :c 3} :c) ;= true
+(contains? {:a 1 :b 2 :c 3} :c) 
+;; ⇒ true
 
 ;; true if index 2 exists
-(contains? ["John" "Mary" "Paul"] 2) ;= true
+(contains? ["John" "Mary" "Paul"] 2) 
+;; ⇒ true
 
 ;; false if index 5 does not exist
-(contains? ["John" "Mary" "Paul"] 5) ;= false
+(contains? ["John" "Mary" "Paul"] 5) 
+;; ⇒ false
 
 ;; "Paul" does not exist as an index
-(contains? ["John" "Mary" "Paul"] "Paul") ;= false
+(contains? ["John" "Mary" "Paul"] "Paul") 
+;; ⇒ false
 
 ;; lists always return false. Contain won't traverse a collection for a result.
-(contains? '(1 2 3) 0) ;= false
+(contains? '(1 2 3) 0) 
+;; ⇒ false
 ```
 
 ### some
@@ -502,22 +544,26 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 Since collections are "true" values, this makes it possible to return the first result itself rather than simply `true`.
 
 ```clojure
-(some even? [1 2 3 4 5]) ;= true
+(some even? [1 2 3 4 5]) 
+;; ⇒ true
 
 ;; predicate returns the value rather than simply true 
-(some #(if (even? %) %) [1 2 3 4 5]) ;= 2
+(some #(if (even? %) %) [1 2 3 4 5]) 
+;; ⇒ 2
 ```
 
 Since maps can be used as functions, you can use a map as a predicate. This will return the value of the first key in the collection that is also in the map.
 
 ```clojure
-(some {:a 1 :b 5} [:h :k :d :b]) ;= 5
+(some {:a 1 :b 5} [:h :k :d :b]) 
+;; ⇒ 5
 ```
 
 Sets can also be used as functions and will return the first item in the collection that is present in the set.
 
 ```clojure
-(some #{4} (range 20)) ;= 4
+(some #{4} (range 20)) 
+;; ⇒ 4
 ```
 
 ### every?
@@ -525,32 +571,12 @@ Sets can also be used as functions and will return the first item in the collect
 `every` returns true if the predicate returns true for every item in the collection, otherwise it returns false.
 
 ```clojure
-(every? even? (range 0 10 2)) ;= true
+(every? even? (range 0 10 2)) 
+;; ⇒ true
 
 ;; set can be used to see if collection only contains items in the set.
-(every? #{2 3 4} [2 3 4 2 3 4]) ;= true
-```
-
-### keys
-
-`key`s returns a sequence of the keys in a map or record.
-
-```clojure
-(keys {1 "one" 2 "two" 3 "three"}) ;= (1 2 3)
-
-(defrecord Hand [index middle ring pinky thumb])
-(keys (Hand. 2 4 3 1 2)) ;= (:index :middle :ring :pinky :thumb)
-```
-
-### vals
-
-`vals` returns a sequence of vals in a map or record.
-
-```clojure
-(vals {:meows 20 :barks 2 :moos 5}) ;= (5 2 20)
-
-(defrecord Hand [index middle ring pinky thumb])
-(vals (Hand. 1 2 3 4 5)) ;= (1 2 3 4 5)
+(every? #{2 3 4} [2 3 4 2 3 4]) 
+;; ⇒ true
 ```
 
 ### map
@@ -569,10 +595,10 @@ TODO: Simple image accompaniment.
 
 ```clojure
 (filter even? (range 10))
-;; (0 2 4 6 8)
+;; ⇒ (0 2 4 6 8)
 
 (filter #(if (< (count %) 5) %) ["Paul" "Celery" "Computer" "Rudd" "Tayne"])
-;; ("Paul" "Rudd")
+;; ⇒ ("Paul" "Rudd")
 ```
 
 When using sets with `filter`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`.
@@ -581,7 +607,7 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 ```clojure
 (filter #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
-;; (:nothing :something)
+;; ⇒ (:nothing :something)
 ```
 
 ### remove
@@ -589,10 +615,12 @@ In this example, when nil and false are tested with the predicate, the predicate
 `remove` returns a lazy sequence of items that return `false` or `nil` for the provided predicate. Contrast to `filter`.
 
 ```clojure
-(remove even? (range 10)) ;= (1 3 5 7 9)
+(remove even? (range 10)) 
+;; ⇒ (1 3 5 7 9)
 
 ;; relative complement. probably useless?
-(remove {:a 1 :b 2} [:h :k :z :b :s]) ;= (:h :k :z :s)
+(remove {:a 1 :b 2} [:h :k :z :b :s]) 
+;; ⇒ (:h :k :z :s)
 ```
 
 When using sets with `remove`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`.
@@ -601,8 +629,14 @@ This will cause that item to be included in the returned lazy sequence.
 In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned.
 
 ```clojure
-(remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons]) ;= (:things :someone nil false :pigeons)
+(remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons]) 
+;; ⇒ (:things :someone nil false :pigeons)
 ```
+
+### iterate
+
+TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TODO: Simple image accompaniment.
 
 ### get-in
 
@@ -618,6 +652,32 @@ TODO: Simple image accompaniment.
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 TODO: Simple image accompaniment.
+
+### keys
+
+`key`s returns a sequence of the keys in a map or record.
+
+```clojure
+(keys {1 "one" 2 "two" 3 "three"}) 
+;; ⇒ (1 2 3)
+
+(defrecord Hand [index middle ring pinky thumb])
+(keys (Hand. 2 4 3 1 2)) 
+;; ⇒ (:index :middle :ring :pinky :thumb)
+```
+
+### vals
+
+`vals` returns a sequence of vals in a map or record.
+
+```clojure
+(vals {:meows 20 :barks 2 :moos 5}) 
+;; ⇒ (5 2 20)
+
+(defrecord Hand [index middle ring pinky thumb])
+(vals (Hand. 1 2 3 4 5)) 
+;; ⇒ (1 2 3 4 5)
+```
 
 ### select-keys
 
