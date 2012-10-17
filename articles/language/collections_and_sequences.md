@@ -703,7 +703,44 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ## Transients
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+Clojure data structures are immutable, they do not change. Mutating them produces
+a new data structure that internally has structural sharing with the original
+one. This makes a whole class of concurrency hazards go away but has some
+performance penalty and additional GC pressure.
+
+For cases when raw performance for a piece of code is more important than safety,
+Clojure provides mutable versions of vectors and unsorted maps. They are known
+as *transients* and should only be used for locals and as an optimization
+technique after profiling.
+
+Transients are produced from immutable data structures using the `clojure.core/transient`
+function:
+
+``` clojure
+(let [m (transient {})]
+  (assoc! m :key "value") ;; mutates the transient in place!
+  (count m)) ;; ⇒ 1
+```
+
+Note that `clojure.core/transient` does not affect nested collections, for
+example, values in a map of keywords to vectors.
+
+To mutate transients, use `clojure.core/assoc!`, `clojure.core/dissoc!` and
+`clojure.core/conj!`. The exclamation point at the end hints that these
+functions work on transients and modify data structures in place, which
+is not safe of data structures are shared between threads.
+
+To create an immutable data structure out of a transient, use `clojure.core/persistent!`:
+
+``` clojure
+(let [m (transient {})]
+        (assoc! m :key "value")
+        (persistent! m)) ;; ⇒ {:key "value"}
+```
+
+In conclusion: use transients only as an optimization technique and only
+after profiling and identifying hot spots in your code. Guessing is the
+shortest way we know to blowing the performance.
 
 
 ## Custom Collections and Sequences
