@@ -46,18 +46,15 @@ good indentation support.
 
 The easiest way this author has found to install jEdit is to just download and
 run the Java-based installer (jar file). After that, follow the excellent
-instructions in the LispIndent README and you'll be good to go.
+instructions in the LispIndent README.
 
 Two configuration recommendations for after you've installed LispIndent: In
 "Plugins --> Plugin Options --> LispIndent pane":
 
-  * in the "File Ending Options" area, make sure the box is checked to only
-    use the plug-in for clj/cljs files, and
-  * in the "Indent Options" area, select the "Indent to function arguments by
-    default" radio button, check the "Indent two spaces if operator matches"
-    checkbox, and in the text-entry box put
-    "def|defn|fn|let|ns|with-open|for|loop|doseq|dotimes|if-let|when-let" (no
-    quotes).
+  * in the "File Ending Options" area, make sure the box is checked so that
+    this plug-in is used only for clj/cljs files, and
+  * to set up LispIndent specifically for *Clojure*, click the "Use Preset"
+    button and select "Clojure" in the pop-up.
 
 
 
