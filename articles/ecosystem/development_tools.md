@@ -56,7 +56,7 @@ Two configuration recommendations for after you've installed LispIndent: In
     use the plug-in for clj/cljs files, and
   * in the "Indent Options" area, select the "Indent to function arguments by
     default" radio button, check the "Indent two spaces if operator matches"
-    checkbox, and in the text-entry box put "defn" (no quotes).
+    checkbox, and in the text-entry box put "def|defn|fn|let|ns|with-open|for|loop|doseq|dotimes|if-let|when-let" (no quotes).
 
 
 
