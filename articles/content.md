@@ -212,7 +212,7 @@ This guide covers:
  * Popular tools and libraries in the area
 
 
-### [Editors & IDEs](/articles/ecosystem/development_tools.html) (TBD)
+### [Editors & IDEs](/articles/ecosystem/development_tools.html) (incomplete)
 
 This guide covers:
 
