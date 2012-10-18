@@ -16,7 +16,7 @@ available [on Github](https://github.com/clojuredocs/cds).
 
 ## Editors & IDEs
 
-Editors and IDEs listed below are in alphabetical order.
+Editors and IDEs are listed below in alphabetical order.
 
 
 
