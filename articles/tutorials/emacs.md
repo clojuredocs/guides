@@ -31,10 +31,11 @@ Once brew is installed, you can install Emacs 24 using:
 
 ```bash
 $ brew install emacs --cocoa
+$ brew linkapps Emacs
 ```
 
 This should install Emacs 24.x, which is required for the
-emacs-starter-kit.
+emacs-starter-kit, and symlink Emacs.app to your ~/Applications folder.
 
 After compiling, Emacs will be living happily somewhere in your
 cellar. You can check this:
@@ -42,10 +43,6 @@ cellar. You can check this:
 ```bash
 $ ls /usr/local/Cellar/emacs/24.x
 ```
-
-You will find that Homebrew has created a Emacs.app for you which you
-can copy to your /Applications folder for easy launching. I tried
-symlinking, but it didnt work for me.
 
 If you have customizations to your environment (say in `.profile` or
 your shell-specific config) you can add [this](https://gist.github.com/3887459) function to fix the path
