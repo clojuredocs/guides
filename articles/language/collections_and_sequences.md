@@ -842,4 +842,10 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ## Wrapping Up
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+When working with Clojure, it is common to operate and transform collections and sequences.
+Clojure's core library unify operations on collections and sequences where possible.
+This extends to Java collections, arrays and iterable objects for seamless interoperability.
+
+Most of the time, whenever you need a function that transforms sequences, chances are, there is
+one already that does that in `clojure.core` or you can compose more than one `clojure.core` function
+to achieve the same result.
