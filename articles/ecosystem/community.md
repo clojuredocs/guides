@@ -43,7 +43,7 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
   * [Clojure Documentation Site](http://clojure-doc.org)
   * [Clojuredocs](http://clojuredocs.org/): Clojure API reference, with examples
   * [Clojure API cheatsheets with tooltips](http://jafingerhut.github.com/)
-
+  * [Clojure Koans](http://clojurekoans.com/)
 
 ## User Groups
 

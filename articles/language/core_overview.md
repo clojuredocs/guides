@@ -27,8 +27,9 @@ This guide covers Clojure 1.4.
 
 ### let
 
+`let` takes a vector of symbol value pairs followed by a variable number of expressions.
+
 `let` allows binding of locals (roughly equivalent to variables in many other languages) and defines an explicit scope for those bindings.
-The bindings are defined as a vector of [symbol value] pairs.
 
 The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
 
@@ -57,7 +58,9 @@ TBD: link to the section about destructuring
 
 ### def
 
-`def` takes a symbol and an optional init value. If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding.
+`def` takes a symbol and an optional init value. 
+
+If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding.
 
 A root binding is a value that is shared across all threads.
 
@@ -65,11 +68,13 @@ The `let` form is the preferred method of creating local bindings. It is strongl
 
 
 ``` clojure
-;; todo - reference to var documentation, basic example
-;; todo - metadata
+;; TBD - reference to var documentation, basic example
+;; TBD - metadata
 ```
 
 ### declare
+
+`declare` takes a variable number of symbols.
 
 `declare` provides a simple way of creating 'forward declarations'. `declare` defs the supplied symbols with no init values. This allows for referencing of a var before it has been supplied a value.
 
@@ -100,6 +105,8 @@ No matter which order you put func<10 and func<20 in, there will be a reference 
 
 ### defn
 
+`defn` takes a symbol, an optional doc string, an optional meta-data map, a vector of arguments and a variable number of expressions.
+
 `defn` allows for succinct definition of a function and metadata about its argslist and doc-string. `defn` inherently allows for quick documentation of functions that can be retrieved with `doc`. This feature should be used almost universally.
 
 Without `defn`, a var would be directly bound to a function definition and explicit metadata about the doc string and argslits would be added manually.
@@ -118,7 +125,7 @@ Without `defn`, a var would be directly bound to a function definition and expli
 ```
 
 ``` clojure
-;; todo - link to doc and metadata
+;; TBD - link to doc and metadata
 ```
 
 ### ns
@@ -127,9 +134,11 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### if
 
+`if` takes 2 expressions, and an optional third.
+
 `if` is the primary method of conditional execution and other conditionals are built upon `if`.
 
-`if` is an expression that takes 2 expressions, and an optional third.  If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
+If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
 
 If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
 
@@ -153,6 +162,8 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ### when
 
+`when` takes 2 expressions.
+
 `when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. `when` does not provide an 'else'.
 
 ``` clojure
@@ -166,7 +177,9 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ### for
 
-`for` allows for list comprehensions. `for` takes a vector of pairs of [binding collection]. `for` then assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
+`for` takes a vector of pairs of [binding collection].
+
+`for` allows for list comprehensions. `for`  assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
 
 `for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
 
@@ -198,6 +211,8 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ### doseq
 
+`doseq` takes a vector of pairs of [binding collection].
+
 `doseq` is similar to `for` except it does not return a sequence of results. `doseq` is generally intended for execution of side-effects in the body, and thusly returns nil.
 
 `doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
@@ -211,6 +226,8 @@ If a third expression is provided, when the first expression returns nil or fals
 ```
 
 ### apply
+
+`apply` takes a variable number of arguments and a collection.
 
 `apply` effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
 
@@ -268,6 +285,7 @@ The point of recursion is the nearest `fn` or `loop` form determined lexically.
 TBD: more examples
 
 ### loop
+`loop` takes a vector of symbol value pairs followed by a variable number of expressions.
 
 `loop` establishes a recursion point for a `recur` expression inside its body. `loop` provides an implicit `let` for bindings.
 
@@ -288,9 +306,11 @@ TBD: more examples
 
 ### trampoline
 
+`trampoline` takes a function and a variable number of arguments to pass to that function.
+
 `trampoline` allows for mutual recursion without consuming stack space proportional to the number of recursive calls made.
 
-`trampoline` takes an initial function to call and the arguments for that function. If the return value of that function is a function, `trampoline` calls that function with no arguments. If the return value is not a function, `trampoline` simply returns that value.
+If the return value of that function is a function, `trampoline` calls that function with no arguments. If the return value is not a function, `trampoline` simply returns that value.
 
 Since `trampoline` calls the returned functions with no arguments, you must supply an anonymous function that takes no arguments and calls the function you wish to recur to. This is usually done with anonymous function literals ``` #() ```
 
@@ -316,6 +336,8 @@ TBD: a trivial example that would not be easily solved with self-recursion
 ## Collections and Sequences
 
 ### count
+
+`count` takes a collection.
 
 Returns a count of the number of items in a collection. An argument of nil returns 0.
 
@@ -349,7 +371,9 @@ can cause a variety of otherwise cryptic errors.
 
 ### conj
 
-`conj` is short for "conjoin". As the name implies, `conj` takes a collection and argument(s) and returns the collection with those arguments added.
+`conj` takes a collection and a variable number of arguments.
+
+`conj` is short for "conjoin". As the name implies, `conj` returns the collection with those arguments added.
 
 Adding items to a collection occurs at different places depending on the concrete type of collection.
 
@@ -391,8 +415,9 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 ### get
 
-`get` returns the value for the specified key in a map or record, index of a vector or value in a set. If the key is not present,
-`get` returns nil or a supplied default value.
+`get` takes an associative collection, a sequence of keys and an optional default value.
+
+`get` returns the value for the specified key in a map or record, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
 
 ```clojure
 ;; val of a key in a map
@@ -463,6 +488,8 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 
 ### dissoc
 
+`dissoc` takes a map and a variable number of keys.
+
 `dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
 
 ```clojure
@@ -481,6 +508,8 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 
 ### first
 
+`first` takes a collection.
+
 `first` returns the first item in the collection. `first` returns nil if the argument is empty or is nil.
 
 Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
@@ -497,6 +526,8 @@ Note that for collections that do not guarantee order like some maps and sets, t
 ```
 
 ### rest
+
+`rest` takes a collection.
 
 `rest` returns a seq of items starting with the second element in the collection. `rest` returns an empty seq if the collection only contains a single item.
 
@@ -528,6 +559,8 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 
 ### empty?
 
+`empty` takes a collection.
+
 `empty?` returns true if the collection has no items, or false if it has 1 or more items.
 
 ```clojure
@@ -549,6 +582,8 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 
 ### empty
 
+`empty` takes a collection
+
 `empty` returns an empty collection of the same type as the collection provided.
 
 ```clojure
@@ -561,6 +596,8 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 
 ### not-empty
 
+`not-empty` takes a collection.
+
 `not-empty` returns nil if the collection has no items. If the collection contains items, the collection is returned.
 
 ```clojure
@@ -572,6 +609,8 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 ```
 
 ### contains?
+
+`contains?` takes a map and a key.
 
 `contains` returns true if the provided *key* is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
 
@@ -597,6 +636,8 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 ```
 
 ### some
+
+`some` takes a function that accepts a single argument and a collection.
 
 `some` will apply a predicate to each value in a collection until a non-false/nil result is returned then immediately return that result.
 
@@ -627,6 +668,8 @@ Sets can also be used as functions and will return the first item in the collect
 
 ### every?
 
+`every` takes a function that accepts a single argument and a collection.
+
 `every` returns true if the predicate returns true for every item in the collection, otherwise it returns false.
 
 ```clojure
@@ -640,7 +683,9 @@ Sets can also be used as functions and will return the first item in the collect
 
 ### keys
 
-`key`s returns a sequence of the keys in a map or record.
+`keys` takes a map or record.
+
+`keys` returns a sequence of the keys in a map or record.
 
 ```clojure
 (keys {1 "one" 2 "two" 3 "three"}) 
@@ -652,6 +697,8 @@ Sets can also be used as functions and will return the first item in the collect
 ```
 
 ### vals
+
+`vals` takes a map or record.
 
 `vals` returns a sequence of vals in a map or record.
 
@@ -666,37 +713,83 @@ Sets can also be used as functions and will return the first item in the collect
 
 ### map
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`map` takes a function and one or more collections. 
+
+`map` passes an item from each collection, in order, to the function and returns a lazy sequence of the results.
+
+The function provided to `map` must support an arity matching the number of collections passed. Due to this, when using more than one collection, map stops processing items when any collection runs out of items.
+
+```clojure
+TBD: Examples
+```
+
+TBD: Simple image accompaniment.
 
 ### iterate
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`iterate` takes a function and an argument to the function. 
+
+A lazy sequence is returned consisting of the argument then each subsequent entry is the function evaluated with the previous entry in the lazy sequence.
+
+```clojure
+TBD: Examples
+```
+
+TBD: Simple image accompaniment.
 
 ### reduce
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`reduce` takes a function, an optional initial value and a collection. 
+
+`reduce` takes the first item of the collection and either the second item of the collection or the provided initial value, then evaluates the function with those arguments. The function is then evaluated with that result and the next item in the collection. This is repeated until the collection is exhausted and the value of the final function call is returned.
+
+```clojure
+TBD: examples
+```
+
+TBD: Simple image accompaniment.
 
 ### reductions
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`reductions` takes a function, an optional initial value and a collection. 
+
+`reductions` returns a lazy sequence consisting of the first item in the collection, or the provided initial value followed by the result of the function evaluated with the previous result and the next item in the collection.
+
+```clojure
+TBD: examples
+```
+
+TBD: Simple image accompaniment.
 
 ### juxt
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`juxt` takes a variable number of functions. 
+
+`juxt` returns a function that will return a vector consisting of the result of each of those functions to a provided argument.
+
+```clojure
+TBD: examples
+```
+
+TBD: Simple image accompaniment.
 
 ### comp
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`comp` takes a variable number of functions. 
+
+`comp` returns a function that will return the result of applying the rightmost function to the provided argument, then the second rightmost function to the result of that etc...
+
+```clojure
+TBD: examples
+```
+
+TBD: Simple image accompaniment.
 
 ### fnil
 
-`fnil` takes a function and one to three arguments. `fnil` returns a function that replaces any nil arguments with the provided values. `fnil` only supports supports patching 3 arguments, but will pass any arguments beyond that un-patched.
+`fnil` takes a function and one to three arguments. 
+
+`fnil` returns a function that replaces any nil arguments with the provided values. `fnil` only supports supports patching 3 arguments, but will pass any arguments beyond that un-patched.
 
 ```clojure
 (defn say-info [name location hobby]
@@ -712,6 +805,8 @@ TODO: Simple image accompaniment.
 ```
 
 ### filter
+
+`filter` takes a function that accepts a single argument and a collection.
 
 `filters` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`
 
@@ -733,6 +828,8 @@ In this example, when nil and false are tested with the predicate, the predicate
 ```
 
 ### remove
+
+`remove` takes a function that accepts a single argument and a collection.
 
 `remove` returns a lazy sequence of items that return `false` or `nil` for the provided predicate. Contrast to `filter`.
 
@@ -757,38 +854,91 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 ### get-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`get-in` takes an associative collection, a sequence of keys and an optional default value.
+
+`get-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value and returns the final result. If any key is not present when evaluated then either nil, or a provided default value is returned.
+
+```clojure
+TBD: example
+```
+
+TBD: Simple image accompaniment.
 
 ### update-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`update-in` takes an associative collection, a sequence of keys, a function and optional arguments to supply to that function.
+
+`update-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value. The function and optional arguments are applied to the value and a new nested collection is returned with the key having the result of that function.
+
+`update-in` will create new hash-maps if a key in the sequence of keys does not exist. The returned collection will have a nested structure correlating to the provided sequence along with the result of the function and optional arguments as the value of the final key.
+
+```clojure
+TBD: example
+```
+
+TBD: Simple image accompaniment.
 
 ### assoc-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+`assoc-in` takes an associative collection, a sequence of keys and a value.
+
+`assoc-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value. The final key is assigned the provided value and a new nested collection is returned.
+
+`update-in` will create new hash-maps if a key in the sequence of keys does not exist. The returned collection will have a nested structure correlating to the provided sequence along with the provided value as the value of the final key.
+
+```clojure
+TBD: example
+```
+
+TBD: Simple image accompaniment.
 
 ### select-keys
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`select-keys` takes an associative collection and a sequence of keys.
+
+`select-keys` returns a map containing only the entries that have a key which is also present in the sequence of keys.
+
+```clojure
+TBD: example
+```
 
 ### take
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`take` takes a number and a collection.
+
+`take` returns a lazy sequence starting with the first value of the collection and n sequential items after that.
+
+If the number of items in the collection is less than the provided number, the entire collection is returned lazily.
+
+```clojure
+TBD: example
+```
 
 ### drop
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`drop` takes a number and a collection.
+
+`drop` returns a lazy sequence starting at the nth item of the collection.
+
+```clojure
+TBD: example
+```
 
 ### take-while
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`take-while` takes a function that accepts a single-argument and a collection.
+
+`take-while` returns a lazy sequence of sequential items until the function returns nil/false value for that item.
+
+```clojure
+TBD: example
+```
 
 ### drop-while
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+'drop-while` takes a function that accepts a single-argument and a collection.
+
+`drop-while` returns a lazy sequence starting at the first item in the collection that the function returns nil/false.
 
 ### partition
 
@@ -803,12 +953,12 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 ### ->
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+TBD: Simple image accompaniment.
 
 ### ->>
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-TODO: Simple image accompaniment.
+TBD: Simple image accompaniment.
 
 ## Reference Types
 
