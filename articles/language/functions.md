@@ -323,11 +323,11 @@ Variadic functions are functions that take varying number of arguments (some arg
 of such function in `clojure.core` are `clojure.core/str` and `clojure.core/format`:
 
 ``` clojure
-(str "a" "b")     ;= "ab"
-(str "a" "b" "c") ;= "abc"
+(str "a" "b")     ;; ⇒ "ab"
+(str "a" "b" "c") ;; ⇒ "abc"
 
-(format "Hello, %s" "world")              ;= "Hello, world"
-(format "Hello, %s %s" "Clojure" "world") ;= "Hello, Clojure world"
+(format "Hello, %s" "world")              ;; ⇒ "Hello, world"
+(format "Hello, %s %s" "Clojure" "world") ;; ⇒ "Hello, Clojure world"
 ```
 
 To define a variadic function, prefix optional arguments with an ampersand (`&`):
@@ -394,7 +394,18 @@ Keywords not present and not given a default will be nil.
 
 ## Higher Order Functions
 
-TBD: [How to contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+Higher-order functions (*HOFs*) are functions that take other functions as arguments. HOFs
+are an important functional programming technique and are quite commonly used in Clojure. One example
+of an HOF is a function that takes a function and a collection and returns a collection of elements
+that satisfy a condition (a predicate). In Clojure, this function is called `clojure.core/filter`:
+
+``` clojure
+(filter even? (range 0 10)) ;; ⇒ (0 2 4 6 8)
+```
+
+In the example above, `clojure.core/filter` takes `clojure.core/even?` as an argument.
+
+`clojure.core` has dozens of other higher-order functions. The most commonly used ones are covered in [clojure.core Overview](/articles/language/core_overview.html).
 
 
 ## Private Functions
@@ -409,19 +420,19 @@ They are covered in more detail in the [Namespaces](/articles/language/namespace
 In Clojure, keywords can be used as functions. They take a map or record and look themselves up in it:
 
 ``` clojure
-(:age {:age 27 :name "Michael"}) ;= 27
+(:age {:age 27 :name "Michael"}) ;; ⇒ 27
 ```
 
 This is commonly used with higher order functions:
 
 ``` clojure
-(map :age [{:age 45 :name "Joe"} {:age 42 :name "Jill"} {:age 17 :name "Matt"}]) ;= (45 42 17)
+(map :age [{:age 45 :name "Joe"} {:age 42 :name "Jill"} {:age 17 :name "Matt"}]) ;; ⇒ (45 42 17)
 ```
 
 and the `->` macro:
 
 ``` clojure
-(-> [{:age 45 :name "Joe"} {:age 42 :name "Jill"}] first :name) ;= "Joe"
+(-> [{:age 45 :name "Joe"} {:age 42 :name "Jill"}] first :name) ;; ⇒ "Joe"
 ```
 
 
@@ -430,9 +441,9 @@ and the `->` macro:
 Clojure maps are also functions that take keys and look up values for them:
 
 ``` clojure
-({:age 42 :name "Joe"} :name)    ;= "Joe"
-({:age 42 :name "Joe"} :age)     ;= 42
-({:age 42 :name "Joe"} :unknown) ;= nil
+({:age 42 :name "Joe"} :name)    ;; ⇒ "Joe"
+({:age 42 :name "Joe"} :age)     ;; ⇒ 42
+({:age 42 :name "Joe"} :unknown) ;; ⇒ nil
 ```
 
 Note that this is **not true** for Clojure records, which are almost identical to maps in other
@@ -442,11 +453,11 @@ cases.
 ## Sets as Functions
 
 ``` clojure
-(#{1 2 3} 1)  ;= 1
-(#{1 2 3} 10) ;= 10
+(#{1 2 3} 1)  ;; ⇒ 1
+(#{1 2 3} 10) ;; ⇒ 10
 
-(#{:us :au :ru :uk} :uk) ;= :uk
-(#{:us :au :ru :uk} :cn) ;= nil
+(#{:us :au :ru :uk} :uk) ;; ⇒ :uk
+(#{:us :au :ru :uk} :cn) ;; ⇒ nil
 ```
 
 This is often used to check if a value is in a set:
