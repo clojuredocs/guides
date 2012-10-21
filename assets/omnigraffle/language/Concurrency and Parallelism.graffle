@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-10-21 14:44:31 +0000</string>
+	<string>2012-10-21 15:09:22 +0000</string>
 	<key>Modifier</key>
 	<string>Michael Klishin</string>
 	<key>NotesVisible</key>
@@ -559,7 +559,7 @@
 						<integer>29</integer>
 					</dict>
 					<key>ID</key>
-					<integer>36</integer>
+					<integer>43</integer>
 					<key>OrthogonalBarAutomatic</key>
 					<true/>
 					<key>OrthogonalBarPoint</key>
@@ -925,7 +925,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{188, 448}, {1000, 399}}</string>
+		<string>{{188, 300}, {1000, 547}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -939,7 +939,7 @@
 		<key>SidebarWidth</key>
 		<integer>231</integer>
 		<key>VisibleRegion</key>
-		<string>{{-97, 0}, {754, 260}}</string>
+		<string>{{-97, -33}, {754, 408}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
