@@ -33,9 +33,10 @@ discourage you.
 
 If some parts are not clear, please ask for clarification [on the
 mailing
-list](https://groups.google.com/forum/?fromgroups#!forum/clojure).  We
-will work hard on making this guide easy to follow with edits, images
-to illustrate the concepts.
+list](https://groups.google.com/forum/?fromgroups#!forum/clojure) or
+[file an issue](https://github.com/clojuredocs/cds/issues) on GitHub.
+We will work hard on making this guide easy to follow with edits,
+images to illustrate the concepts.
 
 
 
@@ -151,6 +152,14 @@ currently-connected
 ;; ⇒ ["chatty-joe"]
 ```
 
+To demonstrate this graphically, initial atom state looks like this:
+
+![Atom state 1](/assets/images/language/concurrency_and_parallelism/atom_state1.png)
+
+and then we mutated it with `swap!`:
+
+![Atom state 2](/assets/images/language/concurrency_and_parallelism/atom_state2.png)
+
 For the readers familiar with the atomic types from the [java.util.concurrent.atomic](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html) package,
 it should sound very familiar. The only difference is that instead of setting a value, atoms are mutated
 with a function. This is both because Clojure is a functional language and because with this approach,
@@ -161,6 +170,8 @@ Occasionally you will need to mutate the value of an atom the same way you do it
 by setting them to a specific value. This is what `clojure.core/reset!` does. It takes an atom and the new value:
 
 ``` clojure
+@currently-connected
+;; ⇒ ["chatty-joe"]
 (reset! currently-connected [])
 ;; ⇒ []
 @currently-connected
