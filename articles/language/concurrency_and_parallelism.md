@@ -9,6 +9,7 @@ This guide covers:
 
  * Clojure's identity/value separation
  * Clojure reference types and their concurrency semantics: atoms, refs, agents, vars
+ * Dereferencing, futures and promises
  * How to use java.util.concurrent from Clojure
  * Other approaches to concurrency available on the JVM
  * Other topics related to concurrency
@@ -19,6 +20,23 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 ## What Version of Clojure Does This Guide Cover?
 
 This guide covers Clojure 1.4.
+
+
+## Before You Read This Guide
+
+This is the most hardcore guide of the entire Clojure documentation
+project. It describes concepts that are simple but may seem foreign at first.
+These concepts are some of the key points of Clojure
+design. Understanding them may take some time for folks without
+concurrent programming background. Don't let this learning curve
+discourage you.
+
+If some parts are not clear, please ask for clarification [on the
+mailing
+list](https://groups.google.com/forum/?fromgroups#!forum/clojure).  We
+will work hard on making this guide easy to follow with edits, images
+to illustrate the concepts.
+
 
 
 ## Overview
@@ -63,18 +81,17 @@ members or a counter) that changes over time and at any given moment references 
 
 For example, the current value of a counter may be `42`. After incrementing it, the value
 is `43` but it is still the same counter, the same identity. This is different from, say, Java
-or Ruby, where variables serve as identities that always point to 
+or Ruby, where variables serve as identities that (typically) point to a mutable value
+and modified in place.
 
 TBD: an images to illustrate these concepts
+
+Identities in Clojure can be of several types, known as *reference types*.
 
 
 ## Clojure Reference Types
 
 Clojure has multiple reference types. Each reference type has its own concurrency semantics.
-
-### vars
-
-TBD
 
 ### atoms
 
@@ -85,6 +102,7 @@ to them.
 
 TBD
 
+
 ### agents
 
 Agents are references that are updated asynchronously: updates happen at a later, unknown point
@@ -92,7 +110,154 @@ in time, in a thread pool.
 
 TBD
 
+
+
+### vars
+
+Vars are the reference type you are already familiar with: you define them via the `def` special form:
+
+``` clojure
+(def url "http://en.wikipedia.org/wiki/Margarita")
+```
+
+Functions defined via `defn` are also stored in vars. Vars can be dynamically scoped. They have
+*root bindings* that are initially visible to all threads. When defining a var
+with `def`, you define a var that only has root binding, so its value will be the same, no matter
+what thread you use it from:
+
+``` clojure
+(def url "http://en.wikipedia.org/wiki/Margarita")
+;; ⇒ #'user/url
+(.start (Thread. (fn []
+                   (println (format "url is %s" url)))))
+;; outputs "url is http://en.wikipedia.org/wiki/Margarita"
+;; ⇒ nil
+(.start (Thread. (fn []
+                   (println (format "url is %s" url)))))
+;; outputs "url is http://en.wikipedia.org/wiki/Margarita"
+;; ⇒ nil
+```
+
+### Dynamic Scoping. Thread-local Bindings.
+
+To temporarily change var value, we need to make the var dynamic by adding `:dynamic true` to its
+metadata and then use `clojure.core/binding`:
+
+``` clojure
+(def ^:dynamic *url* "http://en.wikipedia.org/wiki/Margarita")
+;; ⇒ #'user/*url*
+(println (format "*url* is now %s" *url*))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Margarita"
+
+(binding [*url* "http://en.wikipedia.org/wiki/Cointreau"]
+  (println (format "*url* is now %s" *url*)))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Cointreau"
+;; ⇒ nil
+```
+
+Note that by convention, vars that are supposed to or may be dynamically scoped are named with leading
+and trailing `*`, called "earmuffs".
+
+In the example above, `binding` temporarily changed var's current value to a different URL. But that happened
+in the same thread as the var was originally defined in. What makes vars interesting from the concurrency
+point of view is that their bindings can be *thread-local* (yes, if you are familiar with thread-local variables
+in Java or Ruby, it is very similar and serves largely the same purpose). To demonstrate, lets change
+the example to spin up 3 threads and alter var value from them:
+
+``` clojure
+(def ^:dynamic *url* "http://en.wikipedia.org/wiki/Margarita")
+;; ⇒ #'user/*url*
+(println (format "*url* is now %s" *url*))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Margarita"
+;; ⇒ nil
+(.start (Thread. (fn []
+          (binding [*url* "http://en.wikipedia.org/wiki/Cointreau"]
+            (println (format "*url* is now %s" *url*))))))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Cointreau"
+;; ⇒ nil
+(.start (Thread. (fn []
+                   (binding [*url* "http://en.wikipedia.org/wiki/Guignolet"]
+                     (println (format "*url* is now %s" *url*))))))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Guignolet"
+;; ⇒ nil
+(.start (Thread. (fn []
+                   (binding [*url* "http://en.wikipedia.org/wiki/Apéritif"]
+                     (println (format "*url* is now %s" *url*))))))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Apéritif"
+;; ⇒ nil
+(println (format "*url* is now %s" *url*))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Margarita"
+;; ⇒ nil
+```
+
+As you can see, var scoping in different threads did not modify the var's value in the thread it was
+originally defined in (its *root binding*). In real world cases, for example, it means that a multi-threaded
+Web crawler can store some crawling state specific to a particular thread in a var and not
+modify its initial (global) value.
+
+#### How to Alter Var Root
+
+Sometimes, however, modifying the root binding is necessary. This is done via `clojure.core/alter-var-root`
+which takes a var (not its value) and a function that takes the old var value and returns a new one:
+
+``` clojure
+*url*
+;; ⇒ "http://en.wikipedia.org/wiki/Margarita"
+(.start (Thread. (fn []
+                   (alter-var-root (var user/*url*) (fn [_] "http://en.wikipedia.org/wiki/Apéritif"))
+                   (println (format "*url* is now %s" *url*)))))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Apéritif"
+;; ⇒ nil
+*url*
+;; ⇒ "http://en.wikipedia.org/wiki/Apéritif"
+```
+
+`clojure.core/var` is used to locate the var (`user/*url*` in our example executed in the REPL). Note that it
+finds the var itself (the reference, the "box"), not its value (what the var evalutes to).
+
+In the example above the function we use to alter var root ignores the current value and simply returns a
+predefined string:
+
+``` clojure
+(fn [_] "http://en.wikipedia.org/wiki/Apéritif")
+```
+
+Such functions are common enough for `clojure.core` to provide a convenience higher-order function called
+`clojure.core/constantly`. It takes a value and returns a function that, when executed, ignores all its parameters
+and returns that value. So, the function above would be more idiomatically written as
+
+``` clojure
+*url*
+;; ⇒ "http://en.wikipedia.org/wiki/Margarita"
+(.start (Thread. (fn []
+                   (alter-var-root (var user/*url*) (constantly "http://en.wikipedia.org/wiki/Apéritif"))
+                   (println (format "*url* is now %s" *url*)))))
+;; outputs "*url* is now http://en.wikipedia.org/wiki/Apéritif"
+;; ⇒ nil
+*url*
+;; ⇒ "http://en.wikipedia.org/wiki/Apéritif"
+```
+
+When is `alter-var-root` used in real world scenarios? Some Clojure data store and API clients stores active connection
+in a var, so initial connection requires root binding modification.
+
+#### Summary and Use Cases
+
+To summarize: vars can have dynamic scoping. They have root binding and can have thread-local binding.
+As such, vars are good for storing pieces of program state that vary between threads but cannot
+be stored in a function local. `alter-var-root` is used to alter root binding of a var. It is done
+the functional way: by providing a function that takes the old var value and returns a new one.
+
+To alter var root to a specific known value, use `clojure.core/constantly`.
+
+
+
 ### refs
+
+TBD
+
+
+## Dereferencing. Futures and Promises.
 
 TBD
 
@@ -107,6 +272,41 @@ TBD
 TBD
 
 
+## Runtime Parallelism
+
+Clojure was designed to be a hosted language. Its primary target, the JVM, provides runtime parallelism support.
+JVM threads map 1:1 to kernel threads. Those will be executed in parallel given that enough cores are available
+for to program.
+
+In Clojure, many concurrency features are built on top of JVM threads and thus benefit from runtime parallelism
+if the program is running on a multi-core machine.
+
+
+## Books
+
+Concurrency is a broad topic and it would be silly to think that we can cover it well in just one guide.
+To get a better understanding of the subject, one can refer to a few excellent books:
+
+ * [Java Concurrency in Practice](http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601) by Brian Goetz et al. is a true classic.
+ * [Programming Concurrency on the JVM](http://pragprog.com/book/vspcon/programming-concurrency-on-the-jvm) demonstrates a range of concurrency features in several JVM languages.
+
+
 ## Wrapping Up
 
-TBD
+One of Clojure design goals was to make concurrent programming easier.
+
+The key design decision was making Clojure data structures immutable
+(persistent) and separating the concepts of *identity* (references) and
+*value*. Immutable values eliminate many concurrency hazards, and ultimately make
+it easier for developers to reason about their programs.
+
+Atoms are arguably the most commonly used reference type when working with concurrency
+(vars are used much more often but not for their concurrency semantics). Software Transactional Memory
+is a more specialized feature and has certain limitations (e.g. I/O operations must not be
+performed inside transactions). Finally, agents, futures and promises provide an array of
+tools for working with asynchronous operations.
+
+Concurrency is a hard fundamental problem. There is no single "best" solution or approach
+to it. On the JVM, Clojure offers several concurrency-related features of its own but also
+provides easy access to the `java.util.concurrent` primitives and libraries such as [Akka](http://akka.io/)
+or [Jetlang](http://code.google.com/p/jetlang/).
