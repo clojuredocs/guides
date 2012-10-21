@@ -416,8 +416,31 @@ as regular Java objects:
            (accept [this dir name]
              (.endsWith name ".clj")))
     dir  (File. "/Users/antares/Development/ClojureWerkz/neocons.git/")]
-  (into [] (.listFiles dir ff))) ;; ⇒ [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
+  (into [] (.listFiles dir ff)))
+;; ⇒ [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
 ```
+
+`reify` forms a closure: it will capture locals in its scope. This can be used to make implemented
+methods delegate to Clojure functions. The same example, rewritten with delegation:
+
+``` clojure
+user> (import java.io.File)
+
+;; a file filter implementation that keeps only .clj files
+(let [f  (fn [^File dir ^String name]
+           (.endsWith name ".clj"))
+      ff (reify java.io.FilenameFilter
+           (accept [this dir name]
+             (f dir name)))
+    dir  (File. "/Users/antares/Development/ClojureWerkz/neocons.git/")]
+  (into [] (.listFiles dir ff)))
+;; ⇒ [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
+```
+
+Note that unlike in the "inline" implementation, Clojure compiler cannot infer types of
+`dir` and `name` parameters in the function that does the filtering, so we added type hints
+to avoid reflective calls. When methods are implemented "inline", types can be inferred from
+method signatures in the interface.
 
 
 ## Extending Java Classes With proxy
