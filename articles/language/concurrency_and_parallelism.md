@@ -181,7 +181,56 @@ Identities in Clojure can be of several types, known as *reference types*.
 
 ## Clojure Reference Types
 
-Clojure has multiple reference types. Each reference type has its own concurrency semantics.
+### Overview
+
+In Clojure's world view, concurrent operations can be roughly
+classified as coordinated or uncoordinated, and synchronous or
+asynchronous. Different reference types in Clojure have their own
+concurrency semantics and cover different kind of operations:
+
+<table class="table-striped table-bordered table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Coordinated</th>
+      <th>Uncoordinated</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style="font-weight: bold;">Synchronous</td>
+      <td><a href="#refs">Refs</a></td>
+      <td><a href"#atoms">Atoms</a></td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold;">Asynchronous</td>
+      <td>—</td>
+      <td><a href="#agents">Agents</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<dl>
+  <dt>Coordinated</dt>
+  <dl>An operation that depends on cooperation from other operations (possibly, other operations at least do not interfere with it)
+      in order to produce correct results, for example, a banking operation that involves more than one account.
+   </dl>
+
+  <dt>Uncoordinated</dt>
+  <dl>An operation that does not affect other operations in any way. For example, when downloading 100 Web pages concurrently,
+      each operation does not affect the others.
+  </dl>
+
+  <dt>Synchronous</dt>
+  <dl>When caller's thread waits, blocks or sleeps until it has access to a given resource or context.</dl>
+
+  <dt>Asynchronous</dt>
+  <dl>Operations that can be started or scheduled without blocking the caller's thread.</dl>
+</dl>
+
+One more reference type, [vars](#vars), supports dynamic scoping and thread-local storage.
+
 
 ### atoms
 
@@ -288,6 +337,11 @@ a piece of state with other functions and/or threads.
 
 Agents are references that are updated asynchronously: updates happen at a later, unknown point
 in time, in a thread pool.
+
+TBD
+
+
+### refs
 
 TBD
 
@@ -431,11 +485,6 @@ the functional way: by providing a function that takes the old var value and ret
 
 To alter var root to a specific known value, use `clojure.core/constantly`.
 
-
-
-### refs
-
-TBD
 
 
 ## Dereferencing. Futures and Promises.
