@@ -237,7 +237,7 @@ One more reference type, [vars](#vars), supports dynamic scoping and thread-loca
 Atoms are references that change atomically (changes become immediately visible to all threads,
 changes are guaranteed to be synchronized by the JVM). If you come from Java background,
 atoms are basically atomic references from `java.util.concurrent` with a functional twist
-to them.
+to them. Atoms are identities that implement synchronous, uncoordinated, atomic updates.
 
 Lets jump right in and demonstrate how atoms work with an example. We know that Clojure data
 structures are immutable by default. Adding an element to a collection really produces a new
@@ -336,7 +336,57 @@ a piece of state with other functions and/or threads.
 ### agents
 
 Agents are references that are updated asynchronously: updates happen at a later, unknown point
-in time, in a thread pool.
+in time, in a thread pool. Agents are identities that implement uncoordinated, asynchronous updates.
+
+A small but useful example to demo a agent on is a counter. For example, we want to track how often
+page downloads in a Web crawler respond with 40x and 50x status codes. The simplest version
+can look like this:
+
+``` clojure
+(def errors-counter (agent 0))
+;; ⇒ #'user/errors-counter
+errors-counter
+;; ⇒ #<Agent@6a6287b2: 0>
+@errors-counter
+;; ⇒ 0
+(deref errors-counter)
+;; ⇒ 0
+```
+
+This immediately provides several observations: just like atoms, agents are references. To get
+the current value of an agent, we need to *dereference* it using `clojure.core/deref` or
+the `@agent` reader macro.
+
+To mutate an agent, we use `clojure.core/send` and `clojure.core/send-off`:
+
+``` clojure
+@errors-counter
+;; ⇒ 0
+(send errors-counter inc)
+;; ⇒ #<Agent@6a6287b2: 0>
+@errors-counter
+;; ⇒ 1
+
+;; 10 is an additional parameter, the + function will be invoked as (+ @errors-counter 10)
+(send errors-counter + 10)
+;; ⇒ #<Agent@6a6287b2: 1>
+@errors-counter
+;; ⇒ 11
+```
+
+`send` and `send-off` are largely similar. The difference is in how they are implemented. `send` uses a
+fixed-size thread pool so using blocking operations with it won't yield good throughput. `send-off`
+uses a growing thread-pool so blocking operations is not a problem for it as long as there are resources
+available to the JVM to create and run all the threads. On a 4-8 GB machine with 4 cores and stock
+OS settings you can expect up to a couple of thousands of I/O bound threads to work without running
+the system out of kernel resources.
+
+### Agents and Software Transactional Memory
+
+We haven't introduced refs and the Software Transactional Memory yet. It will be covered later in this
+guide, as well as how agents are STM-aware and can be safely used inside transactions.
+
+### Agents and Error Handling
 
 TBD
 
