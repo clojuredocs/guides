@@ -63,7 +63,7 @@ cover some terminology.
     </tr>
     <tr>
       <td>Shared State</td>
-      <td>When multiple threads of execution need to mutate (modify) one or more pieces of state (e.g. variables, identities)</td>
+      <td>When multiple threads of execution need to mutate (modify) one or more pieces of program state (e.g. variables, identities)</td>
     </tr>
     <tr>
       <td>Mutable Data Structures</td>
