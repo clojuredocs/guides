@@ -35,9 +35,98 @@ If some parts are not clear, please ask for clarification [on the
 mailing
 list](https://groups.google.com/forum/?fromgroups#!forum/clojure) or
 [file an issue](https://github.com/clojuredocs/cds/issues) on GitHub.
-We will work hard on making this guide easy to follow with edits,
+We will work hard on making this guide easy to follow with edits and
 images to illustrate the concepts.
 
+
+## Introduction and Terminology
+
+Before we get to the Clojure features related to concurrency, lets lay a foundation and briefly
+cover some terminology.
+
+<table class="table-striped table-bordered table">
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Definition This Guide Uses</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Concurrency</td>
+      <td>when multiple are making progress, whether it is via time-slicing or parallelism</td>
+    </tr>
+    <tr>
+      <td>Parallelism</td>
+      <td>A condition that arises when at least two threads are executing simultaneously, e.g. on multiple cores or CPUs.</td>
+    </tr>
+    <tr>
+      <td>Shared State</td>
+      <td>When multiple threads of execution need to mutate (modify) one or more pieces of state (e.g. variables, identities)</td>
+    </tr>
+    <tr>
+      <td>Mutable Data Structures</td>
+      <td>Data structures that, when changed, are updated "in place"</td>
+    </tr>
+    <tr>
+      <td>Immutable Data Structures</td>
+      <td>Data structures that, when changed, produce new data structures (copies), possibly with optimizations such as internal structural sharing</td>
+    </tr>
+    <tr>
+      <td>Concurrency Hazards</td>
+      <td>Conditions that occur in concurrent programs that prevent program from being correct (behaving the way its authors intended).</td>
+    </tr>
+    <tr>
+      <td>Shared Mutable State</td>
+      <td>When shared state is made of mutable data structures. A ripe ground for concurrency hazards.</td>
+    </tr>
+  </tbody>
+</table>
+
+There are many concurrency hazards, some of the most common and well known are:
+
+<table class="table-striped table-bordered table">
+  <thead>
+    <tr>
+      <th>Concurrency Hazard</th>
+      <th>Brief Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Race Condition</td>
+      <td>A condition when the outcome is dependent on timing or relative ordering of events</td>
+    </tr>
+    <tr>
+      <td>Deadlock</td>
+      <td>When two or more threads are waiting on each other to finish or release a shared resource, thus waiting forever and not making any progress</td>
+    </tr>
+    <tr>
+      <td>Live Lock</td>
+      <td>When two or more threads are technically performing computation but not doing any useful work (not making progress), for example,
+          because they endlessly pass a piece of data to each other but never actually process it</td>
+    </tr>
+    <tr>
+      <td>Starvation</td>
+      <td>When a thread is not given regular access to a shared resource and cannot make progress.</td>
+    </tr>
+  </tbody>
+</table>
+
+These hazards are not exclusive to threads and can happen with OS
+processes, runtime processes and any other executaion processes. They
+are also not specific to a particular runtime or VM (e.g. the JVM) or
+programming language. Admittedly, some languages make it significantly
+easier to write corrent, safe concurrent programs, but none are
+completely immune to concurrency hazards. More often than not,
+concurrency hazards are algorithmic problems, languages just encourage
+or discourage certain practices and techniques.
+
+*Thread-safe* code is code that is always executed correctly and does
+not suffer from concurrency hazards even when executed concurrently
+from multiple threads.
 
 
 ## Overview
