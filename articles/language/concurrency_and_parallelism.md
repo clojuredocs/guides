@@ -100,7 +100,88 @@ changes are guaranteed to be synchronized by the JVM). If you come from Java bac
 atoms are basically atomic references from `java.util.concurrent` with a functional twist
 to them.
 
-TBD
+Lets jump right in and demonstrate how atoms work with an example. We know that Clojure data
+structures are immutable by default. Adding an element to a collection really produces a new
+collection. In such case, how does one keep a shared list (say, of active connections to a server
+or recently crawled URLs) and mutate it in a thread-safe manner? We will demonstrate how to
+accomplish this with an atom.
+
+To create an atom, use the `clojure.core/atom` function. It takes initial atom value as the argument:
+
+``` clojure
+(def currently-connected (atom []))
+```
+
+The line above makes the atom `currently-connected` an empty vector. To access atom's value, use
+`clojure.core/deref` or the `@atom` reader form:
+
+``` clojure
+(def currently-connected (atom []))
+
+@currently-connected
+;; ⇒ []
+(deref currently-connected)
+;; ⇒ []
+currently-connected
+;; ⇒ #<Atom@614b6b5d: []>
+```
+
+As the returned values demonstrate, the atom itself is a reference. To access its current value, you
+*dereference* it. Dereferencing will be covered in more detail later in this guide. For now, it is
+sufficient to say that dereferencing returns the current value of an atom and a few other Clojure
+reference types and data structures.
+
+Locals can be atoms, too:
+
+``` clojure
+(let [xs (atom [])]
+  @xs)
+;; ⇒ []
+```
+
+Now to the most interesting part: adding elements to the collection. To mutate an atom, use `clojure.core/swap!`
+which takes an atom and a function that takes the current value of the atom and must return a new value:
+
+``` clojure
+(swap! currently-connected (fn [xs] (conj xs "chatty-joe")))
+;; ⇒ ["chatty-joe"]
+currently-connected
+;; ⇒ #<Atom@614b6b5d: ["chatty-joe"]>
+@currently-connected
+;; ⇒ ["chatty-joe"]
+```
+
+For the readers familiar with the atomic types from the [java.util.concurrent.atomic](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html) package,
+it should sound very familiar. The only difference is that instead of setting a value, atoms are mutated
+with a function. This is both because Clojure is a functional language and because with this approach,
+`clojure.core/swap!` can *retry the operation* safely. This implies that the function you provide to
+`swap!` is *pure* (has no side effects).
+
+Occasionally you will need to mutate the value of an atom the same way you do it with atomic references in Java:
+by setting them to a specific value. This is what `clojure.core/reset!` does. It takes an atom and the new value:
+
+``` clojure
+(reset! currently-connected [])
+;; ⇒ []
+@currently-connected
+;; ⇒ []
+```
+
+`reset!` may be useful in test suites to reset an atom state between test executions, but it should be
+used sparingly in your implementation code. Consider using `swap!` first.
+
+TBD: demonstrate retries under high update rates
+
+
+#### Summary and Use Cases
+
+Atoms is the most commonly used concurrent feature in Clojure. It covers many cases and lets developers
+avoid explicit locking. Atoms cover a lot of use cases and are very fast. It's fair to say that
+when you need uncoordinated reference types (e.g. not Software Transactional Memory), the rule of
+thumb is, "start with an atom, then see".
+
+It is not uncommon to initialize an atom in a local and then return it from the function and share
+a piece of state with other functions and/or threads.
 
 
 ### agents
