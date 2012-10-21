@@ -380,6 +380,19 @@ the interface:
   (instance? java.io.FileFilter ff)) ;= true
 ```
 
+### reify, Parameter Destructuring and Varargs
+
+`reify` does not support destructuring or variadic number of arguments in method signatures.
+For example, the following will not work and won't even compile in Clojure 1.5:
+
+``` clojure
+(reify com.megacorp.api.AnInterface
+  (aMethod [a [b c]]
+    (comment ...))
+  (anotherMethod [a & rest]
+    (comment ...)))
+```
+
 ### Example 1
 
 The following example demonstrates how instances created with `reify` are passed around
