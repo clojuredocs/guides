@@ -41,13 +41,13 @@ Java classes can be referenced either using their fully-qualified names (FQNs) s
 referenced by short names:
 
 ``` clojure
-java.util.Date ;= java.util.Date
+java.util.Date ;; ⇒ java.util.Date
 ```
 
 ``` clojure
 (import java.util.Date)
 
-Date ;= java.util.Date
+Date ;; ⇒ java.util.Date
 ```
 
 `ns` macro supports imports, too:
@@ -83,12 +83,12 @@ separated from their outer class by a dollar sign (`$`):
 ``` clojure
 (import java.util.Map$Entry)
 
-Map$Entry ;= java.util.Map$Entry
+Map$Entry ;; ⇒ java.util.Map$Entry
 
 ;; this example assumes RabbitMQ Java client is on classpath
 (import com.rabbitmq.client.AMQP$BasicProperties)
 
-AMQP$BasicProperties ;= com.rabbitmq.client.AMQP$BasicProperties
+AMQP$BasicProperties ;; ⇒ com.rabbitmq.client.AMQP$BasicProperties
 ```
 
 Note that if you need to use both a class and one or more of its inner classes, they all need to be imported separately.
@@ -100,14 +100,14 @@ As far as JVM is concerned, they are all separate classes, there is no "imports 
 Java classes are instantiated using the `new` special form:
 
 ``` clojure
-(new java.util.Date) ;= #inst "2012-10-09T21:23:57.278-00:00"
+(new java.util.Date) ;; ⇒ #inst "2012-10-09T21:23:57.278-00:00"
 ```
 
 However, Clojure reader provides a bit of syntactic sugar and you are much more likely
 to see it used:
 
 ``` clojure
-(java.util.Date.)    ;= #inst "2012-10-09T21:24:43.878-00:00"
+(java.util.Date.)    ;; ⇒ #inst "2012-10-09T21:24:43.878-00:00"
 ```
 
 It is possible to use fully qualified names (e.g. `java.util.Date`) or short names with imports:
@@ -115,13 +115,13 @@ It is possible to use fully qualified names (e.g. `java.util.Date`) or short nam
 ``` clojure
 (import java.util.Date)
 
-(Date.) ;= #inst "2012-10-09T21:24:27.229-00:00"
+(Date.) ;; ⇒ #inst "2012-10-09T21:24:27.229-00:00"
 ```
 
 An example with constructor arguments:
 
 ``` clojure
-(java.net.URI. "http://clojure.org") ;= #<URI http://clojure.org>
+(java.net.URI. "http://clojure.org") ;; ⇒ #<URI http://clojure.org>
 ```
 
 ## How to Invoke Java Methods
@@ -132,14 +132,14 @@ Instance methods are invoked using the `.` special form:
 
 ``` clojure
 (let [d (java.util.Date.)]
-  (. d getTime)) ;= 1349819873183
+  (. d getTime)) ;; ⇒ 1349819873183
 ```
 
 Just like with object instantiation, it is much more common to see an alternative version:
 
 ``` clojure
 (let [d (java.util.Date.)]
-  (.getTime d)) ;= 1349819873183
+  (.getTime d)) ;; ⇒ 1349819873183
 ```
 
 
@@ -148,16 +148,16 @@ Just like with object instantiation, it is much more common to see an alternativ
 Static methods can be invoked with the same `.` special form:
 
 ``` clojure
-(. Math floor 5.677) ;= 5.0
+(. Math floor 5.677) ;; ⇒ 5.0
 ```
 
 or (typically) to sugared version, `ClassName/methodName`:
 
 ``` clojure
-(Math/floor 5.677) ;= 5.0
+(Math/floor 5.677) ;; ⇒ 5.0
 
-(Boolean/valueOf "false") ;= false
-(Boolean/valueOf "true")  ;= true
+(Boolean/valueOf "false") ;; ⇒ false
+(Boolean/valueOf "true")  ;; ⇒ true
 ```
 
 
@@ -166,7 +166,7 @@ or (typically) to sugared version, `ClassName/methodName`:
 It is possible to chain method calls using the `..` special form:
 
 ``` clojure
-(.. (java.util.Date.) getTime toString) ;= "1349821993809"
+(.. (java.util.Date.) getTime toString) ;; ⇒ "1349821993809"
 ```
 
 
@@ -179,7 +179,7 @@ can use the `doto` macro:
 (doto (java.util.Stack.)
   (.push 42)
   (.push 13)
-  (.push 7)) ;= #<Stack [42, 13, 7]>
+  (.push 7)) ;; ⇒ #<Stack [42, 13, 7]>
 ```
 
 The `doto` macro returns its first argument as a result.
@@ -194,10 +194,10 @@ It's done with the same dot special form:
 (import java.awt.Point)
 
 (let [pt (Point. 0 10)]
-  (. pt x)) ;= 0
+  (. pt x)) ;; ⇒ 0
 
 (let [pt (Point. 0 10)]
-  (. pt y)) ;= 10
+  (. pt y)) ;; ⇒ 10
 ```
 
 and just like with instance methods, it is much more common to see the following version:
@@ -206,10 +206,10 @@ and just like with instance methods, it is much more common to see the following
 (import java.awt.Point)
 
 (let [pt (Point. 0 10)]
-  (.x pt)) ;= 0
+  (.x pt)) ;; ⇒ 0
 
 (let [pt (Point. 0 10)]
-  (.y pt)) ;= 10
+  (.y pt)) ;; ⇒ 10
 ```
 
 
@@ -223,7 +223,7 @@ demonstrated earlier and a new value:
 
 (let [pt (Point. 0 10)]
   (set! (.y pt) 100)
-  (.y pt)) ;= 100
+  (.y pt)) ;; ⇒ 100
 ```
 
 Fortunately, mutable public fields are rare to meet in the JVM ecosystem so you won't need
@@ -236,7 +236,7 @@ to do this often.
 the same way as fields, except on enum classes and not objects:
 
 ``` clojure
-java.util.concurrent.TimeUnit/MILLISECONDS ;= #< MILLISECONDS>
+java.util.concurrent.TimeUnit/MILLISECONDS ;; ⇒ #< MILLISECONDS>
 ```
 
 
@@ -245,10 +245,10 @@ java.util.concurrent.TimeUnit/MILLISECONDS ;= #< MILLISECONDS>
 To get class of a particular value, pass it to `clojure.core/class`:
 
 ``` clojure
-(class 1)      ;= java.lang.Long
-(class 1.0)    ;= java.lang.Double
-(class "docs") ;= java.lang.String
-(class (java.net.URI. "http://github.com")) ;= java.net.URI
+(class 1)      ;; ⇒ java.lang.Long
+(class 1.0)    ;; ⇒ java.lang.Double
+(class "docs") ;; ⇒ java.lang.String
+(class (java.net.URI. "http://github.com")) ;; ⇒ java.net.URI
 ```
 
 As this example demonstrates, Clojure strings are JVM strings, integer literals are compiled
@@ -260,7 +260,7 @@ as longs and floating point literals are compiled as doubles.
 To obtain a class reference by its string name (fully qualified), use `Class/forName` via Java interop:
 
 ``` clojure
-(Class/forName "java.util.Date") ;= java.util.Date
+(Class/forName "java.util.Date") ;; ⇒ java.util.Date
 ```
 
 ### Array Types, Primitives
@@ -319,10 +319,6 @@ primitives.
 
 
 
-## Extending Java Classes With proxy
-
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
 
 ## Implementing Java Interfaces With reify
 
@@ -378,7 +374,7 @@ the interface:
 (let [ff (reify java.io.FilenameFilter
            (accept [this dir name]
              true))]
-  (instance? java.io.FileFilter ff)) ;= true
+  (instance? java.io.FileFilter ff)) ;; ⇒ true
 ```
 
 `reify` can be used to implement multiple interfaces at once:
@@ -391,7 +387,7 @@ the interface:
            java.io.FileFilter
            (accept [this dir]
              true))]
-  (instance? java.io.FileFilter ff)) ;= true
+  (instance? java.io.FileFilter ff)) ;; ⇒ true
 ```
 
 ### reify, Parameter Destructuring and Varargs
@@ -420,11 +416,60 @@ as regular Java objects:
            (accept [this dir name]
              (.endsWith name ".clj")))
     dir  (File. "/Users/antares/Development/ClojureWerkz/neocons.git/")]
-  (into [] (.listFiles dir ff))) ;= [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
+  (into [] (.listFiles dir ff))) ;; ⇒ [#<File /Users/antares/Development/ClojureWerkz/neocons.git/project.clj>]
 ```
 
 
-### Clojure Functions Implement Runnable and Callable
+## Extending Java Classes With proxy
+
+`proxy` is one of two ways to generate instances of anonymous classeses in Clojure.
+`proxy` takes two vectors: one listing its superclass and (optional) interfaces, another constructor signatures, as well as
+method implementations. Method implementations are basically identical to `reify` except that the `this` argument is
+not necessary.
+
+A very minimalistic example, we instantiate an anonymous class that extends `java.lang.Object`, implements no
+interfaces, has no explictly defined constructors and overrides `#toString`:
+
+``` clojure
+(proxy [Object] []
+        (toString []
+          "I am an instance of an anonymous class generated via proxy"))
+;; ⇒ #<Object$0 I am an instance of an anonymous class generated via proxy>
+```
+
+Clojure compiler will generate an anonymous class for this `proxy` and at runtime, the cost of
+a `proxy` call is the cost of instantiating this class (the class is not generated anew on every single call).
+
+A slightly more complex example where the generated class also implements `java.lang.Runnable` (runnable objects
+a commonly used with threads and `java.util.concurrent` classes) which defines one method, `#run`:
+
+``` clojure
+;; extends java.lang.Object, implements java.lang.Runnable
+(let [runnable (proxy [Object Runnable] []
+                       (toString []
+                         "I am an instance of an anonymous class generated via proxy")
+                       (run []
+                         (println "Run, proxy, run")))]
+        (.run runnable)) ;; ⇒ nil
+;; outputs "Run, proxy, run"
+```
+
+`proxy` forms a closure: it will capture locals in its scope. This is very often used to create an instance
+that delegates to a Clojure function:
+
+``` clojure
+(let [f   (fn [] (println "Executed from a function"))
+      obj (proxy [Object Runnable] []
+            (run []
+              (f)))]
+        (.run obj)) ;; ⇒ nil
+;; outputs "Executed from a function"
+```
+
+TBD: more realistic examples | [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+## Clojure Functions Implement Runnable and Callable
 
 Note that Clojure functions implement `java.lang.Runnable` and
 `java.util.concurrent.Callable` directly so you can pass functions to
