@@ -308,3 +308,9 @@ built-in core data structures are values.
 
 A function that can take a variable number of arguments.
 See also [rest args](#rest_args).
+
+
+
+## Contributors
+
+John Gabriele <jmg3000@gmail.com> (original author)

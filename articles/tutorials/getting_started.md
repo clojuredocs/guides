@@ -99,3 +99,9 @@ to see your changes.
 ## Next stop
 
 Next stop: [the basic Clojure languge tutorial](/articles/tutorials/introduction.html).
+
+
+
+## Contributors
+
+John Gabriele <jmg3000@gmail.com> (original author)

@@ -1574,4 +1574,4 @@ multimethods, and Java interop.
 
 ## Contributors
 
-John Gabriele <jmg3000@gmail.com>, 2012 (original author)
+John Gabriele <jmg3000@gmail.com> (original author)

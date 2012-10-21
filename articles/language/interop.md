@@ -642,3 +642,10 @@ we may want to encode:
 ## Wrapping Up
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+## Contributors
+
+Michael Klishin <michael@defprotocol.org> (original author)
+Lee Hinman <lee@writequit.org>
+gsnewmark <gsnewmark@meta.ua>

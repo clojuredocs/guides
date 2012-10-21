@@ -1009,3 +1009,10 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 ### *clojure-version*
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+
+## Contributors
+
+Robert Randolph <audiolabs@gmail.com> (original author)
+Michael Klishin <michael@defprotocol.org>

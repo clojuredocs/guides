@@ -491,3 +491,8 @@ Concurrency is a hard fundamental problem. There is no single "best" solution or
 to it. On the JVM, Clojure offers several concurrency-related features of its own but also
 provides easy access to the `java.util.concurrent` primitives and libraries such as [Akka](http://akka.io/)
 or [Jetlang](http://code.google.com/p/jetlang/).
+
+
+## Contributors
+
+Michael Klishin <michael@defprotocol.org>, 2012 (original author)

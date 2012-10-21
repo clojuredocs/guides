@@ -849,3 +849,9 @@ This extends to Java collections, arrays and iterable objects for seamless inter
 Most of the time, whenever you need a function that transforms sequences, chances are, there is
 one already that does that in `clojure.core` or you can compose more than one `clojure.core` function
 to achieve the same result.
+
+
+## Contributors
+
+Michael Klishin <michael@defprotocol.org>
+Robert Randolph <audiolabs@gmail.com>
