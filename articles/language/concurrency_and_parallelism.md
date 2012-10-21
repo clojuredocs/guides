@@ -55,7 +55,7 @@ cover some terminology.
   <tbody>
     <tr>
       <td>Concurrency</td>
-      <td>When multiple are making progress, whether it is via time-slicing or parallelism</td>
+      <td>When multiple threads are making progress, whether it is via time-slicing or parallelism</td>
     </tr>
     <tr>
       <td>Parallelism</td>
