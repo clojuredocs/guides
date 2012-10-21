@@ -104,7 +104,7 @@ There are many concurrency hazards, some of the most common and well known are:
       <td>When two or more threads are waiting on each other to finish or release a shared resource, thus waiting forever and not making any progress</td>
     </tr>
     <tr>
-      <td>Live Lock</td>
+      <td>Livelock</td>
       <td>When two or more threads are technically performing computation but not doing any useful work (not making progress), for example,
           because they endlessly pass a piece of data to each other but never actually process it</td>
     </tr>
