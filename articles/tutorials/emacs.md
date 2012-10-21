@@ -102,7 +102,7 @@ list of packages to install:
                       starter-kit-ruby
                       starter-kit-eshell
                       clojure-mode
-                      clojure-test-mode)
+                      clojure-test-mode))
 ```
                       
 Start emacs:
