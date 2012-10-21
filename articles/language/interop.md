@@ -61,6 +61,20 @@ More about the `ns` macro can be found in the article on [Clojure namespaces](/a
 Dynamic (at runtime) imports are usually only used in the REPL and cases when there are multiple implementations of a particular
 protocol/service/feature and it is not possible to tell which one should be used until run time.
 
+### Automatic Imports For java.lang.*
+
+Classes from the `java.lang` package are automatically imported. For example, you can use `String` or `Math`
+without explicitly importing them:
+
+``` clojure
+(defn http-uri?
+  [^String uri]
+  (.startsWith (.toLowerCase uri) "http"))
+
+(Math/round 0.7886)
+```
+
+
 ### Inner (Nested) Classes
 
 In Java, classes can be nested inside other classes. They are called *inner classes* and by convention,
