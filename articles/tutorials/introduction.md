@@ -127,7 +127,7 @@ can try things out while following along.
 
 ## Identifiers
 
-Identifiers are used to names things. For example, in
+Identifiers are used to name things. For example, in
 
 ``` clojure
 (def the-answer 42)

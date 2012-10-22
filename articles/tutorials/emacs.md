@@ -102,7 +102,7 @@ list of packages to install:
                       starter-kit-ruby
                       starter-kit-eshell
                       clojure-mode
-                      clojure-test-mode)
+                      clojure-test-mode))
 ```
                       
 Start emacs:
@@ -471,7 +471,7 @@ symbol you are typing (this works in the source code and the REPL).
 
 When you are finished with the repl (or if for some reason it has
 gotten into a bad state), you can simply kill the `*slime-repl nil*`
-buffer (and re-run `cojure-jack-in` to start another).
+buffer (and re-run `clojure-jack-in` to start another).
 
 ## Appendix ##
 
