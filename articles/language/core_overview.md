@@ -942,11 +942,33 @@ TBD: example
 
 ### partition
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`partition` takes a number, an optional step, an optional padding collection and a collection. If the padding collection is provided, a step must be provided.
+
+`partition` sequentially takes a provided number of items from the collection in sequence and puts them into lists. This lazy sequence of lists is returned.
+
+If a step is provided, the lists in the returned lazy sequence start at offsets in the provided collection of that number items in the list.
+
+If a padding collection is provided, the last item in the returned lazy sequence will be padded with the padding collection to achieve the desired partitioning size.
+
+If there is no padding collection provided and there is not enough items to fill the last list in the returned lazy sequence, those items will be not used.
+
+```clojure
+TBD: example
+```
 
 ### partition-all
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`partition-all` takes a number, an optional step and a collection.
+
+`partition-all` sequentially takes a provided number of items from the collection in sequence and puts them into lists. This lazy sequence of lists is returned.
+
+If a step is provided, the lists in the returned lazy sequence start at offsets in the provided collection of that number items in the list.
+
+If there are not enough items to fill the last list in the returned lazy sequence, the remaining items will be used in the last list.
+
+```clojure
+TBD: example
+```
 
 ## Macros
 
