@@ -925,7 +925,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{188, 300}, {1000, 547}}</string>
+		<string>{{247, 4}, {1000, 874}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -939,7 +939,7 @@
 		<key>SidebarWidth</key>
 		<integer>231</integer>
 		<key>VisibleRegion</key>
-		<string>{{-97, -33}, {754, 408}}</string>
+		<string>{{-97, -197}, {754, 735}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>

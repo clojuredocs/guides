@@ -10,6 +10,7 @@ This guide covers:
  * Clojure's identity/value separation
  * Clojure reference types and their concurrency semantics: atoms, refs, agents, vars
  * Dereferencing, futures and promises
+ * Watches and validators
  * How to use java.util.concurrent from Clojure
  * Other approaches to concurrency available on the JVM
  * Other topics related to concurrency
@@ -383,12 +384,76 @@ the system out of kernel resources.
 
 ### Agents and Software Transactional Memory
 
-We haven't introduced refs and the Software Transactional Memory yet. It will be covered later in this
-guide, as well as how agents are STM-aware and can be safely used inside transactions.
+We haven't introduced refs and the concept of Software Transactional Memory yet. It will be covered later in this
+guide. Here it's sufficient to mention that agents are STM-aware and can be safely used inside transactions.
 
 ### Agents and Error Handling
 
-TBD
+Functions that modify an agent's state will not always return successfully in the real world. Sometimes they
+will fail. For example:
+
+``` clojure
+@errors-counter
+;; ⇒ 11
+(send errors-counter / 0)
+;; Evaluation aborted.
+;; ⇒ nil
+```
+
+This turns agent into the *failed* state. Failed agents will re-raise the exception that caused them
+to fail every time their state changed is attempted:
+
+``` clojure
+(send errors-counter / 0)
+;; ⇒ #<Agent@6a6287b2: 10>
+(send errors-counter inc)
+;; Evaluation aborted.
+```
+
+To access the exception that occured during the agent's state mutation, use `clojure.core/agent-error`:
+
+``` clojure
+(send errors-counter / 0)
+;; Evaluation aborted.
+;; ⇒ nil
+(agent-error errors-counter)
+;; ⇒ #<ArithmeticException java.lang.ArithmeticException: Divide by zero>
+```
+
+It returns an exception. Agents can be restarted with `clojure.core/restart-agent` that takes an agent
+and a new initial value:
+
+``` clojure
+(restart-agent errors-counter 0)
+;; ⇒ 0
+(send errors-counter + 10)
+;; ⇒ #<Agent@6a6287b2: 0>
+@errors-counter
+;; ⇒ 10
+```
+
+If you'd prefer an agent to ignore exceptions instead of going into the *failure mode*, `clojure.core/agent`
+takes an option that control this behavior, `:error-mode`. Because completely ignoring errors is rarely a good
+idea, when the error mode is set to `:continue`, you must also pass an error handler function:
+
+``` clojure
+(def errors-counter (agent 0 :error-mode :continue :error-handler (fn [failed-agent ^Exception exception]
+                                                                    (println (.getMessage exception)))))
+;; ⇒ #'user/errors-counter
+(send errors-counter inc)
+;; ⇒ #<Agent@5620e147: 1>
+(send errors-counter inc)
+;; ⇒ #<Agent@5620e147: 2>
+(send errors-counter / 0)
+;; output: "Divide by zero"
+;; ⇒ #<Agent@5620e147: 2>
+(send errors-counter inc)
+;; ⇒ #<Agent@5620e147: 3>
+@errors-counter
+;; ⇒ 3
+```
+
+The handler function takes two arguments: an agent and the exception that occured.
 
 
 ### refs
@@ -538,6 +603,11 @@ To alter var root to a specific known value, use `clojure.core/constantly`.
 
 
 ## Dereferencing. Futures and Promises.
+
+TBD
+
+
+## Watches and Validators
 
 TBD
 
