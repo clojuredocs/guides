@@ -626,7 +626,7 @@ TBD
 
 Clojure was designed to be a hosted language. Its primary target, the JVM, provides runtime parallelism support.
 JVM threads map 1:1 to kernel threads. Those will be executed in parallel given that enough cores are available
-for to program.
+for OS scheduler to use.
 
 In Clojure, many concurrency features are built on top of JVM threads and thus benefit from runtime parallelism
 if the program is running on a multi-core machine.
