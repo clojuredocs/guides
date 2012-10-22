@@ -338,7 +338,7 @@ To define a variadic function, prefix optional arguments with an ampersand (`&`)
   (comment ...))
 ```
 
-In the example above, one argument is requried and the rest is optional. Variadic functions
+In the example above, one argument is required and the rest is optional. Variadic functions
 are invoked as usual:
 
 ``` clojure
