@@ -289,35 +289,35 @@ an array of longs, for example, pass `"[[J"` to `Class/forName`. Below is the fu
 
   <tbody>
     <tr>
-      <td>"[[S"</td>
+      <td><pre>"[[S"</pre></td>
       <td>short</td>
     </tr>
     <tr>
-      <td>"[[I"</td>
+      <td><pre>"[[I"</pre></td>
       <td>integer</td>
     </tr>
     <tr>
-      <td>"[[J"</td>
+      <td><pre>"[[J"</pre></td>
       <td>long</td>
     </tr>
     <tr>
-      <td>"[[F"</td>
+      <td><pre>"[[F"</pre></td>
       <td>float</td>
     </tr>
     <tr>
-      <td>"[[D"</td>
+      <td><pre>"[[D"</pre></td>
       <td>double</td>
     </tr>
     <tr>
-      <td>"[[B"</td>
+      <td><pre>"[[B"</pre></td>
       <td>byte</td>
     </tr>
     <tr>
-      <td>"[[C"</td>
+      <td><pre>"[[C"</pre></td>
       <td>char</td>
     </tr>
     <tr>
-      <td>"[[Z"</td>
+      <td><pre>"[[Z"</pre></td>
       <td>boolean</td>
     </tr>
   </tbody>
