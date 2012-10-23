@@ -595,6 +595,15 @@ method to use for the `json-encode` method:
   {:json-encode encode-java-thing})
 ```
 
+Alternatively, you could use the `extend-type` macro, which actually
+expands into calls to `extend`:
+
+``` clojure
+(extend-type java.util.UUID
+  JSONable
+  (json-encode [obj] (encode-java-thing obj)))
+```
+
 Now we can use `json-encode` for the object we've extended:
 
 ``` clojure
