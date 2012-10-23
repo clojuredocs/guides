@@ -9,7 +9,8 @@ This guide covers:
 
  * Clojure's identity/value separation
  * Clojure reference types and their concurrency semantics: atoms, refs, agents, vars
- * Dereferencing, futures and promises
+ * Dereferencing
+ * Delays, futures and promises
  * Watches and validators
  * How to use java.util.concurrent from Clojure
  * Other approaches to concurrency available on the JVM
@@ -456,7 +457,178 @@ idea, when the error mode is set to `:continue`, you must also pass an error han
 The handler function takes two arguments: an agent and the exception that occured.
 
 
+#### Summary and Use Cases
+
+TBD
+
+
 ### refs
+
+Refs are the only *coordinated* reference type Clojure has. They help ensure that multiple
+identities can be modified concurrently in a transaction:
+
+ * Either all refs are modified or none are
+ * No race conditions between involved refs
+ * No possibility of deadlocks between involved refs
+
+Refs provide ACI of [ACID](http://en.wikipedia.org/wiki/ACID). Refs are backed by Clojure's implementation of
+*software transactional memory* (STM).
+
+To instantiate a ref, use the `clojure.core/ref` function:
+
+``` clojure
+(def account-a (ref 0))
+;; ⇒ #'user/account-a
+(def account-b (ref 0))
+;; ⇒ #'user/account-b
+```
+
+Like atoms and agents covered earlier, to get the current value of a ref, use `clojure.core/deref` or the
+reader macro:
+
+``` clojure
+(deref account-a)
+;; ⇒ 0
+@account-b
+;; ⇒ 0
+```
+
+Refs are for coordinated concurrent operations and it does not make much sense to use a single ref
+(in that case, an atom would be sufficient). Refs are modified in a transaction in the `clojure.core/dosync`
+body.
+
+`clojure.core/dosync` starts a transaction, performs all modifications and commits changes. If a concurrently
+running transaction modifies a ref in the current transaction before the current transaction commits,
+the current transaction will be *retried* to make sure that the most recent value of the modified
+ref is used.
+
+TBD: a picture that visualizes retries and serializability.
+
+#### alter
+
+Refs are modified using `clojure.core/alter` which is very similar to
+`clojure.core/swap!` in the arguments it takes: a ref, a function that
+takes an old value and returns a new value of the ref, and any number
+of optional arguments to pass to the function.
+
+In the following example, two refs are initialized at 1000,
+representing two bank accounts.  Then 100 units are transferred from
+one account to the other, atomically:
+
+``` clojure
+(def account-a (ref 1000))
+;; ⇒ #'user/account-a
+(def account-b (ref 1000))
+;; ⇒ #'user/account-b
+
+(dosync
+  ;; will be executed as (+ @account-a 100)
+  (alter account-a + 100)
+  ;; will be executed as (- @account-b 100)
+  (alter account-b - 100))
+;; ⇒ 900
+@account-a
+;; ⇒ 1100
+@account-b
+;; ⇒ 900
+```
+
+#### Conflicts and Retries
+
+TBD: explain transaction conflicts, demonstrate transaction retries
+
+
+#### commute
+
+With a high number of concurrently running transactions, retries
+overhead can become noticeable.  Some modifications, however, can be
+applied in any order. Clojure STM implementation acknowledges this
+fact and provides an alternative way to modify refs:
+`clojure.core/commute`. `commute` must only be used for operations
+that [commute in the mathematical
+sense](http://mathforum.org/dr.math/faq/faq.property.glossary.html#commutative):
+the order can be changed without affecting the result. For example,
+addition is commutative: `1 + 10` produces the same result as `10 +
+1`, but substraction is not: `1 - 10` does not equal `10 - 1`.
+
+`clojure.core/commute` has the same signature as `clojure.core/alter`:
+
+``` clojure
+@account-a
+;; ⇒ 1100
+@account-b
+;; ⇒ 900
+(dosync
+  (commute account-a + 300)
+  (commute account-b + 300))
+;; ⇒ 1200
+@account-a
+;; ⇒ 1400
+@account-b
+;; ⇒ 1200
+```
+
+Note that a change made to a ref by `commute` will never cause a transaction
+to retry. `commute` does not cause *transaction conflicts*.
+
+
+
+#### Using Refs With Clojure Data Structures
+
+TBD: demonstrate more complex changes, e.g. to game characters
+
+
+
+#### Limitations of Refs
+
+Software transactional memory is a powerful but highly specialized tool. Because transactions can be retried,
+you must only use pure functions with STM. I/O operations cannot be undone by the runtime and very often are
+not idempotent.
+
+Structuring your application code as *pure core* and *edge code* that interact with the user or other
+services (perform I/O operations and other side-effects) helps with this. In that case, the pure core
+can use STM without issues.
+
+For example, in a Web or network server, incoming requests are the edge code: they do I/O. The pure core
+is then called to modify server state, do any calculations necessary, return a result that is returned
+back to the client by the edge code:
+
+TBD: a picture to demonstrate
+
+Unlike some other languages and runtimes (for example, Haskell), Clojure *will not prevent you from
+doing I/O in transactions*. It is a matter of discipline on the programmer's part. It does provide
+a helper function, though: `clojure.core/io!`. It will raise an exception if there is an STM transaction
+running and has no effect otherwise.
+
+First, an example with pure code:
+
+``` clojure
+(io!
+  ;; pure code, clojure.core/io! has no effect
+  (reduce + (range 0 100)))
+;; ⇒ 4950
+```
+
+And an example that invokes functions that are guarded with `clojure.core/io!` in an STM
+transaction:
+
+``` clojure
+(defn render-results
+  "Prints results to the standard output"
+  []
+  (io!
+    (println "Results:")
+    (comment ...)))
+;; ⇒ #'user/render-results
+(dosync
+  (alter account-a + 100)
+  (alter account-b - 100)
+  (render-results))
+;; throws java.lang.IllegalStateException, "I/O in transaction!"
+```
+
+
+#### Summary and Use Cases
 
 TBD
 
@@ -488,7 +660,7 @@ what thread you use it from:
 ;; ⇒ nil
 ```
 
-### Dynamic Scoping. Thread-local Bindings.
+#### Dynamic Scoping. Thread-local Bindings.
 
 To temporarily change var value, we need to make the var dynamic by adding `:dynamic true` to its
 metadata and then use `clojure.core/binding`:
@@ -602,7 +774,129 @@ To alter var root to a specific known value, use `clojure.core/constantly`.
 
 
 
-## Dereferencing. Futures and Promises.
+## Dereferencing
+
+Earlier sections demonstrated the concept of *dereferencing*. Dereferencing means retrieving the current
+value of a reference (an atom, an agent, a ref, etc). To dereference a Clojure reference, use
+`clojure.core/deref` or the `@reference` reader macro:
+
+``` clojure
+(let [xs (atom [])]
+  @xs)
+;; ⇒ []
+```
+
+Besides atoms, agents and refs, Clojure has several other concurrency-oriented data structures
+that can be dereferenced: delays, futures and promises. They will be covered later in this
+guide.
+
+### Dereferencing Support For Data Types Implemented In Java
+
+It is possible to make custom data types implemented in Java to support dereferencing by
+making them implement the `clojure.lang.` interface:
+
+``` java
+package clojure.lang;
+
+public interface IDeref{
+  Object deref();
+}
+```
+
+This can be done to make data types implemented in Java to look and feel more like built-in
+Clojure data types or make it possible to pass said types to a function that expects
+its arguments to be dereferenceable.
+
+
+## Delays
+
+In Clojure, a *delay* is a data structure that is evaluated the first time it is dereferenced.
+Subsequent dereferencing will use the cached value. Delays are instantiated with the `clojure.core/delay`
+function.
+
+In the following example a delay is used to calculate a timestamp that is later used
+as a cached value:
+
+``` clojure
+(def d (delay (System/currentTimeMillis)))
+;; ⇒ #'user/d
+d
+;; ⇒ #<Delay@21ed22af: :pending>
+;; dereferencing causes the value to be realized, it happens only once
+@d
+;; ⇒ 1350997814621
+@d
+;; ⇒ 1350997814621
+@d
+;; ⇒ 1350997814621
+```
+
+`clojure.core/realized?` can be used to check whether a delay instance has been realized
+or not:
+
+``` clojure
+(def d (delay (System/currentTimeMillis)))
+;; ⇒ #'user/d
+(realized? d)
+;; ⇒ false
+@d
+;; ⇒ 1350997967984
+(realized? d)
+;; ⇒ true
+```
+
+
+## Futures
+
+A Clojure future evaluates a piece of code in another thread. To instantiate a future,
+use `clojure.core/future`. The `future` function will return immediately (it never blocks
+the current thread). To obtain the result of computation, dereference the future:
+
+``` clojure
+(def ft (future (+ 1 2 3 4 5 6)))
+;; ⇒ #'user/ft
+ft
+;; ⇒ #<core$future_call$reify__6110@effa25e: 21>
+@ft
+;; ⇒ 21
+```
+
+Dereferencing a future blocks the current thread. Because some operations may take
+a very long time or get blocked forever, futures support a timeout specified
+when you dereference them:
+
+``` clojure
+;; will block the current thread for 10 seconds, returns :completed
+(def ft (future (Thread/sleep 10000) :completed))
+;; ⇒ #'user/ft
+(deref ft 2000 :timed-out)
+;; ⇒ :timed-out
+```
+
+Subsequent access to futures using `deref` will use the cached value, just like it
+does for delays.
+
+Just like delays, it is possible to check whether a future is realized or not
+with `clojure.core/realized?`:
+
+``` clojure
+(def ft (future (reduce + (range 0 10000))))
+;; ⇒ #'user/ft
+(realized? ft)
+;; ⇒ true
+@ft
+;; ⇒ 49995000
+```
+
+Clojure futures are evaluated in a fixed size thread pool that is also used by agents
+(updated via `clojure.core/send`). This works well in many cases but may result in
+throughput lower than expected in applications that heavily use agents and futures at the same time.
+
+Finally, Clojure futures implement `java.util.concurrent.Future` and can be used with Java APIs
+that accept them.
+
+
+## Promises
 
 TBD
 
@@ -612,7 +906,34 @@ TBD
 TBD
 
 
+## Using Intrinsic Locks ("synchronized") in Clojure
+
+TBD
+
+
 ## java.util.concurrent
+
+### Overview
+
+TBD
+
+### Executors (Thread Pools)
+
+TBD
+
+### Countdown Latches
+
+TBD
+
+### Concurrent Collections
+
+TBD
+
+### Atomic Variables
+
+TBD
+
+### Fork/Join Framework
 
 TBD
 
@@ -624,18 +945,21 @@ TBD
 
 ## Runtime Parallelism
 
-Clojure was designed to be a hosted language. Its primary target, the JVM, provides runtime parallelism support.
-JVM threads map 1:1 to kernel threads. Those will be executed in parallel given that enough cores are available
-for OS scheduler to use.
+Clojure was designed to be a hosted language. Its primary target, the
+JVM, provides runtime parallelism support.  JVM threads map 1:1 to
+kernel threads. Those will be executed in parallel given that enough
+cores are available for OS scheduler to use.
 
-In Clojure, many concurrency features are built on top of JVM threads and thus benefit from runtime parallelism
-if the program is running on a multi-core machine.
+In Clojure, many concurrency features are built on top of JVM threads
+and thus benefit from runtime parallelism if the program is running on
+a multi-core machine.
 
 
 ## Books
 
-Concurrency is a broad topic and it would be silly to think that we can cover it well in just one guide.
-To get a better understanding of the subject, one can refer to a few excellent books:
+Concurrency is a broad topic and it would be silly to think that we
+can cover it well in just one guide.  To get a better understanding of
+the subject, one can refer to a few excellent books:
 
  * [Java Concurrency in Practice](http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601) by Brian Goetz et al. is a true classic.
  * [Programming Concurrency on the JVM](http://pragprog.com/book/vspcon/programming-concurrency-on-the-jvm) demonstrates a range of concurrency features in several JVM languages.
@@ -646,20 +970,25 @@ To get a better understanding of the subject, one can refer to a few excellent b
 One of Clojure design goals was to make concurrent programming easier.
 
 The key design decision was making Clojure data structures immutable
-(persistent) and separating the concepts of *identity* (references) and
-*value*. Immutable values eliminate many concurrency hazards, and ultimately make
-it easier for developers to reason about their programs.
+(persistent) and separating the concepts of *identity* (references)
+and *value*. Immutable values eliminate many concurrency hazards, and
+ultimately make it easier for developers to reason about their
+programs.
 
-Atoms are arguably the most commonly used reference type when working with concurrency
-(vars are used much more often but not for their concurrency semantics). Software Transactional Memory
-is a more specialized feature and has certain limitations (e.g. I/O operations must not be
-performed inside transactions). Finally, agents, futures and promises provide an array of
-tools for working with asynchronous operations.
+Atoms are arguably the most commonly used reference type when working
+with concurrency (vars are used much more often but not for their
+concurrency semantics). Software Transactional Memory is a more
+specialized feature and has certain limitations (e.g. I/O operations
+must not be performed inside transactions). Finally, agents, futures
+and promises provide an array of tools for working with asynchronous
+operations.
 
-Concurrency is a hard fundamental problem. There is no single "best" solution or approach
-to it. On the JVM, Clojure offers several concurrency-related features of its own but also
-provides easy access to the `java.util.concurrent` primitives and libraries such as [Akka](http://akka.io/)
-or [Jetlang](http://code.google.com/p/jetlang/).
+Concurrency is a hard fundamental problem. There is no single "best"
+solution or approach to it. On the JVM, Clojure offers several
+concurrency-related features of its own but also provides easy access
+to the `java.util.concurrent` primitives and libraries such as
+[Akka](http://akka.io/) or
+[Jetlang](http://code.google.com/p/jetlang/).
 
 
 ## Contributors
