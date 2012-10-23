@@ -898,7 +898,36 @@ that accept them.
 
 ## Promises
 
-TBD
+Promises is a yet another take on asynchronously realized values. They are similar to futures in
+certain ways:
+
+ * Can be dereferenced with a timeout
+ * Caches the realized value
+ * Supported by `clojure.core/realized?`
+
+However, promises are realized not by evaluating a piece of code but by calling `clojure.core/deliver`
+on a promise with a value:
+
+``` clojure
+;; promises have no code body (no code to evaluate)
+(def p (promise))
+;; ⇒ #'user/p
+p
+;; ⇒ #<core$promise$reify__6153@306a0a21: :pending>
+(realized? p)
+;; ⇒ false
+
+;; delivering a promise makes it realized
+(deliver p {:result 42})
+;; ⇒ #<core$promise$reify__6153@306a0a21: {:result 42}>
+(realized? p)
+;; ⇒ true
+@p
+;; ⇒ {:result 42}
+```
+
+Promises combine many of the benefits of callback-oriented asynchronous programming
+and simpler blocking function calls model provided by dereferencing.
 
 
 ## Watches and Validators
