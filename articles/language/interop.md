@@ -254,6 +254,16 @@ To get class of a particular value, pass it to `clojure.core/class`:
 As this example demonstrates, Clojure strings are JVM strings, integer literals are compiled
 as longs and floating point literals are compiled as doubles.
 
+You can also use `clojure.core/type` to return either the class of the
+Java object, or the `:type` metadata if it exists:
+
+``` clojure
+(def foo (with-meta [1 2 3] {:type :bar}))
+(type foo)
+;; ⇒ :bar
+(type [1 2 3])
+;; ⇒ clojure.lang.PersistentVector
+```
 
 ## How To Get a Java Class Reference By Name
 
