@@ -254,6 +254,16 @@ To get class of a particular value, pass it to `clojure.core/class`:
 As this example demonstrates, Clojure strings are JVM strings, integer literals are compiled
 as longs and floating point literals are compiled as doubles.
 
+You can also use `clojure.core/type` to return either the class of the
+Java object, or the `:type` metadata if it exists:
+
+``` clojure
+(def foo (with-meta [1 2 3] {:type :bar}))
+(type foo)
+;; ⇒ :bar
+(type [1 2 3])
+;; ⇒ clojure.lang.PersistentVector
+```
 
 ## How To Get a Java Class Reference By Name
 
@@ -279,35 +289,35 @@ an array of longs, for example, pass `"[[J"` to `Class/forName`. Below is the fu
 
   <tbody>
     <tr>
-      <td>"[[S"</td>
+      <td><pre>"[[S"</pre></td>
       <td>short</td>
     </tr>
     <tr>
-      <td>"[[I"</td>
+      <td><pre>"[[I"</pre></td>
       <td>integer</td>
     </tr>
     <tr>
-      <td>"[[J"</td>
+      <td><pre>"[[J"</pre></td>
       <td>long</td>
     </tr>
     <tr>
-      <td>"[[F"</td>
+      <td><pre>"[[F"</pre></td>
       <td>float</td>
     </tr>
     <tr>
-      <td>"[[D"</td>
+      <td><pre>"[[D"</pre></td>
       <td>double</td>
     </tr>
     <tr>
-      <td>"[[B"</td>
+      <td><pre>"[[B"</pre></td>
       <td>byte</td>
     </tr>
     <tr>
-      <td>"[[C"</td>
+      <td><pre>"[[C"</pre></td>
       <td>char</td>
     </tr>
     <tr>
-      <td>"[[Z"</td>
+      <td><pre>"[[Z"</pre></td>
       <td>boolean</td>
     </tr>
   </tbody>
@@ -593,6 +603,15 @@ method to use for the `json-encode` method:
 (extend java.util.UUID
   JSONable
   {:json-encode encode-java-thing})
+```
+
+Alternatively, you could use the `extend-type` macro, which actually
+expands into calls to `extend`:
+
+``` clojure
+(extend-type java.util.UUID
+  JSONable
+  (json-encode [obj] (encode-java-thing obj)))
 ```
 
 Now we can use `json-encode` for the object we've extended:
