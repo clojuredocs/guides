@@ -171,7 +171,7 @@ If a third expression is provided, when the first expression returns nil or fals
 ;; ⇒ nil
 
 (when (< 10 11) (print "hey") 10)
-⇒ hey
+;; hey
 ;; ⇒ 10
 ```
 
@@ -243,13 +243,13 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ``` clojure
 (map + [[1 2 3] [1 2 3]]) ;; This attempts to add 2 vectors with +
-⇒ ClassCastException   java.lang.Class.cast (Class.java:2990)
+;; ClassCastException   java.lang.Class.cast (Class.java:2990)
 
 (apply map + [[1 2 3] [1 2 3]]) ;; same as (map + [1 2 3] [1 2 3])
-⇒ (2 4 6)
+;; ⇒ (2 4 6)
 
 (apply + 1 2 3 [4 5 6]) ;; same as  (+ 1 2 3 4 5 6)
-⇒ 21
+;; ⇒ 21
 ```
 
 Note that apply can not be used with macros.
@@ -500,7 +500,7 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 ;; ⇒ {:a 1, :f 51, :d 75}
 
 ;; note that a map is returned, not a record.
-(defrecord Hand [index middle ring pinky ring])
+(defrecord Hand [index middle ring pinky thumb])
 ;; always be careful with the bandsaw!
 (dissoc (Hand. 3 4 3.5 2 2) :ring) 
 ;; ⇒ {:index 3, :middle 4, :pinky 2, :thumb 2}
@@ -1031,3 +1031,10 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 ### *clojure-version*
 
 TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+
+
+
+## Contributors
+
+Robert Randolph <audiolabs@gmail.com> (original author)
+Michael Klishin <michael@defprotocol.org>

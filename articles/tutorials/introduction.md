@@ -18,8 +18,11 @@ This guide covers:
  * looping and recursion
  * basics of Clojure macros
 
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
-(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
 
 
 
@@ -124,7 +127,7 @@ can try things out while following along.
 
 ## Identifiers
 
-Identifiers are used to names things. For example, in
+Identifiers are used to name things. For example, in
 
 ``` clojure
 (def the-answer 42)
@@ -132,9 +135,10 @@ Identifiers are used to names things. For example, in
 
 we've named something "the-answer" and given it the value 42.
 
-We'll mostly use lowercase letters, numbers, and dashes to name
-things, although some other characters are allowed too. We'll note
-those cases later on as they come up.
+In this document we'll mostly use lowercase letters, numbers, and
+dashes to name things, although some other characters are allowed too,
+such as `_<>!?*` (ex. `this->that`, `ready?`). We'll note more
+examples of those cases later on as they come up.
 
 
 
@@ -406,10 +410,13 @@ When you want some lexically-scoped named values to use in a section
 of your code, you can use the `let` expression:
 
 ``` clojure
-(let [width  10
-      height 20]
+(let [width     10
+      height    20
+      thickness 2]
   (println "hello from inside the `let`.")
-  (* width height))
+  (* width
+     height
+     thickness))
 ```
 
 The first thing inside the `let` is a binding vector. In it, you
@@ -418,7 +425,7 @@ along with their values.
 
 > **Formatting note:** Your readers might appreciate you vertically
 > lining up the values used in the binding vector, as we've done
-> above with 10 and 20.
+> above with 10, 20, and 2.
 
 These local names are symbols that refer directly to the values you
 set them to.
@@ -740,10 +747,12 @@ values don't change.
 > And of course, you don't get any action-at-a-distance in situations
 > like this either:
 >
->     (def a [1 2 3 4 5])
->     (def b a)
->     ;; Do what you will with `b`, ...
->     (my-func a)   ; but it won't affect `a`.
+> ``` clojure
+> (def a [1 2 3 4 5])
+> (def b a)
+> ;; Do what you will with `b`, ...
+> (my-func a)   ; but it won't affect `a`.
+> ```
 >
 > since, regardless, you can't mutate the vector (neither via `b`
 > *nor* `a`).
@@ -1074,11 +1083,26 @@ We say that `let` expressions and function bodies (and also `loop`
 expressions, which you'll read about later in [Looping and
 Recursion](#looping_and_recursion)) have an "implicit do": within them
 you can list expressions one after another, and they all get evaluated
-in order, but the last one is what determines the overall resulting
-value of the overall expression.
+in order (presumably for the side-effects), but the last one is what
+determines the overall resulting value of the `let` expression.
+
+> Incidentally, if in the binding vector of a `let` you'd like to have
+> some side-effects happen and aren't really concerned about the local
+> values involved, it's customary to use "_" (an underscore) as the
+> identifier:
+>
+> ``` clojure
+> (let [_ (do-something)
+>       _ (println "done with that")
+>       x 10]
+>   ...)
+> ```
+>
+> There's nothing special about the identifier "_" --- it's just
+> shorter to type than, say, "this-is-of-no-consequence".
 
 There's a version of `if` which supports no "else" expression and
-which provides an "implicit do". It's spelled "`when`" (and likewise
+which provides an "implicit do": it's spelled "`when`" (and likewise
 with `if-not` ↔ `when-not`).
 
 
@@ -1550,4 +1574,4 @@ multimethods, and Java interop.
 
 ## Contributors
 
-John Gabriele <jmg3000@gmail.com>, 2012 (original author)
+John Gabriele <jmg3000@gmail.com> (original author)

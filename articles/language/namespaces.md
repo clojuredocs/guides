@@ -442,3 +442,9 @@ vars. In many cases, those vars store functions in them.
 This implementation lets Clojure have many of its highly dynamic
 features at a very reasonable runtime overhead cost. For example, vars
 in namespaces can be temporarily altered for unit testing purposes.
+
+
+
+## Contributors
+
+Michael Klishin <michael@defprotocol.org> (original author)
