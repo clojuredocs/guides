@@ -500,7 +500,7 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 ;; ⇒ {:a 1, :f 51, :d 75}
 
 ;; note that a map is returned, not a record.
-(defrecord Hand [index middle ring pinky ring])
+(defrecord Hand [index middle ring pinky thumb])
 ;; always be careful with the bandsaw!
 (dissoc (Hand. 3 4 3.5 2 2) :ring) 
 ;; ⇒ {:index 3, :middle 4, :pinky 2, :thumb 2}
