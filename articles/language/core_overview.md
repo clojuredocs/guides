@@ -171,7 +171,7 @@ If a third expression is provided, when the first expression returns nil or fals
 ;; ⇒ nil
 
 (when (< 10 11) (print "hey") 10)
-⇒ hey
+;; hey
 ;; ⇒ 10
 ```
 
@@ -243,13 +243,13 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ``` clojure
 (map + [[1 2 3] [1 2 3]]) ;; This attempts to add 2 vectors with +
-⇒ ClassCastException   java.lang.Class.cast (Class.java:2990)
+;; ClassCastException   java.lang.Class.cast (Class.java:2990)
 
 (apply map + [[1 2 3] [1 2 3]]) ;; same as (map + [1 2 3] [1 2 3])
-⇒ (2 4 6)
+;; ⇒ (2 4 6)
 
 (apply + 1 2 3 [4 5 6]) ;; same as  (+ 1 2 3 4 5 6)
-⇒ 21
+;; ⇒ 21
 ```
 
 Note that apply can not be used with macros.
