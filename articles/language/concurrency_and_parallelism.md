@@ -944,7 +944,21 @@ TBD
 
 ### Overview
 
-TBD
+`java.util.concurrent` (sometimes abbreviated as `j.u.c.`) is a group of
+*concurrency utilities* in the JDK. Originally introduced in JDK 5 in 2004,
+they are developed and maintained by some of the experts in concurrency.
+`j.u.c.` is a mature library that has been heavily battle tested for
+almost a decade.
+
+While Clojure provides a whole toolbelt of concurrency features of its own,
+it certain cases the best solution is to use an existing `j.u.c.` class
+or even build a new abstraction on top of `j.u.c.` building blocks.
+
+`j.u.c.` consists of multiple parts that cover common concurrent programming
+patterns and use cases: from thread pools (a.k.a. *executors*) to synchronization
+classes, to atomic variables, to concurrent collections to the Fork/Join
+framework.
+
 
 ### Executors (Thread Pools)
 
