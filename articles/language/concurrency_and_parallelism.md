@@ -937,6 +937,32 @@ TBD
 
 ## Using Intrinsic Locks ("synchronized") in Clojure
 
+### Explicit Locking
+
+Every object on the JVM has an *intrinsic lock* (also referred to as *monitor lock*
+or simply *monitor*). By convention, a thread that needs to modify a field of a
+mutable object has to acquire the object's intrinsic lock and then release it.
+As long as a thread owns an intrinsic lock, no other thread can acquire the same lock.
+
+In Clojure, explicit synchronization like this is rarely necessary but may be
+needed for interoperability with Java code. When you need to execute a piece
+of code while holding on intrinsic lock of a mutable object, use
+the `clojure.core/locking` macro:
+
+``` clojure
+(let [l (java.util.ArrayList.)]
+  (locking l
+    (.add l 10))
+  l)
+;; ⇒ #<ArrayList [10]>
+```
+
+Note that for immutable Clojure data structures, explicit locking is effectively
+not necessary.
+
+
+### Synchronization on Clojure Record Fields
+
 TBD
 
 
