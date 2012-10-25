@@ -124,3 +124,9 @@ Same, but just the *names* (strings), not File objects:
 ```
 
 The results of those calls are seqable.
+
+
+## See also
+
+  * <https://github.com/Raynes/fs>
+  * the I/O section of the [cheatsheet](http://clojure.org/cheatsheet)
