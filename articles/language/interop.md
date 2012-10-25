@@ -635,7 +635,7 @@ example, extending `nil` to return a warning string:
 ;; ⇒  "x is nil!"
 ```
 
-The `encode-java-thing` method can also be reused for other java types
+The `encode-java-thing` method can also be reused for other Java types
 we may want to encode:
 
 ``` clojure
@@ -657,6 +657,17 @@ we may want to encode:
 ;;     :file "",
 ;;     :userInfo ""}
 ```
+
+
+## Using Intrinsic Locks ("synchronized") in Clojure
+
+Every object on the JVM has an *intrinsic lock* (also referred to as *monitor lock*
+or simply *monitor*). While very rarely necessary, Clojure provides support for
+operations that acquire intrinsic lock of a mutable Java object.
+
+This is covered in the [Concurrency and Parallelism guide](/articles/language/concurrency_and_parallelism.html#using_intrinsic_locks_synchronized_in_clojure).
+
+
 
 ## Wrapping Up
 
