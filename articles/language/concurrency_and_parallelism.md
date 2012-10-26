@@ -1089,7 +1089,24 @@ TBD
 
 ### Atomic Variables
 
-TBD
+The [java.util.concurrent.atomic](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html) package provides
+a number of data structures that support lock-free thread-safe programming on a single variable (identity). They support
+conditional atomic update operation (*compared-and-swap* aka *CAS*).
+
+Some of the more popular atomic types in the `j.u.c.atomic` package are [AtomicBoolean](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/AtomicBoolean.html),
+[AtomicLong](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/AtomicLong.html) and [AtomicReference](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/AtomicReference.html).
+
+Atomic references are pretty well covered in Clojure with atoms but ocassionally may be used by
+other libraries. An example to demonstrate how to use an atomic long for a thread-safe counter:
+
+``` clojure
+(let [l (AtomicLong.)]
+  (dotimes [i 50]
+    (.start (Thread. (fn []
+                       (.incrementAndGet l)))))
+  (.get l))
+;; ⇒ 49
+```
 
 ### Fork/Join Framework
 
