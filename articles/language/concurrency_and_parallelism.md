@@ -1036,7 +1036,52 @@ TBD
 
 ### Countdown Latches
 
-TBD
+*Countdown latch* is a thread synchronization data structure. More specifically, it handles
+on group of concurrent workflows: "block the current thread until N other threads are
+done with their work". For example, "make a POST request to N URLs and continue when all N operations
+succeeded or failed".
+
+Countdown latches are instances of `java.util.concurrent.CountDownLatch` and instantiated with
+a positive integer:
+
+``` clojure
+(import java.util.concurrent.CountDownLatch)
+
+(CountDownLatch. n)
+```
+
+When the `CountDownLatch#await` method is executed, the calling thread blocks until the counter
+gets to 0. Invoking the `CountDownLatch#countDown` method decreases the counter by 1. Count down
+operations, of course, are supposed to be performed in other threads.
+
+An example to demonstrate:
+
+``` clojure
+(let [cnt   (atom [])
+      n     5
+      latch (java.util.concurrent.CountDownLatch. n)]
+  (doseq [i (range 0 n)]
+    (.start (Thread. (fn []
+                       (swap! cnt conj i)
+                       (.countDown latch)))))
+  (.await latch)
+  @cnt)
+;; note the ordering: starting N threads in parallel leads to
+;; non-deterministic thread interleaving
+;; ⇒ [0 1 2 4 3]
+```
+
+In the example above, we start multiple threads and block the current thread until all other
+threads are done. In this example, those other threads simply add an integer to a vector
+stored in an atom. More realistic scenarios will contact external services, the file system,
+perform some computation and so on.
+
+Because when threads are executed concurrently (or in parallel), the order of their execution is not
+guaranteed, we see 4 being added to the vector before 3 in the result.
+
+Countdown latches are commonly used with initial value of 1 to "block and wait until this operation in
+a different thread is done".
+
 
 ### Concurrent Collections
 
