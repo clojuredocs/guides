@@ -8,20 +8,18 @@ layout: article
 Try as you might, XML is difficult to avoid. This is particularly true
 in the Java ecosystem. This guide will show you how to parse XML from
 a variety of different sources, with the minimum amount of pain using
-the excellent tools built in to Clojure.
+the excellent tools available in Clojure.
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4. There are no external dependencies
-used.
+This guide covers Clojure 1.4. No external dependencies are used.
 
 ## Parsing NZB files
 
 For the purpose of the tutorial I have chosen a simple and fairly well
-known XML file format: NZB. An NZB file is used to describe segments
-of files to download from NNTP servers. In this tutorial we will take
-a basic NZB document from either a string, a file (local or remote)
-and turn it into a Clojure map. 
+known XML file format: NZB. An NZB file is used to describe files to
+download from NNTP servers. In this tutorial we will take a basic NZB
+document and turn it into a Clojure map.
 
 Let us start by creating a new project (for details on using
 Leiningen, see [this guide](/articles/tutorials/leiningen.html):
@@ -44,7 +42,7 @@ Now edit `project.clj` to contain the following:
 
 We are including a dependency on
 [clojure.data.zip](http://github.com/clojure/data.zip), which is a
-"system for filtering trees, and XML trees in particular". We also
+"system for filtering trees, and XML trees in particular". 
 
 Make a dir called `dev-resources` at the root of your project, and
 create a file named `example.nzb` inside of it. This will be the file
@@ -73,13 +71,13 @@ XML:
 </nzb>
 ```
 
-_The eagle eyed among you will notice that I have commented out the
+_*Note* The eagle eyed among you will notice that I have commented out the
 DOCTYPE declaration, as this causes an Exception to be thrown. I will
 show you how to get around this at the end of the tutorial._
 
-Let's write a high level test to illustrate what we are trying to do
-clearly. Open up the `test/nzb/core_test.clj` file and make it look
-like the following:
+Let's write a high level test to illustrate more clearly what we are
+trying to do. Open up the `test/nzb/core_test.clj` file and make paste
+in the following:
 
 ```clojure
 (ns nzb.core-test
@@ -91,7 +89,7 @@ like the following:
   (let [input (io/resource "example.nzb")]
     (is (= {:meta {:title "Your File!"
                    :tag "Example"}
-            :files [{:poster "Joe Bloggs &lt;bloggs@nowhere.example&gt;"
+            :files [{:poster "Joe Bloggs <bloggs@nowhere.example>"
                      :date 1071674882
                      :subject "Here's your file!  abc-mr2a.r01 (1/2)"
                      :groups ["alt.binaries.newzbin"
@@ -109,8 +107,8 @@ This should be fairly self-explanatory, I have pretty much directly
 translated the XML into Clojure data structures. Remember it is the
 process of doing so that is of interest here, not the end result.
 
-If we just use the `clojure.xml` library to parse an XML file, we get
-a tree based representation. For example:
+If we were to just use the `clojure.xml` library to parse the NZB file,
+we get a tree based representation. For example:
 
 ```clojure
 (-> "example.nzb" io/resource io/file xml/parse)
@@ -154,3 +152,5 @@ perfect for this. The
 little confused as to how to go about using the library (not being
 familiar with zippers in general). Hopefully a few examples will make
 things clearer.
+
+
