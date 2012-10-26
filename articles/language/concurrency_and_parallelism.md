@@ -988,7 +988,51 @@ framework.
 
 ### Executors (Thread Pools)
 
+#### Overview
+
+The Executor interface standardizes invocation, scheduling, execution, and control of asynchronous tasks.
+Those tasks can be executed in the calling thread, in newly created threads, or (mostly typically)
+in a thread pool. Thread pools also can have different implementations: for example,
+be fixed size or growing dynamically, using different error handling strategies and so on.
+
+Executors are most often instantiates using static methods of the `java.util.concurrent.Executors` class. To submit an operation to the pool, use the `ExecutorService#submit` method.
+
+``` clojure
+(import '[java.util.concurrent Executors ExecutorService Callable])
+
+(let [^ExecutorService pool (Executors/newFixedThreadPool 16)
+      ^Callable  clbl       (cast Callable (fn []
+                                             (reduce + (range 0 10000))))]
+  (.submit pool clbl))
+;; ⇒ #<FutureTask java.util.concurrent.FutureTask@19ca276f>
+```
+
+In the example above, we create a new fixed size thread pool with 16 threads
+and submit a Clojure function for execution. Clojure functions [implement Runnable and Callable](/articles/language/interop.html#clojure_functions_implement_runnable_and_callable)
+interfaces and can be submitted for execution, however, because `ExecutorService#submit`
+is an overloaded method, to avoid reflection warnings, we cast the function
+to `java.util.concurrent.Callable`.
+
+#### java.util.concurrent.Future
+
+`Executor#submit` will return an instance of `java.util.concurrent.Future`. It is much like Clojure
+futures but cannot be dereferenced. To get the result, use the `j.u.c.Future#get` method:
+
+``` clojure
+(import '[java.util.concurrent Executors ExecutorService Callable])
+
+(let [^ExecutorService pool (Executors/newFixedThreadPool 16)
+      ^Callable  clbl       (cast Callable (fn []
+                                             (reduce + (range 0 10000))))
+      task                  (.submit pool clbl)]
+  (.get task))
+;; ⇒ 49995000
+```
+
+#### Scheduled Executors
+
 TBD
+
 
 ### Countdown Latches
 

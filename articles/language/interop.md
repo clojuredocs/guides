@@ -519,9 +519,14 @@ For example, to run a function in a new thread:
 Or submit a function for execution to a thread pool (in JDK terms: an execution service):
 
 ``` clojure
-(let [pool (Executors/newFixedThreadPool 16)]
-  (.submit pool (cast Callable (fn []
-                                  (println "I am executed in a thread pool")))))
+(import '[java.util.concurrent Executors ExecutorService Callable])
+
+(let [^ExecutorService pool (Executors/newFixedThreadPool 16)
+      ^Callable  clbl       (cast Callable (fn []
+                                             (reduce + (range 0 10000))))
+      task                  (.submit pool clbl)]
+  (.get task))
+;; ⇒ 49995000
 ```
 
 Note that without the cast, Clojure compiler would not be able to determine
