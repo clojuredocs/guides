@@ -116,7 +116,7 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Collections and Sequences](/articles/language/collections_and_sequences.html) (In Progress)
+### [Collections and Sequences](/articles/language/collections_and_sequences.html) ◪
 
 This guide covers:
 
@@ -127,7 +127,7 @@ This guide covers:
  * Other topics related to collections and sequences
 
 
-### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
+### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) ◪
 
 This guide covers:
 
