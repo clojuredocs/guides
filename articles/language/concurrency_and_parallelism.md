@@ -966,6 +966,11 @@ not necessary.
 TBD
 
 
+## Reducers (Clojure 1.5+)
+
+TBD
+
+
 ## java.util.concurrent
 
 ### Overview
@@ -1085,7 +1090,9 @@ a different thread is done".
 
 ### Concurrent Collections
 
-TBD
+Most of the Java collections are mutable and were not designed for concurrency. `java.util.concurrent` includes a number of collections that
+are thread safe and can be used for passing data structures between threads. 
+
 
 ### Atomic Variables
 
@@ -1115,7 +1122,18 @@ TBD
 
 ## Other Approaches to Concurrency
 
-TBD
+There are also other approaches to concurrency that neither Clojure nor Java cover. The growing
+adoption of *message passing* concurrency (the [Actor model](http://en.wikipedia.org/wiki/Actor_model) and [CSP](http://en.wikipedia.org/wiki/Communicating_Sequential_Processes))
+lead to creation of several JVM-based frameworks for message passing. Some of the most popular ones
+include
+
+ * [Akka](http://akka.io)
+ * [Jetlang](http://code.google.com/p/jetlang/)
+ * [LMAX Disruptor](http://lmax-exchange.github.com/disruptor/)
+
+Akka Java API can be used from Clojure either directly or with a library called [Okku](https://github.com/gaverhae/okku).
+
+In LMAX Disruptor, event instances passed around are assumed to mutable so the framework is of limited use with Clojure.
 
 
 ## Runtime Parallelism
