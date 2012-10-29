@@ -927,6 +927,20 @@ In this example, when nil and false are tested with the predicate, the predicate
 (filter #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
 ;; ⇒ (:nothing :something)
 ```
+
+<a id="keep_desc"></a>
+### keep
+
+`(keep f coll)`
+
+`keep` takes a function that accepts a single argument and a collection.
+
+`keep` returns a lazy sequence of non-nil results of the function applied to each item in the collection in sequence.
+
+```clojure
+TBD: examples
+```
+
 <a id="remove_desc"></a>
 ### remove
 
