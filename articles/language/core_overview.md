@@ -159,7 +159,7 @@ If the return value of the test expression is anything except nil or false, the 
 
 
 ``` clojure
-(if 0 "then") ; 0 is a truthy value. Only false or nil are falsey.
+(if 0 "then") ; 0 is a truthy value. Only false or nil are falsy.
 "then"
 
 (if nil "then" "else")
@@ -302,7 +302,7 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 
 `for` allows for list comprehensions. `for`  assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
 
-`for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
+`for` allows for explicit let, when and while through use of `:let []`, `:when (expression)`, and `:while (expression)` in the binding vector.
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]]
@@ -310,7 +310,7 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 ;; ⇒ ([1 4] [1 5] [1 6] [2 4] [2 5] [2 6] [3 4] [3 5] [3 6])
 ```
 
-:when only evaluates the body when a true value is returned by the expression provided
+`:when` only evaluates the body when a truthy value is returned by the expression provided:
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]
@@ -321,7 +321,7 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 ;; ⇒ ([2 5])
 ```
 
-:while evaluates the body until a non-true value is reached. Note that the rightmost collection is fully bound to y before a non-true value of (< x 2) is reached. This demonstrates the order of the comprehension.
+`:while` evaluates the body until a falsy value is reached. Note that the rightmost collection is fully bound to y before a falsy value of `(< x 2)` is reached. This demonstrates the order of the comprehension:
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]
@@ -337,11 +337,11 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 ([seq-exprs & body])
 ```
 
-`doseq` takes a vector of pairs of [binding collection].
+`doseq` takes a vector of binding-collection pairs and a body.
 
 `doseq` is similar to `for` except it does not return a sequence of results. `doseq` is generally intended for execution of side-effects in the body, and thusly returns nil.
 
-`doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
+`doseq` supports the same modifiers as `for`: `:let`, `:when`, and `:while`. For examples of these, see for.
 
 ``` clojure
 (doseq [x [1 2 3] y [4 5 6]]
