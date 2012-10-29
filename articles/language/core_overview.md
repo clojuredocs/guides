@@ -151,30 +151,28 @@ Without `defn`, a var would be directly bound to a function definition and expli
 (if test then else?)
 ```
 
-`if` takes 2 expressions, and an optional third.
+`if` takes 2 expressions, and an optional third: a test, a then-clause, and an else-clause.
 
 `if` is the primary method of conditional execution and other conditionals are built upon `if`.
 
-If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
-
-If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
+If the return value of the test expression is anything except nil or false, the then-clause is evaluated and the result returned. Otherwise, the else-clause is evaluated and returned if it exists. If it does not, nil is returned.
 
 
 ``` clojure
-(if 0 "second") ; 0 is a 'true' value. Only false or nil are 'false'
-"second"
+(if 0 "then") ; 0 is a truthy value. Only false or nil are falsey.
+"then"
 
-(if nil "second" "third")
-;; ⇒ "third"
+(if nil "then" "else")
+;; ⇒ "else"
 
-(if (< 10 9) "second" "third") ; (< 9 10) returns false
-;; ⇒ "third"
+(if (< 10 9) "then" "else") ; (< 9 10) returns false
+;; ⇒ "else"
 
-(if (seq '()) "second") ; seq returns nil for an empty sequence
-;; ⇒ nil
+(if (seq '()) "then") ; seq returns nil for an empty sequence
+;; ⇒ nil              ; no else-clause exists
 
-(if (nil? (= 1 2)) "second" "third") ; differentiate between nil and false if needed
-;; ⇒ "third"
+(if (nil? (= 1 2)) "then" "else") ; (= 1 2) returns false, which is not nil, and so
+;; ⇒ "else"                       ; (nil? (= 1 2)) returns false.
 ```
 
 <a id="when_desc"></a>
