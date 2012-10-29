@@ -283,23 +283,21 @@ If the return value of that function is a function, `trampoline` calls that func
 Since `trampoline` calls the returned functions with no arguments, you must supply an anonymous function that takes no arguments and calls the function you wish to recur to. This is usually done with anonymous function literals ``` #() ```
 
 ```clojure
-(declare count-up1 count-up2) ;; see `declare` for why this is needed
+(declare -even? -odd?) ;; see `declare` for why this is needed
 
-(defn count-up1 [result start total]
-  (if (= start total)
-    result
-    #(count-up2 (conj result start) (inc start) total))) ;; returns an anonymous function
+(defn -even? [n]
+  (if (zero? n)
+    true
+    #(-odd? n))) ;; returns an anonymous function
 
-(defn count-up2 [result start total]
-  (if (= start total)
-    result
-    #(count-up1 (conj result start) (inc start) total))) ;; returns an anonymous function
-    
-(trampoline count-up1 [] 0 10)
-;; ⇒ [0 1 2 3 4 5 6 7 8 9]
+(defn -odd? [n]
+  (if (zero? n)
+    false
+    #(-even? n))) ;; returns an anonymous function
+
+(trampoline -even? 10000000)
+;; ⇒ true
 ```
-
-TBD: a trivial example that would not be easily solved with self-recursion
 
 <a id="for_desc"></a>
 ### for
