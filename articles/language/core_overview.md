@@ -246,14 +246,14 @@ TBD: more examples
 The implicit `let` that `loop` provides binds each symbol to the init-expression. `recur` then binds new values when returning the execution point to `loop`.
 
 ```clojure
-(defn count-up [start total]
-  (loop [result []
-         x start
-         y total]
-    (if (= x y)
-      result
-      (recur (conj result x) (inc x) y))))
-;; ⇒ [0 1 2 3 4 5 6 7 8 9]
+(defn factorial [n]
+  (loop [n n acc 1]
+    (if (< n 1)
+      acc
+      (recur (dec n) (* acc n)))))
+
+(factorial 5)
+;; ⇒ 120
 ```
 
 TBD: more examples
