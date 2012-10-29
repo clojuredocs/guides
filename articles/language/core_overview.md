@@ -63,13 +63,11 @@ Let bindings are immutable and can be destructured, the syntax of which can be f
 (def symbol doc-string? init?)
 ```
 
-`def` takes a symbol and an optional init value.
+`def` takes a symbol, an optional documentation string, and an optional initializing value.
 
-If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding.
+If an init-value is supplied, the root binding of the var is assigned to that value. (A root binding is a value that is shared across all threads.) Redefining a var with an init-value will re-assign the root binding.
 
-A root binding is a value that is shared across all threads.
-
-The `let` form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use `def` within another form.
+The `let` form is the preferred method of creating local bindings. It should be prefered wherever possible, and the use of `def` within another form should be avoided.
 
 
 ``` clojure
