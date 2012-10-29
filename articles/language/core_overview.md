@@ -182,9 +182,9 @@ If the return value of the test expression is anything except nil or false, the 
 ([test & body])
 ```
 
-`when` takes 2 expressions.
+`when` takes 2 or more expressions: a test, and one or more body expressions.
 
-`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. `when` does not provide an 'else'.
+`when` is similar to `if`, except that it does not accept an else-clause. Instead, it wraps all body expressions in an implicit `do`, and evaluates it if the test is not false or nil. Otherwise, it returns nil.
 
 ``` clojure
 (when (= 1 2) (print "hey") 10)
