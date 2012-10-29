@@ -379,12 +379,23 @@ TBD: Simple image accompaniment.
 ([f val coll])
 ```
 
-`reduce` takes a function, an optional initial value and a collection.
+`reduce` takes a binary function, an optional initial value and a collection.
 
 `reduce` takes the first item of the collection and either the second item of the collection or the provided initial value, then evaluates the function with those arguments. The function is then evaluated with that result and the next item in the collection. This is repeated until the collection is exhausted and the value of the final function call is returned.
 
 ```clojure
-TBD: examples
+(defn sum [ns]
+  (reduce + ns))
+
+(sum [0 1 2 3 4]) ;; ⇒ 10
+(sum (range 5)) ;; ⇒ 10
+
+(defn factorial [n]
+  (reduce * (range n 0 -1)))
+
+(factorial 5) ;; ⇒ 120
+
+TBD: more examples
 ```
 
 TBD: Simple image accompaniment.
@@ -401,7 +412,15 @@ TBD: Simple image accompaniment.
 
 `reductions` returns a lazy sequence consisting of the first item in the collection, or the provided initial value followed by the result of the function evaluated with the previous result and the next item in the collection.
 
+In this way, `reductions` is the same as `reduce`, except that interim values are retained.
+
 ```clojure
+(defn sums [ns]
+  (reductions + ns))
+
+(sum (range 5))
+;; ⇒ (0 1 3 6 10)
+
 TBD: examples
 ```
 
