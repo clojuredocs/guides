@@ -32,23 +32,20 @@ This guide covers Clojure 1.4.
 (let [bindings*] exprs*)
 ```
 
-`let` takes a vector of symbol value pairs followed by a variable number of expressions.
+`let` takes a vector of symbol-value pairs followed by zero or more expressions.
 
-`let` allows binding of locals (roughly equivalent to variables in many other languages) and defines an explicit scope for those bindings.
-
-The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
+`let` allows binding of locals, which are roughly equivalent to variables in many other languages, and defines an explicit scope for those bindings. The body of a `let` also provides an implicit `do` that allows for multiple expressions.
 
 A basic example:
 
 ``` clojure
 (let [x 1 y 2]
-  (println x y))
-;; ⇒ 1 2
+  (println x y)  ; prints 1 2
+  [x y])
+;; ⇒ [1 2]
 ```
 
-Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
-
-This example basically demonstrates the lexical scoping of the let form.
+Multiple `let`'s can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol:
 
 ``` clojure
 (let [x 1]
@@ -57,9 +54,7 @@ This example basically demonstrates the lexical scoping of the let form.
     (println x))) ; prints 2
 ```
 
-Let bindings are immutable and can be destructured.
-
-TBD: link to the section about destructuring
+Let bindings are immutable and can be destructured, the syntax of which can be found in the [function arguments destructuring guide](functions.html#destructuring_of_function_arguments).
 
 <a id="def_desc"></a>
 ### def
