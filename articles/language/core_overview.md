@@ -115,7 +115,8 @@ No matter which order you put func<10 and func<20 in, there will be a reference 
 ### defn
 
 ```clojure
-([name doc-string? attr-map? [params*] prepost-map? body] [name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?])
+([name doc-string? attr-map? [params*] prepost-map? body])
+([name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?])
 ```
 
 `defn` takes a symbol, an optional doc string, an optional meta-data map, a vector of arguments and a variable number of expressions.
