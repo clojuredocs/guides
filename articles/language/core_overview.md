@@ -361,10 +361,12 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 
 `iterate` takes a function and an argument to the function.
 
-A lazy sequence is returned consisting of the argument then each subsequent entry is the function evaluated with the previous entry in the lazy sequence.
+A lazy sequence is returned, the first element of which is the argument to the function, and where each subsequent element is the result of applying the function to the previous element in the sequence.
 
 ```clojure
-TBD: Examples
+(def numbers (iterate inc 0))
+(take 10 numbers)
+;; ⇒ (0 1 2 3 4 5 6 7 8 9)
 ```
 
 TBD: Simple image accompaniment.
