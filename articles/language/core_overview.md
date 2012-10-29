@@ -212,7 +212,7 @@ See: [doseq](#doseq_desc)
 (recur exprs*)
 ```
 
-`recur` allows for self-recursion without consuming stack space proportional to the number of recursive calls made. Due to the jack of tail-call optimization on the JVM currently, this is the only method of recursion that does not consume excess stack space.
+`recur` allows for self-recursion without consuming stack space proportional to the number of recursive calls made. Due to the lack of tail-call optimization on the JVM currently, this is the only method of recursion that does not consume excess stack space.
 
 `recur` takes a number of arguments identical to the point of recursion. `recur` will evaluate those arguments, rebind them at the point of recursion and resume execution at that point.
 
