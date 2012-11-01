@@ -9,7 +9,7 @@ Clojure libraries. When you're done working through it, you'll have a
 little webapp that displays some (x, y) locations from a database,
 letting you add more locations as well.
 
-It's assumed that you're already a little familiar with Clojure. If
+It's assumed that you're already somewhat familiar with Clojure. If
 not, see the [Getting Started](getting_started.html) and
 [Introduction](introduction.html) guides.
 
@@ -39,12 +39,10 @@ application library. It:
   * sets things up such that an http request comes into your webapp as
     as a regular Clojure hashmap, and likewise makes it so that you
     can return a response as a hashmap.
-
   * provides [a
     spec](https://github.com/ring-clojure/ring/blob/master/SPEC)
     describing exactly what those request and response maps should
     look like.
-
   * brings along a web server
     ([Jetty](http://jetty.codehaus.org/jetty/)) and connects your
     webapp to it.
@@ -52,7 +50,7 @@ application library. It:
 For this tutorial, we won't actually need to deal with these maps
 by-hand, as you'll soon see.
 
-For more info, see
+For more info, see:
 
   * [the Ring readme](https://github.com/ring-clojure/ring#readme)
   * [its wiki docs](https://github.com/ring-clojure/ring/wiki)
@@ -70,11 +68,11 @@ clojars](https://clojars.org/compojure)) provides some handy features
 to take care of this for us such that we can associate url paths with
 corresponding functions, all in one place.
 
-For more info, see
+For more info, see:
 
   * [the Compojure readme](https://github.com/weavejester/compojure#readme)
   * [its wiki docs](https://github.com/weavejester/compojure/wiki)
-  * [its API docs](http://weavejester.github.com/compojure/).
+  * [its API docs](http://weavejester.github.com/compojure/)
 
 
 
@@ -120,13 +118,10 @@ For more info, see:
 
 [SQLite](http://sqlite.org/) is a small, fast, and reliable SQL
 database program that uses a sigle flat file for storage and is
-serverless. If you already know and use Postgres, go and use that
-instead. If you prefer something written in Java, by all means check
-out [Apache Derby](http://db.apache.org/derby/) or
-[H2](http://www.h2database.com/html/main.html). But this tutorial uses
-SQLite.
+serverless.
 
-Make sure you've got sqlite installed. On Debian-based OS's:
+Make sure you've got sqlite installed. On Debian-based OS's,
+install like so:
 
     sudo apt-get install sqlite3
 
@@ -209,14 +204,11 @@ a dot and don't end with a semicolon.
 
 ## Set up your routes
 
-```bash
-cd src/my_webapp
-```
-
-In the default handler.clj file you're provided, we specify our
-webapp's *routes* inside the `defroutes` macro. That is, we assign a
-function to handle each of the url paths we'd like to support, and
-then at the end provide a "not found" page for any other url paths.
+In the default src/my_webapp/handler.clj file you're provided, we
+specify our webapp's *routes* inside the `defroutes` macro. That is,
+we assign a function to handle each of the url paths we'd like to
+support, and then at the end provide a "not found" page for any other
+url paths.
 
 Make your handler.clj file look like this:
 
