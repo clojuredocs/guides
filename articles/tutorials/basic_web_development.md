@@ -6,8 +6,8 @@ layout: article
 
 This guide covers building a simple web-application using common
 Clojure libraries. When you're done working through it, you'll have a
-working little webapp that displays some (x, y) locations from a
-database.
+little webapp that displays some (x, y) locations from a database,
+letting you add more locations as well.
 
 It's assumed that you're already a little familiar with Clojure. If
 not, see the [Getting Started](getting_started.html) and
