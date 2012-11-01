@@ -48,6 +48,11 @@ A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 A brief introduction to VimClojure and its features.
 
+### [Basic Web Development](/articles/tutorials/basic_web_development.html)
+
+A brief tutorial/walkthrough of building a small webapp using Ring,
+Compojure, Hiccup, and SQLite.
+
 
 ## Clojure Language Guides
 
