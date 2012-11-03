@@ -153,7 +153,8 @@ Starting VimClojure server on localhost, 2113
 ... more output ...
 ```
 
-Now we can start editing code. (_see Editing below for tips on effectively editing Clojure code in Vim_) Let's add a simple test. Execute `:e test/command_line_args/core_test.clj`, enter
+Now we can start editing code (see [Editing](#editing) below for tips on effectively editing Clojure code in Vim).
+Let's add a simple test. Execute `:e test/command_line_args/core_test.clj`, enter
 insert mode and add the following to the file:
 
 ```clojure
