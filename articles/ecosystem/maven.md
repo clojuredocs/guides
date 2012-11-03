@@ -5,8 +5,12 @@ layout: article
 
 ## About this guide
 
-This guide describes how to use Maven to build projects written in Clojure (or in
-Clojure, and other languages, such as Java).
+This guide describes how to use Maven to build projects written in Clojure (or in Clojure,
+and other languages, such as Java).  Although Leiningen is more popular build tool in the
+Clojure community, Maven is also used for some projects, such as Clojure Contrib
+libraries, and may be useful when you need to perform some special tasks during build,
+that aren't covered by Leiningen's plugins, or when you're integrating Clojure code into
+existing Maven project.
 
 ## What is Maven?
 
