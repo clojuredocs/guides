@@ -280,6 +280,14 @@ This guide covers:
  * How to distribute plugins
 
 
+### [Clojure User Groups](/articles/ecosystem/user_groups.html) ▣
+
+This guide covers:
+
+ * Clojure User Groups (CLJUGs) around the world
+
+
+
 
 ## Cookbooks
 
