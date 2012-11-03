@@ -153,7 +153,7 @@ Starting VimClojure server on localhost, 2113
 ... more output ...
 ```
 
-Now we can start editing code. Let's add a simple test. Execute `:e test/command_line_args/core_test.clj`, enter
+Now we can start editing code. (_see Editing below for tips on effectively editing Clojure code in Vim_) Let's add a simple test. Execute `:e test/command_line_args/core_test.clj`, enter
 insert mode and add the following to the file:
 
 ```clojure
@@ -305,11 +305,48 @@ This starts the Nailgun server as usual, but also starts a Leiningen/reply REPL 
 process. So, you can switch over to the REPL, run your long-running operation, and then
 go back to Vim and continue editing while it executes.
 
+## Editing
+This section includes some tips on basic Clojure code editing in Vim.
+
+### "Words"
+The VimClojure plugin makes some minor adjustments to Vim's settings to improve the editing experience. In particular, it extends the notion of a "word" (`:help word`) to include additional characters like `-` (hyphen), `.` (dot), etc. This changes has a number of effects:
+
+* Insert mode code completion (`ctrl-n` and `ctrl-p`) will complete words with hyphens which is very common in Clojure code
+* The insanely useful, magical "star" (`*`) operator in normal mode will search for the full Clojure symbol under the cursor, including dots, hyphens, etc.
+* Word motions (`:help w`), include dots, hyphens, etc. So `dw` in normal mode will delete an entire Clojure symbol.
+
+### Wrangling Parentheses
+The most effective way to edit Clojure code is *structurally* with [paredit.vim](https://bitbucket.org/kovisoft/paredit/overview), but if you don't have time to learn that, Vim still brings a lot to the table for dealing with all the parenthese in Clojure code.
+
+First, obviously, the `%` motion (`:help %`) is very useful. In normal mode, put the cursor on an opening or closing paren and you can:
+
+* Hit `%` to jump to the matching paren.
+* Hit `d%` to delete the parens and everything they contain.
+* Hit `y%` to "yank"/copy the parens and everything in them.
+* Hit `c%` to delete the parens and the text they contain and start editing.
+* Hit `v%` to select the parens and the text they contain visually.
+
+
+The `%` motion is useful, but it's often more convenient to work with Vim's "block" text object (`:help text-objects`). This manifests in two forms. First, `ab` ("all block") which is an entire form, including the parentheses. Second, `ib` ("inner block") which is all the text within the enclosing parentheses. So, put your cursor anywhere within some parentheses in normal mode and you can:
+
+* Hit `dab` ("delete all block") to delete the entire form.
+* Hit `dib` ("delete inner block") to delete everything inside the parens.
+* Hit `cab` ("change all block") to delete the entire form and enter insert mode.
+* Hit `cib` ("change inner block") to delete the contents of the form, preserving parens, and enter insert mode.
+* Hit `yab` ("yank all block") to copy the entire form including parens.
+* Hit `yib` ("yank inner block") to copy the everything inside the parens.
+
+And so on. Getting these commands in muscle memory can really speed up working with Clojure forms.
+
+_Tip: Vim has text objects for blocks enclosed in square brackets (vectors), quotes (strings), curly braces (maps, sets) etc. They're all invaluable. `:help text-objects` !!!_
+
 ## Code Completion
 Some code completion is available with VimClojure. It is built using Vim's `omni-complete`
 system. When typing a symbol, hit `ctrl-x ctrl-o` to start omni-complete. A popup with a
-list of suggestions will appear. Use `ctlr-n` and `ctrl-p` to change the selection and hit
+list of suggestions will appear. Use `ctrl-n` and `ctrl-p` to change the selection and hit
 enter to expand a selection into the buffer.
+
+Note that Vim's built-in code completion, `ctrl-n` and `ctrl-p` in insert mode, also work fine while editing Clojure code.
 
 ## Getting Documentation
 
@@ -343,7 +380,7 @@ More shortcuts are covered in the VimClojure help files, but these cover most us
 
 ## Other Resources
 
-* [vimclojure-easy](https://github.com/daveray/vimclojure-easy) is a bare bones setup for VimClojure aimed 
+* [vimclojure-easy](https://github.com/daveray/vimclojure-easy) is a bare bones setup for VimClojure aimed
 at just getting something working.
 
 ## Contributors
