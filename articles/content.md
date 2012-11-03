@@ -236,6 +236,14 @@ This guide covers:
  * Books on ClojureScript
 
 
+### [Maven for Clojure Development](/articles/ecosystem/maven.html) ◪
+
+This guide covers:
+
+ * An overview of Apache Maven
+ * Maven Clojure plugin
+
+
 ### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
 
 This guide covers:
@@ -244,7 +252,7 @@ This guide covers:
  * How to publish a library to Clojars
 
 
-### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) (Semi-complete)
+### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) ◪
 
 This guide covers:
 
@@ -262,7 +270,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
+### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) ◪
 
 This guide covers:
 

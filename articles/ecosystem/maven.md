@@ -1,5 +1,5 @@
 ---
-title: "How to use Maven to build Clojure code"
+title: "How to use Maven to build Clojure projects"
 layout: article
 ---
 
@@ -10,7 +10,7 @@ and other languages, such as Java).  Although Leiningen is more popular build to
 Clojure community, Maven is also used for some projects, such as Clojure Contrib
 libraries, and may be useful when you need to perform some special tasks during build,
 that aren't covered by Leiningen's plugins, or when you're integrating Clojure code into
-existing Maven project.
+an existing Maven project.
 
 ## What is Maven?
 
@@ -22,16 +22,18 @@ but also for code, written in other languages. You can read more about Maven in
 [following, freely available book](http://www.sonatype.com/products/maven/documentation/book-defguide).
 
 Maven differs from other tools, such as Ant - it describes *what* we want to do, in
-contrast with Ant, that describes *how* to do something.  Maven uses declarative style to
+contrast with Ant, that describes *how* to it.  Maven uses declarative style to
 describe tasks that we want to execute, and all described tasks are performed by
-corresponding plugins.
+the corresponding plugins.
 
-Description of software lifecycle and information about project is stored in `pom.xml` file,
-that should exist in root directory of the project (and in root directories of
+Description of software lifecycle and information about project is stored in `pom.xml`,
+a file that should exist in root directory of the project (and in root directories of
 sub-projects, if your project is separated into several modules).  Project's information
 includes name, identifier and version of the project, and often includes more information:
 URL of project's site, information about source code repository (so you can use `mvn
 scm:update` goal to update code, for example), etc.
+
+## Lifecycle Phases
 
 Project Object Model (POM) defines set of stages for project's lifecycle - they are
 called "lifecycle phases".  Each phase can include several tasks (goals), that define what
@@ -40,7 +42,7 @@ testing (`test`), creation of package (`package`), and installation (`install`).
 phases has dependencies on other phases, that should be executed before its invocation
 (compilation should be executed before testing, testing before packaging, etc.).
 
-Usually developer uses phase's name to start process.  For example, `mvn package`, or `mvn
+Usually developer uses phase's name to start a process.  For example, `mvn package`, or `mvn
 install`, etc.  But developer can also execute concrete Maven's goal.  To do this, he
 should specify name of plugin, that implements concrete goal, and task name in given
 plugin.  For example, `mvn clojure:run` will start Clojure and execute script, specified in
@@ -128,7 +130,7 @@ By default, Clojure's source code is placed in the `src/main/clojure` directory 
 project's tree, while source code for tests is placed in the `src/test/clojure` directory.
 These default values could be changed in [plugin's configuration](#configure).
 
-### Goals, defined in clojure-maven-plugin
+### Goals in the Clojure Maven Plugin
 
 `clojure-maven-plugin` implements several commands (goals) that could be divided into
 following groups:
@@ -179,13 +181,14 @@ To use repository you need to add following code into `repositories` section in 
  </repository>
 ```
 
-### Dependencies
+### Dependencies Management
 
-Maven automatically downloads all necessary dependencies from default repository, and
+Maven automatically downloads the all necessary dependencies from the default repository (known as
+Maven Central), and
 repositories, specified by user (as shown above).  Downloaded packages are stored in
 user's home directory and could be used by other projects without additional downloading.
 Each package is uniquely identified by combination of three parameters - group's name
-(`groupId` tag), artifact's name (`artifactId` tag), and version (`version` tag).
+(the `groupId` tag), artifact's name (the `artifactId` tag), and version (the `version` tag).
 
 To use Clojure in your project you need at least specify dependency on language itself.
 Right now, the stable version of Clojure is 1.4.0.  To declare this dependency, add
@@ -199,13 +202,14 @@ following code into `dependencies` section of `pom.xml` file:
  </dependency>
 ```
 
-If you want to use latest version of the language, then you need to add corresponding
-repository (snapshots) and use version number like `1.5.0-SNAPSHOTS` instead of version
+If you want to use the latest version of the language, then you need to add corresponding
+repository (snapshots) and use version number like `1.5.0-master-SNAPSHOT` instead of version
 `1.4.0`.
 
 To perform some tasks, implemented by `clojure-maven-plugin`, you need to specify additional
-dependencies:
- * if you will use `clojure:swank` goal, then you need to specify dependency on `swank-clojure` package:
+dependencies.
+
+If you will use `clojure:swank` goal, then you need to specify dependency on `swank-clojure` package:
 
 ```xml
  <dependency>
@@ -215,23 +219,23 @@ dependencies:
 </dependency>
 ```
 
- * if you will use `clojure:nailgun` task, then you need to download distribution from
-   [vimclojure](http://kotka.de/projects/clojure/vimclojure.html)'s site, build it, as described in documentation, and install into local
-   Maven repository.  And after this, you need to add following dependency on
-   `vimclojure` with following code:
+If you will use `clojure:nailgun` task, then you need to download distribution from
+[vimclojure](http://kotka.de/projects/clojure/vimclojure.html)'s site, build it, as described in documentation, and install into local
+Maven repository.  And after this, you need to add following dependency on
+`vimclojure` with following code:
 
 ```xml
 <dependency>
   <groupId>de.kotka</groupId>
   <artifactId>vimclojure</artifactId>
-  <version>X.X.X</version>
+  <version>X.Y.Z</version>
  </dependency>
 ```
 
- * the JLine library isn't required, but it could be useful if you plan to use REPL -
-   this library implements history of commands, etc.  Presence of this library is detected
-   automatically when `mvn clojure:repl` goal is executed. You can add dependency for this
-   library with following code:
+The JLine library isn't required, but it could be useful if you plan to use the REPL -
+this library implements support for command history and other nice things. Presence of this library is detected
+automatically when `mvn clojure:repl` goal is executed. You can add dependency for this
+library with following code:
 
 ```xml
  <dependency>
@@ -241,8 +245,7 @@ dependencies:
  </dependency>
 ```
 
-#configure
-### Plugin's configuration
+### Plugin's Configuration
 
 Developer can change plugin's configuration options, such as location of source code,
 scripts names, etc.  To change some parameter, you need to add its new value into
@@ -298,7 +301,7 @@ code and/or tests:
  * `clojureOptions` - using this option you can specify command-line options that will be
   passed to `java` process on every invocation.
 
-## Conclusion
+## Wrapping Up
 
 I think, that this article provides enough information for you to start use Maven together
 with Clojure.  If you have Clojure-only project, and you don't plan to use all power of
@@ -310,9 +313,19 @@ this language is almost the same as language implemented in Leiningen).
 
 Other examples of using Maven with Clojure you can find in different projects: [Incanter](http://github.com/liebke/incanter/tree/1.0.x)
 (as example of project, consisting from several modules), [labrepl](http://github.com/relevance/labrepl) and
-[clojure-maven-example](http://github.com/talios/clojure-maven-example).  More information on Clojure and Maven you can also find in
+the [clojure-maven-example](http://github.com/talios/clojure-maven-example).
+
+
+## Where To Learn More
+
+More information on Clojure and Maven you can also find in
 following blog posts:
- - [Why using Maven for Clojure builds is a no-brainer](http://muckandbrass.com/web/display/~cemerick/2010/03/25/Why+using+Maven+for+Clojure+builds+is+a+no-brainer) (including video, that shows how to
-   work with `clojure-maven-plugin`);
- - [How to create a Clojure application](http://pupeno.com/blog/how-to-create-a-clojure-application/);
- - [Maven’s Not So Bad](http://stuartsierra.com/2009/09/03/mavens-not-so-bad).
+
+ * [Why using Maven for Clojure builds is a no-brainer](http://muckandbrass.com/web/display/~cemerick/2010/03/25/Why+using+Maven+for+Clojure+builds+is+a+no-brainer) (including video, that shows how to work with the `clojure-maven-plugin`)
+ * [How to create a Clojure application](http://pupeno.com/blog/how-to-create-a-clojure-application/)
+ * [Maven’s Not So Bad](http://stuartsierra.com/2009/09/03/mavens-not-so-bad).
+
+
+## Contributors
+
+[Alex Ott](http://alexott.net/en/index.html), 2012 (original author)
