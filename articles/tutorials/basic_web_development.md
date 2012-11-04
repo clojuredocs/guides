@@ -117,7 +117,7 @@ For more info, see:
 ### SQLite
 
 [SQLite](http://sqlite.org/) is a small, fast, and reliable SQL
-database program that uses a sigle flat file for storage and is
+database program that uses a single flat file for storage and is
 serverless.
 
 Make sure you've got sqlite installed. On Debian-based OS's,
