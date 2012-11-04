@@ -32,23 +32,20 @@ This guide covers Clojure 1.4.
 (let [bindings*] exprs*)
 ```
 
-`let` takes a vector of symbol value pairs followed by a variable number of expressions.
+`let` takes a vector of symbol-value pairs followed by zero or more expressions.
 
-`let` allows binding of locals (roughly equivalent to variables in many other languages) and defines an explicit scope for those bindings.
-
-The body of a `let` statement also provides an implicit `do` that allows for multiple statements in the body of `let`.
+`let` allows binding of locals, which are roughly equivalent to variables in many other languages, and defines an explicit scope for those bindings. The body of a `let` also provides an implicit `do` that allows for multiple expressions.
 
 A basic example:
 
 ``` clojure
 (let [x 1 y 2]
-  (println x y)) 
-;; ⇒ 1 2
+  (println x y)  ; prints 1 2
+  [x y])
+;; ⇒ [1 2]
 ```
 
-Let can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol.
-
-This example basically demonstrates the lexical scoping of the let form.
+Multiple `let`'s can be nested, and the scope is lexically determined. This means that a binding's value is determined by the nearest binding form for that symbol:
 
 ``` clojure
 (let [x 1]
@@ -57,9 +54,7 @@ This example basically demonstrates the lexical scoping of the let form.
     (println x))) ; prints 2
 ```
 
-Let bindings are immutable and can be destructured.
-
-TBD: link to the section about destructuring
+Let bindings are immutable and can be destructured, the syntax of which can be found in the [function arguments destructuring guide](functions.html#destructuring_of_function_arguments).
 
 <a id="def_desc"></a>
 ### def
@@ -68,13 +63,11 @@ TBD: link to the section about destructuring
 (def symbol doc-string? init?)
 ```
 
-`def` takes a symbol and an optional init value. 
+`def` takes a symbol, an optional documentation string, and an optional initializing value.
 
-If an init value is supplied, the root binding of the var is assigned to that value. Redefining a var with an init value will re-assign the root binding.
+If an init-value is supplied, the root binding of the var is assigned to that value. (A root binding is a value that is shared across all threads.) Redefining a var with an init-value will re-assign the root binding.
 
-A root binding is a value that is shared across all threads.
-
-The `let` form is the preferred method of creating local bindings. It is strongly suggested to prefer it where possible, and never use `def` within another form.
+The `let` form is the preferred method of creating local bindings. It should be prefered wherever possible, and the use of `def` within another form should be avoided.
 
 
 ``` clojure
@@ -122,7 +115,8 @@ No matter which order you put func<10 and func<20 in, there will be a reference 
 ### defn
 
 ```clojure
-([name doc-string? attr-map? [params*] prepost-map? body] [name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?])
+([name doc-string? attr-map? [params*] prepost-map? body])
+([name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?])
 ```
 
 `defn` takes a symbol, an optional doc string, an optional meta-data map, a vector of arguments and a variable number of expressions.
@@ -157,30 +151,28 @@ Without `defn`, a var would be directly bound to a function definition and expli
 (if test then else?)
 ```
 
-`if` takes 2 expressions, and an optional third.
+`if` takes 2 expressions, and an optional third: a test, a then-clause, and an else-clause.
 
 `if` is the primary method of conditional execution and other conditionals are built upon `if`.
 
-If the return value of the first expression is anything except nil or false, the second expression is evaluated and the result returned..
-
-If a third expression is provided, when the first expression returns nil or false the third expression is evaluated and returned.
+If the return value of the test expression is anything except nil or false, the then-clause is evaluated and the result returned. Otherwise, the else-clause is evaluated and returned if it exists. If it does not, nil is returned.
 
 
 ``` clojure
-(if 0 "second") ; 0 is a 'true' value. Only false or nil are 'false'
-"second"
+(if 0 "then") ; 0 is a truthy value. Only false or nil are falsy.
+"then"
 
-(if nil "second" "third")
-;; ⇒ "third"
+(if nil "then" "else")
+;; ⇒ "else"
 
-(if (< 10 9) "second" "third") ; (< 9 10) returns false
-;; ⇒ "third"
+(if (< 10 9) "then" "else") ; (< 9 10) returns false
+;; ⇒ "else"
 
-(if (seq '()) "second") ; seq returns nil for an empty sequence
-;; ⇒ nil
+(if (seq '()) "then") ; seq returns nil for an empty sequence
+;; ⇒ nil              ; no else-clause exists
 
-(if (nil? (= 1 2)) "second" "third") ; differentiate between nil and false if needed
-;; ⇒ "third"
+(if (nil? (= 1 2)) "then" "else") ; (= 1 2) returns false, which is not nil, and so
+;; ⇒ "else"                       ; (nil? (= 1 2)) returns false.
 ```
 
 <a id="when_desc"></a>
@@ -190,9 +182,9 @@ If a third expression is provided, when the first expression returns nil or fals
 ([test & body])
 ```
 
-`when` takes 2 expressions.
+`when` takes 2 or more expressions: a test, and one or more body expressions.
 
-`when` provides an implicit do form that is evaluated if an expression returns true, otherwise nil is returned. `when` does not provide an 'else'.
+`when` is similar to `if`, except that it does not accept an else-clause. Instead, it wraps all body expressions in an implicit `do`, and evaluates it if the test is not false or nil. Otherwise, it returns nil.
 
 ``` clojure
 (when (= 1 2) (print "hey") 10)
@@ -205,7 +197,7 @@ If a third expression is provided, when the first expression returns nil or fals
 
 ### for
 
-See: [for](#for_desc) 
+See: [for](#for_desc)
 
 ### doseq
 
@@ -220,7 +212,7 @@ See: [doseq](#doseq_desc)
 (recur exprs*)
 ```
 
-`recur` allows for self-recursion without consuming stack space proportional to the number of recursive calls made. Due to the jack of tail-call optimization on the JVM currently, this is the only method of recursion that does not consume excess stack space.
+`recur` allows for self-recursion without consuming stack space proportional to the number of recursive calls made. Due to the lack of tail-call optimization on the JVM currently, this is the only method of recursion that does not consume excess stack space.
 
 `recur` takes a number of arguments identical to the point of recursion. `recur` will evaluate those arguments, rebind them at the point of recursion and resume execution at that point.
 
@@ -254,14 +246,14 @@ TBD: more examples
 The implicit `let` that `loop` provides binds each symbol to the init-expression. `recur` then binds new values when returning the execution point to `loop`.
 
 ```clojure
-(defn count-up [start total]
-  (loop [result []
-         x start
-         y total]
-    (if (= x y)
-      result
-      (recur (conj result x) (inc x) y))))
-;; ⇒ [0 1 2 3 4 5 6 7 8 9]
+(defn factorial [n]
+  (loop [n n acc 1]
+    (if (< n 1)
+      acc
+      (recur (dec n) (* acc n)))))
+
+(factorial 5)
+;; ⇒ 120
 ```
 
 TBD: more examples
@@ -283,23 +275,21 @@ If the return value of that function is a function, `trampoline` calls that func
 Since `trampoline` calls the returned functions with no arguments, you must supply an anonymous function that takes no arguments and calls the function you wish to recur to. This is usually done with anonymous function literals ``` #() ```
 
 ```clojure
-(declare count-up1 count-up2) ;; see `declare` for why this is needed
+(declare -even? -odd?) ;; see `declare` for why this is needed
 
-(defn count-up1 [result start total]
-  (if (= start total)
-    result
-    #(count-up2 (conj result start) (inc start) total))) ;; returns an anonymous function
+(defn -even? [n]
+  (if (zero? n)
+    true
+    #(-odd? n))) ;; returns an anonymous function
 
-(defn count-up2 [result start total]
-  (if (= start total)
-    result
-    #(count-up1 (conj result start) (inc start) total))) ;; returns an anonymous function
-    
-(trampoline count-up1 [] 0 10)
-;; ⇒ [0 1 2 3 4 5 6 7 8 9]
+(defn -odd? [n]
+  (if (zero? n)
+    false
+    #(-even? n))) ;; returns an anonymous function
+
+(trampoline -even? 10000000)
+;; ⇒ true
 ```
-
-TBD: a trivial example that would not be easily solved with self-recursion
 
 <a id="for_desc"></a>
 ### for
@@ -312,7 +302,7 @@ TBD: a trivial example that would not be easily solved with self-recursion
 
 `for` allows for list comprehensions. `for`  assigns each sequential value in the collection to the binding form and evaluates them rightmost first. The results are returned in a lazy sequence.
 
-`for` allows for explicit let, when and while through use of ":let []" ":when (expression)" ":while (expression)" in the binding vector.
+`for` allows for explicit let, when and while through use of `:let []`, `:when (expression)`, and `:while (expression)` in the binding vector.
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]]
@@ -320,7 +310,7 @@ TBD: a trivial example that would not be easily solved with self-recursion
 ;; ⇒ ([1 4] [1 5] [1 6] [2 4] [2 5] [2 6] [3 4] [3 5] [3 6])
 ```
 
-:when only evaluates the body when a true value is returned by the expression provided
+`:when` only evaluates the body when a truthy value is returned by the expression provided:
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]
@@ -331,7 +321,7 @@ TBD: a trivial example that would not be easily solved with self-recursion
 ;; ⇒ ([2 5])
 ```
 
-:while evaluates the body until a non-true value is reached. Note that the rightmost collection is fully bound to y before a non-true value of (< x 2) is reached. This demonstrates the order of the comprehension.
+`:while` evaluates the body until a falsy value is reached. Note that the rightmost collection is fully bound to y before a falsy value of `(< x 2)` is reached. This demonstrates the order of the comprehension:
 
 ``` clojure
 (for [x [1 2 3] y [4 5 6]
@@ -341,17 +331,17 @@ TBD: a trivial example that would not be easily solved with self-recursion
 ```
 
 <a id="doseq_desc"></a>
-### doseq 
+### doseq
 
 ```clojure
 ([seq-exprs & body])
 ```
 
-`doseq` takes a vector of pairs of [binding collection].
+`doseq` takes a vector of binding-collection pairs and a body.
 
 `doseq` is similar to `for` except it does not return a sequence of results. `doseq` is generally intended for execution of side-effects in the body, and thusly returns nil.
 
-`doseq` supports the same bindings as for - :let :when :while. For examples of these, see for.
+`doseq` supports the same modifiers as `for`: `:let`, `:when`, and `:while`. For examples of these, see for.
 
 ``` clojure
 (doseq [x [1 2 3] y [4 5 6]]
@@ -369,12 +359,14 @@ TBD: a trivial example that would not be easily solved with self-recursion
 ([f x])
 ```
 
-`iterate` takes a function and an argument to the function. 
+`iterate` takes a function and an argument to the function.
 
-A lazy sequence is returned consisting of the argument then each subsequent entry is the function evaluated with the previous entry in the lazy sequence.
+A lazy sequence is returned, the first element of which is the argument to the function, and where each subsequent element is the result of applying the function to the previous element in the sequence.
 
 ```clojure
-TBD: Examples
+(def numbers (iterate inc 0))
+(take 10 numbers)
+;; ⇒ (0 1 2 3 4 5 6 7 8 9)
 ```
 
 TBD: Simple image accompaniment.
@@ -387,12 +379,23 @@ TBD: Simple image accompaniment.
 ([f val coll])
 ```
 
-`reduce` takes a function, an optional initial value and a collection. 
+`reduce` takes a binary function, an optional initial value and a collection.
 
 `reduce` takes the first item of the collection and either the second item of the collection or the provided initial value, then evaluates the function with those arguments. The function is then evaluated with that result and the next item in the collection. This is repeated until the collection is exhausted and the value of the final function call is returned.
 
 ```clojure
-TBD: examples
+(defn sum [ns]
+  (reduce + ns))
+
+(sum [0 1 2 3 4]) ;; ⇒ 10
+(sum (range 5)) ;; ⇒ 10
+
+(defn factorial [n]
+  (reduce * (range n 0 -1)))
+
+(factorial 5) ;; ⇒ 120
+
+TBD: more examples
 ```
 
 TBD: Simple image accompaniment.
@@ -405,11 +408,19 @@ TBD: Simple image accompaniment.
 ([f val coll])
 ```
 
-`reductions` takes a function, an optional initial value and a collection. 
+`reductions` takes a function, an optional initial value and a collection.
 
 `reductions` returns a lazy sequence consisting of the first item in the collection, or the provided initial value followed by the result of the function evaluated with the previous result and the next item in the collection.
 
+In this way, `reductions` is the same as `reduce`, except that interim values are retained.
+
 ```clojure
+(defn sums [ns]
+  (reductions + ns))
+
+(sum (range 5))
+;; ⇒ (0 1 3 6 10)
+
 TBD: examples
 ```
 
@@ -421,11 +432,11 @@ TBD: Simple image accompaniment.
 ```clojure
 ([f coll])
 ([f c1 c2])
-([f c1 c2 c3]) 
+([f c1 c2 c3])
 ([f c1 c2 c3 & colls])
 ```
 
-`map` takes a function and one or more collections. 
+`map` takes a function and one or more collections.
 
 `map` passes an item from each collection, in order, to the function and returns a lazy sequence of the results.
 
@@ -457,14 +468,14 @@ List addition occurs at the beginning of the list. This is because accessing the
 the tail requires traversal of the entire list.
 
 ```clojure
-(conj '(1 2) 3) 
+(conj '(1 2) 3)
 ;; ⇒ (3 1 2)
 ```
 
 Vectors have constant time access across the entire data structure. `'conj' thusly appends to the end of a vector.
 
 ```clojure
-(conj [1 2] 3) 
+(conj [1 2] 3)
 ;; ⇒ [1 2 3]
 ```
 
@@ -472,20 +483,20 @@ Maps do not have guaranteed ordering, so the location that items are added is ir
 added to the map.
 
 ```clojure
-(conj {:a 1 :b 2 :c 3} [:d 4]) 
+(conj {:a 1 :b 2 :c 3} [:d 4])
 ;; ⇒ {:d 4, :a 1, :c 3, :b 2}
 
-(conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13]) 
+(conj {:cats 1 :dogs 2} [:ants 400] [:giraffes 13])
 ;; ⇒ {:giraffes 13, :ants 400, :cats 1, :dogs 2}
 ```
 
 Sets also do not have guaranteed ordering. `conj` returns a set with the item added. As the concept of sets implies, added items will not duplicate equivalent items if they are present in the set.
 
 ```clojure
-(conj #{1 4} 5) 
+(conj #{1 4} 5)
 ;; ⇒ #{1 4 5}
 
-(conj #{:a :b :c} :b :c :d :e) 
+(conj #{:a :b :c} :b :c :d :e)
 ;; ⇒ #{:a :c :b :d :e}
 ```
 
@@ -501,10 +512,10 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 `empty` returns an empty collection of the same type as the collection provided.
 
 ```clojure
-(empty [1 2 3]) 
+(empty [1 2 3])
 ;; ⇒ []
 
-(empty {:a 1 :b 2 :c 3}) 
+(empty {:a 1 :b 2 :c 3})
 ;; ⇒ {}
 ```
 
@@ -523,14 +534,14 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
 
 ```clojure
-(assoc {:a 1} :b 2) 
+(assoc {:a 1} :b 2)
 ;; ⇒ {:b 2, :a 1}
 
-(assoc {:a 1 :b 45 :c 3} :b 2) 
+(assoc {:a 1 :b 45 :c 3} :b 2)
 ;; ⇒ {:a 1, :c 3, :b 2}
 
 (defrecord Hand [index middle ring pinky thumb])
-(assoc (Hand. 3 4 3.5 2 2) :index 3.75) 
+(assoc (Hand. 3 4 3.5 2 2) :index 3.75)
 ;; ⇒ #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
 ```
 When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector.
@@ -557,16 +568,16 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 `dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
 
 ```clojure
-(dissoc {:a 1 :b 2 :c 3} :b) 
+(dissoc {:a 1 :b 2 :c 3} :b)
 ;; ⇒ {:a 1, :c 3}
 
-(dissoc {:a 1 :b 14 :c 390 :d 75 :e 2 :f 51} :b :c :e) 
+(dissoc {:a 1 :b 14 :c 390 :d 75 :e 2 :f 51} :b :c :e)
 ;; ⇒ {:a 1, :f 51, :d 75}
 
 ;; note that a map is returned, not a record.
 (defrecord Hand [index middle ring pinky thumb])
 ;; always be careful with the bandsaw!
-(dissoc (Hand. 3 4 3.5 2 2) :ring) 
+(dissoc (Hand. 3 4 3.5 2 2) :ring)
 ;; ⇒ {:index 3, :middle 4, :pinky 2, :thumb 2}
 ```
 
@@ -584,13 +595,13 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 Returns a count of the number of items in a collection. An argument of nil returns 0.
 
 ``` clojure
-(count "Hello") 
+(count "Hello")
 ;; ⇒ 5
 
-(count [1 2 3 4 5 6 7]) 
+(count [1 2 3 4 5 6 7])
 ;; ⇒ 7
 
-(count nil) 
+(count nil)
 ;; ⇒ 0
 ```
 
@@ -599,15 +610,15 @@ Keep in mind that lazy sequences must be realized to get a count of the items. T
 can cause a variety of otherwise cryptic errors.
 
 ``` clojure
-(counted? "Hello") 
+(counted? "Hello")
 ;; ⇒ false
 
 ;; will be fully realized when using (count (range 10))
-(counted? (range 10) 
+(counted? (range 10)
 ;; ⇒ false
 
 ;; Constant time return of (count)
-(counted? [1 2 3 4 5]) 
+(counted? [1 2 3 4 5])
 ;; ⇒ true
 ```
 <a id="empty?_desc"></a>
@@ -622,10 +633,10 @@ can cause a variety of otherwise cryptic errors.
 `empty?` returns true if the collection has no items, or false if it has 1 or more items.
 
 ```clojure
-(empty? []) 
+(empty? [])
 ;; ⇒ true
 
-(empty? '(1 2 3)) 
+(empty? '(1 2 3))
 ;; ⇒ false
 ```
 
@@ -650,10 +661,10 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 `not-empty` returns nil if the collection has no items. If the collection contains items, the collection is returned.
 
 ```clojure
-(not-empty '(:mice :elephants :children)) 
+(not-empty '(:mice :elephants :children))
 ;; ⇒ (:mice :elephants :children)
 
-(not-empty '()) 
+(not-empty '())
 ;; ⇒ nil
 ```
 
@@ -673,13 +684,13 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
 
 ```clojure
-(first (range 10)) 
+(first (range 10))
 ;; ⇒ 0
 
-(first [:floor :piano :seagull]) 
+(first [:floor :piano :seagull])
 ;; ⇒ :floor
 
-(first []) 
+(first [])
 ;; ⇒ nil
 ```
 
@@ -697,10 +708,10 @@ Note that for collections that do not guarantee order like some maps and sets, t
 `rest` should also not be relied on when using maps and sets unless you are sure ordering is guaranteed.
 
 ```clojure
-(rest [13 1 16 -4]) 
+(rest [13 1 16 -4])
 ;; ⇒ (1 16 -4)
 
-(rest '(:french-fry)) 
+(rest '(:french-fry))
 ;; ⇒ '()
 ```
 
@@ -734,15 +745,15 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 
 ```clojure
 ;; val of a key in a map
-(get {:a 1 :b 2 :c 3} :b) 
+(get {:a 1 :b 2 :c 3} :b)
 ;; ⇒ 2
 
 ;; index of a vector
-(get [10 15 20 25] 2) 
+(get [10 15 20 25] 2)
 ;; ⇒ 20
 
 ;; in a set, returns the value itself if present
-(get #{1 10 100 2 20 200} 1) 
+(get #{1 10 100 2 20 200} 1)
 ;; ⇒ 1
 
 ;; returns nil if key is not present
@@ -750,11 +761,11 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 ;; ⇒ nil
 
 ;; vector does not have an _index_ of 4. nil is returned
-(get [1 2 3 4] 4) 
+(get [1 2 3 4] 4)
 ;; ⇒ nil
 
 (defrecord Hand [index middle ring pinky thumb])
-(get (Hand. 3 4 3.5 2 2) :index) 
+(get (Hand. 3 4 3.5 2 2) :index)
 ;; ⇒ 3
 ```
 
@@ -762,11 +773,11 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 
 ```clojure
 ;; index 4 does not exist. return default value
-(get [1 2 3 4] 4 "Not Found") 
+(get [1 2 3 4] 4 "Not Found")
 ;; ⇒ "Not Found"
 
 ;; key :c does not exist, so return default value of 3
-(get {:a 1 :b 2} :c 3) 
+(get {:a 1 :b 2} :c 3)
 ;; ⇒ 3
 ```
 
@@ -782,23 +793,23 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 `contains` returns true if the provided *key* is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
 
 ```clojure
-(contains? {:a 1 :b 2 :c 3} :c) 
+(contains? {:a 1 :b 2 :c 3} :c)
 ;; ⇒ true
 
 ;; true if index 2 exists
-(contains? ["John" "Mary" "Paul"] 2) 
+(contains? ["John" "Mary" "Paul"] 2)
 ;; ⇒ true
 
 ;; false if index 5 does not exist
-(contains? ["John" "Mary" "Paul"] 5) 
+(contains? ["John" "Mary" "Paul"] 5)
 ;; ⇒ false
 
 ;; "Paul" does not exist as an index
-(contains? ["John" "Mary" "Paul"] "Paul") 
+(contains? ["John" "Mary" "Paul"] "Paul")
 ;; ⇒ false
 
 ;; lists always return false. Contain won't traverse a collection for a result.
-(contains? '(1 2 3) 0) 
+(contains? '(1 2 3) 0)
 ;; ⇒ false
 ```
 
@@ -814,11 +825,11 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 `keys` returns a sequence of the keys in a map or record.
 
 ```clojure
-(keys {1 "one" 2 "two" 3 "three"}) 
+(keys {1 "one" 2 "two" 3 "three"})
 ;; ⇒ (1 2 3)
 
 (defrecord Hand [index middle ring pinky thumb])
-(keys (Hand. 2 4 3 1 2)) 
+(keys (Hand. 2 4 3 1 2))
 ;; ⇒ (:index :middle :ring :pinky :thumb)
 ```
 
@@ -834,11 +845,11 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 `vals` returns a sequence of vals in a map or record.
 
 ```clojure
-(vals {:meows 20 :barks 2 :moos 5}) 
+(vals {:meows 20 :barks 2 :moos 5})
 ;; ⇒ (5 2 20)
 
 (defrecord Hand [index middle ring pinky thumb])
-(vals (Hand. 1 2 3 4 5)) 
+(vals (Hand. 1 2 3 4 5))
 ;; ⇒ (1 2 3 4 5)
 ```
 
@@ -953,11 +964,11 @@ TBD: examples
 `remove` returns a lazy sequence of items that return `false` or `nil` for the provided predicate. Contrast to `filter`.
 
 ```clojure
-(remove even? (range 10)) 
+(remove even? (range 10))
 ;; ⇒ (1 3 5 7 9)
 
 ;; relative complement. probably useless?
-(remove {:a 1 :b 2} [:h :k :z :b :s]) 
+(remove {:a 1 :b 2} [:h :k :z :b :s])
 ;; ⇒ (:h :k :z :s)
 ```
 
@@ -967,7 +978,7 @@ This will cause that item to be included in the returned lazy sequence.
 In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned.
 
 ```clojure
-(remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons]) 
+(remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
 ;; ⇒ (:things :someone nil false :pigeons)
 ```
 
@@ -986,25 +997,25 @@ In this example, when nil and false are tested with the predicate, the predicate
 Since collections are "true" values, this makes it possible to return the first result itself rather than simply `true`.
 
 ```clojure
-(some even? [1 2 3 4 5]) 
+(some even? [1 2 3 4 5])
 ;; ⇒ true
 
-;; predicate returns the value rather than simply true 
-(some #(if (even? %) %) [1 2 3 4 5]) 
+;; predicate returns the value rather than simply true
+(some #(if (even? %) %) [1 2 3 4 5])
 ;; ⇒ 2
 ```
 
 Since maps can be used as functions, you can use a map as a predicate. This will return the value of the first key in the collection that is also in the map.
 
 ```clojure
-(some {:a 1 :b 5} [:h :k :d :b]) 
+(some {:a 1 :b 5} [:h :k :d :b])
 ;; ⇒ 5
 ```
 
 Sets can also be used as functions and will return the first item in the collection that is present in the set.
 
 ```clojure
-(some #{4} (range 20)) 
+(some #{4} (range 20))
 ;; ⇒ 4
 ```
 
@@ -1020,11 +1031,11 @@ Sets can also be used as functions and will return the first item in the collect
 `every` returns true if the predicate returns true for every item in the collection, otherwise it returns false.
 
 ```clojure
-(every? even? (range 0 10 2)) 
+(every? even? (range 0 10 2))
 ;; ⇒ true
 
 ;; set can be used to see if collection only contains items in the set.
-(every? #{2 3 4} [2 3 4 2 3 4]) 
+(every? #{2 3 4} [2 3 4 2 3 4])
 ;; ⇒ true
 ```
 
@@ -1095,13 +1106,13 @@ See: [not-empty](not-empty_desc)
 
 ```clojure
 ([])
-([f]) 
+([f])
 ([f g])
-([f g h]) 
+([f g h])
 ([f1 f2 f3 & fs])
 ```
 
-`juxt` takes a variable number of functions. 
+`juxt` takes a variable number of functions.
 
 `juxt` returns a function that will return a vector consisting of the result of each of those functions to a provided argument.
 
@@ -1116,13 +1127,13 @@ TBD: Simple image accompaniment.
 
 ```clojure
 ([])
-([f]) 
+([f])
 ([f g])
-([f g h]) 
+([f g h])
 ([f1 f2 f3 & fs])
 ```
 
-`comp` takes a variable number of functions. 
+`comp` takes a variable number of functions.
 
 `comp` returns a function that will return the result of applying the rightmost function to the provided argument, then the second rightmost function to the result of that etc...
 
@@ -1141,7 +1152,7 @@ TBD: Simple image accompaniment.
 ([f x y z])
 ```
 
-`fnil` takes a function and one to three arguments. 
+`fnil` takes a function and one to three arguments.
 
 `fnil` returns a function that replaces any nil arguments with the provided values. `fnil` only supports supports patching 3 arguments, but will pass any arguments beyond that un-patched.
 
@@ -1196,7 +1207,7 @@ Note that apply can not be used with macros.
 ### ->
 
 ```clojure
-([x]) 
+([x])
 ([x form])
 ([x form & more])
 ```
@@ -1215,7 +1226,7 @@ TBD: Simple image accompaniment.
 ### ->>
 
 ```clojure
-([x]) 
+([x])
 ([x form])
 ([x form & more])
 ```
