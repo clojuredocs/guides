@@ -59,6 +59,7 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'VimClojure'
+filetype on
 ```
 
 Step 2 : Run this in the terminal:
