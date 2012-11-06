@@ -108,7 +108,7 @@ environment setup and how to run a local server.
 ### Contributing To Existing Guides
 
 First, pick a topic that sounds interesting. Writing documentation takes some effort and
-working on something that is interesting will motivate you. Next, find the article you want
+working on something that is interesting to you will motivate you. Next, find the article you want
 to contribute to under `./articles/`. It is a Markdown file with inline code snippets.
 
 At the top of each article you will usually find what it is supposed to cover. Please stick
@@ -117,17 +117,17 @@ to that list.
 Then fork the repository, create a [topic branch](http://git-scm.com/book/en/Git-Branching-Branching-Workflows), and
 start writing.
 
-When writing, periodically view results in the browser (see the Toolchain section about running a local server) and make
-sure code examples are rendered correctly and there are no serious formatting issues. If you are not a Markdown or CSS guru,
+When writing, periodically view results in the browser (see the [Toolchain readme](cds/blob/master/README-tools.md) about running a local server) and make
+sure code examples are rendered correctly and that there are no serious formatting issues. If you are not a Markdown or CSS guru,
 it's OK, but submitting changes that seriously break formatting and force maintainers to work on fixing them is not
 very productive (or nice).
 
 After making the changes you want, run them by a fellow developer, edit them a couple
-of times and **submit a pull request on GitHub*. Please be patient. It may take a while for
-CDS maintainers to get to your pull request, read your changes and suggest improvements.
+of times and *submit a pull request on GitHub*. Please be patient. It may take a while for
+CDS maintainers to get to your pull request, read your changes, and suggest improvements.
 
-Don't get discouraged if asked to do more edits or even completely rewrite some parts from scratch.
-All good documentation out there is a result of dozens of edits, corrections, sometimes ground-up
+Don't get discouraged if asked to make more edits or even completely rewrite some parts from scratch.
+All good documentation out there is a result of dozens of edits, corrections, and sometimes ground-up
 rewrites. This is normal. We want Clojure documentation to be high quality just like the language and
 `clojure.core`.
 
