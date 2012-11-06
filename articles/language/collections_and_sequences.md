@@ -29,13 +29,13 @@ many operations are expressed as a series of operations on collections or sequen
 Most of Clojure's core library treats collections and sequences the same way, although
 sometimes a distinction has to be made (e.g. with lazy infinite sequences).
 
-`clojure.core` provides many fundamental operations on collections: such as `map`, `filter`,
-`remove`, `take` and `drop`. Basic operations on collections and sequences are combined
+`clojure.core` provides many fundamental operations on collections, such as: `map`, `filter`,
+`remove`, `take`, and `drop`. Basic operations on collections and sequences are combined
  to implement more complex operations.
 
 ### Clojure Collections are Immutable (Persistent)
 
-Clojure collections are *immutable* (*persistent*). The term *persistent data structures* has
+Clojure collections are *immutable* (*persistent*). The term "persistent data structures" has
 nothing to do with durably storing them on disk. What it means is that collections are
 mutated (updated) by producing new collections. To quote Wikipedia:
 
@@ -44,7 +44,7 @@ mutated (updated) by producing new collections. To quote Wikipedia:
 > immutable, as their operations do not (visibly) update the structure in-place, but instead
 > always yield a new updated structure.
 
-Clojure's persistent data structures are implemented as trees and tries and
+Clojure's persistent data structures are implemented as trees and [*tries*](https://en.wikipedia.org/wiki/Hash_array_mapped_trie) and
 have `O(log32 n)` access complexity where `n` is the number of elements.
 
 
