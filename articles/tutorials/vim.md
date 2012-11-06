@@ -42,7 +42,13 @@ If you're using [Pathogen](http://www.vim.org/scripts/script.php?script_id=2332)
 
 ### With Vundle
 
-If you prefer to use [Vundle](https://github.com/gmarik/vundle) (a great wrapper around Pathogen):
+If you are already using [Vundle](https://github.com/gmarik/vundle), just add this one line to your `~/.vimrc` after the `Bundle 'gmarik/vundle'` line:
+
+```vim
+Bundle 'VimClojure'
+```
+
+If you are not already using Vundle, and want to use it:
 
 Step 1 : Add this to the top of your `~/.vimrc`:
 
