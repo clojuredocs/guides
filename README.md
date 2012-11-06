@@ -160,7 +160,6 @@ to be added to the repository as a collaborator. We still encourage contributors
 review and discussions for new content, but you will be able to push small improvements directly.
 
 [GitHub contributors page](https://github.com/clojuredocs/cds/graphs/contributors) lists key contributors to the project.
-If you authored or co-authored a guide, please add your name to the end of it in the `Contributors` section.
 
 
 ## License
