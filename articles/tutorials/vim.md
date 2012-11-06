@@ -41,7 +41,34 @@ VimClojure is installed like any other Vim plugin. The "old fashioned" way is to
 If you're using [Pathogen](http://www.vim.org/scripts/script.php?script_id=2332), simply unzip the VimClojure archive from [vim.org](http://www.vim.org/scripts/script.php?script_id=2332) into your `.vim/bundle` folder.
 
 ### With Vundle
-TODO: Someone that uses [Vundle](https://github.com/gmarik/vundle) write some stuff here.
+
+If you are already using [Vundle](https://github.com/gmarik/vundle), just add this one line to your `~/.vimrc` after the `Bundle 'gmarik/vundle'` line:
+
+```vim
+Bundle 'VimClojure'
+```
+
+If you are not already using Vundle, and want to use it:
+
+Step 1 : Add this to the top of your `~/.vimrc`:
+
+```vim
+set nocompatible
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'VimClojure'
+filetype on
+```
+
+Step 2 : Run this in the terminal:
+
+```bash
+mkdir -p ~/.vim/bundle
+git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
+```
 
 ### Setting up the Nailgun Client
 In order to get the capabilities of VimClojure beyond just indentation and syntax highlighting, you'll need a Nailgun client. It can be downloaded [here](http://kotka.de/projects/vimclojure/vimclojure-nailgun-client-2.3.0.zip). For completeness, the Nailgun homepage is [here](http://www.martiansoftware.com/nailgun/quickstart.html).
