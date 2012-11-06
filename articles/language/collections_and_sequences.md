@@ -90,9 +90,9 @@ Commas can be used in map literals (Clojure compiler treats the as whitespace):
 `clojure.core/sorted-map` and `clojure.core/array-map` produce ordered maps:
 
 ``` clojure
-(sorted-map :language "Clojure" :creator "Rich Hickey") ;= {:creator "Rich Hickey", :language "Clojure"}
+(sorted-map :language "Clojure" :creator "Rich Hickey") ; ⇒ {:creator "Rich Hickey", :language "Clojure"}
 
-(array-map :language "Clojure" :creator "Rich Hickey")  ;= {:creator "Rich Hickey", :language "Clojure"}
+(array-map :language "Clojure" :creator "Rich Hickey")  ; ⇒ {:creator "Rich Hickey", :language "Clojure"}
 ```
 
 Unsurprisingly, map literals must contain an even number of forms (as many keys as values). Otherwise
@@ -207,12 +207,12 @@ for more information.
 The most common way of checking if an element is in a set is by using set as a function:
 
 ``` clojure
-(#{1 2 3 4} 1)  ;= 1
-(#{1 2 3 4} 10) ;= nil
+(#{1 2 3 4} 1)  ; ⇒ 1
+(#{1 2 3 4} 10) ; ⇒ nil
 
 (if (#{1 2 3 4} 1)
   :hit
-  :miss) ;= :hit
+  :miss) ; ⇒ :hit
 ```
 
 
@@ -485,7 +485,7 @@ When using `assoc` with a vector, the key is the index and the value is the valu
 The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
 
 ```clojure
-(assoc [1 2 76] 2 3) ;= [1 2 3]
+(assoc [1 2 76] 2 3) ; ⇒ [1 2 3]
 
 ;; index 5 does not exist. valid indexes for this vector are: 0, 1, 2
 (assoc [1 2 3] 5 6) ;; IndexOutOfBoundsException   clojure.lang.PersistentVector.assocN (PersistentVector.java:136)
