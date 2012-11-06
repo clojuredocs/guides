@@ -45,7 +45,7 @@ mutated (updated) by producing new collections. To quote Wikipedia:
 > always yield a new updated structure.
 
 Clojure's persistent data structures are implemented as trees and [*tries*](https://en.wikipedia.org/wiki/Hash_array_mapped_trie) and
-have `O(log32 n)` access complexity where `n` is the number of elements.
+have O(log<sub>32</sub> *n*) access complexity where *n* is the number of elements.
 
 
 ## The Collection Abstraction
