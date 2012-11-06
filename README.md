@@ -153,8 +153,7 @@ If you are the primary author of a substantial document, you are
 encouraged to include your name in a `# Contributors` section near the
 end of it, noting that you are the original author. If you have made
 substantial contributions to an existing document, you might add your
-name to the `# Contributors` section. All contributors are encouraged
-to add their name to the `CONTRIBUTORS.md` file.
+name to the `# Contributors` section.
 
 
 
