@@ -149,6 +149,12 @@ other sources unless you are the primary author of them and understand the impli
 
 ### Contributors Policy
 
+If you are the primary author of a substantial document, you are
+encouraged to include your name in a `# Contributors` section near the
+end of it, noting that you are the original author. If you have made
+substantial contributions to an existing document, you might add your
+name to the `# Contributors` section.
+
 If you have at least one non-trivial (e.g. not just typo fixes) pull request merged, you can ask
 to be added to the repository as a collaborator. We still encourage contributors to use pull requests for content
 review and discussions for new content, but you will be able to push small improvements directly.
