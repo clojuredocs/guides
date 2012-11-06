@@ -23,7 +23,8 @@ This guide covers Clojure 1.4.
 
 ## Overview
 
-Clojure has two powerful abstractions: collections and sequences. When working with Clojure,
+Clojure provides a number of powerful abstractions including *collections* and *sequences*.
+When working with Clojure,
 many operations are expressed as a series of operations on collections or sequences.
 
 Most of Clojure's core library treats collections and sequences the same way, although
