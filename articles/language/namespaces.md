@@ -61,46 +61,13 @@ recommended. For example:
 
 In addition, the `ns` macro takes a number of optional forms:
 
- * `(:import ...)`
  * `(:require ...)`
+ * `(:import ...)`
  * `(:use ...)`
  * `(:refer-clojure ...)`
  * `(:gen-class ...)`
 
 These are just slightly more concise variants of `clojure.core/import`, `clojure.core/require`, et cetera.
-
-### The :import Helper Form
-
-The `:import` helper form is for setting up access to Java classes
-from your Clojure code. For example:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:import java.util.concurrent.Executors))
-```
-
-This will make sure the `java.util.concurrent.Executors` class is imported and can be used by its short
-name, `Executors`. It is possible to import multiple classes:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:import java.util.concurrent.Executors
-           java.util.concurrent.TimeUnit
-           java.util.Date))
-```
-
-If multiple imported classes are in the same namespace (like in the example above),
-it is possible to avoid some duplication by using an *import list*. The first element
-of an import list is the package and other elements are class names in that package:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:import [java.util.concurrent Executors TimeUnit]
-           java.util.Date))
-```
-
-Even though *import list* is called a list, it can be any Clojure collection (typically
-vectors are used).
 
 
 ### The :require Helper Form
@@ -159,6 +126,41 @@ It is possible to refer to all functions in a namespace (usually not necessary):
 ;; Now it is possible to do:
 ;; (difference #{1 2 3} #{3 4 5})
 ```
+
+
+### The :import Helper Form
+
+The `:import` helper form is for setting up access to Java classes
+from your Clojure code. For example:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:import java.util.concurrent.Executors))
+```
+
+This will make sure the `java.util.concurrent.Executors` class is imported and can be used by its short
+name, `Executors`. It is possible to import multiple classes:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:import java.util.concurrent.Executors
+           java.util.concurrent.TimeUnit
+           java.util.Date))
+```
+
+If multiple imported classes are in the same namespace (like in the example above),
+it is possible to avoid some duplication by using an *import list*. The first element
+of an import list is the package and other elements are class names in that package:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:import [java.util.concurrent Executors TimeUnit]
+           java.util.Date))
+```
+
+Even though *import list* is called a list, it can be any Clojure collection (typically
+vectors are used).
+
 
 
 ### The Current Namespace
