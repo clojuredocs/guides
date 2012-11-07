@@ -61,11 +61,11 @@ cover some terminology.
     </tr>
     <tr>
       <td>Parallelism</td>
-      <td>A condition that arises when at least two threads are executing simultaneously, e.g. on multiple cores or CPUs.</td>
+      <td>A condition that arises when at least two threads are executing simultaneously, e.g., on multiple cores or CPUs.</td>
     </tr>
     <tr>
       <td>Shared State</td>
-      <td>When multiple threads of execution need to mutate (modify) one or more pieces of program state (e.g. variables, identities)</td>
+      <td>When multiple threads of execution need to mutate (modify) one or more pieces of program state (e.g., variables, identities)</td>
     </tr>
     <tr>
       <td>Mutable Data Structures</td>
@@ -119,7 +119,7 @@ There are many concurrency hazards, some of the most common and well known are:
 
 These hazards are not exclusive to threads and can happen with OS
 processes, runtime processes and any other executaion processes. They
-are also not specific to a particular runtime or VM (e.g. the JVM) or
+are also not specific to a particular runtime or VM (e.g., the JVM) or
 programming language. Admittedly, some languages make it significantly
 easier to write corrent, safe concurrent programs, but none are
 completely immune to concurrency hazards. More often than not,
@@ -148,7 +148,7 @@ reason about their programs.
 
 However, a language that only has immutable data structures and no way
 to change (mutate) program state is not very useful. The
-identity/value separation makes state mutations (e.g. incrementing a
+identity/value separation makes state mutations (e.g., incrementing a
 counter or adding an element to a list) possible in ways that
 have known guarantees with respect to concurrency. This separation largely
 eliminates the need for explicit use of locks, which is possible in Clojure
@@ -170,7 +170,7 @@ When you attempt to modify a value (a data structure), a new value is produced i
 are known as *persistent data structures* (the word "persistent" has nothing to do with
 storing data on disk).
 
-An *identity* is a named entity (e.g. a list of active chat group
+An *identity* is a named entity (e.g., a list of active chat group
 members or a counter) that changes over time and at any given moment references a value.
 For example, the current value of a counter may be `42`. After incrementing it, the value
 is `43` but it is still the same counter --- the same identity. This is different from, say, Java
@@ -332,7 +332,7 @@ used sparingly in your implementation code. Consider using `swap!` first.
 
 Atoms is the most commonly used concurrent feature in Clojure. It covers many cases and lets developers
 avoid explicit locking. Atoms cover a lot of use cases and are very fast. It's fair to say that
-when you need uncoordinated reference types (e.g. not Software Transactional Memory), the rule of
+when you need uncoordinated reference types (e.g., not Software Transactional Memory), the rule of
 thumb is, "start with an atom, then see".
 
 It is not uncommon to initialize an atom in a local and then return it from the function and share
@@ -583,7 +583,7 @@ to retry. `commute` does not cause *transaction conflicts*.
 
 #### Using Refs With Clojure Data Structures
 
-*TBD: demonstrate more complex changes, e.g. to game characters*
+*TBD: demonstrate more complex changes, e.g., to game characters*
 
 
 
@@ -593,8 +593,8 @@ Software transactional memory is a powerful but highly specialized tool. Because
 you must only use pure functions with STM. I/O operations cannot be undone by the runtime and very often are
 not [idempotent](glossary.html#idempotent).
 
-Structuring your application code as *pure core* and *edge code* that interact with the user or other
-services (perform I/O operations and other side-effects) helps with this. In that case, the pure core
+Structuring your application code as *pure core* and *edge code* that interacts with the user or other
+services (performing I/O operations and other side-effects) helps with this. In that case, the pure core
 can use STM without issues.
 
 For example, in a Web or network server, incoming requests are the edge code: they do I/O. The pure core
@@ -604,8 +604,8 @@ back to the client by the edge code:
 *TBD: a picture to demonstrate*
 
 Unlike some other languages and runtimes (for example, Haskell), Clojure *will not prevent you from
-doing I/O in transactions*. It is a matter of discipline on the programmer's part. It does provide
-a helper function, though: `clojure.core/io!`. It will raise an exception if there is an STM transaction
+doing I/O in transactions*. It is left as a matter of discipline on the programmer's part. It does provide
+a helper function, though: `clojure.core/io!` will raise an exception if there is an STM transaction
 running and has no effect otherwise.
 
 First, an example with pure code:
@@ -638,13 +638,13 @@ transaction:
 
 #### Summary and Use Cases
 
-TBD
+*TBD*
 
 
 
-### vars
+### Vars
 
-Vars are the reference type you are already familiar with: you define them via the `def` special form:
+Vars are the reference type you are already familiar with. You define them via the `def` special form:
 
 ``` clojure
 (def url "http://en.wikipedia.org/wiki/Margarita")
@@ -652,7 +652,7 @@ Vars are the reference type you are already familiar with: you define them via t
 
 Functions defined via `defn` are also stored in vars. Vars can be dynamically scoped. They have
 *root bindings* that are initially visible to all threads. When defining a var
-with `def`, you define a var that only has root binding, so its value will be the same, no matter
+with `def`, you define a var that only has root binding, so its value will be the same no matter
 what thread you use it from:
 
 ``` clojure
@@ -668,7 +668,7 @@ what thread you use it from:
 ;; ⇒ nil
 ```
 
-#### Dynamic Scoping. Thread-local Bindings.
+#### Dynamic Scoping and Thread-local Bindings
 
 To temporarily change var value, we need to make the var dynamic by adding `:dynamic true` to its
 metadata and then use `clojure.core/binding`:
@@ -685,14 +685,14 @@ metadata and then use `clojure.core/binding`:
 ;; ⇒ nil
 ```
 
-Note that by convention, vars that are supposed to or may be dynamically scoped are named with leading
-and trailing `*`, called "earmuffs".
+Note that, by convention, vars which are supposed to or may be dynamically scoped are named with leading
+and trailing asterisks `*` (often referred to as "earmuffs").
 
-In the example above, `binding` temporarily changed var's current value to a different URL. But that happened
+In the example above, `binding` temporarily changed the var's current value to a different URL. But that happened only
 in the same thread as the var was originally defined in. What makes vars interesting from the concurrency
 point of view is that their bindings can be *thread-local* (yes, if you are familiar with thread-local variables
-in Java or Ruby, it is very similar and serves largely the same purpose). To demonstrate, lets change
-the example to spin up 3 threads and alter var value from them:
+in Java or Ruby, it is very similar and serves largely the same purpose). To demonstrate, let's change
+the example to spin up 3 threads and alter the var's value from them:
 
 ``` clojure
 (def ^:dynamic *url* "http://en.wikipedia.org/wiki/Margarita")
@@ -721,7 +721,7 @@ the example to spin up 3 threads and alter var value from them:
 ```
 
 As you can see, var scoping in different threads did not modify the var's value in the thread it was
-originally defined in (its *root binding*). In real world cases, for example, it means that a multi-threaded
+originally defined in (its *root binding*). In real-world cases, for example, it means that a multi-threaded
 Web crawler can store some crawling state specific to a particular thread in a var and not
 modify its initial (global) value.
 
@@ -773,7 +773,7 @@ in a var, so initial connection requires root binding modification.
 
 #### Summary and Use Cases
 
-To summarize: vars can have dynamic scoping. They have root binding and can have thread-local binding.
+To summarize: vars can have dynamic scope. They have a root binding and can have thread-local bindings as well.
 As such, vars are good for storing pieces of program state that vary between threads but cannot
 be stored in a function local. `alter-var-root` is used to alter root binding of a var. It is done
 the functional way: by providing a function that takes the old var value and returns a new one.
@@ -794,13 +794,13 @@ value of a reference (an atom, an agent, a ref, etc). To dereference a Clojure r
 ;; ⇒ []
 ```
 
-Besides atoms, agents and refs, Clojure has several other concurrency-oriented data structures
-that can be dereferenced: delays, futures and promises. They will be covered later in this
+Besides atoms, agents, and refs, Clojure has several other concurrency-oriented data structures
+that can be dereferenced: delays, futures, and promises. They will be covered later in this
 guide.
 
 ### Dereferencing Support For Data Types Implemented In Java
 
-It is possible to make custom data types implemented in Java to support dereferencing by
+It is possible to make custom data types implemented in Java support dereferencing by
 making them implement the `clojure.lang.` interface:
 
 ``` java
@@ -811,8 +811,8 @@ public interface IDeref{
 }
 ```
 
-This can be done to make data types implemented in Java to look and feel more like built-in
-Clojure data types or make it possible to pass said types to a function that expects
+This can be done to make data types implemented in Java look and feel more like built-in
+Clojure data types, or make it possible to pass said types to a function that expects
 its arguments to be dereferenceable.
 
 
@@ -906,7 +906,7 @@ that accept them.
 
 ## Promises
 
-Promises is a yet another take on asynchronously realized values. They are similar to futures in
+Promises are yet another take on asynchronously realized values. They are similar to futures in
 certain ways:
 
  * Can be dereferenced with a timeout
@@ -914,7 +914,7 @@ certain ways:
  * Supported by `clojure.core/realized?`
 
 However, promises are realized not by evaluating a piece of code but by calling `clojure.core/deliver`
-on a promise with a value:
+on a promise along with a value:
 
 ``` clojure
 ;; promises have no code body (no code to evaluate)
@@ -935,12 +935,12 @@ p
 ```
 
 Promises combine many of the benefits of callback-oriented asynchronous programming
-and simpler blocking function calls model provided by dereferencing.
+and the simpler blocking function calls model provided by dereferencing.
 
 
 ## Watches and Validators
 
-TBD
+*TBD*
 
 
 ## Using Intrinsic Locks ("synchronized") in Clojure
@@ -954,7 +954,7 @@ As long as a thread owns an intrinsic lock, no other thread can acquire the same
 
 In Clojure, explicit synchronization like this is rarely necessary but may be
 needed for interoperability with Java code. When you need to execute a piece
-of code while holding on intrinsic lock of a mutable object, use
+of code while holding an intrinsic lock of a mutable object, use
 the `clojure.core/locking` macro:
 
 ``` clojure
@@ -971,12 +971,12 @@ not necessary.
 
 ### Synchronization on Clojure Record Fields
 
-TBD
+*TBD*
 
 
 ## Reducers (Clojure 1.5+)
 
-TBD
+*TBD*
 
 
 ## java.util.concurrent
@@ -990,12 +990,12 @@ they are developed and maintained by some of the experts in concurrency.
 almost a decade.
 
 While Clojure provides a whole toolbelt of concurrency features of its own,
-it certain cases the best solution is to use an existing `j.u.c.` class
+in certain cases the best solution is to use an existing `j.u.c.` class
 or even build a new abstraction on top of `j.u.c.` building blocks.
 
 `j.u.c.` consists of multiple parts that cover common concurrent programming
 patterns and use cases: from thread pools (a.k.a. *executors*) to synchronization
-classes, to atomic variables, to concurrent collections to the Fork/Join
+classes, to atomic variables, to concurrent collections, to the Fork/Join
 framework.
 
 
@@ -1014,7 +1014,7 @@ Executors are most often instantiates using static methods of the `java.util.con
 (import '[java.util.concurrent Executors ExecutorService Callable])
 
 (let [^ExecutorService pool (Executors/newFixedThreadPool 16)
-      ^Callable  clbl       (cast Callable (fn []
+      ^Callable clbl        (cast Callable (fn []
                                              (reduce + (range 0 10000))))]
   (.submit pool clbl))
 ;; ⇒ #<FutureTask java.util.concurrent.FutureTask@19ca276f>
@@ -1035,7 +1035,7 @@ futures but cannot be dereferenced. To get the result, use the `j.u.c.Future#get
 (import '[java.util.concurrent Executors ExecutorService Callable])
 
 (let [^ExecutorService pool (Executors/newFixedThreadPool 16)
-      ^Callable  clbl       (cast Callable (fn []
+      ^Callable clbl        (cast Callable (fn []
                                              (reduce + (range 0 10000))))
       task                  (.submit pool clbl)]
   (.get task))
@@ -1044,7 +1044,7 @@ futures but cannot be dereferenced. To get the result, use the `j.u.c.Future#get
 
 #### Scheduled Executors
 
-TBD
+*TBD*
 
 
 ### Countdown Latches
@@ -1125,23 +1125,23 @@ other libraries. An example to demonstrate how to use an atomic long for a threa
 
 ### Fork/Join Framework
 
-TBD
+*TBD*
 
 
 ## Other Approaches to Concurrency
 
 There are also other approaches to concurrency that neither Clojure nor Java cover. The growing
 adoption of *message passing* concurrency (the [Actor model](http://en.wikipedia.org/wiki/Actor_model) and [CSP](http://en.wikipedia.org/wiki/Communicating_Sequential_Processes))
-lead to creation of several JVM-based frameworks for message passing. Some of the most popular ones
-include
+lead to the creation of several JVM-based frameworks for message passing. Some of the most popular ones
+include:
 
  * [Akka](http://akka.io)
  * [Jetlang](http://code.google.com/p/jetlang/)
  * [LMAX Disruptor](http://lmax-exchange.github.com/disruptor/)
 
-Akka Java API can be used from Clojure either directly or with a library called [Okku](https://github.com/gaverhae/okku).
+Akka's Java API can be used from Clojure either directly or via a library called [Okku](https://github.com/gaverhae/okku).
 
-In LMAX Disruptor, event instances passed around are assumed to mutable so the framework is of limited use with Clojure.
+In LMAX Disruptor, event instances passed around are assumed to be mutable, so the framework is of limited use with Clojure.
 
 
 ## Runtime Parallelism
@@ -1179,8 +1179,8 @@ programs.
 Atoms are arguably the most commonly used reference type when working
 with concurrency (vars are used much more often but not for their
 concurrency semantics). Software Transactional Memory is a more
-specialized feature and has certain limitations (e.g. I/O operations
-must not be performed inside transactions). Finally, agents, futures
+specialized feature and has certain limitations (e.g., I/O operations
+must not be performed inside transactions). Finally, agents, futures,
 and promises provide an array of tools for working with asynchronous
 operations.
 
