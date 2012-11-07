@@ -177,7 +177,7 @@ is `43` but it is still the same counter --- the same identity. This is differen
 or Ruby, where variables serve as identities that (typically) point to a mutable value
 and which are modified in place.
 
-TBD: an images to illustrate these concepts
+*TBD: add images to illustrate these concepts*
 
 Identities in Clojure can be of several types, known as *reference types*.
 
@@ -191,7 +191,7 @@ classified as coordinated or uncoordinated, and synchronous or
 asynchronous. Different reference types in Clojure have their own
 concurrency semantics and cover different kind of operations:
 
-<table class="table-striped table-bordered table">
+<table class="table-bordered table">
   <thead>
     <tr>
       <th></th>
@@ -217,7 +217,7 @@ concurrency semantics and cover different kind of operations:
 <dl>
   <dt>Coordinated</dt>
   <dl>An operation that depends on cooperation from other operations (possibly, other operations at least do not interfere with it)
-      in order to produce correct results, for example, a banking operation that involves more than one account.
+      in order to produce correct results. For example, a banking operation that involves more than one account.
    </dl>
 
   <dt>Uncoordinated</dt>
@@ -226,7 +226,7 @@ concurrency semantics and cover different kind of operations:
   </dl>
 
   <dt>Synchronous</dt>
-  <dl>When caller's thread waits, blocks or sleeps until it has access to a given resource or context.</dl>
+  <dl>When the caller's thread waits, blocks, or sleeps until it has access to a given resource or context.</dl>
 
   <dt>Asynchronous</dt>
   <dl>Operations that can be started or scheduled without blocking the caller's thread.</dl>
@@ -235,26 +235,27 @@ concurrency semantics and cover different kind of operations:
 One more reference type, [vars](#vars), supports dynamic scoping and thread-local storage.
 
 
-### atoms
+### Atoms
 
 Atoms are references that change atomically (changes become immediately visible to all threads,
-changes are guaranteed to be synchronized by the JVM). If you come from Java background,
+changes are guaranteed to be synchronized by the JVM). If you come from a Java background,
 atoms are basically atomic references from `java.util.concurrent` with a functional twist
 to them. Atoms are identities that implement synchronous, uncoordinated, atomic updates.
 
-Lets jump right in and demonstrate how atoms work with an example. We know that Clojure data
+Lets jump right in and demonstrate how atoms work using an example. We know that Clojure data
 structures are immutable by default. Adding an element to a collection really produces a new
 collection. In such case, how does one keep a shared list (say, of active connections to a server
 or recently crawled URLs) and mutate it in a thread-safe manner? We will demonstrate how to
 accomplish this with an atom.
 
-To create an atom, use the `clojure.core/atom` function. It takes initial atom value as the argument:
+To create an atom, use the `clojure.core/atom` function. Its argument will serve as the atom's
+initial value:
 
 ``` clojure
 (def currently-connected (atom []))
 ```
 
-The line above makes the atom `currently-connected` an empty vector. To access atom's value, use
+The line above makes the atom `currently-connected` an empty vector. To access an atom's value, use
 `clojure.core/deref` or the `@atom` reader form:
 
 ``` clojure
@@ -268,10 +269,12 @@ currently-connected
 ;; ⇒ #<Atom@614b6b5d: []>
 ```
 
-As the returned values demonstrate, the atom itself is a reference. To access its current value, you
-*dereference* it. Dereferencing will be covered in more detail later in this guide. For now, it is
-sufficient to say that dereferencing returns the current value of an atom and a few other Clojure
-reference types and data structures.
+As the returned values demonstrate, the atom itself is a reference. To
+access its current value, you *dereference* it. Dereferencing will be
+covered in more detail later in this guide. For now, it is sufficient
+to say that dereferencing returns the current value of an atom. (Other
+Clojure reference types as well as a few specialized data structures
+can be dereferenced as well.)
 
 Locals can be atoms, too:
 
@@ -302,12 +305,12 @@ and then we mutated it with `swap!`:
 ![Atom state 2](/assets/images/language/concurrency_and_parallelism/atom_state2.png)
 
 For the readers familiar with the atomic types from the [java.util.concurrent.atomic](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html) package,
-it should sound very familiar. The only difference is that instead of setting a value, atoms are mutated
+this should sound very familiar. The only difference is that instead of setting a value, atoms are mutated
 with a function. This is both because Clojure is a functional language and because with this approach,
 `clojure.core/swap!` can *retry the operation* safely. This implies that the function you provide to
 `swap!` is *pure* (has no side effects).
 
-Occasionally you will need to mutate the value of an atom the same way you do it with atomic references in Java:
+Occasionally you will need to mutate the value of an atom the same way you would with atomic references in Java:
 by setting them to a specific value. This is what `clojure.core/reset!` does. It takes an atom and the new value:
 
 ``` clojure
@@ -319,10 +322,10 @@ by setting them to a specific value. This is what `clojure.core/reset!` does. It
 ;; ⇒ []
 ```
 
-`reset!` may be useful in test suites to reset an atom state between test executions, but it should be
+`reset!` may be useful in test suites to reset an atom's state between test executions, but it should be
 used sparingly in your implementation code. Consider using `swap!` first.
 
-TBD: demonstrate retries under high update rates
+*TBD: demonstrate retries under high update rates*
 
 
 #### Summary and Use Cases
@@ -336,13 +339,14 @@ It is not uncommon to initialize an atom in a local and then return it from the 
 a piece of state with other functions and/or threads.
 
 
-### agents
+### Agents
 
 Agents are references that are updated asynchronously: updates happen at a later, unknown point
 in time, in a thread pool. Agents are identities that implement uncoordinated, asynchronous updates.
 
-A small but useful example to demo a agent on is a counter. For example, we want to track how often
-page downloads in a Web crawler respond with 40x and 50x status codes. The simplest version
+A small but useful example of using an agent is as a counter. For
+example, suppose we want to track how often page downloads in a Web
+crawler respond with 40x and 50x status codes. The simplest version
 can look like this:
 
 ``` clojure
@@ -356,7 +360,7 @@ errors-counter
 ;; ⇒ 0
 ```
 
-This immediately provides several observations: just like atoms, agents are references. To get
+One can immediately make several observations: just like atoms, agents are references. To get
 the current value of an agent, we need to *dereference* it using `clojure.core/deref` or
 the `@agent` reader macro.
 
@@ -370,7 +374,7 @@ To mutate an agent, we use `clojure.core/send` and `clojure.core/send-off`:
 @errors-counter
 ;; ⇒ 1
 
-;; 10 is an additional parameter, the + function will be invoked as (+ @errors-counter 10)
+;; 10 is an additional parameter. The + function will be invoked as `(+ @errors-counter 10)`.
 (send errors-counter + 10)
 ;; ⇒ #<Agent@6a6287b2: 1>
 @errors-counter
@@ -381,7 +385,7 @@ To mutate an agent, we use `clojure.core/send` and `clojure.core/send-off`:
 fixed-size thread pool so using blocking operations with it won't yield good throughput. `send-off`
 uses a growing thread-pool so blocking operations is not a problem for it as long as there are resources
 available to the JVM to create and run all the threads. On a 4-8 GB machine with 4 cores and stock
-OS settings you can expect up to a couple of thousands of I/O bound threads to work without running
+OS settings you can expect up to a couple of thousand I/O-bound threads to work without running
 the system out of kernel resources.
 
 ### Agents and Software Transactional Memory
@@ -402,7 +406,7 @@ will fail. For example:
 ;; ⇒ nil
 ```
 
-This turns agent into the *failed* state. Failed agents will re-raise the exception that caused them
+This puts the agent into the *failed* state. Failed agents will re-raise the exception that caused them
 to fail every time their state changed is attempted:
 
 ``` clojure
@@ -435,12 +439,14 @@ and a new initial value:
 ```
 
 If you'd prefer an agent to ignore exceptions instead of going into the *failure mode*, `clojure.core/agent`
-takes an option that control this behavior, `:error-mode`. Because completely ignoring errors is rarely a good
-idea, when the error mode is set to `:continue`, you must also pass an error handler function:
+takes an option that controls this behavior: `:error-mode`. Because completely ignoring errors is rarely a good
+idea, when the error mode is set to `:continue` you must also pass an error handler function:
 
 ``` clojure
-(def errors-counter (agent 0 :error-mode :continue :error-handler (fn [failed-agent ^Exception exception]
-                                                                    (println (.getMessage exception)))))
+(def errors-counter (agent 0
+                           :error-mode    :continue
+                           :error-handler (fn [failed-agent ^Exception exception]
+                                            (println (.getMessage exception)))))
 ;; ⇒ #'user/errors-counter
 (send errors-counter inc)
 ;; ⇒ #<Agent@5620e147: 1>
@@ -460,20 +466,21 @@ The handler function takes two arguments: an agent and the exception that occure
 
 #### Summary and Use Cases
 
-TBD
+*TBD*
 
 
-### refs
+### Refs
 
 Refs are the only *coordinated* reference type Clojure has. They help ensure that multiple
-identities can be modified concurrently in a transaction:
+identities can be modified concurrently within a *[transaction](glossary.html#transaction)*:
 
  * Either all refs are modified or none are
  * No race conditions between involved refs
  * No possibility of deadlocks between involved refs
 
-Refs provide ACI of [ACID](http://en.wikipedia.org/wiki/ACID). Refs are backed by Clojure's implementation of
-*software transactional memory* (STM).
+Refs provide ACI of [ACID](http://en.wikipedia.org/wiki/ACID). Refs
+are backed by Clojure's implementation of [*software transactional
+memory* (STM)](glossary.html#stm).
 
 To instantiate a ref, use the `clojure.core/ref` function:
 
@@ -484,7 +491,7 @@ To instantiate a ref, use the `clojure.core/ref` function:
 ;; ⇒ #'user/account-b
 ```
 
-Like atoms and agents covered earlier, to get the current value of a ref, use `clojure.core/deref` or the
+Like atoms and agents covered earlier, to get the current value of a ref, use `clojure.core/deref` or the "`@`"
 reader macro:
 
 ``` clojure
@@ -494,7 +501,7 @@ reader macro:
 ;; ⇒ 0
 ```
 
-Refs are for coordinated concurrent operations and it does not make much sense to use a single ref
+Refs are for coordinated concurrent operations and so it does not make much sense to use a single ref
 (in that case, an atom would be sufficient). Refs are modified in a transaction in the `clojure.core/dosync`
 body.
 
@@ -503,7 +510,7 @@ running transaction modifies a ref in the current transaction before the current
 the current transaction will be *retried* to make sure that the most recent value of the modified
 ref is used.
 
-TBD: a picture that visualizes retries and serializability.
+*TBD: a picture that visualizes retries and serializability.*
 
 #### alter
 
@@ -536,21 +543,21 @@ one account to the other, atomically:
 
 #### Conflicts and Retries
 
-TBD: explain transaction conflicts, demonstrate transaction retries
+*TBD: explain transaction conflicts, demonstrate transaction retries*
 
 
 #### commute
 
 With a high number of concurrently running transactions, retries
 overhead can become noticeable.  Some modifications, however, can be
-applied in any order. Clojure STM implementation acknowledges this
+applied in any order. Clojure's STM implementation acknowledges this
 fact and provides an alternative way to modify refs:
 `clojure.core/commute`. `commute` must only be used for operations
 that [commute in the mathematical
 sense](http://mathforum.org/dr.math/faq/faq.property.glossary.html#commutative):
 the order can be changed without affecting the result. For example,
-addition is commutative: `1 + 10` produces the same result as `10 +
-1`, but substraction is not: `1 - 10` does not equal `10 - 1`.
+addition is commutative (1 + 10 produces the same result as 10 + 1)
+but substraction is not (1 &minus; 10 does not equal 10 &minus; 1).
 
 `clojure.core/commute` has the same signature as `clojure.core/alter`:
 
@@ -576,7 +583,7 @@ to retry. `commute` does not cause *transaction conflicts*.
 
 #### Using Refs With Clojure Data Structures
 
-TBD: demonstrate more complex changes, e.g. to game characters
+*TBD: demonstrate more complex changes, e.g. to game characters*
 
 
 
@@ -584,7 +591,7 @@ TBD: demonstrate more complex changes, e.g. to game characters
 
 Software transactional memory is a powerful but highly specialized tool. Because transactions can be retried,
 you must only use pure functions with STM. I/O operations cannot be undone by the runtime and very often are
-not idempotent.
+not [idempotent](glossary.html#idempotent).
 
 Structuring your application code as *pure core* and *edge code* that interact with the user or other
 services (perform I/O operations and other side-effects) helps with this. In that case, the pure core
@@ -594,7 +601,7 @@ For example, in a Web or network server, incoming requests are the edge code: th
 is then called to modify server state, do any calculations necessary, return a result that is returned
 back to the client by the edge code:
 
-TBD: a picture to demonstrate
+*TBD: a picture to demonstrate*
 
 Unlike some other languages and runtimes (for example, Haskell), Clojure *will not prevent you from
 doing I/O in transactions*. It is a matter of discipline on the programmer's part. It does provide
