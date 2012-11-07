@@ -71,7 +71,8 @@ These are just slightly more concise variants of `clojure.core/import`, `clojure
 
 ### The :import Helper Form
 
-An example with `(:import ...)`:
+The `:import` helper form is for setting up access to Java classes
+from your Clojure code. For example:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
@@ -104,13 +105,14 @@ vectors are used).
 
 ### The :require Helper Form
 
-An example with `(:require ...)`:
+The `:require` helper form is for setting up access to other Clojure
+namespaces from your code. For example:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
   (:require clojure.set))
 
-;; now it is possible to do
+;; Now it is possible to do:
 ;; (clojure.set/difference #{1 2 3} #{3 4 5})
 ```
 
@@ -122,7 +124,7 @@ as a different alias:
 (ns megacorp.profitd.scheduling
   (:require [clojure.set :as cs]))
 
-;; now it is possible to do
+;; Now it is possible to do:
 ;; (cs/difference #{1 2 3} #{3 4 5})
 ```
 
@@ -142,7 +144,7 @@ to *refer* to certain functions:
 (ns megacorp.profitd.scheduling
   (:require [clojure.set :refer [difference intersection]]))
 
-;; now it is possible to do
+;; Now it is possible to do:
 ;; (difference #{1 2 3} #{3 4 5})
 ```
 
@@ -154,7 +156,7 @@ It is possible to refer to all functions in a namespace (usually not necessary):
 (ns megacorp.profitd.scheduling
   (:require [clojure.set :refer :all]))
 
-;; now it is possible to do
+;; Now it is possible to do:
 ;; (difference #{1 2 3} #{3 4 5})
 ```
 
