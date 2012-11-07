@@ -40,6 +40,12 @@ Could mean one of two things:
     is sometimes referred to as the "binding [form](#form)".
 
 
+### classpath
+
+The search path used by the JVM to locate classes which are not
+part of the Java standard class library. May include jar files.
+
+
 
 ### comparator
 
