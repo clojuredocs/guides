@@ -155,26 +155,27 @@ eliminates the need for explicit use of locks, which is possible in Clojure
 but typically not necessary.
 
 To put it another way: "changing variables" in Clojure happens
-differently from many other languages, in ways that are predictable
-from the concurrency perspective and eliminate many concurrency hazards.
+differently from many other languages; in ways that are predictable
+from the concurrency perspective and which eliminate many concurrency hazards.
 
 Next lets take a closer look to the identity/value separation.
 
 
-## Identity/Value Separation ("on State And Identity")
+## Identity/Value Separation ("on State and Identity")
 
 In Clojure, *values* are immutable. They never change. For example, a number is a value.
 A map `{:language "Clojure"}` is a value. A vector with 3 elements is a value.
 
-When you attempt to modify a value (a data structure), a new value is produced instead. This
-is known as *persistent data structures* (the word "persistent" has nothing to do with
-storing data on disk). *Identity* is a named entity (e.g. a list of active chat group
-members or a counter) that changes over time and at any given moment references a value.
+When you attempt to modify a value (a data structure), a new value is produced instead. These
+are known as *persistent data structures* (the word "persistent" has nothing to do with
+storing data on disk).
 
+An *identity* is a named entity (e.g. a list of active chat group
+members or a counter) that changes over time and at any given moment references a value.
 For example, the current value of a counter may be `42`. After incrementing it, the value
-is `43` but it is still the same counter, the same identity. This is different from, say, Java
+is `43` but it is still the same counter --- the same identity. This is different from, say, Java
 or Ruby, where variables serve as identities that (typically) point to a mutable value
-and modified in place.
+and which are modified in place.
 
 TBD: an images to illustrate these concepts
 
