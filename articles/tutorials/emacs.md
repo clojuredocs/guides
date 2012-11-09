@@ -77,6 +77,28 @@ On older systems you can add unofficial package sources for
 `emacs-snapshot`, either for [Debian](http://emacs.naquadah.org/) or
 [Ubuntu](https://launchpad.net/~cassou/+archive/emacs).
 
+### MS Windows ###
+
+You can find Emacs for Windows in the [FSF FTP
+directory](http://ftp.gnu.org/pub/gnu/emacs/windows/).
+
+Download the file named `emacs-24.1-bin-i386.zip` and unzip it in a new folder.
+Avoid folder with spaces in their names such as `C:\Documents and Settings`.
+Prefer folder names such as `C:\emacs-24.1`.
+
+[Create an environment variable](http://support.microsoft.com/kb/310519#tocHeadRef) 
+with name HOME and value equal to the location of your home folder; in Windows
+XP, it's `C:\Documents and Settings\YourUsername`, in Windows 7, it's
+`C:\Users\YourUsername`. With this variable set, you can use the tilde character
+(`~`) to type the name of a file under your home folder and Emacs will expand
+its full path.
+
+The following section describes Emacs configuration using the folder `.emacs.d`.
+When using Emacs in Windows, you should create this folder under your home
+folder. In Windows XP, that will be the folder `C:\Documents and
+Settings\YourUsername\.emacs.d`; in Windows 7, that will be the folder
+`C:\Users\YourUsername\.emacs.d`.
+
 ## Configuring Emacs ##
 
 So Emacs is installed, but running it now would be a somewhat
