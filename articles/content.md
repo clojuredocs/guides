@@ -336,6 +336,15 @@ This guide covers:
  * Instant literals (Clojure 1.4+)
 
 
+### [Middleware](/articles/cookbooks/middleware.html) (incomplete)
+
+This guide covers:
+
+ * What middleware is and how it works
+ * Creating middleware for a client function
+ * Combining middleware to create a new client
+
+
 ## License
 
 All the content is distributed under the
