@@ -16,7 +16,7 @@ jQuery.fn.toc = function () {
     each(function(index, el) {
       var currentLevel = parseInt(el.tagName[1]);
 
-      var text = $(el).text() + " (" + el.tagName + ")";
+      var text = $(el).text();
       var anchor = text.replace(/[^a-zA-Z 0-9]+/g,'').replace(/\s/g, "_").toLowerCase();
 
       $(el).attr('id', anchor);
