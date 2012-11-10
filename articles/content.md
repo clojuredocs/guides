@@ -44,9 +44,14 @@ A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workf
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
-### [VimClojure for Clojure Development](/articles/tutorials/vim.html) (TBD)
+### [VimClojure for Clojure Development](/articles/tutorials/vim.html) ◪
 
 A brief introduction to VimClojure and its features.
+
+### [Basic Web Development](/articles/tutorials/basic_web_development.html)
+
+A brief tutorial/walkthrough of building a small webapp using Ring,
+Compojure, Hiccup, and SQLite.
 
 
 ## Clojure Language Guides
@@ -116,7 +121,7 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Collections and Sequences](/articles/language/collections_and_sequences.html) (In Progress)
+### [Collections and Sequences](/articles/language/collections_and_sequences.html) ◪
 
 This guide covers:
 
@@ -127,7 +132,7 @@ This guide covers:
  * Other topics related to collections and sequences
 
 
-### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) (TBD)
+### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) ◪
 
 This guide covers:
 
@@ -231,6 +236,14 @@ This guide covers:
  * Books on ClojureScript
 
 
+### [Maven for Clojure Development](/articles/ecosystem/maven.html) ◪
+
+This guide covers:
+
+ * An overview of Apache Maven
+ * Maven Clojure plugin
+
+
 ### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
 
 This guide covers:
@@ -239,7 +252,7 @@ This guide covers:
  * How to publish a library to Clojars
 
 
-### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) (Semi-complete)
+### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) ◪
 
 This guide covers:
 
@@ -257,7 +270,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) (Semi-complete)
+### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) ◪
 
 This guide covers:
 
@@ -265,6 +278,14 @@ This guide covers:
  * How to install Leiningen plugins
  * How to develop plugins
  * How to distribute plugins
+
+
+### [Clojure User Groups](/articles/ecosystem/user_groups.html) ▣
+
+This guide covers:
+
+ * Clojure User Groups (CLJUGs) around the world
+
 
 
 
@@ -313,6 +334,15 @@ This guide covers:
  * Working with JDK dates
  * Working with Joda Time and `clj-time`
  * Instant literals (Clojure 1.4+)
+
+
+### [Middleware](/articles/cookbooks/middleware.html) (incomplete)
+
+This guide covers:
+
+ * What middleware is and how it works
+ * Creating middleware for a client function
+ * Combining middleware to create a new client
 
 
 ## License

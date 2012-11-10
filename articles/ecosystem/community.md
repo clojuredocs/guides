@@ -45,6 +45,11 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
   * [Clojure API cheatsheets with tooltips](http://jafingerhut.github.com/)
   * [Clojure Koans](http://clojurekoans.com/)
 
+## Courses
+
+ * [Udemy's 19 part series on Clojure](http://www.udemy.com/clojure-code)
+ * [Codelesson's Intro to Clojure](http://codelesson.com/courses/view/introduction-to-clojure)
+
 ## User Groups
 
 See the list of [Clojure User Groups](http://dev.clojure.org/display/community/Clojure+User+Groups).

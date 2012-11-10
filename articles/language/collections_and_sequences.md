@@ -23,19 +23,20 @@ This guide covers Clojure 1.4.
 
 ## Overview
 
-Clojure has two powerful abstractions: collections and sequences. When working with Clojure,
+Clojure provides a number of powerful abstractions including *collections* and *sequences*.
+When working with Clojure,
 many operations are expressed as a series of operations on collections or sequences.
 
 Most of Clojure's core library treats collections and sequences the same way, although
 sometimes a distinction has to be made (e.g. with lazy infinite sequences).
 
-`clojure.core` provides many fundamental operations on collections: such as `map`, `filter`,
-`remove`, `take` and `drop`. Basic operations on collections and sequences are combined
+`clojure.core` provides many fundamental operations on collections, such as: `map`, `filter`,
+`remove`, `take`, and `drop`. Basic operations on collections and sequences are combined
  to implement more complex operations.
 
 ### Clojure Collections are Immutable (Persistent)
 
-Clojure collections are *immutable* (*persistent*). The term *persistent data structures* has
+Clojure collections are *immutable* (*persistent*). The term "persistent data structures" has
 nothing to do with durably storing them on disk. What it means is that collections are
 mutated (updated) by producing new collections. To quote Wikipedia:
 
@@ -44,8 +45,8 @@ mutated (updated) by producing new collections. To quote Wikipedia:
 > immutable, as their operations do not (visibly) update the structure in-place, but instead
 > always yield a new updated structure.
 
-Clojure's persistent data structures are implemented as trees and tries and
-have `O(log32 n)` access complexity where `n` is the number of elements.
+Clojure's persistent data structures are implemented as trees and [*tries*](https://en.wikipedia.org/wiki/Hash_array_mapped_trie) and
+have O(log<sub>32</sub> *n*) access complexity where *n* is the number of elements.
 
 
 ## The Collection Abstraction
@@ -90,9 +91,9 @@ Commas can be used in map literals (Clojure compiler treats the as whitespace):
 `clojure.core/sorted-map` and `clojure.core/array-map` produce ordered maps:
 
 ``` clojure
-(sorted-map :language "Clojure" :creator "Rich Hickey") ;= {:creator "Rich Hickey", :language "Clojure"}
+(sorted-map :language "Clojure" :creator "Rich Hickey") ; ⇒ {:creator "Rich Hickey", :language "Clojure"}
 
-(array-map :language "Clojure" :creator "Rich Hickey")  ;= {:creator "Rich Hickey", :language "Clojure"}
+(array-map :language "Clojure" :creator "Rich Hickey")  ; ⇒ {:creator "Rich Hickey", :language "Clojure"}
 ```
 
 Unsurprisingly, map literals must contain an even number of forms (as many keys as values). Otherwise
@@ -207,12 +208,12 @@ for more information.
 The most common way of checking if an element is in a set is by using set as a function:
 
 ``` clojure
-(#{1 2 3 4} 1)  ;= 1
-(#{1 2 3 4} 10) ;= nil
+(#{1 2 3 4} 1)  ; ⇒ 1
+(#{1 2 3 4} 10) ; ⇒ nil
 
 (if (#{1 2 3 4} 1)
   :hit
-  :miss) ;= :hit
+  :miss) ; ⇒ :hit
 ```
 
 
@@ -485,7 +486,7 @@ When using `assoc` with a vector, the key is the index and the value is the valu
 The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
 
 ```clojure
-(assoc [1 2 76] 2 3) ;= [1 2 3]
+(assoc [1 2 76] 2 3) ; ⇒ [1 2 3]
 
 ;; index 5 does not exist. valid indexes for this vector are: 0, 1, 2
 (assoc [1 2 3] 5 6) ;; IndexOutOfBoundsException   clojure.lang.PersistentVector.assocN (PersistentVector.java:136)

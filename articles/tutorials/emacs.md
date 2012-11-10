@@ -74,6 +74,28 @@ On older systems you can add unofficial package sources for
 `emacs-snapshot`, either for [Debian](http://emacs.naquadah.org/) or
 [Ubuntu](https://launchpad.net/~cassou/+archive/emacs).
 
+### MS Windows ###
+
+You can find Emacs for Windows in the [FSF FTP
+directory](http://ftp.gnu.org/pub/gnu/emacs/windows/).
+
+Download the file named `emacs-24.1-bin-i386.zip` and unzip it in a new folder.
+Avoid folder with spaces in their names such as `C:\Documents and Settings`.
+Prefer folder names such as `C:\emacs-24.1`.
+
+[Create an environment variable](http://support.microsoft.com/kb/310519#tocHeadRef) 
+with name HOME and value equal to the location of your home folder; in Windows
+XP, it's `C:\Documents and Settings\YourUsername`, in Windows 7, it's
+`C:\Users\YourUsername`. With this variable set, you can use the tilde character
+(`~`) to type the name of a file under your home folder and Emacs will expand
+its full path.
+
+The following section describes Emacs configuration using the folder `.emacs.d`.
+When using Emacs in Windows, you should create this folder under your home
+folder. In Windows XP, that will be the folder `C:\Documents and
+Settings\YourUsername\.emacs.d`; in Windows 7, that will be the folder
+`C:\Users\YourUsername\.emacs.d`.
+
 ## Configuring Emacs ##
 
 So Emacs is installed, but running it now would be a somewhat
@@ -198,19 +220,19 @@ run any command. And there are a LOT. Apropos is very useful for
 searching for something `C-h a`.
 
 So after doing the tutorial (you did do that, RIGHT? O_O) you can move
-around, open files, save files, etc and are generally comfortable at
+around, open files, save files, etc., and are generally comfortable at
 the basics. There is an almost infinite amount of things to learn
 about Emacs, but those basics will get you a long way.
 
 ## Creating a project ##
 
-Lets go through the process of creating a small sample clojure project
+Let's go through the process of creating a small sample clojure project
 and illustrate how Emacs helps makes us champions in the land of lisp.
 
 The project we will be building is a trivially simple command line
-parser, that will take the argument pairs given to it and turn them
+parser that will take the argument pairs given to it and turn them
 into a map of key-value pairs. The functionality is irrelevant and not
-particularly useful, it serves purely to illustrate the development
+particularly useful. It serves purely to illustrate the development
 flow.
 
 If you don't have [Leiningen](http://leiningen.org) yet, get it
@@ -265,7 +287,7 @@ Should be fairly self-explanatory, namespaces in clojure are
 represented as folders in the filesystem (like packages in java) and
 the test structure mirrors that of the src structure. 
 
-Lets start up a server and connect to it from Emacs using
+Let's start up a server and connect to it from Emacs using
 clojure-mode:
 
 ```
@@ -301,7 +323,7 @@ we can do `C-c ,`. We should get an error in a buffer complaining that
 `parse-args` does not exist. To dismiss this buffer, simply press `q`.
 The buffer should go away, and the cursor should be back in the code
 where you left it (another way of getting this type of compilation
-error is to compile the buffer using `C-c C-k`). Lets try and fix the
+error is to compile the buffer using `C-c C-k`). Let's try to fix the
 exception by opening `core.clj` (`C-x C-f`) and adding the following
 definition:
 
@@ -325,7 +347,7 @@ with the assertion in the mini-buffer:
       {}))
 ```
 
-Awesome! So our map was empty as expected. Lets fix that:
+Awesome! So our map was empty as expected. Let's fix that:
 
 ```clojure
 (defn parse-args [args]
@@ -368,7 +390,7 @@ One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
 open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
 two so you have the `core.clj` and \*slime-repl nil\* buffers open.
-Lets say you are editing the core.clj and you want to play around with
+Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
 decided you want to pull out the anonymous function to be a named
 function `keywordize`.
@@ -394,7 +416,7 @@ A shortcut to moving to this namespace is to be inside the source code
 buffer and press `C-c M-p`. Thanks to [Jake
 McCrary](http://jakemccrary.com/) for that tip.
 
-Lets go ahead and create our new function in `core.clj`:
+Let's go ahead and create our new function in `core.clj`:
 
 ```clojure
 (defn keywordize [kvp]
@@ -420,7 +442,7 @@ around with it is one of the things that makes Emacs and a lisp a
 great combination for development.
 
 Another incredibly useful command is `C-c I` for inspecting
-values. Try this in your repl:
+values. Try this in your REPL:
 
     command-line-args.core> (def foo {:a "a" :b "b"})
     #'command-line-args.core/foo    

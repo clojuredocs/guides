@@ -61,17 +61,79 @@ recommended. For example:
 
 In addition, the `ns` macro takes a number of optional forms:
 
- * `(:import ...)`
  * `(:require ...)`
+ * `(:import ...)`
  * `(:use ...)`
  * `(:refer-clojure ...)`
  * `(:gen-class ...)`
 
 These are just slightly more concise variants of `clojure.core/import`, `clojure.core/require`, et cetera.
 
+
+### The :require Helper Form
+
+The `:require` helper form is for setting up access to other Clojure
+namespaces from your code. For example:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require clojure.set))
+
+;; Now it is possible to do:
+;; (clojure.set/difference #{1 2 3} #{3 4 5})
+```
+
+This will make sure the `clojure.set` namespace is loaded, compiled, and available as `clojure.set`
+(using its fully qualified name). It is possible (and common) to make a namespace available
+under an alias:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require [clojure.set :as cs]))
+
+;; Now it is possible to do:
+;; (cs/difference #{1 2 3} #{3 4 5})
+```
+
+One more example with two required namespaces:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require [clojure.set  :as cs]
+            [clojure.walk :as walk]))
+```
+
+#### The :refer Option
+
+To make functions in `clojure.set` available in the defined namespace via short names
+(i.e., their unqualified names, without the `clojure.set` or other prefix), you can tell Clojure compiler
+to *refer* to certain functions:
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require [clojure.set :refer [difference intersection]]))
+
+;; Now it is possible to do:
+;; (difference #{1 2 3} #{3 4 5})
+```
+
+The `:refer` feature of the `:require` form is new in Clojure 1.4.
+
+It is possible to refer to all functions in a namespace (usually not necessary):
+
+``` clojure
+(ns megacorp.profitd.scheduling
+  (:require [clojure.set :refer :all]))
+
+;; Now it is possible to do:
+;; (difference #{1 2 3} #{3 4 5})
+```
+
+
 ### The :import Helper Form
 
-An example with `(:import ...)`:
+The `:import` helper form is for setting up access to Java classes
+from your Clojure code. For example:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
@@ -102,66 +164,10 @@ Even though *import list* is called a list, it can be any Clojure collection (ty
 vectors are used).
 
 
-### The :require Helper Form
-
-An example with `(:require ...)`:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:require clojure.set))
-
-;; now it is possible to do
-;; (clojure.set/difference #{1 2 3} #{3 4 5})
-```
-
-This will make sure the `clojure.set` namespace is loaded, compiled and available as `clojure.set`
-(using its fully qualified name). It is possible (and common) to make a namespace available
-as a different alias:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:require [clojure.set :as cs]))
-
-;; now it is possible to do
-;; (cs/difference #{1 2 3} #{3 4 5})
-```
-
-One more example with two required namespaces:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:require [clojure.set  :as cs]
-            [clojure.walk :as walk]))
-```
-
-To make functions in `clojure.set` available in the defined namespace via short names
-(e.g. without the `clojure.set` or other prefix), you can tell Clojure compiler
-to *refer* to certain functions:
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:require [clojure.set :refer [difference intersection]]))
-
-;; now it is possible to do
-;; (difference #{1 2 3} #{3 4 5})
-```
-
-The `:refer` feature of the `:require` form is new in Clojure 1.4.
-
-It is possible to refer to all functions in a namespace (usually not necessary):
-
-``` clojure
-(ns megacorp.profitd.scheduling
-  (:require [clojure.set :refer :all]))
-
-;; now it is possible to do
-;; (difference #{1 2 3} #{3 4 5})
-```
-
 
 ### The Current Namespace
 
-Under the hood, Clojure keeps **current namespace** a special var, [*ns*](http://clojuredocs.org/clojure_core/clojure.core/*ns*).
+Under the hood, Clojure keeps **current namespace** a special var, [\*ns\*](http://clojuredocs.org/clojure_core/clojure.core/*ns*).
 When vars are defined using the [def](http://clojuredocs.org/clojure_core/clojure.core/def) special form, they are
 added to the current namespace.
 
@@ -172,7 +178,7 @@ added to the current namespace.
 
 Functions like `clojure.core/get` and macros like `clojure.core/defn` can be used without
 namespace qualification because they reside in the `clojure.core` namespace and Clojure
-compiler automatically *refers* all vars in it. This leaders to a problem: if your
+compiler automatically *refers* all vars in it. Therefore, if your
 namespace defines a function with the same name (e.g. `find`), you will get a warning
 from the compiler, like this:
 
@@ -186,15 +192,16 @@ different value. Remember, Clojure is a very dynamic language and namespaces are
 basically maps, as far as the implementation goes. Most of the time, however,
 replacing vars like this is not intentional and Clojure compiler emits a warning.
 
-To solve this problem, you can exclude certain `clojure.core` functions from being
-referred using the `(:refer-clojure ...)` form with the `ns`:
+To solve this problem, you can either rename your function, or else
+exclude certain `clojure.core` functions from being
+referred using the `(:refer-clojure ...)` form within the `ns`:
 
 ``` clojure
 (ns megacorp.profitd.scheduling
   (:refer-clojure :exclude [find]))
 
 (defn find
-  "Finds a needle in the haystack"
+  "Finds a needle in the haystack."
   [^String haystack]
   (comment ...))
 ```
@@ -207,7 +214,7 @@ qualified name: `clojure.core/find`:
   (:refer-clojure :exclude [find]))
 
 (defn find
-  "Finds a needle in the haystack"
+  "Finds a needle in the haystack."
   [^String haystack]
   (clojure.core/find haystack :needle))
 ```
@@ -224,7 +231,7 @@ In Clojure versions before 1.4, there was no `:refer` support for the
 ```
 
 In the example above, **all** functions in `clojure.test` are made available
-in the current namespace. This practice (known as *naked use*) works for `clojure.test` in
+in the current namespace. This practice (known as "naked use") works for `clojure.test` in
 test namespaces, but in general not a good idea. `(:use ...)` supports limiting
 functions that will be referred:
 
@@ -240,7 +247,7 @@ which is a pre-1.4 alternative of
   (:require clojure.test :refer [deftest testing is]))
 ```
 
-It is highly recommended to use `(:require ... :refer [...])` on Clojure 1.4
+It is highly recommended to use `(:require ...)` (optionally with `... :refer [...]`) on Clojure 1.4
 and later releases. `(:use ...)` is a thing of the past and now that
 `(:require ...)` with `:refer` is capable of doing the same thing when you
 need it, it is a good idea to let `(:use ...)` go.
@@ -248,7 +255,7 @@ need it, it is a good idea to let `(:use ...)` go.
 
 ### The :gen-class Helper Form
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+*TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)*
 
 
 ### Documentation and Metadata
@@ -274,31 +281,31 @@ or metadata:
   (:require [clojure.set :refer [union difference]]))
 ```
 
-metadata can contain any additional keys such as `:author` for various tools
-(e.g. [Codox](https://clojars.org/codox), [Cadastre](https://clojars.org/cadastre) or [lein-clojuredocs](https://clojars.org/lein-clojuredocs)) to use.
+Metadata can contain any additional keys such as `:author` which may be of use to various tools
+(such as [Codox](https://clojars.org/codox), [Cadastre](https://clojars.org/cadastre), or [lein-clojuredocs](https://clojars.org/lein-clojuredocs)).
 
 
 ## How to Use Functions From Other Namespaces in the REPL
 
 The `ns` macro is how you usually require functions from other namespaces.
-However, it is not very convenient in the REPL. For that case, `clojure.core/require`
+However, it is not very convenient in the REPL. For that case, the `clojure.core/require` function
 can be used directly:
 
 ``` clojure
-;; will be available as clojure.set, e.g. clojure.set/difference
+;; Will be available as clojure.set, e.g. clojure.set/difference.
 (require 'clojure.set)
 
-;; will be available as io, e.g. io/resource
+;; Will be available as io, e.g. io/resource.
 (require '[clojure.java.io :as io])
 ```
 
-It takes a quoted *libspec*. *libspec* is either a namespace name or
+It takes a quoted *[libspec](glossary.html#libspec)*. The libspec is either a namespace name or
 a collection (typically a vector) of `[name :as alias]` or `[name :refer [fns]]`:
 
 ``` clojure
 (require '[clojure.set :refer [difference]])
 
-(difference #{1 2 3} #{3 4 5 6}) ;= #{1 2}
+(difference #{1 2 3} #{3 4 5 6})  ; ⇒ #{1 2}
 ```
 
 The `:as` and `:refer` options can be used together:
@@ -306,34 +313,34 @@ The `:as` and `:refer` options can be used together:
 ``` clojure
 (require '[clojure.set :as cs :refer [difference]])
 
-(difference #{1 2 3} #{3 4 5 6}) ;= #{1 2}
-(cs/union #{1 2 3} #{3 4 5 6})   ;= #{1 2 3 4 5 6}
+(difference #{1 2 3} #{3 4 5 6})  ; ⇒ #{1 2}
+(cs/union #{1 2 3} #{3 4 5 6})    ; ⇒ #{1 2 3 4 5 6}
 ```
 
-`clojure.core/use` does the same thing as `clojure.core/require` with the
-`:refer` option discussed. It is not generally recommended with Clojure
-versions starting with 1.4. Just use `clojure.core/require` with `:refer`
+`clojure.core/use` does the same thing as `clojure.core/require` but with the
+`:refer` option (as discussed above). It is not generally recommended to use `use` with Clojure
+versions starting with 1.4. Use `clojure.core/require` with `:refer`
 instead.
 
 
 ## Namespaces and Class Generation
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+*TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)*
 
 
 ## Namespaces and Code Compilation in Clojure
 
 Clojure is a compiled language: code is compiled when it is loaded (usually with `clojure.core/require`).
 
-A namespace can contain vars or be used purely to extend protocols, add multimethod implementations
+A namespace can contain vars or be used purely to extend protocols, add multimethod implementations,
 or conditionally load other libraries (e.g. the most suitable JSON parser or key/value store implementation).
 In all cases, to trigger compilation, you need to require the namespace.
 
 
 ## Private Vars
 
-Vars (and, in turn, functions defined with `defn`) can be private. There are two ways to
-specify that a function is private, via its metadata or the `defn-` macro:
+Vars (and, in turn, functions defined with `defn`) can be private. There are two equivalent ways to
+specify that a function is private: either via metadata or by using the `defn-` macro:
 
 ``` clojure
 (ns megacorp.superlib)
@@ -353,7 +360,7 @@ specify that a function is private, via its metadata or the `defn-` macro:
 
 ## Constant Vars
 
-Var can be constant: this is done by setting the `:const` metadata key to `true`. This
+Vars can be constant. This is done by setting the `:const` metadata key to `true`. This
 will cause Clojure compiler to compile it as a constant:
 
 ``` clojure
@@ -370,15 +377,15 @@ will cause Clojure compiler to compile it as a constant:
 
 ## How to Look up and Invoke a Function by Name
 
-It is possible to look up a function in particular namespace by name with `clojure.core/resolve` that takes
+It is possible to look up a function in particular namespace by-name with `clojure.core/resolve`. This takes
 quoted names of the namespace and function. The returned value can be used just like any other
 function, for example, passed as an argument to a higher order function:
 
 ``` clojure
-(resolve 'clojure.set 'difference) ;= #'clojure.set/difference
+(resolve 'clojure.set 'difference)  ; ⇒ #'clojure.set/difference
 
 (let [f (resolve 'clojure.set 'difference)]
-   (f #{1 2 3} #{3 4 5 6})) ;= #{1 2}
+   (f #{1 2 3} #{3 4 5 6}))  ; ⇒ #{1 2}
 ```
 
 
@@ -390,7 +397,8 @@ This section describes some common compilation errors.
 
 ### ClassNotFoundException
 
-This exception means that JVM could not load a class. It is either misspelled or not on the classpath.
+This exception means that JVM could not load a class. It is either misspelled or not on the
+[classpath](glossary.html#classpath).
 Potentially your project has unsatisfied dependency (some dependencies may be optional).
 
 Example:
@@ -418,19 +426,15 @@ means that compilation was triggered from the REPL and not a Clojure source file
 
 
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
-
-
-
 ## Temporarily Overriding Vars in Namespaces
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+*TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)*
 
 
 
 ## Getting Information About and Programmatically Manipulating Namespaces
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+*TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)*
 
 
 

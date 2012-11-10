@@ -40,6 +40,12 @@ Could mean one of two things:
     is sometimes referred to as the "binding [form](#form)".
 
 
+### classpath
+
+The search path used by the JVM to locate classes which are not
+part of the Java standard class library. May include jar files.
+
+
 
 ### comparator
 
@@ -101,6 +107,11 @@ even an out-of-memory error. Accidentally keeping around a lazy
 sequence like this is referred to as "head retention".
 
 
+### idempotent
+
+*todo*
+
+
 
 ### identity
 
@@ -123,7 +134,7 @@ last expression evaluated. Forms that do this include: `when`,
 
 ### intern
 
-todo
+*todo*
 
 
 
@@ -169,7 +180,7 @@ See also [binding form](#binding_form)
 
 ### libspec
 
-todo
+*todo*
 
 
 
@@ -235,7 +246,7 @@ Clojure provides thread-safe mechanisms for doing so.
 
 ### reify
 
-todo
+*todo*
 
 
 
@@ -249,7 +260,7 @@ called like `(my-func 1 2 3 4 5)`, then 3, 4, & 5 are the "rest args".
 
 ### s-expression
 
-todo
+*todo*
 
 
 
@@ -258,6 +269,13 @@ todo
 The [value](#value) that a given [identity](#identity) may have at a
 given time.  When you change the state of an identity, you're changing
 to which value it refers. Clojure uses values to represent states.
+
+
+
+### STM
+
+*todo*
+
 
 
 
@@ -281,6 +299,11 @@ A combinator. Not the same thing as the [thread-first
 macro](#threading-macros).  More info at
 <http://blog.fogus.me/2010/09/28/thrush-in-clojure-redux/> if you're
 curious.
+
+
+### transaction
+
+*todo*
 
 
 
@@ -308,9 +331,3 @@ built-in core data structures are values.
 
 A function that can take a variable number of arguments.
 See also [rest args](#rest_args).
-
-
-
-## Contributors
-
-John Gabriele <jmg3000@gmail.com> (original author)
