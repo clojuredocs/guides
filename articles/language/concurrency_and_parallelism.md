@@ -216,20 +216,20 @@ concurrency semantics and cover different kind of operations:
 
 <dl>
   <dt>Coordinated</dt>
-  <dl>An operation that depends on cooperation from other operations (possibly, other operations at least do not interfere with it)
+  <dd>An operation that depends on cooperation from other operations (possibly, other operations at least do not interfere with it)
       in order to produce correct results. For example, a banking operation that involves more than one account.
-   </dl>
+   </dd>
 
   <dt>Uncoordinated</dt>
-  <dl>An operation that does not affect other operations in any way. For example, when downloading 100 Web pages concurrently,
+  <dd>An operation that does not affect other operations in any way. For example, when downloading 100 Web pages concurrently,
       each operation does not affect the others.
-  </dl>
+  </dd>
 
   <dt>Synchronous</dt>
-  <dl>When the caller's thread waits, blocks, or sleeps until it has access to a given resource or context.</dl>
+  <dd>When the caller's thread waits, blocks, or sleeps until it has access to a given resource or context.</dd>
 
   <dt>Asynchronous</dt>
-  <dl>Operations that can be started or scheduled without blocking the caller's thread.</dl>
+  <dd>Operations that can be started or scheduled without blocking the caller's thread.</dd>
 </dl>
 
 One more reference type, [vars](#vars), supports dynamic scoping and thread-local storage.
