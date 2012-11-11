@@ -53,6 +53,13 @@ A brief introduction to VimClojure and its features.
 A brief tutorial/walkthrough of building a small webapp using Ring,
 Compojure, Hiccup, and SQLite.
 
+### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html) ◪
+
+This guide covers:
+
+ * How to parse XML in Clojure with zippers (`clojure.data.zip`)
+
+
 
 ## Clojure Language Guides
 
@@ -299,7 +306,7 @@ This cookbook covers:
  * How to work with regular expressions
  * How to work with characters
 
-### [Mathematics](/articles/cookbooks/math.html) (incomplete)
+### [Mathematics](/articles/cookbooks/math.html) ◪
 
 Includes coverage of facilities for doing math with Clojure.
 
@@ -334,6 +341,7 @@ This guide covers:
  * Working with JDK dates
  * Working with Joda Time and `clj-time`
  * Instant literals (Clojure 1.4+)
+
 
 
 ### [Middleware](/articles/cookbooks/middleware.html) (incomplete)
