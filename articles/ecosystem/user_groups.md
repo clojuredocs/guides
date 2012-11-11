@@ -15,7 +15,7 @@ please see our [How to Contribute](https://github.com/clojuredocs/cds#how-to-con
  * [Austin Clojure Meetup](http://www.meetup.com/Austin-Clojure-Meetup/)
  * [Boston Clojure User Group](http://www.meetup.com/Boston-Clojure-Group/)
  * [Chicago Clojure User Group](http://www.meetup.com/Chicago-Clojure/)
- * [Clojure DC](http://clojuredc.org/)
+ * [Clojure DC User Group](http://clojuredc.org/)
  * [Columbus Clojure User Group](http://www.columbusclojure.com/)
  * [Dallas/Fort Worth Clojure User Group](https://groups.google.com/forum/#%21topic/clojure/Cym7oiViFoQ)
  * [Denver Clojure User Group](http://www.meetup.com/Denver-Clojure-Meetup/)
