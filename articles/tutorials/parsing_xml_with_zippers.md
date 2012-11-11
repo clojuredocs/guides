@@ -1,5 +1,5 @@
 ---
-title: "Parsing XML"
+title: "Parsing XML in Clojure"
 layout: article
 ---
 
@@ -12,7 +12,7 @@ Clojure.
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4, and Leiningen 2.x.
+This guide covers Clojure 1.4 and Leiningen 2.x.
 
 ## Parsing NZB files
 
