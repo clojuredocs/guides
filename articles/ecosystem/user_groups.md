@@ -56,7 +56,7 @@ please see our [How to Contribute](https://github.com/clojuredocs/cds#how-to-con
  * [Manchester Clojure Dojo](http://manchester.clojuredojo.com/)
  * [Stockholm Clojure User Group](http://groups.google.com/group/stockholm-clojure-user-group), [@sclojug](http://twitter.com/sclojug)
  * [Zürich](http://www.meetup.com/zh-clj-Zurich-Clojure-User-Group/)
-
+ * [München Clojure User Group](http://www.meetup.com/clj-muc/), [@cljmuc](http://twitter.com/cljmuc)
 
 ## South America
 
