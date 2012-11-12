@@ -111,12 +111,12 @@ has structural sharing (for efficiency reasons) but semantically is a separate i
 
 #### Maps As Functions
 
-Maps in Clojure can be used as functions on their keys. See the [Functions guide](http://localhost:4000/articles/language/functions.html#maps_as_functions)
+Maps in Clojure can be used as functions on their keys. See the [Functions guide](/articles/language/functions.html#maps_as_functions)
 for more information.
 
 #### Keywords As Functions
 
-Keywords in Clojure can be used as functions on maps. See the [Functions guide](http://localhost:4000/articles/language/functions.html#keywords_as_functions)
+Keywords in Clojure can be used as functions on maps. See the [Functions guide](/articles/language/functions.html#keywords_as_functions)
 for more information.
 
 
