@@ -534,9 +534,9 @@ and maps:
 (We cover `apply` in the [Bread and Butter
 functions](#bread_and_butter_functions) section.)
 
-If you need to convert to a sequential collection (list or vector),
-but don't need to access by index, you can use `seq` instead of `vec`
-(to convert to a generic non-indexable list-like ("sequential") data
+If you need to convert to a sequential collection but don't need fast
+random access to items via index, you can use `seq` instead of `vec`
+(to convert to a generic linked-list-like ("sequential") data
 structure).  More about `seq` when we get to [Laziness](#laziness).
 
 > By the way, you may have noticed a pattern here: longer function
