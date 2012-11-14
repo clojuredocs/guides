@@ -285,14 +285,14 @@ the various abstract data types.
 
 Some of the Clojure abstractions are:
 
-  * Collection: lists, vectors, maps, and sets are all collections.
-  * Sequential: lists and vectors are collections with ordering.
-  * Associative: hashmaps associate keys with values. vectors associate numeric indices with values.
-  * Indexed: you can index into vectors.
+  * Collection (Lists, vectors, maps, and sets are all collections.)
+  * Sequential (Lists and vectors are ordered collections.)
+  * Associative (Hashmaps associate keys with values. Vectors associate numeric indices with values.)
+  * Indexed (Vectors, for example, can be quickly indexed into.)
 
-In the docs for the various functions, you'll often see, for example,
-that they take a "coll". This means that the particular function will
-work on any of the collections.
+In the docs for the various functions, you'll often see that they
+take, for example, a "coll". This means that the particular function
+will work on any of the collections.
 
 > If you'd like to look under the covers and see what the type of
 > an object is, try `(type my-stuff)`.
