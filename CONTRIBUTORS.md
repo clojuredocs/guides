@@ -13,3 +13,8 @@
 * Email: audiolabs@gmail.com
 * IRC: AdmiralBumbleBee
 * web: (GloryIsASilentThing)[http://www.gloryisasilentthing.com]
+
+## Devin Walters
+
+* IRC: devn
+
