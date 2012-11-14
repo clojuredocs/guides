@@ -35,7 +35,7 @@ TODO: Someone should write Vim installation instructions and basic usage here.
 * Install [Homebrew](http://mxcl.github.com/homebrew/)
 * The dance: `brew update`
 * If you're like me, you tend to inspect a homebrew formula's options before installing: `brew options macvim`
-* And if you're like me: `brew install --override-system-vim mvim`
+* And if you're like me: `brew install --override-system-vim macvim`
 * Optionally you can: `brew linkapps` which will, by default, create a symlink to `MacVim.app` in `~/Applications`.
 * Assuming your `PATH` is set correctly, you can run vim from the command line by typing `mvim`
 * If you'd rather launch it from the dock, you can navigate to `~/Applications` and double-click `MacVim.app` assuming you've run `brew linkapps`
