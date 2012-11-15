@@ -775,11 +775,33 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### take
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`take` returns the first `n` items of a collection `coll`.
+
+```clojure
+(take 3 [1 3 5 7 9])
+;; ⇒ (1 3 5)
+```
+If there are fewer than `n` items in `coll`, all items will be returned.
+
+```clojure
+(take 5 [1 2 3])
+;; ⇒ (1 2 3)
+(take 3 nil)
+;; ⇒ ()
+```
 
 ### drop
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+`drop` drops `n` items from a collection `coll` and returns the rest of it.
+
+```clojure
+(drop 3 '(0 1 2 3 4 5 6))
+;; ⇒ (3 4 5 6)
+(drop 2 [1 2])
+;; ⇒ ()
+(drop 2 nil)
+;; ⇒ ()
+```
 
 ### take-while
 
