@@ -878,3 +878,4 @@ to achieve the same result.
 
 Michael Klishin <michael@defprotocol.org>
 Robert Randolph <audiolabs@gmail.com>
+satoru <satorulogic@gmail.com>
