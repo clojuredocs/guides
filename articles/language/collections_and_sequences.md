@@ -775,11 +775,13 @@ TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
 
 ### take
 
-`take` returns the first `n` items of a collection `coll`.
+`take` returns a lazy sequence of the first `n` items of a collection `coll`.
 
 ```clojure
 (take 3 [1 3 5 7 9])
 ;; ⇒ (1 3 5)
+(type (take 3 (range)))
+;; ⇒ clojure.lang.LazySeq
 ```
 If there are fewer than `n` items in `coll`, all items will be returned.
 
@@ -792,7 +794,7 @@ If there are fewer than `n` items in `coll`, all items will be returned.
 
 ### drop
 
-`drop` drops `n` items from a collection `coll` and returns the rest of it.
+`drop` drops `n` items from a collection `coll` and returns a lazy sequence of the rest of it.
 
 ```clojure
 (drop 3 '(0 1 2 3 4 5 6))
