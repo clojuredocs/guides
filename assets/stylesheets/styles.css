@@ -1,132 +1,172 @@
-/* Mixins.scss
- * Snippets of reusable CSS to develop faster and keep code readable
- * ----------------------------------------------------------------- */
 .clearfix {
-  zoom: 1; }
-  .clearfix:before, .clearfix:after {
-    display: table;
-    content: "";
-    zoom: 1;
-    *display: inline; }
-  .clearfix:after {
-    clear: both; }
+  zoom: 1;
+}
+
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: "";
+  zoom: 1;
+  *display: inline;
+
+}
+.clearfix:after {
+  clear: both;
+}
 
 .fixed-container {
   width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  zoom: 1; }
-  .fixed-container:before, .fixed-container:after {
-    display: table;
-    content: "";
-    zoom: 1;
-    *display: inline; }
-  .fixed-container:after {
-    clear: both; }
+  zoom: 1;
+}
+
+.fixed-container:before, .fixed-container:after {
+  display: table;
+  content: "";
+  zoom: 1;
+  *display: inline;
+}
+
+.fixed-container:after {
+  clear: both;
+n}
 
 article pre {
-  font-size: 13px !important; }
+  font-size: 13px !important;
+}
 
 .container > section {
-  margin-top: 60px; }
+  margin-top: 60px;
+}
 
 strong {
-  color: #cb4b16; }
+  color: #cb4b16;
+}
 
 .jumbotron {
-  position: relative; }
+  position: relative;
+}
 
 .jumbotron h1 {
   margin-bottom: 9px;
   font-size: 81px;
   letter-spacing: -1px;
-  line-height: 1; }
+  line-height: 1;
+}
 
 .masthead {
   padding-top: 36px;
-  margin-bottom: 72px; }
-  .masthead h1, .masthead p {
-    text-align: center; }
-  .masthead h1 {
-    margin-bottom: 18px; }
-  .masthead p {
-    margin-left: 5%;
-    margin-right: 5%;
-    font-size: 30px;
-    line-height: 36px; }
+  margin-bottom: 72px;
+}
+
+.masthead h1, .masthead p {
+    text-align: center;
+}
+
+.masthead h1 {
+  margin-bottom: 18px;
+}
+
+.masthead p {
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 30px;
+  line-height: 36px;
+}
 
 footer {
   margin-top: 45px;
   padding: 35px 0 0 0;
-  border-top: 1px solid #e5e5e5; }
+  border-top: 1px solid #e5e5e5;
+}
 
 .marketing h2 {
   margin: 36px 0 27px;
-  text-align: center; }
+  text-align: center;
+}
 
 .sidebar-nav {
-  padding: 9px 0; }
+  padding: 9px 0;
+}
 
 .headline {
-  padding: 50px; }
-  .headline h1 {
-    font-size: 100px;
-    line-height: 250px;
-    font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  .headline p {
-    padding-top: 20px;
-    font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 27px; }
-  .headline .logo {
-    margin-left: auto;
-    margin-right: auto;
-    width: 900px; }
+  padding: 50px;
+}
+
+.headline h1 {
+  font-size: 100px;
+  line-height: 250px;
+  font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.headline p {
+  padding-top: 20px;
+  font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 27px;
+}
+.headline .logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
 
 .clear {
-  clear: both; }
-
-code {
-  line-height: 2em; }
-
-h2 {
-  line-height: 2em; }
+  clear: both;
+}
 
 @media (min-width: 767px) and (max-width: 979px) {
   body {
-    background: none; }
+    background: none;
+  }
 
   .headline h1 {
-    font-size: 65px; }
+    font-size: 65px;
+  }
 
   .container-fluid footer {
     padding-left: 0px;
-    border-top: 1px solid #e5e5e5; } }
+    border-top: 1px solid #e5e5e5;
+  }
+
+}
 @media (max-width: 767px) {
   body {
-    background: none; }
+    background: none;
+  }
 
   .headline h1 {
-    font-size: 60px; }
+    font-size: 60px;
+  }
 
   .container-fluid footer {
     padding-left: 0px;
-    border-top: 1px solid #e5e5e5; } }
+    border-top: 1px solid #e5e5e5;
+  }
+
+}
+
 @media (max-width: 480px) {
   body {
-    background: none; }
+    background: none;
+  }
 
   .headline {
-    padding: 0; }
-    .headline h1 {
-      line-height: 60px;
-      padding-top: 85px;
-      font-size: 30px; }
+    padding: 0;
+  }
+
+  .headline h1 {
+    line-height: 60px;
+    padding-top: 85px;
+    font-size: 30px;
+  }
 
   .container-fluid footer {
     padding-left: 0px;
-    border-top: 1px solid #e5e5e5; } }
+    border-top: 1px solid #e5e5e5;
+  }
+
+}
 
 
 blockquote p {
