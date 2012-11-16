@@ -420,6 +420,7 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
   * [seesaw](http://seesaw-clj.org/) ([at clojars](https://clojars.org/seesaw)): A Swing wrapper/DSL.
 
+  * [clisk](https://github.com/mikera/clisk): Clisk is a DSL-based library for procedural image generation that can be used from Clojure and Java. 
 
 ## Security and Sandboxing
 
