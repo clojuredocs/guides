@@ -128,9 +128,6 @@ h2 {
     padding-left: 0px;
     border-top: 1px solid #e5e5e5; } }
 
-.container.content, .container-fluid.content {
-  margin-top: 50px;
-}
 
 blockquote p {
   font-size: 1em !important;
