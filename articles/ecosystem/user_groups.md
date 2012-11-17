@@ -14,6 +14,7 @@ please see our [How to Contribute](https://github.com/clojuredocs/cds#how-to-con
  * [Atlanta Clojure User Group](http://www.meetup.com/Atl-Clj/)
  * [Austin Clojure Meetup](http://www.meetup.com/Austin-Clojure-Meetup/)
  * [Boston Clojure User Group](http://www.meetup.com/Boston-Clojure-Group/)
+ * [Charlotte Clojure User Group](http://www.meetup.com/Charlotte-Clojure-Users-Group/)
  * [Chicago Clojure User Group](http://www.meetup.com/Chicago-Clojure/)
  * [Clojure DC User Group](http://clojuredc.org/)
  * [Columbus Clojure User Group](http://www.columbusclojure.com/)
@@ -54,9 +55,9 @@ please see our [How to Contribute](https://github.com/clojuredocs/cds#how-to-con
  * [London Clojurians](http://londonclojurians.org/)
  * [Lyon Clojure User Group](http://clojure-lyon.eventbrite.fr/)
  * [Manchester Clojure Dojo](http://manchester.clojuredojo.com/)
+ * [München Clojure User Group](http://www.meetup.com/clj-muc/), [@cljmuc](http://twitter.com/cljmuc)
  * [Stockholm Clojure User Group](http://groups.google.com/group/stockholm-clojure-user-group), [@sclojug](http://twitter.com/sclojug)
  * [Zürich](http://www.meetup.com/zh-clj-Zurich-Clojure-User-Group/)
- * [München Clojure User Group](http://www.meetup.com/clj-muc/), [@cljmuc](http://twitter.com/cljmuc)
 
 ## South America
 
@@ -67,5 +68,5 @@ TBD
 
  * [Bangalore Clojure User Group](http://groups.google.com/group/bangalore-clj)
  * [Chinese Clojure User Group](https://groups.google.com/group/cn-clojure)
- * [Sydney Clojure User Group](http://www.meetup.com/clj-syd/)
  * [Melbourne Clojure User Group](http://www.meetup.com/clj-melb/)
+ * [Sydney Clojure User Group](http://www.meetup.com/clj-syd/)
