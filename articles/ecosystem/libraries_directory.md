@@ -31,6 +31,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [environ](https://clojars.org/environ): Manage environment settings from a number of different sources
 
+  * [carica](https://github.com/sonian/carica) ([at clojars](https://clojars.org/sonian/carica)):
+    Flexible config file usage & management library.
+
 
 ## Date and Time
 
