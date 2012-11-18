@@ -284,11 +284,14 @@ Locals can be atoms, too:
 ;; ⇒ []
 ```
 
-Now to the most interesting part: adding elements to the collection. To mutate an atom, use `clojure.core/swap!`
-which takes an atom and a function that takes the current value of the atom and must return a new value:
+Now to the most interesting part: adding elements to the collection.
+
+To mutate an atom, we can use `clojure.core/swap!`.
+
+`swap!` takes an atom, a function and optionally some other args, swaps the current value of the atom to be the return value of calling the function with the current value of the atom and the args:
 
 ``` clojure
-(swap! currently-connected (fn [xs] (conj xs "chatty-joe")))
+(swap! currently-connected conj "chatty-joe")
 ;; ⇒ ["chatty-joe"]
 currently-connected
 ;; ⇒ #<Atom@614b6b5d: ["chatty-joe"]>
