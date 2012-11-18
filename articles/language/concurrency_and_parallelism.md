@@ -121,7 +121,7 @@ These hazards are not exclusive to threads and can happen with OS
 processes, runtime processes and any other executaion processes. They
 are also not specific to a particular runtime or VM (e.g., the JVM) or
 programming language. Admittedly, some languages make it significantly
-easier to write corrent, safe concurrent programs, but none are
+easier to write correct, safe concurrent programs, but none are
 completely immune to concurrency hazards. More often than not,
 concurrency hazards are algorithmic problems, languages just encourage
 or discourage certain practices and techniques.
