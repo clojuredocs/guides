@@ -454,7 +454,7 @@ cases.
 
 ``` clojure
 (#{1 2 3} 1)   ; ⇒ 1
-(#{1 2 3} 10)  ; ⇒ 10
+(#{1 2 3} 10)  ; ⇒ nil
 
 (#{:us :au :ru :uk} :uk)  ; ⇒ :uk
 (#{:us :au :ru :uk} :cn)  ; ⇒ nil
