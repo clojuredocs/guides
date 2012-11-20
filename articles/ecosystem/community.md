@@ -54,6 +54,7 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 See the list of [Clojure User Groups](http://dev.clojure.org/display/community/Clojure+User+Groups).
 
+How to run your own [Clojure User Group](running_cljug.md).
 
 ## Videos About Clojure
 
