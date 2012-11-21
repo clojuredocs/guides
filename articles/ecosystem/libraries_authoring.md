@@ -342,7 +342,10 @@ For more detailed documentation on various aspects of the procedures
 described here, see:
 
   * the [Clojars wiki](https://github.com/ato/clojars-web/wiki)
-  * the [Leiningen tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
+  * the
+    [Leiningen tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
+    and the [deploy
+    guide](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md)
 
 
 
