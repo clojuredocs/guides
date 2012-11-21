@@ -264,7 +264,7 @@ used with github. For the gpg public key, get it by running:
 
 where `<your-key-id>` is in the output of `gpg --list-keys` (the
 8-character part following the forward slash on the line starting with
-"pub"). Copy/past that output (including the "-----BEGIN PGP PUBLIC
+"pub"). Copy/paste that output (including the "-----BEGIN PGP PUBLIC
 KEY BLOCK-----" and "-----END PGP PUBLIC KEY BLOCK-----") into the
 form on your Clojars profile page.
 
