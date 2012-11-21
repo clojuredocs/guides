@@ -226,9 +226,9 @@ git push
 
 ## Create a GPG key for signing your releases
 
-You'll need to create a gpg key pair, which will be used by lein to
-sign any release you make to Clojars. Make sure you've got gpg
-installed and kick the tires:
+You'll need to create a [gpg](http://www.gnupg.org/) key pair, which
+will be used by lein to sign any release you make to Clojars. Make
+sure you've got gpg installed and kick the tires:
 
     gpg --list-keys
 
