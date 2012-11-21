@@ -125,10 +125,10 @@ directly from your source (discussed later).
 ## Create your project's local git repository
 
 Before going much further, you probably want to get your project under
-version control. Make sure you've got git installed and it's
-configured to know your name and email address (i.e., at some point
-you've run `git config --global user.name "Your Name"` and `git config
---global user.email "your-email@somewhere.org"`).
+version control. Make sure you've got git installed and configured to
+know your name and email address (i.e., that at some point you've run
+`git config --global user.name "Your Name"` and `git config --global
+user.email "your-email@somewhere.org"`).
 
 Then, in your project dir, run:
 
@@ -136,9 +136,10 @@ Then, in your project dir, run:
     git add .
     git commit -m "The initial commit."
 
-At any time after you've made changes and want to commit
-them to the repository:
+At any time after you've made changes and want to inspect them and
+commit them to the repository:
 
+    git diff
     git add -p
     git commit -m "The commit message."
 
@@ -158,7 +159,8 @@ An example is provided in there to get you started.
 
 Write code to make your tests pass.
 
-Remember to add license text to top of each file.
+Remember to add a note at the top of each file indicating copyright
+and the license under which the code is distributed.
 
 
 
@@ -174,8 +176,9 @@ In your project dir:
 
 ## Commit any remaining changes
 
-Make sure all tests pass and you've committed all your changes. Check
-to see the status of your repo at any time with `git status`.
+Before continuing to the next step, make sure all tests pass and
+you've committed all your changes. Check to see the status of your
+repo at any time with `git status` and view changes with `git diff`.
 
 
 
