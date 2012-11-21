@@ -55,7 +55,7 @@ author) for each) are:
     recommendations] and their [instructions for use].
   * The [MIT] License (focused most on the user's freedom to do what
     they want with the code). The FSF calls this the ["Expat"
-    License](http://directory.fsf.org/wiki/License:Expat)
+    License](http://directory.fsf.org/wiki/License:Expat).
 
 [Eclipse Public License]: http://directory.fsf.org/wiki/License:EPLv1.0
 [GPL]: http://www.gnu.org/licenses/gpl.html
@@ -70,16 +70,15 @@ reflect that choice and save the text of the license as a file named
 
 ### A Note Regarding Project Naming
 
-The top line of your project.clj will include something like
-"defproject my-project-name".  What this implicitly means is that your
-project has an *artifact-id* of "my-project-name" and also a
-*group-id* of "my-project-name". That is, using that single name after
-`defproject` implies that group-id = artifact-id.
+The top line of your project.clj includes something like `defproject
+my-project-name`.  This means that your project has an *artifact-id*
+of "my-project-name", but it also implies a *group-id* of
+"my-project-name" (group-id = artifact-id).
 
-The artifact-id is the name of your project. The group-id is used as a
-kind of namespacing (not the same as Clojure namespaces) for
-identifying to which group/organization a project belongs. For
-example, clojurewerkz, sonian, or org.*your-domain*.
+The artifact-id is the name of your project. The group-id is used for
+namespacing (not the same thing as Clojure namespaces) --- it
+identifies to which group/organization a project belongs. Some
+examples of group-id's: clojurewerkz, sonian, and org.*your-domain*.
 
 Read more about groups at
 <https://github.com/ato/clojars-web/wiki/Groups>.
@@ -93,8 +92,8 @@ like. For example:
 Some authors like to use a single group-id for most of the libs they
 publish. The maintainers of Clojars recommend using the default
 "artifact-id = group-id" (as we've done with trivial-library-example)
-for libraries that are intended for broad community use and which are
-expected to live long enough to possibly have different maintainers
+for libraries intended for broad community use and for those which are
+expected to live long enough to perhaps have different maintainers
 over time. You are free to handle the matter as you wish.
 
 
