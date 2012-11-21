@@ -7,7 +7,7 @@ layout: article
 
 This short guide covers how to create your own typical pure Clojure
 library and distribute it to the community via Clojars. It uses
-Clojure 1.4 and Leiningen 2.0-previewX, and requires you have `git`
+Clojure 1.4 and Leiningen 2.0-previewX, and requires you have git
 installed (though very little familiarity with git is required).
 
 It's assumed that you're already somewhat familiar with Clojure. If
@@ -15,8 +15,7 @@ not, see the [Getting Started](getting_started.html) and
 [Introduction](introduction.html) guides.
 
 For the purposes of this guide, the library we'll be making is named
-"trivial-library-example" (find the link to its github page [at its
-clojars page](https://clojars.org/trivial-library-example)).
+"[trivial-library-example](https://clojars.org/trivial-library-example)".
 
 
 
@@ -35,29 +34,31 @@ creating a library project for you.
 
 Our trivial library example project will have a dependency on
 [flatland's "useful"](https://clojars.org/org.flatland/useful)
-library. Open up the project.clj file and make a few changes:
+library.
 
- 1. Add our dependency (`[org.flatland/useful "0.9.0"]`) to the :dependencies vector.
- 2. remove "-SNAPSHOT" from version string
+Open up our new project.clj file and make a few changes:
+
+ 1. Add our dependency (`[org.flatland/useful "0.9.0"]`) to the `:dependencies` vector.
+ 2. Remove "-SNAPSHOT" from version string.
  3. Write a short description.
- 4. Add a url (if not a homepage, then where it's source is hosted online)
+ 4. Add a url (if not a homepage, then where it's source is hosted online).
  5. If you're using a different license, change the value for `:license`.
 
 Regarding your choice of license, probably the three most common for
 Clojure libs (along with a grossly oversimplified blurb (by this
 author) for each) are:
 
-  * The [Eclipse Public License] (the default)
-  * The [GPL] or [LGPL] (focused most on code and additions always
-    being free; includes language addressing s/w patent concerns). See
-    the [FSF's recommendations] and their [instructions for use].
+  * The [Eclipse Public License] (the default).
+  * The [GPL] or [LGPL](http://www.gnu.org/licenses/lgpl.html)
+    (focused most on code and additions always being free; includes
+    language addressing s/w patent concerns). See the [FSF's
+    recommendations] and their [instructions for use].
   * The [MIT] License (focused most on the user's freedom to do what
     they want with the code). The FSF calls this the ["Expat"
     License](http://directory.fsf.org/wiki/License:Expat)
 
 [Eclipse Public License]: http://directory.fsf.org/wiki/License:EPLv1.0
 [GPL]: http://www.gnu.org/licenses/gpl.html
-[LGPL]: http://www.gnu.org/licenses/lgpl.html
 [FSF's recommendations]: http://www.gnu.org/licenses/license-recommendations.html
 [instructions for use]: http://www.gnu.org/licenses/gpl-howto.html
 [MIT]: http://opensource.org/licenses/MIT
@@ -344,7 +345,7 @@ described here, see:
   * the [Clojars wiki](https://github.com/ato/clojars-web/wiki)
   * the
     [Leiningen tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
-    and the [deploy
+    and [deploy
     guide](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md)
 
 
