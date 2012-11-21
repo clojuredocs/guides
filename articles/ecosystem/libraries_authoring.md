@@ -139,7 +139,7 @@ Then, in your project dir, run:
 At any time after you've made changes and want to commit
 them to the repository:
 
-    git add .
+    git add -p
     git commit -m "The commit message."
 
 
@@ -215,7 +215,7 @@ to the remote one at github:
 
 ```bash
 # work work work
-git add .
+git add -p
 git commit -m "commit message here"
 git push
 ```
@@ -316,7 +316,7 @@ Making updates to your lib follows the same pattern as described above:
 ```bash
 # work test work test
 # update version string in project.clj
-git add .
+git add -p
 git commit
 git push
 lein deploy clojars
