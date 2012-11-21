@@ -49,10 +49,10 @@ Clojure libs (along with a grossly oversimplified blurb (by this
 author) for each) are:
 
   * The [Eclipse Public License] (the default).
-  * The [GPL] or [LGPL](http://www.gnu.org/licenses/lgpl.html)
-    (focused most on code and additions always being free; includes
-    language addressing s/w patent concerns). See the [FSF's
-    recommendations] and their [instructions for use].
+  * The [LGPL](http://www.gnu.org/licenses/lgpl.html) (focused most on
+    code and additions always being free; includes language addressing
+    s/w patent concerns). See the [FSF's recommendations] and their
+    [instructions for use].
   * The [MIT] License (focused most on the user's freedom to do what
     they want with the code). The FSF calls this the ["Expat"
     License](http://directory.fsf.org/wiki/License:Expat).
