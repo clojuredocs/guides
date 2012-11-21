@@ -271,7 +271,7 @@ where `<your-key-id>` is in the output of `gpg --list-keys` (the
 KEY BLOCK-----" and "-----END PGP PUBLIC KEY BLOCK-----") into the
 form on your Clojars profile page.
 
-For more info on working with Clojars, [the Clojars
+For more info on working with Clojars, see [the Clojars
 wiki](https://github.com/ato/clojars-web/wiki/About).
 
 Once your Clojars account is all set up, and it has your public keys,
@@ -283,7 +283,7 @@ You will be asked for your (Clojars) username and password.
 
 Then you'll be asked for your gpg passphrase. (You won't be asked for
 your ssh passphrase because `lein deploy clojars` uses http rather
-than scp, though Clojars supports both.)
+than scp --- though Clojars supports both.)
 
 You should now be able to see your lib's Clojars page: for example,
 <https://clojars.org/trivial-library-example>!
@@ -296,7 +296,7 @@ You should now be able to see your lib's Clojars page: for example,
 
 For larger library projects, you may want to automatically generate
 API docs (from your docstrings). See
-[codox](https://github.com/weavejester/codox). If your library code
+[codox](https://github.com/weavejester/codox). If your library project
 is hosted at github, you can use [github
 pages](http://pages.github.com/) to host the resulting docs.
 
@@ -332,8 +332,9 @@ And optionally announce the release on the ML.
 ### Merging pull-requests
 
 Note that if you receive a pull-request at github, you can easily
-merge changes into your project, and then update your local repo to
-receive those changes as well:
+merge those changes into your project (right there, via the web page
+describing the pull-request). Afterwards, update your local repo to
+grab those changes as well:
 
     git pull
 
