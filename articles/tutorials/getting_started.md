@@ -5,8 +5,10 @@ layout: article
 
 This guide covers:
 
- * The REPL
- * Leiningen, Creating a Sample Project
+ * prerequisites (such as Leiningen) and installing
+ * running the REPL
+ * creating a project
+ * interactive development
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
 (including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
