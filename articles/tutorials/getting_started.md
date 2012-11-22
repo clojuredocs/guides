@@ -96,7 +96,17 @@ Back in the repl, reload your source file and run `-main` again:
 to see your changes.
 
 
-## Next stop
+## See Also
+
+Other getting started documention you might find useful:
+
+  * [A Brief Beginner's Guide to
+    Clojure](http://www.unexpected-vortices.com/clojure/brief-beginners-guide/index.html)
+    --- contains a bit more overview and background material for learning your way
+    around the landscape.
+
+
+## Next Stop
 
 Next stop: [the basic Clojure languge tutorial](/articles/tutorials/introduction.html).
 
