@@ -3,14 +3,25 @@ title: "Parsing XML in Clojure"
 layout: article
 ---
 
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
+
+
+## What Version of Clojure Does This Guide Cover?
+
+This guide covers Clojure 1.4 and Leiningen 2.x.
+
+
+## Overview
+
 Try as you might, XML is difficult to avoid. This is particularly true
 in the Java ecosystem. This guide will show you how to parse XML with
 the minimum amount of pain using the excellent tools available in
 Clojure.
 
-## What Version of Clojure Does This Guide Cover?
-
-This guide covers Clojure 1.4 and Leiningen 2.x.
 
 ## Parsing NZB files
 

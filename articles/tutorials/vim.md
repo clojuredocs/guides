@@ -3,6 +3,15 @@ title: "Clojure with Vim and VimClojure"
 layout: article
 ---
 
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
+
+
+## Overview
+
 VimClojure is a Vim plugin providing a Clojure development environment. Highlights include syntax highlighting, code completion, documentation, and an integrated REPL. This guide will cover how to get VimClojure installed, and some basic usage within a typical Clojure project.
 
 ## What Version of Clojure and VimClojure Does This Guide Cover?

@@ -3,16 +3,27 @@ title: "Clojure with Emacs"
 layout: article
 ---
 
-Emacs has traditionally been one of the best development environments
-for functional languages and Lisps in particular. This guide will
-explain how to get it installed, and give an example of a basic
-workflow to use while developing a simple library.
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
+
 
 ## What Version of Clojure Does This Guide Cover?
 
 This guide covers Clojure 1.4 and Emacs 24. Most packages should work
 on earlier versions of Emacs, but they will be more work to install
 since the package manager is new in 24.
+
+
+## Overview
+
+Emacs has traditionally been one of the best development environments
+for functional languages and Lisps in particular. This guide will
+explain how to get it installed, and give an example of a basic
+workflow to use while developing a simple library.
+
 
 ## Installing Emacs ##
 

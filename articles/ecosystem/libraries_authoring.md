@@ -15,6 +15,12 @@ not, see the [Getting Started](getting_started.html) and
 For the purposes of this guide, the library we'll be making is named
 "[trivial-library-example](https://clojars.org/trivial-library-example)".
 
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
+
 
 
 
