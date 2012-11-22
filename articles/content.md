@@ -251,7 +251,7 @@ This guide covers:
  * Maven Clojure plugin
 
 
-### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html) (TBD)
+### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html)
 
 This guide covers:
 
