@@ -3,16 +3,14 @@ title: "About"
 layout: article
 ---
 
-## What is CDS?
-
 CDS (Clojure Documentation Site) is a community documentation project for the Clojure programming language. It is not affiliated with
 `Clojure/core`, does not require going through the Clojure Contributor Agreement, and is developed [on GitHub](http://github.com/clojuredocs).
 
-### Rationale
+## Rationale
 
 The rationale is explained in more detail in the [announcement blog post](http://blog.clojurewerkz.org/blog/2012/10/10/announcing-a-new-clojure-documentation-project/).
 
-### History
+## History
 
 CDS was started in early October, 2012, by several active members of the Clojure community due to their dissatisfaction
 with the state of documentation and documentation contribution process (that involved mailing Clojure Contributor Agreement in paper).
