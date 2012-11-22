@@ -3,8 +3,6 @@ title: "Introduction to Clojure"
 layout: article
 ---
 
-## About this tutorial
-
 This guide covers:
 
  * Clojure language basics

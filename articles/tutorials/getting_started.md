@@ -3,8 +3,6 @@ title: "Getting Started with Clojure"
 layout: article
 ---
 
-## About this tutorial
-
 This guide covers:
 
  * The REPL
