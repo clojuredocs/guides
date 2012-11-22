@@ -3,8 +3,6 @@ title: "Laziness"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
   * What are lazy sequences

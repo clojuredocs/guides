@@ -3,8 +3,6 @@ title: "Concurrency and Parallelism in Clojure"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * Clojure's identity/value separation

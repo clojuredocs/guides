@@ -3,8 +3,6 @@ title: "Clojure interoperability with Java"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * How to instantiate Java classes

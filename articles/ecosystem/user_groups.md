@@ -3,8 +3,6 @@ title: "Clojure User Groups"
 layout: article
 ---
 
-## About this guide
-
 This guide covers Clojure User Groups (CLJUGs) around the world. If you want to add a new user group,
 please see our [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute) guide.
 

@@ -3,8 +3,6 @@ title: "Clojure Community"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * The Official Clojure mailing lists

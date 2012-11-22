@@ -3,8 +3,6 @@ title: "Starting with Eclipse and Counterclockwise For Clojure Development"
 layout: article
 ---
 
-## About this tutorial
-
 This guide covers:
 
  * Installing Eclipse

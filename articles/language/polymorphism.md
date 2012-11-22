@@ -3,8 +3,6 @@ title: "Polymorphism in Clojure: protocols and multimethods"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * What are polymorphic functions

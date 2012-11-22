@@ -3,8 +3,6 @@ title: "Books about Clojure and ClojureScript"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * Books about Clojure

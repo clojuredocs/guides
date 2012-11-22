@@ -3,8 +3,6 @@ title: "Parsing XML in Clojure"
 layout: article
 ---
 
-## Overview
-
 Try as you might, XML is difficult to avoid. This is particularly true
 in the Java ecosystem. This guide will show you how to parse XML with
 the minimum amount of pain using the excellent tools available in

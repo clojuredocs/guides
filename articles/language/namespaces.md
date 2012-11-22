@@ -3,8 +3,6 @@ title: "Clojure namespaces and vars"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * An overview of Clojure namespaces and vars

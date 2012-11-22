@@ -3,8 +3,6 @@ title: "Overview of clojure.core, the standard Clojure library"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * Key functions of `clojure.core`

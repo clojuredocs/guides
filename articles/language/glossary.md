@@ -3,9 +3,6 @@ title: "Clojure Terminology Guide"
 layout: article
 ---
 
-
-## About this guide
-
 A glossary of terminology specific to Clojure. Terms
 are listed in alphabetical order.
 

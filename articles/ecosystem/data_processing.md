@@ -3,8 +3,6 @@ title: "Data Processing (Overview)"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
   * An overview of why Clojure is an excellent choice for data processing

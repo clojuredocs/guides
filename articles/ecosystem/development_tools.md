@@ -3,8 +3,6 @@ title: "Development Tools"
 layout: article
 ---
 
-## About this guide
-
 This guide includes overview information regarding the various
 Clojure development tools available.
 

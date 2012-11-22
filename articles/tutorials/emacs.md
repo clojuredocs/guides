@@ -3,8 +3,6 @@ title: "Clojure with Emacs"
 layout: article
 ---
 
-## Overview
-
 Emacs has traditionally been one of the best development environments
 for functional languages and Lisps in particular. This guide will
 explain how to get it installed, and give an example of a basic

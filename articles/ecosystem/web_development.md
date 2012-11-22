@@ -3,8 +3,6 @@ title: "Web Development (Overview)"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
   * popular tools and libraries for web development

@@ -3,8 +3,6 @@ title: "Listing of All CDS Documents"
 layout: article
 ---
 
-## Overview
-
 [CDS](https://github.com/clojuredocs/cds) is a categorized and
 manifold collection of guides for the Clojure programming language and
 its ecosystem.

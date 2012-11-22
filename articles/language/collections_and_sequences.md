@@ -3,8 +3,6 @@ title: "Collections and sequences in Clojure"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * Collections in Clojure

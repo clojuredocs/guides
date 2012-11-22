@@ -3,8 +3,6 @@ title: "Macros and Metaprogramming"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
   * Clojure macros

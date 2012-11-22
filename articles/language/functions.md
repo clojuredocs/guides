@@ -3,8 +3,6 @@ title: "Functions in Clojure"
 layout: article
 ---
 
-## About this guide
-
 This guide covers:
 
  * How to define functions

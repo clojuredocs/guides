@@ -3,8 +3,6 @@ title: "Library Development and Distribution"
 layout: article
 ---
 
-## About this guide
-
 This short guide covers how to create your own typical pure Clojure
 library and distribute it to the community via Clojars. It uses
 Clojure 1.4 and Leiningen 2.0-previewX, and requires you have git
