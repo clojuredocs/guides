@@ -17,34 +17,30 @@ and separates content into several groups:
  * [The Ecosystem](#ecosystem) (tools, libraries, community, books) guides
  * [Cookbooks](#cookbooks)
 
-For easier navigation of the menu on the left, guides marked with a
-mostly filled box (▣, 25a3) are considered relatively complete, and a
-half-filled box (◪, 25ea) indicates partially-complete.
-
 
 ## Tutorials
 
-### [Getting Started](/articles/tutorials/getting_started.html) ◪
+### [Getting Started](/articles/tutorials/getting_started.html)
 
 If you're new to Clojure, this is a good place to start.
 
 
-### [Introduction](/articles/tutorials/introduction.html) ◪
+### [Introduction](/articles/tutorials/introduction.html)
 
 A swift introduction to the Clojure language, covering most of the
 basics.
 
 
-### [Emacs for Clojure Development](/articles/tutorials/emacs.html) ◪
+### [Emacs for Clojure Development](/articles/tutorials/emacs.html)
 
 A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
 
 
-### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html) ◪
+### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html)
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
-### [VimClojure for Clojure Development](/articles/tutorials/vim.html) ◪
+### [VimClojure for Clojure Development](/articles/tutorials/vim.html)
 
 A brief introduction to VimClojure and its features.
 
@@ -53,7 +49,7 @@ A brief introduction to VimClojure and its features.
 A brief tutorial/walkthrough of building a small webapp using Ring,
 Compojure, Hiccup, and SQLite.
 
-### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html) ◪
+### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
 
 This guide covers:
 
@@ -63,7 +59,7 @@ This guide covers:
 
 ## Clojure Language Guides
 
-### [Functions](/articles/language/functions.html) ◪
+### [Functions](/articles/language/functions.html)
 
 Functions are at the heart of Clojure.
 
@@ -88,7 +84,7 @@ This guide covers:
  * Key vars of `clojure.core`
 
 
-### [Interoperability with Java](/articles/language/interop.html) ◪
+### [Interoperability with Java](/articles/language/interop.html)
 
 The Clojure language implementation is symbiotic with its host
 platform (the JVM), providing direct interoperability.
@@ -103,7 +99,7 @@ This guide covers:
  * Other topics related to interop
 
 
-### [Namespaces](/articles/language/namespaces.html) ◪
+### [Namespaces](/articles/language/namespaces.html)
 
 Namespaces organize Clojure functions.
 
@@ -118,7 +114,7 @@ This guide covers:
  * How code compilation works in Clojure
 
 
-### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html) ◪
+### [Polymorphism: Protocols and Multimethods](/articles/language/polymorphism.html)
 
 This guide covers:
 
@@ -128,7 +124,7 @@ This guide covers:
  * How to create your own data types that behave like core Clojure data types
 
 
-### [Collections and Sequences](/articles/language/collections_and_sequences.html) ◪
+### [Collections and Sequences](/articles/language/collections_and_sequences.html)
 
 This guide covers:
 
@@ -139,7 +135,7 @@ This guide covers:
  * Other topics related to collections and sequences
 
 
-### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html) ◪
+### [Concurrency & Parallelism](/articles/language/concurrency_and_parallelism.html)
 
 This guide covers:
 
@@ -171,7 +167,7 @@ This guide covers:
  * How to force evaluation
 
 
-### [Glossary](/articles/language/glossary.html) ◪
+### [Glossary](/articles/language/glossary.html)
 
 This guide includes definitons of various Clojure-related terminology.
 
@@ -179,7 +175,7 @@ This guide includes definitons of various Clojure-related terminology.
 
 ## The Ecosystem
 
-### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md) ▣
+### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
 
 This guide covers:
 
@@ -193,7 +189,7 @@ This guide covers:
  * How to share (publish) a library
 
 
-### [Clojure Community](/articles/ecosystem/community.html) ▣
+### [Clojure Community](/articles/ecosystem/community.html)
 
 This guide covers:
 
@@ -203,7 +199,7 @@ This guide covers:
  * Other Clojure community resources
 
 
-### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html) ▣
+### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html)
 
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
@@ -235,7 +231,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [Books](/articles/ecosystem/books.html) ▣
+### [Books](/articles/ecosystem/books.html)
 
 This guide covers:
 
@@ -243,7 +239,7 @@ This guide covers:
  * Books on ClojureScript
 
 
-### [Maven for Clojure Development](/articles/ecosystem/maven.html) ◪
+### [Maven for Clojure Development](/articles/ecosystem/maven.html)
 
 This guide covers:
 
@@ -259,7 +255,7 @@ This guide covers:
  * How to publish a library to Clojars
 
 
-### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md) ◪
+### [Leiningen Profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md)
 
 This guide covers:
 
@@ -267,7 +263,7 @@ This guide covers:
  * How to use them
 
 
-### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md) ▣
+### [Distributing Libraries with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/DEPLOY.md)
 
 This guide covers:
 
@@ -277,7 +273,7 @@ This guide covers:
  * How to publish Clojure libraries to your own Maven repository
 
 
-### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md) ◪
+### [Writing Leiningen Plugins](https://github.com/technomancy/leiningen/blob/master/doc/PLUGINS.md)
 
 This guide covers:
 
@@ -287,7 +283,7 @@ This guide covers:
  * How to distribute plugins
 
 
-### [Clojure User Groups](/articles/ecosystem/user_groups.html) ▣
+### [Clojure User Groups](/articles/ecosystem/user_groups.html)
 
 This guide covers:
 
@@ -306,7 +302,7 @@ This cookbook covers:
  * How to work with regular expressions
  * How to work with characters
 
-### [Mathematics](/articles/cookbooks/math.html) ◪
+### [Mathematics](/articles/cookbooks/math.html)
 
 Includes coverage of facilities for doing math with Clojure.
 
