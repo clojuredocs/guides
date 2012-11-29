@@ -63,15 +63,22 @@ Once you get to a certain size (or if you are fortunate to have good companies i
 
 ## Meeting ideas
 
-Looking for meeting ideas? Here's some thoughts....
+Looking for meeting ideas? Here's some ideas....
 
- * Work through through the Clojure Koans at [4Clojure](http://www.4clojure.com/)
+ * Work through through the [Clojure Koans](https://github.com/functional-koans/clojure-koans) 
+ * Work through problems from [4Clojure](http://www.4clojure.com/)
  * Run a session on getting set up on Emacs with Clojure (or Vim, or ...)
  * Work through [Project Euler](http://projecteuler.net/) problems
  * Work through a [Code Kata](http://codekata.pragprog.com/)
- * Implement a game (Tic-Tac-Toe, Rock-Paper-Scissors, Checkers, etc)
+ * Implement a game (Tic-Tac-Toe, Rock-Paper-Scissors, Checkers, Othello, etc)
+ * Build a web site for your group in Clojure and deploy it to Heroku!
  * Review and expand [Clojure documentation](http://clojure-doc.org) guides
  * Look through the [Clojure JIRA](http://dev.clojure.org/jira/secure/Dashboard.jspa) for bugs to work on
+
+And some tips:
+
+ * [Running a Clojure dojo](http://otfrom.wordpress.com/2012/07/04/how-to-run-a-london-clojure-dojo-in-20ish-easy-steps/)
+ * [Swarm coding how-to](http://www.infoq.com/presentations/Swarm-Coding)
 
 ## Troubleshooting
 
