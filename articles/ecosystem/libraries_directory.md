@@ -161,6 +161,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Validateur](http://clojurevalidations.info) ([at clojars](https://clojars.org/com.novemberain/validateur)): functional validations library inspired by Ruby's ActiveModel
 
+  * [Metis](https://github.com/mylesmegyesi/metis): another validations library inspired by Ruby's ActiveModel
+
 
 ### URIs, URLs
 
