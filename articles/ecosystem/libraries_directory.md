@@ -48,6 +48,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [test.generative](https://github.com/clojure/test.generative): generative testing, a la QuickCheck
 
+  * [conjure](https://github.com/amitrathore/conjure) ([at clojars](https://clojars.org/org.clojars.runa/conjure)):
+    mocking and stubbing for unit tests.
+
 
 ## Namespaces and Code-as-Data
 
