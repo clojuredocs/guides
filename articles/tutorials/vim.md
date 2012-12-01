@@ -154,7 +154,7 @@ Most VimClojure shortcuts are initiated with Vim's "local leader", (`:help maplo
 let maplocalleader=","
 ```
 
-`\` will be assumed throughout this tuorial for consistency.
+`\` will be assumed throughout this tutorial for consistency.
 
 ## Basics
 
@@ -211,7 +211,7 @@ insert mode and add the following to the file:
 ```
 
 _Note that the first time you open a Clojure file with VimClojure, there will be a slight pause while stuff
-is initailized in the Nailgun server._
+is initialized in the Nailgun server._
 
 To run the test, save the file, `:w`, and now we'll invoke our first VimClojure command, `\rt`. This
 reloads the current buffer/namespace and runs all tests it contains. A result window will appear
@@ -359,7 +359,7 @@ The VimClojure plugin makes some minor adjustments to Vim's settings to improve 
 * Word motions (`:help w`), include dots, hyphens, etc. So `dw` in normal mode will delete an entire Clojure symbol.
 
 ### Wrangling Parentheses
-The most effective way to edit Clojure code is *structurally* with [paredit.vim](https://bitbucket.org/kovisoft/paredit/overview), but if you don't have time to learn that, Vim still brings a lot to the table for dealing with all the parenthese in Clojure code.
+The most effective way to edit Clojure code is *structurally* with [paredit.vim](https://bitbucket.org/kovisoft/paredit/overview), but if you don't have time to learn that, Vim still brings a lot to the table for dealing with all the parentheses in Clojure code.
 
 First, obviously, the `%` motion (`:help %`) is very useful. In normal mode, put the cursor on an opening or closing paren and you can:
 

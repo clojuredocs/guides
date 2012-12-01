@@ -267,7 +267,7 @@ Nesting data structures works like you'd expect:
   #{"shirt" "coat" "hat"}}
 ```
 
-We will see how to get at values inside nested data strucures a little
+We will see how to get at values inside nested data structures a little
 later on.
 
 
