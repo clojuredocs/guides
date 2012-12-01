@@ -57,6 +57,8 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure) and [Clojure blip.tv channel](http://blip.tv/clojure).
 
+ * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
+
 
 
 ## Code repositories
