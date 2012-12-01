@@ -51,14 +51,6 @@ and Compojure.
 
 
 
-### Conjure
-
-[Conjure](https://github.com/macourtney/Conjure) is a Rails-like
-framework, the aim of which is to simplify the development of
-database-backed web applications.
-
-
-
 ## More
 
 See also the [web development section of the library
