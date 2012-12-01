@@ -98,7 +98,7 @@ to see your changes.
 
 ## See Also
 
-Other getting started documention you might find useful:
+Other getting started documentation you might find useful:
 
   * [A Brief Beginner's Guide to
     Clojure](http://www.unexpected-vortices.com/clojure/brief-beginners-guide/index.html)
@@ -108,7 +108,7 @@ Other getting started documention you might find useful:
 
 ## Next Stop
 
-Next stop: [the basic Clojure languge tutorial](/articles/tutorials/introduction.html).
+Next stop: [the basic Clojure language tutorial](/articles/tutorials/introduction.html).
 
 
 
