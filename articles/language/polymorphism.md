@@ -232,13 +232,13 @@ With protocols, it is possible to only implement certain functions for certain t
 
 ### First Example: Shapes
 
-Lets start with a simple problem definition. We have 3 shapes: square, triangle and circle, and
+Lets start with a simple problem definition. We have 3 shapes: square, circle and triangle, and
 need to provide an polymorphic function that calculates the area of the given shape.
 
 In total, we need 4 functions:
 
  * A function that calculates area of a square
- * A function that calculates area of a triangle
+ * A function that calculates area of a circle
  * A function that calculates area of a triangle
  * A polymorphic function that acts as a "unified frontend" to the functions above
 
