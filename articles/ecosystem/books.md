@@ -14,7 +14,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-As of fall 2012, Clojure has 6 books published about it, plus one coming up about ClojureScript. This guide lists them in
+As of December 2012, Clojure has 7 books published about it, plus one about ClojureScript. This guide lists them in
 reverse chronological order and intended to provide a very brief overview of each. It is by no means comprehensive and
 may be quite opinionated. The goal is to identify books that are more useful to newcomers than others and
 recommend books that cover recent releases of Clojure (1.3+).
@@ -22,6 +22,24 @@ recommend books that cover recent releases of Clojure (1.3+).
 
 
 ## Books About Clojure
+
+### Functional Programming for the Object-Oriented Programmer
+
+By Brian Marick.
+
+#### Notes
+
+This is a book about functional programming for those with object-oriented programming
+backgrounds that uses Clojure in examples.
+
+It is often cited as a good introductory book for newcomers to Clojure.
+
+#### Where You Can Buy It
+
+ * [On Leanpub](https://leanpub.com/fp-oo), eBook (Kindle, ePub, PDF).
+
+
+
 
 ### Clojure Programming
 
