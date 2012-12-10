@@ -51,10 +51,12 @@ and Compojure.
 
 
 
-## More
+## See Also
 
-See also the [web development section of the library
-directory](/articles/ecosystem/libraries_directory.html#web_development).
+  * the [web development section of the library
+    directory](/articles/ecosystem/libraries_directory.html#web_development).
+
+  * [The Clojure Web Stack and the CRUD Stack](http://brehaut.net/blog/2012/clojure_web_and_the_crud_stack)
 
 
 
