@@ -39,15 +39,7 @@ tutorial](/articles/tutorials/basic_web_development.html).
 ### lib-noir
 
 In addition to Ring and Compojure, you might also make use of
-[lib-noir](https://github.com/noir-clojure/lib-noir) --- web
-development libraries split out from Noir (see below).
-
-
-
-### Noir
-
-[Noir](http://webnoir.org/) is a micro-framework based on Ring
-and Compojure.
+[lib-noir](https://github.com/noir-clojure/lib-noir).
 
 
 
