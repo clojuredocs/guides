@@ -443,6 +443,11 @@ browser window, run it like so:
     lein ring server-headless
 
 
+## See Also
+
+  * For creating new Compojure-based projects with more batteries
+    included, have a look at
+    [Compojure-Template](https://github.com/yogthos/compojure-template).
 
 
 ## Contributors
