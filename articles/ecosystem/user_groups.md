@@ -71,3 +71,4 @@ TBD
  * [Chinese Clojure User Group](https://groups.google.com/group/cn-clojure)
  * [Melbourne Clojure User Group](http://www.meetup.com/clj-melb/)
  * [Sydney Clojure User Group](http://www.meetup.com/clj-syd/)
+ * [Tel Aviv Clojure User Group](http://www.meetup.com/Clojure-Israel/)
