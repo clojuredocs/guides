@@ -446,8 +446,8 @@ browser window, run it like so:
 ## See Also
 
   * For creating new Compojure-based projects with more batteries
-    included, have a look at
-    [Compojure-Template](https://github.com/yogthos/compojure-template).
+    included, have a look at [this augmented
+    Compojure-Template](https://github.com/yogthos/compojure-template).
 
 
 ## Contributors
