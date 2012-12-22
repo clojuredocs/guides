@@ -269,10 +269,17 @@ to which value it refers. Clojure uses values to represent states.
 
 
 
-### STM
+### STM (Software Transactional Memory)
 
-*todo*
-
+Software Transactional Memory (STM) is a concurrency control method to
+coordinate and control access to shared storage as an alternative to
+lock-based synchronization. Clojure's STM uses multiversion concurrency
+control (MVCC) as an alternative to lock-based transactions, as well as
+ensuring changes are made atomically, consistently, and in
+isolation. It does this by taking a snapshot of the ref, making the
+changes in isolation to the snapshot, and apply the result. If the STM
+detects that another transaction has made an update to the ref, the
+current transaction will be forced to retry.
 
 
 
