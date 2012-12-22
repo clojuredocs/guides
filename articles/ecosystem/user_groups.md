@@ -19,7 +19,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Chicago Clojure User Group](http://www.meetup.com/Chicago-Clojure/)
  * [Clojure DC User Group](http://clojuredc.org/)
  * [Columbus Clojure User Group](http://www.columbusclojure.com/)
- * [Dallas/Fort Worth Clojure User Group](https://groups.google.com/forum/#%21topic/clojure/Cym7oiViFoQ)
+ * [Dallas/Fort Worth Clojure User Group](http://www.meetup.com/DFW-Clojure/)
  * [Denver Clojure User Group](http://www.meetup.com/Denver-Clojure-Meetup/)
  * [Detroit Clojure User Group](http://groups.google.com/group/detroit-clojure)
  * [Houston Clojure User Group](http://groups.google.com/group/clj-houston)
