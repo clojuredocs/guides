@@ -209,6 +209,16 @@ the reader to become :current-namespace/foo.
 
 
 
+### nullipotent
+
+An operation with no side effects.  The result of calling the function
+one or more times is the same as if it was never called.  Queries are
+typically good examples of functions that are nullipotent, as they
+do not modify the state of the object or structure they are queried
+against.
+
+
+
 ### persistence
 
 See the [relevant section of the
