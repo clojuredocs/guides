@@ -281,6 +281,13 @@ This guide covers:
  * How to distribute plugins
 
 
+### [Generating Documentation](/articles/ecosystem/generating_documentation.html)
+
+Tools for generating documentation from docstrings and other project
+metadata.
+
+
+
 ### [Clojure User Groups](/articles/ecosystem/user_groups.html)
 
 This guide covers:
