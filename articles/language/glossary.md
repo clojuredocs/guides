@@ -295,10 +295,10 @@ An identifier that refers to vars or local values.
 Some literals begin with a hash mark "#" (so-called "dispatch
 macros"); for example, `#{}` for sets and `#""` for regex
 literals. Starting with Clojure 1.4, you can create your own
-#-prefixed literal which causes the reader to parse the form following
-it using a function or macro of your own choosing/devising. It's in
-this way that you can *tag* a literal to be handled specially by the
-reader.
+\#-prefixed literal which causes the reader to parse the form
+following it using a function or macro of your own
+choosing/devising. It's in this way that you can *tag* a literal to be
+handled specially by the reader.
 
 For more info, see [the "Tagged Literals" section of the reader
 doc](http://clojure.org/reader).
