@@ -106,7 +106,12 @@ sequence like this is referred to as "head retention".
 
 ### idempotent
 
-*todo*
+An operation that when given the same inputs will produce the same
+result when called one or more times. An idempotent function may
+produce a side effect, such a updating a ref or an atom, but will
+only produce the side effect once. An idempotent function is
+different than a pure function, in that a pure function will
+produce no side effects.
 
 
 
