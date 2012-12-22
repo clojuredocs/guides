@@ -74,6 +74,9 @@ examples of expressions:
 (println "hello!")     ; evaluates to nil (but also prints "hello!")
 ```
 
+Clojure supports a few extra bits of syntax which will be noted as we
+encounter them.
+
 Expressions can contain sub-expressions:
 
 ``` clojure
@@ -85,10 +88,9 @@ Expressions can contain sub-expressions:
 Expressions in (various types of) brackets are often referred to as
 "forms".
 
-When Clojure sees something in parentheses, Clojure assumes it's a
-regular function call. There are exceptions to this rule with macros
-and special forms; more about that in the [Evaluation](#evaluation)
-section, below.
+An expression in parentheses is usually treated as a function call,
+but may also be a macro or special form (more about those in the
+[Evaluation](#evaluation) section below).
 
 Clojure is not whitespace-sensitive. Also, commas count as whitespace,
 so you can omit them (for example, you can write a vector as `[1 2 3]`
