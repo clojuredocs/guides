@@ -136,7 +136,13 @@ last expression evaluated. Forms that do this include: `when`,
 
 ### intern
 
-*todo*
+A method of storing values or immutable data structures as a single
+copy of the item, allowing for more space-efficiency, and possibly
+time-efficiency, with the trade off of requiring more time being
+required when interning the item. When the string "clojure" is interned,
+all instances of the string "clojure" will reference the exact same
+instance, instead of having multiple string objects with the same value
+of "clojure".
 
 
 
