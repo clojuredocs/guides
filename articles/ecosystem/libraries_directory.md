@@ -133,13 +133,19 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ### Web Services
 
-  * [Noir](http://webnoir.org/) ([at clojars](https://clojars.org/noir)): a popular Clojure Web framework suitable for services that generate HTML and pure API endpoints
+  * [Ring](https://github.com/ring-clojure) ([at clojars](https://clojars.org/ring)): foundational
+    web application library
 
-  * [compojure](https://github.com/weavejester/compojure) ([at clojars](https://clojars.org/compojure)): A concise routing library for Ring
+  * [Compojure](https://github.com/weavejester/compojure) ([at clojars](https://clojars.org/compojure)):
+    concise routing library for Ring
+
+  * [lib-noir](https://github.com/noir-clojure/lib-noir) ([at clojars](https://clojars.org/lib-noir)):
+    set of useful web development libraries
+
+  * [Luminus](http://www.luminusweb.net/): web framework using Ring, Compojure, lib-noir, plus its own
+    lib-luminus
 
   * [Liberator](https://github.com/clojure-liberator/liberator) ([at clojars](https://clojars.org/liberator)): a Clojure library for building RESTful applications
-
-  * [ring](https://github.com/ring-clojure) ([at clojars](https://clojars.org/ring)): foundational web application library
 
   * [friend](https://github.com/cemerick/friend) ([at clojars](https://clojars.org/com.cemerick/friend)): Authentication and authorization library for Web apps
 
