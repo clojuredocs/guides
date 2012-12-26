@@ -248,7 +248,8 @@ and cannot depend on any outside state, other than that which was given
 as arguments to the function. A pure function's result also cannot change
 during the execution of the program or between executions of the program,
 as the dependency on outside state can lead to changes in the result of
-the function.
+the function.  Pure functions are also
+[referentially transparent.](#referential-transparency)
 
 
 
@@ -272,6 +273,16 @@ have been "realized".
 Vars, atoms, refs, and agents are all reference types. They are
 mutable in the sense that you can change to what value they refer, and
 Clojure provides thread-safe mechanisms for doing so.
+
+
+
+### referential transparency
+
+An expression that will always return the same result for the values
+given, and can be substituted for the resulting value, without
+effecting the program.  The advantage of referential transparent
+expressions is that they can be memoized, and be the subject of
+various compilier optimizations.
 
 
 
