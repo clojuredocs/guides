@@ -239,6 +239,19 @@ A function taking one or more args and returning a boolean (`true` or
 `nil?`, `zero?`, `string?`.
 
 
+
+### pure function
+
+A function that given the same inputs will always produce the same
+result. A pure function also does not have any observable side effects
+and cannot depend on any outside state, other than that which was given
+as arguments to the function. A pure function's result also cannot change
+during the execution of the program or between executions of the program,
+as the dependency on outside state can lead to changes in the result of
+the function.
+
+
+
 ### reader macro
 
 Syntax that the Clojure reader recognizes as special syntactic sugar,
