@@ -199,6 +199,17 @@ hash-map object".
 
 
 
+### memoization
+
+The ability to cache a result of a function call by given arguments,
+and return the result without having to do the calculation again.
+Memoization is a time-space trade off in that more memory is used
+to store the results of a function call to be able to return the
+value instead of having to keep spending time doing the calculation
+involved in the function.
+
+
+
 ### metadata
 
 An extra map that you can attach to a collection value (or a symbol),
