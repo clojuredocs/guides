@@ -104,6 +104,17 @@ even an out-of-memory error. Accidentally keeping around a lazy
 sequence like this is referred to as "head retention".
 
 
+### homoiconicity
+
+Where the code and the data is represented by the same structure.
+This allows the code to be treated as data, and the data to be treated
+as code. This feature of Clojure, and other Lisps, allows for
+macros in the language, since they can operate on code as a data
+structure, and to return a transformation of that structure to
+be the representation of new code.
+
+
+
 ### idempotent
 
 An operation that when given the same inputs will produce the same
