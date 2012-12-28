@@ -325,7 +325,7 @@ called like `(my-func 1 2 3 4 5)`, then 3, 4, & 5 are the "rest args".
 ### s-expression
 
 Short for Symbolic Expression. A S-Expression is a data structure able
-to represent both simple datastructes such as atoms, or complex data
+to represent both simple datastructes such as literals, or complex data
 structures such as nested expressions. Due to their versatile nature,
 S-Expressions are able to represent both data in Clojure, as well as
 the Clojure code itself, allowing Clojure to be a
