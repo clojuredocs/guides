@@ -87,6 +87,12 @@ that it returns `clojure.lang.MapEntry`.
 
 
 
+### evaluator
+
+*todo*
+
+
+
 ### form
 
 A valid s-expression. For example: `(+ 1 1)` and `(defn foo [x] (* x
@@ -281,6 +287,12 @@ during the execution of the program or between executions of the program,
 as the dependency on outside state can lead to changes in the result of
 the function.  Pure functions are also
 [referentially transparent.](#referential-transparency)
+
+
+
+### reader
+
+*todo*
 
 
 
