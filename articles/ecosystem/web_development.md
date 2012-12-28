@@ -46,10 +46,10 @@ In addition to Ring and Compojure, you might also make use of
 ### Luminus
 
 [Luminus](http://www.luminusweb.net/) is [a lein
-template](https://github.com/yogthos/luminus-template) plus [the
-luminus library](https://github.com/yogthos/lib-luminus) which
-comprises a "batteries-included" web framework. It makes use of Ring,
-Compojure, and lib-noir.
+template](https://github.com/yogthos/luminus-template) for creating
+batteries-included web applications. It makes use of Ring, Compojure,
+lib-noir, and optionally (as described in its documentation) other
+libraries.
 
 
 

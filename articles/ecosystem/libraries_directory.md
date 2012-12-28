@@ -142,8 +142,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [lib-noir](https://github.com/noir-clojure/lib-noir) ([at clojars](https://clojars.org/lib-noir)):
     set of useful web development libraries
 
-  * [Luminus](http://www.luminusweb.net/): web framework using Ring, Compojure, lib-noir, plus its own
-    lib-luminus
+  * [Luminus](http://www.luminusweb.net/): lein template for creating batteries-included
+    web applications using Ring, Compojure, lib-noir, and other libraries.
 
   * [Liberator](https://github.com/clojure-liberator/liberator) ([at clojars](https://clojars.org/liberator)): a Clojure library for building RESTful applications
 
