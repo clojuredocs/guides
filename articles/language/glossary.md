@@ -335,6 +335,15 @@ various compilier optimizations.
 
 
 
+### REPL
+
+Short for: "Read, Eval, Print, Loop".  The REPL reads in text through
+the [reader](#reader) transforming it into a Clojure data structure,
+[evaluates](#evaluator) the data structure as code, prints the result 
+of the evaluation, and loops back waiting to read the next input string.
+
+
+
 ### rest args
 
 The extra args passed to a [variadic](#variadic) function, for example
