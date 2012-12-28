@@ -203,6 +203,15 @@ See also [binding form](#binding_form)
 
 
 
+### macro
+
+A special type of function which is transforms a S-Expression read in
+and applies a transformation to the S-Expression resulting in a new
+form.  This process is called macro-expansion, and is done as part
+of the Clojure reader.
+
+
+
 ### map
 
 Either refers to the built in `map` function, or else means "a
