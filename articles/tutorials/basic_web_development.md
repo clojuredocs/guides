@@ -126,6 +126,12 @@ For more info, see:
 database program that uses a single flat file for storage and is
 serverless.
 
+> Note: for tighter integration with the underlying platform, you may
+> instead wish to use a Java-based embedded db such as [Apache
+> Derby](http://db.apache.org/derby/) or
+> [H2](http://www.h2database.com/html/main.html). In fact, this
+> tutorial may eventually be modified to use one of those instead.
+
 Make sure you've got sqlite installed. On Debian-based OS's,
 install like so:
 
