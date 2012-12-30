@@ -247,31 +247,7 @@ $ lein new command-line-args
 $ cd command-line-args
 ```
 
-Start up Emacs and edit your `project.clj` to look like this:
-
-```clojure
-(defproject command-line-args "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.4.0"]])
-  :plugins [[lein-swank "1.4.4"]])
-```
-
-We are adding a plugin for `lein-swank` which allows us to keep a
-server running in the background to send code to as we write. You can
-also add plugins at the user level, see the Leiningen docs for
-details. A full reference for what can go in this file lives in the
-Leiningen project
-[here](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
-
-Alternatively we could have used `nrepl-jack-in`, but there is
-currently no support for `clojure-test-mode` and we will be using
-that to run our tests from Emacs.
-
-At this point we are ready to start coding. Take a look at the project
-structure:
+Take a look at the project structure:
 
 ```
 + doc
@@ -286,19 +262,17 @@ structure:
     - core_test.clj
 ```
 
-Should be fairly self-explanatory, namespaces in clojure are
-represented as folders in the filesystem (like packages in java) and
-the test structure mirrors that of the src structure. 
+Should be fairly self-explanatory, though Leiningen's built-in
+tutorial (available via `lein help tutorial`) provides a detailed
+explanation of the project structure.
 
-Let's start up a server and connect to it from Emacs using
-clojure-mode:
+Let's start up a live repl session.
 
 ```
-M-x clojure-jack-in
+M-x nrepl-jack-in
 ```
 
-This should open up a new window looking at our \*slime-repl nil\*
-buffer.
+This should open up a new window looking at our \*nrepl\* buffer.
 
 First thing to do is add a simple test (in fact the only test we will
 be adding because by default, we get it right first time). Open the
@@ -317,18 +291,16 @@ is there with the following:
 ```
 
 We are simply assigning a list of arguments as they would arrive from
-the command line to a "variable" called args, and asserting that the
+the command line to a local called args, and asserting that the
 return from a function called `parse-args` is equal to those command
 line args turned into a simple map.
 
-To run this test, save the file `C-x C-s` and using clojure-test-mode
-we can do `C-c ,`. We should get an error in a buffer complaining that
-`parse-args` does not exist. To dismiss this buffer, simply press `q`.
-The buffer should go away, and the cursor should be back in the code
-where you left it (another way of getting this type of compilation
-error is to compile the buffer using `C-c C-k`). Let's try to fix the
-exception by opening `core.clj` (`C-x C-f`) and adding the following
-definition:
+Compile the file `C-c C-k`. We should get an error in a buffer
+complaining that `parse-args` does not exist. To dismiss this buffer,
+switch to the window containing the stack trace with `C-x o` and press
+`q`. The buffer should go away, and the cursor should be back in the
+code where you left it. Let's try to fix the exception by opening
+`core.clj` (`C-x C-f`) and adding the following definition:
 
 ```clojure
 (defn parse-args [args]
@@ -336,7 +308,8 @@ definition:
 ```
 
 Save the file (`C-x C-s`), switch back to the test buffer (`C-x b
-ENTER`) and run the test again (`C-c ,`). This time you should get a
+ENTER`) and try compiling again (`C-c C-k`). This time it will
+succeed, so try running the tests with `C-c C-,` and you should get a
 message in the mini-buffer (the small line at the bottom of you
 screen) telling you one test has failed AND you should have a red bar
 across the `is` assertion. To check what the problem was, we can move
@@ -350,7 +323,9 @@ with the assertion in the mini-buffer:
       {}))
 ```
 
-Awesome! So our map was empty as expected. Let's fix that:
+The failure message will also be shown in the `\*nrepl\*` buffer.
+
+Anyway, our map was empty as expected. Let's fix that:
 
 ```clojure
 (defn parse-args [args]
@@ -384,6 +359,12 @@ had multiple test files we can run them all from the CLI using:
 $ lein test
 ```
 
+Re-running all the tests from Leiningen can be a good sanity check
+before you wrap up work on a feature or branch since there are some
+cases where developing from a REPL can give misleading results. For
+instance, if you delete a function definition but still call it from
+other functions, you won't notice until your process is restarted.
+
 So that is an extremely simple example of a workflow using Emacs with
 clojure-mode and clojure-test-mode. 
 
@@ -392,32 +373,21 @@ clojure-mode and clojure-test-mode.
 One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
 open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
-two so you have the `core.clj` and \*slime-repl nil\* buffers open.
+two so you have the `core.clj` and `\*nrepl\*` buffers open.
 Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
 decided you want to pull out the anonymous function to be a named
 function `keywordize`.
 
-First load and compile the buffer into the slime process with `C-c
-C-k`. Now switch to the REPL window (you can hold the shift key and
-use the arrow keys to move around windows if you are using GUI Emacs
-or use `C-x o` to switch to other). Change the namespace you are in:
+First load and compile the buffer into the REPL process with `C-c
+C-k`. Change the namespace of the REPL buffer to the one of the file
+you're in with `C-c C-n`. Now switch to the REPL window with `C-x o`.
 
-    user> (in-ns 'command-line-args.core)
-
-Your REPL prompt should update to reflect this:
-
-    command-line-args.core>
-
-You now have access to the functions in this namespace (that were
-defined when you loaded the file). Try it:
+You now have access to the functions in this namespace that were
+defined when you compiled the file. Try it:
 
     command-line-args.core> (parse-args '("key" "value"))
     {:key "value"}
-
-A shortcut to moving to this namespace is to be inside the source code
-buffer and press `C-c M-p`. Thanks to [Jake
-McCrary](http://jakemccrary.com/) for that tip.
 
 Let's go ahead and create our new function in `core.clj`:
 
@@ -430,7 +400,7 @@ Let's go ahead and create our new function in `core.clj`:
   (into {} (map keywordize (partition 2 args))))
 ```
 
-Now we have a couple of options, we could re-compile the file again
+Now we have a couple of options, we could re-compile the whole file again
 (`C-c C-k`) or we could evaluate each function on its own by going to
 the end of the s-exp and using `C-x C-e` which sends the s-exp to the
 running REPL. Now switching back to the REPL we can try out our
@@ -444,35 +414,16 @@ it which is nice. The ability to continually change the code and play
 around with it is one of the things that makes Emacs and a lisp a
 great combination for development.
 
-Another incredibly useful command is `C-c I` for inspecting
-values. Try this in your REPL:
-
-    command-line-args.core> (def foo {:a "a" :b "b"})
-    #'command-line-args.core/foo    
-
-Now move your cursor in the REPL of the `foo` symbol and press `C-c
-I`. After pressing enter to confirm `foo`, a new buffer pops up
-showing you lots of interesting things about the value it contains:
-
-    {:a "a", :b "b"}
-    --------------------
-    Class: class clojure.lang.PersistentArrayMap
-    Count: 2
-    Contents: 
-      :a = a
-      :b = b
-
-You can move your cursor to the values and press enter to drill down
-to see more info. Pressing `q` again will dismiss this buffer.
-
 If you find yourself wanting to repeat a command you just typed at the
-REPL, you can hold down Control and use the arrow-up key to scroll
-back through history. Also, all of the Emacs editing commands are
-available in the REPL which is great.
+REPL, you can use `M-p` scroll back through history and `M-n` to go
+forwards. Also, all of the Emacs editing commands are available in the
+REPL, which is great.
 
-A handy clojure function to use in the REPL is `doc` which gives you
-the clojure doc for a given function:
+A handy clojure function to use in the REPL is `clojure.repldoc` which
+gives you the docstring for a given function:
 
+    command-line-args.core> (use 'clojure.repl)
+    nil
     command-line-args.core> (doc println)
     -------------------------
     clojure.core/println
@@ -483,20 +434,15 @@ the clojure doc for a given function:
 However there is a shortcut `C-c C-d C-d` when your cursor is over a
 function name. This will show the Clojure doc in a new window. If
 instead you want to jump to the source of the function you can use
-`M-.`, which is awesome. This works on your own functions and the
-Clojure functions if available (which they will be if you are using
-Leiningen the way described here). Incidentally to see all of symbols
-in a file and fuzzy-find the one you are looking for you can use `C-x
-C-i`, this is a big time saver. Its like `C-x C-f` but for functions.
-
-Another useful shortcut brought to my attention by my colleague [Jake
-McCrary](http://jakemccrary.com/) is `M-p` for auto-completion based
-on items in your history. `M-/` will also complete any individual
-symbol you are typing (this works in the source code and the REPL).
+`M-.`, which is awesome. This works on your own functions as well as
+those which come from third-party libraries. Use `M-,` to pop the
+stack and return to where you were. Incidentally to see all
+of symbols in a file and jump to the one you are looking for you
+can use `C-x C-i`, this is a big time saver.
 
 When you are finished with the repl (or if for some reason it has
-gotten into a bad state), you can simply kill the `*slime-repl nil*`
-buffer (and re-run `clojure-jack-in` to start another).
+gotten into a bad state), you can simply kill the `\*nrepl\*`
+buffer and re-run `nrepl-jack-in` to start another.
 
 ## Appendix ##
 
@@ -507,11 +453,10 @@ beginning (thanks to Mikael Sundberg for this suggestion):
     C-c '          View test failure messages
     C-c C-k        Compile and load buffer
     C-x C-e        Evaluate sexp
-    S-arrow keys   Move between windows
     C-c M-o        Clear REPL buffer
-    M-p            Auto-complete line in REPL
+    M-.            Jump to definition
+    M-p            Back through REPL history
     M-/            Auto-complete word
-    C-c I          Evaluate an expression and inspect the result
     q              Dismiss a temporary buffer that has appeared
     C-c C-d C-d    Show docs for function
     C-x C-i        Fuzzy-find all symbols in buffer
