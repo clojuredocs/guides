@@ -119,59 +119,49 @@ defaults for you called
 [emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
 if you'd prefer a prepackaged set of config to starting from scratch.
 
-Installation instructions on the Starter Kit Readme are very thorough, so
-you should follow those carefully. My personal setup lives in my
-[dotfiles
-project](https://github.com/gar3thjon3s/dotfiles/tree/master/.emacs.d),
-which you can look at for inspiration for Clojure specific things. You
-will certainly want to add clojure-mode, and clojure-test-mode to your
-list of packages to install:
+Most Emacs packages are kept at [Marmalade](http://marmalade-repo.org),
+the community package host. Add this code to your config in
+`~/.emacs.d/init.el` to tell Emacs to look there:
+
+```lisp
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+```
+
+Run `M-x package-refresh-contents` to pull in the package listing.
+
+M-x means meta-x, and meta is mapped to the alt key on most keyboards,
+though Mac OS X maps it to the command key.
+
+You can either install each package one-by-one with `M-x
+package-install` or list all your packages as part of your
+configuration. This is helpful if you take your dotfiles to a new
+machine; you don't have to remember everything you've installed by hand.
 
 ```lisp
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
-                      starter-kit-ruby
                       starter-kit-eshell
                       clojure-mode
-                      clojure-test-mode))
+                      clojure-test-mode
+                      nrepl))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 ```
                       
-Start emacs:
-
-```bash
-$ emacs -nw
-```
-
 A lot of messages will likely whizz by as it installs and compiles
 packages. Unless you have any actual *errors* this is all fine.
 
-To look at the other packages available for installation you can do
-(from inside Emacs):
-
-```
-M-x package-list-packages
-```
-
-M-x means meta-x, and meta is mapped to the alt key on Ubuntu and
-either the alt key or the apple key on the mac. A list of available
-packages should load up. To manually install a package, move to the
-package with the keyboard and press 'i' for 'install'. After selecting
-all the packages you are interested in, press 'x' for 'eXecute' to
-install. A better idea is to simply add the package to the var
-`my-packages` in your init.el and restart emacs.
-
-Start up Emacs (if it's not already running):
-
-```bash
-$ emacs -nw
-```
-
-and follow along!
+To look at the other packages available for installation you can
+invoke `M-x package-list-packages`. To manually install a package,
+move the point to line of the package with the keyboard and press 'i'
+for 'install'. After selecting all the packages you are interested in,
+press 'x' for 'eXecute' to install.
 
 ### Basics ###
 
