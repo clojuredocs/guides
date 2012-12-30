@@ -43,8 +43,8 @@ $ brew install emacs --cocoa
 $ brew linkapps Emacs
 ```
 
-This should install Emacs 24.x, which is required for the
-emacs-starter-kit, and symlink Emacs.app to your ~/Applications folder.
+This should install the latest version of Emacs and symlink Emacs.app
+to your ~/Applications folder.
 
 After compiling, Emacs will be living happily somewhere in your
 cellar. You can check this:
@@ -133,12 +133,13 @@ the community package host. Add this code to your config in
 Run `M-x package-refresh-contents` to pull in the package listing.
 
 M-x means meta-x, and meta is mapped to the alt key on most keyboards,
-though Mac OS X maps it to the command key.
+though Mac OS X usually maps it to the command key.
 
 You can either install each package one-by-one with `M-x
-package-install` or list all your packages as part of your
-configuration. This is helpful if you take your dotfiles to a new
-machine; you don't have to remember everything you've installed by hand.
+package-install` or specify all your packages in Emacs Lisp as part of
+your configuration file. This is helpful if you take your dotfiles to
+a new machine; you don't have to remember everything you've installed
+by hand.
 
 ```lisp
 (defvar my-packages '(starter-kit
@@ -153,8 +154,11 @@ machine; you don't have to remember everything you've installed by hand.
   (when (not (package-installed-p p))
     (package-install p)))
 ```
-                      
-A lot of messages will likely whizz by as it installs and compiles
+
+Put the code above in `~/.emacs.d/init.el` and run it with `M-x
+eval-buffer`.
+
+A lot of warnings will likely whizz by as it installs and compiles
 packages. Unless you have any actual *errors* this is all fine.
 
 To look at the other packages available for installation you can
@@ -167,7 +171,7 @@ press 'x' for 'eXecute' to install.
 
 The first thing you should do without question, is to go through the
 built-in Emacs tutorial. To do this press `C-h t` or hold down Control
-and press `h` and then press `t`.
+and press `h` and then press `t` by itself.
 
 With that in mind, these are the basic keystrokes you're going to be
 using most often:
@@ -199,7 +203,7 @@ M-v         Back a page
 Edit commands
 C-d         Kill character
 M-d         Kill word
-M-delete    Kill word backwards (I have this mapped to C-w)
+M-delete    Kill word backwards
 
 Misc commands
 C-s         Regex search forwards
@@ -285,9 +289,9 @@ is there with the following:
                "--port" "8080" 
                "--environment" "production"]]
       (is (= {:server "localhost"
-           :port "8080"
-           :environment "production"}
-           (parse-args args)))))
+              :port "8080"
+              :environment "production"}
+             (parse-args args)))))
 ```
 
 We are simply assigning a list of arguments as they would arrive from
@@ -318,12 +322,12 @@ with the assertion in the mini-buffer:
 
 ```clojure
 (not (= {:server "localhost", 
-      :port "8080", 
-      :environment "production"} 
-      {}))
+         :port "8080", 
+         :environment "production"} 
+        {}))
 ```
 
-The failure message will also be shown in the `\*nrepl\*` buffer.
+The failure message will also be shown in the `*nrepl*` buffer.
 
 Anyway, our map was empty as expected. Let's fix that:
 
@@ -343,7 +347,7 @@ Running our tests again we now get another error:
          "--environment" "production"}))
 ```
 
-Whoops our keys are just strings with the dashes still in place. We
+Whoops, our keys are just strings with the dashes still in place. We
 need to strip those off and turn them into keywords:
 
 ```clojure
@@ -373,7 +377,7 @@ clojure-mode and clojure-test-mode.
 One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
 open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
-two so you have the `core.clj` and `\*nrepl\*` buffers open.
+two so you have the `core.clj` and `*nrepl*` buffers open.
 Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
 decided you want to pull out the anonymous function to be a named
@@ -419,7 +423,7 @@ REPL, you can use `M-p` scroll back through history and `M-n` to go
 forwards. Also, all of the Emacs editing commands are available in the
 REPL, which is great.
 
-A handy clojure function to use in the REPL is `clojure.repldoc` which
+A handy clojure function to use in the REPL is `clojure.repl/doc` which
 gives you the docstring for a given function:
 
     command-line-args.core> (use 'clojure.repl)
@@ -436,12 +440,11 @@ function name. This will show the Clojure doc in a new window. If
 instead you want to jump to the source of the function you can use
 `M-.`, which is awesome. This works on your own functions as well as
 those which come from third-party libraries. Use `M-,` to pop the
-stack and return to where you were. Incidentally to see all
-of symbols in a file and jump to the one you are looking for you
-can use `C-x C-i`, this is a big time saver.
+stack and return to where you were. For all the definitions in a
+single file you can use `M-x imenu` to list them and jump to one.
 
 When you are finished with the repl (or if for some reason it has
-gotten into a bad state), you can simply kill the `\*nrepl\*`
+gotten into a bad state), you can simply kill the `*nrepl*`
 buffer and re-run `nrepl-jack-in` to start another.
 
 ## Appendix ##
