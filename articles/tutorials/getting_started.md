@@ -10,8 +10,11 @@ This guide covers:
  * creating a project
  * interactive development
 
-This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
-(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+This work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
+Attribution 3.0 Unported License</a> (including images &
+stylesheets). The source is available [on
+Github](https://github.com/clojuredocs/cds).
 
 
 ## Overview
@@ -22,11 +25,22 @@ it.
 To quickly get started, first make sure you've got Java installed.
 
 Then install the [Leiningen](http://leiningen.org/) project management
-tool. Clojure programs are typically developed inside their own
-project directory, and Leiningen manages
-projects for you. Lein takes care of pulling in dependencies (including Clojure itself),
-running the REPL, running your program and its tests, packaging your program for
-distribution, and other administrative tasks.
+tool.
+
+> This author (jg) recommends always installing by downloading the
+> script directly (as described in the instructions at leiningen.org),
+> rather than using your OS's package manager. This will ensure that
+> you get the latest lein version 2.
+
+Clojure programs are typically developed inside their own project
+directory, and Leiningen manages projects for you. Lein takes care of
+pulling in dependencies (including Clojure itself), running the REPL,
+running your program and its tests, packaging your program for
+distribution, and other administrative tasks. Run `lein help` to
+see the list of all the tasks in can perform.
+
+> Again, there's no need to "install" Clojure, per se. Lein
+> will take care of fetching it for you.
 
 
 ## Trying out the REPL
@@ -42,16 +56,16 @@ You should be greeted with a "`user=>`" prompt. Try it out:
 
 ``` clojure
 user=> (+ 1 1)
-; 2
+;; ⇒ 2
 user=> (distinct [:a :b :a :c :a :d])
-; (:a :b :c :d)
+;; ⇒ (:a :b :c :d)
 user=> (dotimes [i 3]
   #_=>   (println (rand-nth ["Fabulous!" "Marvelous!" "Inconceivable!"])
   #_=>            i))
-; Marvelous! 0
-; Fabulous! 1
-; Inconceivable! 2
-; nil
+;; Marvelous! 0
+;; Inconceivable! 1
+;; Fabulous! 2
+;; ⇒ nil
 ```
 
 
