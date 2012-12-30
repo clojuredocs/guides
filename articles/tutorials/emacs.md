@@ -58,7 +58,7 @@ your shell-specific config) you can add [this](https://gist.github.com/3887459) 
 issues when launching Emacs from the GUI on OS X
 ([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
-```scheme
+```lisp
 ;; fix the PATH variable
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -116,9 +116,10 @@ Emacs can be configured through a folder in your home folder called
 configuration options are pretty much endless. To help you through
 this, Phil Hagelberg has created a starter kit with lots of sensible
 defaults for you called
-[emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit).
+[emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
+if you'd prefer a prepackaged set of config to starting from scratch.
 
-Installation instructions on the github project are very thorough, so
+Installation instructions on the Starter Kit Readme are very thorough, so
 you should follow those carefully. My personal setup lives in my
 [dotfiles
 project](https://github.com/gar3thjon3s/dotfiles/tree/master/.emacs.d),
@@ -126,7 +127,7 @@ which you can look at for inspiration for Clojure specific things. You
 will certainly want to add clojure-mode, and clojure-test-mode to your
 list of packages to install:
 
-```scheme
+```lisp
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -134,6 +135,10 @@ list of packages to install:
                       starter-kit-eshell
                       clojure-mode
                       clojure-test-mode))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 ```
                       
 Start emacs:
@@ -252,8 +257,7 @@ $ lein new command-line-args
 $ cd command-line-args
 ```
 
-Start up Emacs and `M-x cd` to the command-line-args folder. Open and
-edit your project.clj to look like this:
+Start up Emacs and edit your `project.clj` to look like this:
 
 ```clojure
 (defproject command-line-args "0.1.0-SNAPSHOT"
@@ -261,7 +265,7 @@ edit your project.clj to look like this:
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.4.0"]]
+  :dependencies [[org.clojure/clojure "1.4.0"]])
   :plugins [[lein-swank "1.4.4"]])
 ```
 
