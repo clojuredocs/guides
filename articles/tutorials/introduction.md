@@ -574,7 +574,7 @@ Getting values from data structures:
 ;; Same as vectors, but can't index.
 
 ;; Maps
-(def m {:a 1 :b 2}
+(def m {:a 1 :b 2})
 (get m :a)            ; ⇒ 1
 (m :a)                ; ⇒ 1       (same)
 (:a m)                ; ⇒ 1       (same!)
