@@ -20,6 +20,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [useful](https://clojars.org/useful)
 
+  * [Clojure Toolbox](http://www.clojure-toolbox.com/): a categorized directory of libraries and tools for Clojure
+  
   * [ClojureWerkz Support](http://github.com/clojurewerkz/support) ([at clojars](https://clojars.org/clojurewerkz/support))
 
 
