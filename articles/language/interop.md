@@ -472,7 +472,7 @@ Clojure compiler will generate an anonymous class for this `proxy` and at runtim
 a `proxy` call is the cost of instantiating this class (the class is not generated anew on every single call).
 
 A slightly more complex example where the generated class also implements `java.lang.Runnable` (runnable objects
-a commonly used with threads and `java.util.concurrent` classes) which defines one method, `#run`:
+are commonly used with threads and `java.util.concurrent` classes) which defines one method, `#run`:
 
 ``` clojure
 ;; extends java.lang.Object, implements java.lang.Runnable
@@ -533,7 +533,7 @@ has two versions, one for `Runnable` and one for `Callable`. They work very much
 slightly different results (`Callable` produces a value while `Runnable` always returns nil when
 executed).
 
-The exception we would get without the case is
+The exception we would get without the cast is
 
 ```
 CompilerException java.lang.IllegalArgumentException: More than one matching method found: submit, compiling:(NO_SOURCE_PATH:2)
