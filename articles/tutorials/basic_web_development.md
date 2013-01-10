@@ -157,6 +157,9 @@ Add the following extra dependencies to your project.clj's
 [org.xerial/sqlite-jdbc "3.7.2"]
 ```
 
+(You might also remove the "-SNAPSHOT" from the project's version
+string.)
+
 
 ## Add some styling
 
@@ -283,7 +286,6 @@ Create a src/my_webapp/views.clj file and make it look like:
             [clojure.string :as str]
             [hiccup.page :as hic-p]))
 
-
 (defn gen-page-head
   [title]
   [:head
@@ -375,11 +377,9 @@ Create a src/my_webapp/db.clj file and make it look like:
 (ns my-webapp.db
   (:require [clojure.java.jdbc :as sql]))
 
-
 (def db-spec {:classname "org.sqlite.JDBC"
               :subprotocol "sqlite"
               :subname "db/my-webapp.db"})
-
 
 (defn add-location-to-db
   [x y]
@@ -436,9 +436,9 @@ if you like:
     ({:y 9, :x 8})
 
 
-## Run the webapp
+## Run your webapp during development
 
-Run your webapp like so:
+You can run your webapp via lein:
 
     lein ring server
 
@@ -447,6 +447,58 @@ It should start up and also open a browser window for you pointed at
 browser window, run it like so:
 
     lein ring server-headless
+
+
+## Deploy your webapp
+
+To make your webapp suitable for deployment, make the following
+changes:
+
+
+### Changes in project.clj
+
+In your project.clj's defproject:
+
+  * add to `:dependencies`:
+
+    ```clojure
+    [ring/ring-jetty-adapter "x.y.z"] ; See clojars for current version.
+    ```
+
+  * and also add `:main my-webapp.handler`
+
+
+### Changes in handler.clj
+
+In src/my_webapp/handler.clj:
+
+  * in your `ns` macro:
+      * add `[ring.adapter.jetty :as jetty]` to the `:require`, and
+      * add `(:gen-class)` to the end
+
+  * and at the bottom, add the following `-main` function:
+
+    ~~~clojure
+    (defn -main
+      [& [port]]
+      (let [port (Integer. (or port
+                               (System/getenv "PORT")
+                               5000))]
+        (jetty/run-jetty #'app {:port  port
+                                :join? false})))
+    ~~~
+
+
+### Build and Run it
+
+Now create an uberjar of your webapp (via `lein uberjar`), copy it
+(target/my-webapp-0.1.0-standalone.jar) to wherever you like, and run
+it in the usual way:
+
+    java -jar my-webapp-0.1.0-standalone.jar 8080
+
+(or on whatever port number you wish).
+
 
 
 ## See Also
