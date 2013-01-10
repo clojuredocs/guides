@@ -503,9 +503,8 @@ it in the usual way:
 
 ## See Also
 
-  * For creating new Compojure-based projects with more batteries
-    included, have a look at [this augmented
-    Compojure-Template](https://github.com/yogthos/compojure-template).
+  * To get a head start with a more "batteries-included" project
+    template, see [Luminus](http://www.luminusweb.net/).
 
 
 ## Contributors
