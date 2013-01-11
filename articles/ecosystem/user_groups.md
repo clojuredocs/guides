@@ -46,6 +46,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Amsterdam Clojurians](http://ams-clj.github.com/), [@amsclj](http://twitter.com/cmsclj)
  * [Berlin Clojure User Group](http://www.meetup.com/Clojure-Berlin/), [@cljugb](http://twitter.com/cljugb)
  * [Bratislava Clojure User Group](http://groups.google.com/group/bratislava-clojure/)
+ * [Budapest Clojure User Group](http://www.meetup.com/Budapest-Clojure-User-Group/)
  * [Cambridge Clojurians](http://www.meetup.com/Cambridge-Clojurians/)
  * [Clojure Finland](https://groups.google.com/forum/#%21forum/clojure-finland)
  * [Cologne Clojure User Group](http://www.meetup.com/clojure-cologne/)
