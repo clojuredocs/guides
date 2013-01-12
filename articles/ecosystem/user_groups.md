@@ -73,3 +73,7 @@ TBD
  * [Melbourne Clojure User Group](http://www.meetup.com/clj-melb/)
  * [Sydney Clojure User Group](http://www.meetup.com/clj-syd/)
  * [Tel Aviv Clojure User Group](http://www.meetup.com/Clojure-Israel/)
+
+## Africa
+
+ * [Cape Town Clojure User Group](https://twitter.com/clj_ug_ct)
