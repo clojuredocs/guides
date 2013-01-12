@@ -60,6 +60,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [München Clojure User Group](http://www.meetup.com/clj-muc/), [@cljmuc](http://twitter.com/cljmuc)
  * [Stockholm Clojure User Group](http://groups.google.com/group/stockholm-clojure-user-group), [@sclojug](http://twitter.com/sclojug)
  * [Zürich](http://www.meetup.com/zh-clj-Zurich-Clojure-User-Group/)
+ * [Prague](http://www.meetup.com/Lambda-Meetup-Group/)
 
 ## South America
 
