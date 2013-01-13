@@ -9,6 +9,7 @@ Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
 Github](https://github.com/clojuredocs/cds).
 
+_**Note: You may want to take a look at [Clojure with Vim and foreplay.vim](/articles/tutorials/vim_foreplay.html) since it is more actively maintained than VimClojure.**_
 
 ## Overview
 
