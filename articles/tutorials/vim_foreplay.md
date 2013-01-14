@@ -22,7 +22,7 @@ If you or your friends and coworkers are uncomfortable with the name, just imagi
 
 ## What About VimClojure?
 
-Until recently (late 2012), VimClojure was the preeminent plugin for Clojure development in Vim. Since then, its developer, Meikel Brandmeyer, has [acknowledged](https://groups.google.com/forum/?fromgroups=#!topic/vimclojure/B-UU8qctd5A) that VimClojure development has slowed to a trickle and that foreplay is the future. That said, VimClojure is still a viable and excellent development evironment. A similar tutorial can be found [here](/articles/tutorials/vim.html).
+Until recently (late 2012), VimClojure was the preeminent plugin for Clojure development in Vim. Since then, its developer, Meikel Brandmeyer, has [acknowledged](https://groups.google.com/forum/?fromgroups=#!topic/vimclojure/B-UU8qctd5A) that VimClojure development has slowed to a trickle and that foreplay is the future. That said, VimClojure is still a viable and excellent development evironment.
 
 ## What Versions of Clojure and foreplay Does This Guide Cover?
 

@@ -42,10 +42,6 @@ A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 A brief introduction to Clojure development in Vim with foreplay.vim.
 
-### [VimClojure for Clojure Development](/articles/tutorials/vim.html)
-
-A brief introduction to VimClojure and its features.
-
 ### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
 A brief tutorial/walkthrough of building a small webapp using Ring,
@@ -228,7 +224,7 @@ This guide covers:
 
  * An overview of development tools
  * A brief intro to Emacs, nREPL, SLIME/Swank
- * A brief intro to VimClojure
+ * A brief intro to Vim with foreplay.vim
  * A brief intro to Counterclockwise (Eclipse plugin)
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
