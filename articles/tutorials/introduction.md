@@ -812,7 +812,7 @@ functions](#bread_and_butter_functions) section.
 
 ## Truthiness
 
-In "`(if <test> <then-this> <otherwise-this>)`" (and in `and`, `or`,
+In `(if <test> <then-this> <otherwise-this>)` (and in `and`, `or`,
 `cond`, etc. expressions), Clojure checks if the `<test>` evaluates to
 something that looks either true or false. Clojure takes a very simple
 approach here: `nil` and `false` are falsey; everything else is
@@ -910,7 +910,7 @@ the-answer (a symbol) → a var → 42 (a value).
 When Clojure sees "`the-answer`", it automatically looks up the var,
 then from there finds and returns the value 42.
 
-Recall that locals (discussed earlier) don't involve vars at all:
+Recall that [locals](#let_and_locals) don't involve vars at all:
 those symbols refer directly to their values.
 
 
