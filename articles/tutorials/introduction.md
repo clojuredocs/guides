@@ -812,7 +812,7 @@ functions](#bread_and_butter_functions) section.
 
 ## Truthiness
 
-In "`(if <test> <then-this> <otherwise-this>)`" (and in `and`, `or`,
+In `(if <test> <then-this> <otherwise-this>)` (and in `and`, `or`,
 `cond`, etc. expressions), Clojure checks if the `<test>` evaluates to
 something that looks either true or false. Clojure takes a very simple
 approach here: `nil` and `false` are falsey; everything else is
