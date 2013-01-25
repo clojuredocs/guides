@@ -140,7 +140,7 @@ Next add the following definition in the `command-line-args.core` namespace:
   {})
 ```
 
-_Tip: Use `ctrl-w s` (ctrl-w followed by the s key) to split the view into two windows before doing `gf`._
+_Tip: Use `ctrl-w f` (ctrl-w followed by the f key) to split the view into two windows opening the file under the cursor in a new split._
 
 Save the file, `:w`, and then switch back to `test/command_line_args/core_test.clj`. Now we can try requiring the test namespace again. This time we'll use `cpR` (that's with a big 'R'), which performs a `(require ... :reload-all)` on the current namespace. That should succeed, so we can run the tests with the command `:Eval (clojure.test/run-tests)` which will print out a test failure with something like this:
 
