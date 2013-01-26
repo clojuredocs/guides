@@ -44,6 +44,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Midje](https://clojars.org/midje): a more featureful test framework
 
+  * [cloverage](https://github.com/lshift/cloverage): a test-coverage tool (lein plug-in)
+
   * [expectations](https://github.com/jaycfields/expectations) ([at clojars](https://clojars.org/expectations)): a minimalist's testing framework
 
   * [test.generative](https://github.com/clojure/test.generative): generative testing, a la QuickCheck
