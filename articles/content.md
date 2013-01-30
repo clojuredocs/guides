@@ -12,7 +12,7 @@ and separates content into several groups:
 
  * [Tutorials](#tutorials)
  * [Core language guides](#clojure_language_guides)
- * [The Ecosystem](#ecosystem) (tools, libraries, community, books) guides
+ * [The Ecosystem](#the_ecosystem) (tools, libraries, community, books) guides
  * [Cookbooks](#cookbooks)
 
 
