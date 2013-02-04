@@ -114,6 +114,12 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ## HTTP
 
+### Client/Server
+
+  * [HTTP Kit](http://http-kit.org/) ([at
+    clojars](https://clojars.org/http-kit)): High-performance
+    event-driven HTTP client/server for Clojure.
+
 ### Client
 
   * [clj-http](https://github.com/dakrone/clj-http) ([at clojars](https://clojars.org/clj-http)): An idiomatic Clojure http client wrapping the apache client.
