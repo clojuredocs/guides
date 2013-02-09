@@ -60,6 +60,8 @@ libraries.
 
   * [The Clojure Web Stack and the CRUD Stack](http://brehaut.net/blog/2012/clojure_web_and_the_crud_stack)
 
+  * [A Brief Overview of the Clojure Web Stack](http://brehaut.net/blog/2011/ring_introduction)
+
 
 
 ## Contributors
