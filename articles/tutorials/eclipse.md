@@ -105,14 +105,14 @@ and navigate to the clj-http page.
 From there follow the link to Clojars and copy the following:
 
 ```clojure
-[clj-http "0.5.5"]
+[clj-http "0.6.4"]
 ```
 
 now we'll simply paste it under dependencies in our `project.clj`:
 
 ```clojure
 :dependencies [[org.clojure/clojure "1.4.0"]
-               [clj-http "0.5.5"]]
+               [clj-http "0.6.4"]]
 ```
 
 In the package explorer view on the left expand "Leiningen dependencies"
