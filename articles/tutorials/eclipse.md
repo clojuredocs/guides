@@ -37,13 +37,13 @@ Then select Leiningen->Leiningen project. Here you'll see the default Leiningen 
 And only thing you have to do is provide a project name. Give the project a name and hit the finish button.
 
 You should now see a new project in your Package Explorer view on the left. If you created a project called
-`clojure-test` then the project template will have a src folder which will contain the package folder named clojure_test.
+`myproject` then the project template will have a src folder which will contain the package folder named myproject.
 
-Since Java cannot use dashes in names, all the dashes in package folders for namespaces get converted to underscores.
+Note that since Java cannot use dashes in names, all the dashes in package folders for namespaces get converted to underscores.
 The package will contain a core.clj file, and its contents should look like the following:
 
 ```clojure
-(ns clojure-test.core)
+(ns myproject.core)
 
 (defn foo
   "I don't do a whole lot."
@@ -90,7 +90,7 @@ The library will show up under "Referenced Libraries" in Package Explorer.
 You will also see a `project.`clj` file in the root of the project. This file should look like the following:
 
 ```clojure
-(defproject clojure-test "0.1.0-SNAPSHOT"
+(defproject myproject "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -123,7 +123,7 @@ When we start a new instance of the REPL, the library will be available for use.
 In the core file we can now require the library in the namespace definition:
 
 ```clojure
-(ns clojure-test.core
+(ns myproject.core
   (:require [clj-http.client :as client]))
 ```
 
