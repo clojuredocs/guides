@@ -40,30 +40,30 @@ You should now see a new project in your Package Explorer view on the left. If y
 `clojure-test` then the project template will have a src folder which will contain the package folder named clojure_test.
 
 Since Java cannot use dashes in names, all the dashes in package folders for namespaces get converted to underscores.
-The pckage will contain a core.clj file, and its contents should look like the following:
+The package will contain a core.clj file, and its contents should look like the following:
 
 ```clojure
 (ns clojure-test.core)
 
-(defn -main
+(defn foo
   "I don't do a whole lot."
-  [& args]
-  (println "Hello, World!"))
+  [x]
+  (println x "Hello, World!"))
 ```
 
 Let's open it and then hit the run button. You should see a REPL pop up momentarily on the bottom of the IDE.
-If all went well, your project should be ready to work on. The code that's in the file will have already been
-loaded up in the REPL when we hit run, and we should now be able to call our -main function.
+If all went well, your project should be ready to work on (if it failed, see the [troubleshooting section](#troubleshooting)). The code that's in the file will have already been
+loaded up in the REPL when we hit run, and we should now be able to call our foo function.
 
-To do that, let's write the code which calls main below it:
+To do that, let's write the code which calls foo below it:
 
 ```clojure
-(-main)
+(foo "Test: ")
 ```
 
 Then navigate the cursor inside the call body and hit CTRL+ENTER on Linux/Windows or CMD+ENTER on OS X.
 You should see "Hello, World!" printed in the REPL view on the bottom. We can now change the behavior of the
-`-main` function and after reloadig it the new behavior will be available next time it'scalled.
+`foo` function and after reloading it the new behavior will be available next time it's called.
 
 It's also recommended to enable the "strict/paredit" mode under Preferences->Clojure->Editor section.
 This will allow the editor to keep track of balancing the parens for you.
@@ -134,3 +134,8 @@ and test using the client by typing
 ```
 
 and running it as we did earlier.
+
+
+## <a id="troubleshooting"></a>Troubleshooting
+
+If when you attempt to run your code for the first time, you are asked to select a way to run your project, rather than it just running, you can try right clicking on the root project folder and then selecting Leiningen->Reset Project Configuration.
