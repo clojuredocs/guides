@@ -136,6 +136,9 @@ and test using the client by typing
 and running it as we did earlier.
 
 
-## <a id="troubleshooting"></a>Troubleshooting
+## Troubleshooting
 
-If when you attempt to run your code for the first time, you are asked to select a way to run your project, rather than it just running, you can try right clicking on the root project folder and then selecting Leiningen->Reset Project Configuration.
+If when you attempt to run your code for the first time, you are asked
+to select a way to run your project, rather than it just running, you
+can try right clicking on the root project folder and then selecting
+Leiningen->Reset Project Configuration.
