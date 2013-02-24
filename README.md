@@ -101,7 +101,7 @@ Thank you!
 
 ### Toolchain
 
-[README-tools.md](cds/blob/master/README-tools.md) covers development
+[README-tools.md](https://github.com/clojuredocs/cds/blob/master/README-tools.md) covers development
 environment setup and how to run a local server.
 
 
