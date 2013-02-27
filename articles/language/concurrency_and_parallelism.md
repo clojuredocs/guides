@@ -24,7 +24,7 @@ This guide covers Clojure 1.4.
 
 ## Before You Read This Guide
 
-This is the most hardcore guide of the entire Clojure documentation
+This is one of the most hardcore guide of the entire Clojure documentation
 project. It describes concepts that are simple but may seem foreign at first.
 These concepts are some of the key points of Clojure
 design. Understanding them may take some time for folks without
@@ -389,6 +389,38 @@ available to the JVM to create and run all the threads. On a 4-8 GB machine with
 OS settings you can expect up to a couple of thousand I/O-bound threads to work without running
 the system out of kernel resources.
 
+#### Using Custom Executors With Agents
+
+Agents can be used (and abused) for arbitrary code execution in a thread pool. Because the default
+thread pool Clojure maintains will not be a good fit for all use cases, Clojure 1.5 introduced
+a function that lets you control what thread pool (executor) is used by `clojure.core/send`:
+`clojure.core/set-agent-send-executor!`.
+
+``` clojure
+(import java.util.concurrent.Executors)
+
+(set-agent-send-executor! (Executors/newFixedThreadPool 32))
+;; clojure.core/send now will use the fixed size thread pool with 32 threads
+```
+
+The default thread pool size is `number of available CPU cores + 2`.
+
+`clojure.core/set-agent-send-off-executor!` is a similar function that controls what
+thread pool `clojure.core/send-off` will use.
+
+Finally, another new function in 1.5 is `clojure.core/send-via` which is like `` but lets you specify
+an executor to be used on a case-by-case basis:
+
+``` clojure
+(import java.util.concurrent.Executors)
+
+(def custom-pool (Executors/newFixedThreadPool 32))
+;; just like clojure.core/send but will use custom-pool instead
+;; of an internally maintained one
+(send-via custom-pool stream-agent inc)
+```
+
+
 ### Agents and Software Transactional Memory
 
 We haven't introduced refs and the concept of Software Transactional Memory yet. It will be covered later in this
@@ -465,9 +497,18 @@ idea, when the error mode is set to `:continue` you must also pass an error hand
 The handler function takes two arguments: an agent and the exception that occured.
 
 
+
 #### Summary and Use Cases
 
-*TBD*
+Agents are asynchronously updated references. They can be used for anything that does
+not require strict consistency for reads:
+
+ * Counters (e.g. message rates in event processing)
+ * Collections (e.g. recently processed events)
+
+Agents can be used for offloading arbitrary computations to a thread pool, however,
+only starting with Clojure 1.5 they can provide the same flexiblity as JDK executors
+(thread pools).
 
 
 ### Refs
