@@ -53,7 +53,15 @@ This guide covers:
 
  * How to parse XML in Clojure with zippers (`clojure.data.zip`)
 
+### [Growing a DSL with Clojure](/articles/tutorials/growing_a_dsl_with_clojure.html)
 
+How to create a simple DSL with Clojure.
+
+Includes introductions to:
+
+* Multimethods
+* Hierarchies
+* Code as data
 
 ## Clojure Language Guides
 
