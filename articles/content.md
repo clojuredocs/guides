@@ -202,22 +202,6 @@ This guide covers:
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
 
-
-### [Data Processing (Overview)](/articles/ecosystem/data_processing.html) (TBD)
-
-This guide covers:
-
- * An overview of why Clojure is an excellent choice for data processing
- * Popular tools and libraries in the area
-
-
-### [Web Development (Overview)](/articles/ecosystem/web_development.html) (TBD)
-
-This guide covers:
-
- * Popular tools and libraries in the area
-
-
 ### [Editors & IDEs](/articles/ecosystem/development_tools.html) (incomplete)
 
 This guide covers:
@@ -227,6 +211,13 @@ This guide covers:
  * A brief intro to Vim with foreplay.vim
  * A brief intro to Counterclockwise (Eclipse plugin)
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
+
+
+### [core.typed](/articles/ecosystem/core_typed/Home.html)
+
+ * What is Clojure core.typed
+ * core.typed documentation, tutorials, and guides.
+
 
 
 ### [Books](/articles/ecosystem/books.html)
@@ -281,10 +272,25 @@ This guide covers:
  * How to distribute plugins
 
 
-### [Generating Documentation](/articles/ecosystem/generating_documentation.html)
+### [Documentation Tools](/articles/ecosystem/generating_documentation.html)
 
-Tools for generating documentation from docstrings and other project
+ * Tools for generating documentation from docstrings and other project
 metadata.
+
+
+### [Data Processing (Overview)](/articles/ecosystem/data_processing.html) (TBD)
+
+This guide covers:
+
+ * An overview of why Clojure is an excellent choice for data processing
+ * Popular tools and libraries in the area
+
+
+### [Web Development (Overview)](/articles/ecosystem/web_development.html) (TBD)
+
+This guide covers:
+
+ * Popular tools and libraries in the area
 
 
 
@@ -294,9 +300,7 @@ This guide covers:
 
  * Clojure User Groups (CLJUGs) around the world
 
-### [core.typed Documentation Home](/articles/ecosystem/core_typed/Home.html)
 
-The home for core.typed documentation, tutorials, and guides.
 
 ## Cookbooks
 
