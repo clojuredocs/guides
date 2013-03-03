@@ -52,3 +52,5 @@ An overview of filters for occurrence typing.
 ## Documentation Contributors
 
 Ambrose Bonnaire-Sergeant (@ambrosebs)
+
+Copyright 2013, Ambrose Bonnaire-Sergeant
