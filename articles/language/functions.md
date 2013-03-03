@@ -174,8 +174,50 @@ A larger example:
     (comment Omitted for clarity)))
 ```
 
+## Runtime Polymorphism
 
+Somtimes you want to be able to use your function on multiple data types.
 
+``` clojure
+(defmulti one
+  (fn [x]))
+
+(defmethod one
+  java.lang.Long
+  [i]
+  (Integer.
+   (str i 1)))
+
+(defmethod one
+  java.lang.String
+  [s]
+  (str s 1))
+```
+
+Sometimes you want your function to handle different values from the passed argument(s).
+
+``` clojure
+(defmulti greet
+  (fn [x]
+    (:name x)))
+
+(defmethod greet
+  "Ryan"
+  [person]
+  (println "Hey there" 
+           (:name person)))
+
+(defmethod greet
+  "Justin"
+  [person]
+  (println "Hi"
+           (:name person)))
+
+(defmethod greet 
+  :default
+  [_]
+  (println "Who are you?"))
+```
 
 ## Destructuring of Function Arguments
 
@@ -412,7 +454,6 @@ Functions in Clojure can be private to their namespace.
 
 They are covered in more detail in the [Namespaces](/articles/language/namespaces.html) guide.
 
-
 ## Keywords as Functions
 
 In Clojure, keywords can be used as functions. They take a map or record and look themselves up in it:
@@ -494,3 +535,5 @@ code.
 ## Contributors
 
 Michael Klishin <michael@defprotocol.org>, 2012 (original author)
+
+Ryan Kelker 2013
