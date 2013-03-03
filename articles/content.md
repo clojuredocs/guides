@@ -53,7 +53,15 @@ This guide covers:
 
  * How to parse XML in Clojure with zippers (`clojure.data.zip`)
 
+### [Growing a DSL with Clojure](/articles/tutorials/growing_a_dsl_with_clojure.html)
 
+How to create a simple DSL with Clojure.
+
+Includes introductions to:
+
+* Multimethods
+* Hierarchies
+* Code as data
 
 ## Clojure Language Guides
 
@@ -213,7 +221,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [core.typed](/articles/ecosystem/core_typed/Home.html)
+### [core.typed](/articles/ecosystem/core_typed/home.html)
 
  * What is Clojure core.typed
  * core.typed documentation, tutorials, and guides.
