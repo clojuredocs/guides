@@ -159,7 +159,7 @@ or (typically) to sugared version, `ClassName/methodName`:
 ```
 
 
-### Chained Calls
+### Chained Calls With The Double Dot Form
 
 It is possible to chain method calls using the `..` special form:
 
