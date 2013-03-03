@@ -294,8 +294,9 @@ This guide covers:
 
  * Clojure User Groups (CLJUGs) around the world
 
+### [core.typed Documentation Home](/articles/ecosystem/core_typed/Home.html)
 
-
+The home for core.typed documentation, tutorials, and guides.
 
 ## Cookbooks
 
