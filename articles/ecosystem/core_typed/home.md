@@ -15,9 +15,9 @@ core.typed is an optional type system for Clojure.
 
 `(clojure.core.typed/cf t)` type checks the form `t`.
 
-See the [Quick Guide](Quick Guide.html).
+See the [Quick Guide](quick_guide.html).
 
-## [Rationale](Rationale.html)
+## [Rationale](rationale.html)
 
 Why core.typed exists, what can it do for you?
 
@@ -26,19 +26,19 @@ Why core.typed exists, what can it do for you?
 If you are new to core.typed, gradual type systems, or even types in general, and want to learn how
 core.typed can help verify your programs, start here.
 
-### [Introduction and Motivation](start/Introduction and Motivation.html)
+### [Introduction and Motivation](start/introduction_and_motivation.html)
 
 We discuss some theory and design goals of core.typed.
 
-### [Annotations](start/Annotations.html)
+### [Annotations](start/annotations.html)
 
 Where and how to annotate your code to help core.typed.
 
-### [Types](Types.html)
+### [Types](types.html)
 
 Syntax and descriptions of core.typed types.
 
-### [Filters](Filters.html)
+### [Filters](filters.html)
 
 An overview of filters for occurrence typing.
 
@@ -47,7 +47,7 @@ An overview of filters for occurrence typing.
 ### Java Classes, Arrays and Interop
 ### Multimethods, Datatypes and Protocols
 
-## [Limitations](Limitations.html) - Known issues
+## [Limitations](limitations.html) - Known issues
 
 ## Documentation Contributors
 
