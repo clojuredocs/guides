@@ -213,7 +213,7 @@ This guide covers:
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 
 
-### [core.typed](/articles/ecosystem/core_typed/Home.html)
+### [core.typed](/articles/ecosystem/core_typed/home.html)
 
  * What is Clojure core.typed
  * core.typed documentation, tutorials, and guides.
