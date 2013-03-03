@@ -1,3 +1,8 @@
+---
+title: "Rationale"
+layout: article
+---
+
 Static typing has well known benefits. For example, statically typed languages catch many common 
 programming errors at the earliest time possible: compile time.
 Types also serve as an excellent form of (machine checkable) documentation that
