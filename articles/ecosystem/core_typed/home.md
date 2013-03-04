@@ -42,10 +42,15 @@ Syntax and descriptions of core.typed types.
 
 An overview of filters for occurrence typing.
 
+### [Datatypes and Protocols](mm_protocol_datatypes.html)
+
+Typing definitions and usages of Clojure datatypes and protocols.
+
+### Multimethods
+
 ### Dotted Functions
 ### Polymorphism, Variance and F-Bounds
 ### Java Classes, Arrays and Interop
-### Multimethods, Datatypes and Protocols
 
 ## [Limitations](limitations.html) - Known issues
 
