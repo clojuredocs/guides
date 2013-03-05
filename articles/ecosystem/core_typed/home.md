@@ -59,6 +59,10 @@ Typing definitions and usages of Clojure datatypes and protocols.
 A fun diversion playing with holes.
 - Requires some knowledge of Haskell.
 
+## Examples
+
+### [IRC Bot](https://github.com/frenchy64/Parjer)
+
 ## [Limitations](limitations.html) - Known issues
 
 ## Documentation Contributors
