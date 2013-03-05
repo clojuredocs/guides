@@ -52,6 +52,13 @@ Typing definitions and usages of Clojure datatypes and protocols.
 ### Polymorphism, Variance and F-Bounds
 ### Java Classes, Arrays and Interop
 
+## Miscellaneous Tutorials
+
+### [Hole-Driven Development](https://github.com/clojure/core.typed/blob/master/src/test/clojure/clojure/core/typed/test/hole.clj)
+
+A fun diversion playing with holes.
+- Requires some knowledge of Haskell.
+
 ## [Limitations](limitations.html) - Known issues
 
 ## Documentation Contributors
