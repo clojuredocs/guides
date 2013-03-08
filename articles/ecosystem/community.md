@@ -63,8 +63,7 @@ Videos of talks about Clojure are often made available on [InfoQ](http://www.inf
 
 ## Podcasts About Clojure
 
- * [Mostly λazy…a Clojure podcast](http://mostlylazy.com/) is a first Clojure-specific podcast, created by Chas Emerick
- * [Relevance podcast](http://thinkrelevance.com/blog/tags/podcast) is a series of interviews with Relevance members, Clojure is mentioned in nearly every episode
+ * [Mostly λazy… a Clojure podcast](http://mostlylazy.com/) by Chas Emerick
 
 
 
