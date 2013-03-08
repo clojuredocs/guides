@@ -1,61 +1,5 @@
 # Usage
 
-## Types
-
-[[Types]]
-
-## Anonymous Functions
-
-`clojure.core.typed/fn>` defines a typed anonymous function.
-
-```clojure
-eg. (fn [a b] (+ a b))
-=>
-(fn> [[a :- Number]
-       [b :- Number]]
-   (+ a b))
-```
-
-## Annotating vars
-
-`clojure.core.typed/ann` annotates vars. Var does not have to exist at usage.
-
-If definition isn't type checked, it is assumed correct anyway for checking usages.
-
-All used vars must be annotated when type checking.
-
-## Annotating datatypes
-
-`clojure.core.typed/ann-datatype` annotates datatypes. 
-
-Takes a name and a vector of fieldname/type type entries.
-
-```clojure
-(ann-datatype Pair [[lhs :- Term]
-                    [rhs :- Term]])
-
-(deftype Pair [lhs rhs]
-  ...)
-```
-
-## Annotating Protocols
-
-`clojure.core.typed/ann-protocol` annotates protocols.
-
-Takes a name and a optionally a :methods keyword argument mapping
-method names to expected types.
-
-Protocol definitions should use `clojure.core.typed/defprotocol>` (identical syntax to `defprotocol`).
-
-```clojure
-(ann-protocol IUnifyWithLVar
-              :methods
-              {unify-with-lvar [Term LVar ISubstitutions -> (U ISubstitutions Fail)]})
-
-(defprotocol> IUnifyWithLVar
-  (unify-with-lvar [v u s]))
-```
-
 ## Type Aliases
 
 `clojure.core.typed/def-alias` defines a type alias.
@@ -72,17 +16,6 @@ Protocol definitions should use `clojure.core.typed/defprotocol>` (identical syn
                    IWalkTerm
                    IOccursCheckTerm
                    IBuildTerm))
-```
-
-## Ignoring code
-
-`clojure.core.typed/tc-ignore` tells the type checker to ignore any forms in the body.
-
-```clojure
-(tc-ignore
-(defprotocol IUnifyTerms
-  (unify-terms [u v s]))
-)
 ```
 
 ## Primitive Java Arrays 

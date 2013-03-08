@@ -38,7 +38,6 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 ## Documentation
 
-  * [Clojure Documentation Site](http://clojure-doc.org)
   * [Clojuredocs](http://clojuredocs.org/): Clojure API reference, with examples
   * [Clojure API cheatsheets with tooltips](http://jafingerhut.github.com/)
   * [Clojure Koans](http://clojurekoans.com/)
@@ -55,9 +54,15 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 ## Videos About Clojure
 
-Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure) and [Clojure blip.tv channel](http://blip.tv/clojure).
+Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure), and [Clojure YouTube channel](https://www.youtube.com/user/ClojureTV).
 
  * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
+
+
+
+## Podcasts About Clojure
+
+ * [Mostly λazy… a Clojure podcast](http://mostlylazy.com/) by Chas Emerick
 
 
 
@@ -77,8 +82,7 @@ library distributions (with the exception of contrib) are available at
   * [Clojure at Rosetta Code](http://rosettacode.org/wiki/Category:Clojure)
   * [Clojure Confluence wiki](http://dev.clojure.org/dashboard.action), which consists of three main areas:
     [Community](http://dev.clojure.org/display/community/Home),
-    [Design](http://dev.clojure.org/display/design/Home), and
-    [Documentation](http://dev.clojure.org/display/doc/Home).
+    [Design](http://dev.clojure.org/display/design/Home).
 
 
 ## Forums
