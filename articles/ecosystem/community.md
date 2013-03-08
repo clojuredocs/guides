@@ -55,9 +55,16 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 
 ## Videos About Clojure
 
-Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure) and [Clojure blip.tv channel](http://blip.tv/clojure).
+Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure), [Clojure blip.tv channel](http://blip.tv/clojure), and [Clojure YouTube channel](https://www.youtube.com/user/ClojureTV).
 
  * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
+
+
+
+## Podcasts About Clojure
+
+ * [Mostly λazy…a Clojure podcast](http://mostlylazy.com/) is a first Clojure-specific podcast, created by Chas Emerick
+ * [Relevance podcast](http://thinkrelevance.com/blog/tags/podcast) is a series of interviews with Relevance members, Clojure is mentioned in nearly every episode
 
 
 
