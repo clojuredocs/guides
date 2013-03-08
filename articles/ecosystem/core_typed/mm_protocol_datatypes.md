@@ -14,13 +14,15 @@ Protocol definitions should use `clojure.core.typed/defprotocol>` (identical syn
 
 ```clojure
 (ann-protocol IUnifyWithLVar
-              :methods
-              {unify-with-lvar [Term LVar ISubstitutions -> (U ISubstitutions Fail)]})
+              unify-with-lvar [Term LVar ISubstitutions -> (U ISubstitutions Fail)])
 
 (defprotocol> IUnifyWithLVar
   (unify-with-lvar [v u s]))
 ```
 
+Each protocol method argument (including the first) is explicit in the type annotation.
+Often, the the first argument (aka. `this`) will just be the protocol, but in some cases
+it is convenient to add more general types.
 
 ## Annotating datatypes
 
@@ -29,9 +31,13 @@ Protocol definitions should use `clojure.core.typed/defprotocol>` (identical syn
 Takes a name and a vector of fieldname/type type entries.
 
 ```clojure
-(ann-datatype Pair [[lhs :- Term]
-                    [rhs :- Term]])
+(ann-datatype Pair [lhs :- Term
+                    rhs :- Term])
 
 (deftype Pair [lhs rhs]
   ...)
 ```
+
+Each protocol extended in `deftype` must have an annotated expected type with `ann-protocol`.
+
+The types for Java interface method are inferred from their corresponding Java type.
