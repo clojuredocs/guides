@@ -20,6 +20,9 @@ Protocol definitions should use `clojure.core.typed/defprotocol>` (identical syn
   (unify-with-lvar [v u s]))
 ```
 
+Each protocol method argument (including the first) is explicit in the type annotation.
+Often, the the first argument (aka. `this`) will just be the protocol, but in some cases
+it is convenient to add more general types.
 
 ## Annotating datatypes
 
