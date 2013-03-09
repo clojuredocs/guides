@@ -90,15 +90,6 @@ implemented on top of `if`:
 
 
 
-### Security Considerations
-
-`*read-eval*` can be disabled via a property when starting the JVM:
-
-```
--Dclojure.read.eval=false
-```
-
-
 ## First Taste of Macros
 
 TBD
@@ -141,6 +132,13 @@ TBD
 TBD
 
 
+## Security Considerations
+
+`*read-eval*` can be disabled via a property when starting the JVM:
+
+```
+-Dclojure.read.eval=false
+```
 
 
 ## Contributors
