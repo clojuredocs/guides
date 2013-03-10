@@ -16,13 +16,13 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 (including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
 
 
-## Mailing Lists
+## Clojure Mailing Lists
 
   * [Clojure user mailing list](https://groups.google.com/forum/?fromgroups#!forum/clojure)
   * [Clojure development mailing list](https://groups.google.com/forum/?fromgroups#!forum/clojure-dev)
 
 
-## IRC
+## Clojure IRC Channels
 
 ### Main Channel
 
@@ -39,7 +39,7 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 ## Documentation
 
   * [Clojuredocs](http://clojuredocs.org/): Clojure API reference, with examples
-  * [Clojure API cheatsheets with tooltips](http://jafingerhut.github.com/)
+  * [Clojure API Cheatsheet](http://jafingerhut.github.com/cheatsheet-clj-1.3/cheatsheet-tiptip-no-cdocs-summary.html)
   * [Clojure Koans](http://clojurekoans.com/)
 
 ## Courses
@@ -57,6 +57,7 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure), and [Clojure YouTube channel](https://www.youtube.com/user/ClojureTV).
 
  * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
+ * [Clojure Koans Walkthroughs](http://www.youtube.com/playlist?list=PL1p6TgkbKXqyOwq6iSkce_EY5YWFHciHt)
 
 
 
@@ -66,7 +67,7 @@ Videos of talks about Clojure are often made available on [InfoQ](http://www.inf
 
 
 
-## Code repositories
+## Code Repositories
 
 Most folks host their projects at
 [GitHub](https://github.com/languages/Clojure), and most pure Clojure
