@@ -229,9 +229,13 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Carmine](https://github.com/ptaoussanis/carmine) ([at clojars](https://clojars.org/com.taoensso/carmine)): a great Clojure client for Redis
 
-### Neo4J
+### Graph Databases (Neo4J, Titan, etc)
 
   * [Neocons](https://clojureneo4j.info) ([at clojars](https://clojars.org/clojurewerkz/neocons)): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info)  with solid documentation
+
+  * [Titanium](http://titanium.clojurewerkz.org): a Clojure graph library built on top of Titan
+
+  * [Hermes](https://github.com/gameclosure/hermes): a Clojure wrapper for Titan
 
   * [Borneo](https://github.com/wagjo/borneo) ([at clojars](https://clojars.org/borneo))
 
