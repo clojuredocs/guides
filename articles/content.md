@@ -44,7 +44,7 @@ A brief introduction to Clojure development in Vim with foreplay.vim.
 
 ### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
-A brief tutorial/walkthrough of building a small webapp using Ring,
+A brief tutorial/walkthrough of building a small web app using Ring,
 Compojure, Hiccup, and SQLite.
 
 ### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
@@ -59,9 +59,11 @@ How to create a simple DSL with Clojure.
 
 Includes introductions to:
 
-* Multimethods
-* Hierarchies
-* Code as data
+ * Multimethods
+ * Hierarchies
+ * Metaprogramming and the "Code as data" philosophy
+
+
 
 ## Clojure Language Guides
 
@@ -79,7 +81,7 @@ This guide covers:
  * Other topics related to functions
 
 
-### [clojure.core Overview](/articles/language/core_overview.html) (In Progress)
+### [clojure.core Overview](/articles/language/core_overview.html) (incomplete)
 
 `clojure.core` is the core Clojure library.
 
@@ -154,7 +156,7 @@ This guide covers:
  * Other topics related to concurrency and runtime parallelism
 
 
-### [Macros and Metaprogramming](/articles/language/macros.html) (TBD)
+### [Macros and Metaprogramming](/articles/language/macros.html) (incomplete)
 
 This guide covers:
 
