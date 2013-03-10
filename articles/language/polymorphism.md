@@ -1,5 +1,5 @@
 ---
-title: "Polymorphism in Clojure: protocols and multimethods"
+title: "Polymorphism in Clojure: Protocols and Multimethods"
 layout: article
 ---
 

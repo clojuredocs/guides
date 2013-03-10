@@ -1,5 +1,5 @@
 ---
-title: "Collections and sequences in Clojure"
+title: "Collections and Sequences in Clojure"
 layout: article
 ---
 

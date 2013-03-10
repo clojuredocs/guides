@@ -1,5 +1,5 @@
 ---
-title: "Clojure namespaces and vars"
+title: "Clojure Namespaces and Vars"
 layout: article
 ---
 
