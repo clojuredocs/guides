@@ -22,7 +22,7 @@ This guide covers Clojure 1.5.
 
 
 
-## ## Before You Read This Guide
+## Before You Read This Guide
 
 This is one of the most hardcore guide of the entire Clojure documentation
 project. It describes concepts that are relatively unique to the Lisp family of languages
