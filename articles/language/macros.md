@@ -67,11 +67,12 @@ Expressions that can be evaluated are known as *forms*.
 ### Special Forms
 
 While Clojure reader can be extended in Clojure itself, some parts of what
-forms the syntax of Clojure is built into the compiler (and implemented in Java).
+forms the syntax of Clojure is built into the compiler.
 
 Such forms are called *special forms*. They are
 
  * . (the dot special form)
+ * .. (the double dot special form)
  * new
  * set!
  * def
@@ -87,6 +88,15 @@ Such forms are called *special forms*. They are
 
 Other forms are implemented with macros on top of special forms. For example, `and` is
 implemented on top of `if`:
+
+``` clojure
+user> (macroexpand '(and true false true))
+;; formatted for readability
+(let* [and__3822__auto__ true]
+  (if and__3822__auto__
+      (clojure.core/and false true)
+      and__3822__auto__))
+```
 
 
 
