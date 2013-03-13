@@ -386,11 +386,6 @@ The key difference between quote and syntax quote is that
 symbols within a syntax quoted form are automatically namespace-qualified.
 
 
-## Clojure Compilation Process
-
-TBD
-
-
 ## Security Considerations
 
 `clojure.core/read-string` *can execute arbitrary code* and *must not* be used
