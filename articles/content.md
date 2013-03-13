@@ -156,7 +156,7 @@ This guide covers:
  * Other topics related to concurrency and runtime parallelism
 
 
-### [Macros and Metaprogramming](/articles/language/macros.html) (incomplete)
+### [Macros and Metaprogramming](/articles/language/macros.html)
 
 This guide covers:
 
