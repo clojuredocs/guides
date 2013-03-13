@@ -1,13 +1,13 @@
 ---
-title: "Listing of All CDS Documents"
+title: "Table of Contents"
 layout: article
 ---
 
-[CDS](https://github.com/clojuredocs/cds) is a categorized and
-manifold collection of guides for the Clojure programming language and
+[The content](https://github.com/clojuredocs/cds) is a categorized and
+manifold collection of documentation guides for the Clojure programming language and
 its ecosystem.
 
-CDS recognizes that different Clojure users have different level of expertise
+We recognize that different Clojure users have different level of expertise
 and separates content into several groups:
 
  * [Tutorials](#tutorials)
@@ -16,7 +16,7 @@ and separates content into several groups:
  * [Cookbooks](#cookbooks)
 
 
-## Tutorials
+## Clojure Tutorials
 
 ### [Getting Started](/articles/tutorials/getting_started.html)
 
@@ -181,7 +181,7 @@ This guide includes definitons of various Clojure-related terminology.
 
 
 
-## The Ecosystem
+## The Clojure Ecosystem
 
 ### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
 
