@@ -20,7 +20,7 @@ Github](https://github.com/clojuredocs/cds).
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4.
+This guide covers Clojure 1.5.
 
 
 

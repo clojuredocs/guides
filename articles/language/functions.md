@@ -17,7 +17,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4.
+This guide covers Clojure 1.5.
 
 
 ## Overview
