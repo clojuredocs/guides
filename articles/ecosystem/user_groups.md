@@ -1,4 +1,4 @@
----
+-F--
 title: "Clojure User Groups"
 layout: article
 ---
@@ -51,6 +51,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Clojure Finland](https://groups.google.com/forum/#%21forum/clojure-finland)
  * [Cologne Clojure User Group](http://www.meetup.com/clojure-cologne/)
  * [Copenhagen Clojure User Group](http://www.ative.dk/om-ative/arrangementer.aspx)
+ * [Clojure Finland](https://groups.google.com/forum/?fromgroups#!forum/clojure-finland)
  * [French Riviera Clojure/Scala Meetup](http://www.meetup.com/riviera-scala-clojure), [@riviera_func](http://twitter.com/riviera_func)
  * [Hamburg Clojure User Group](http://www.meetup.com/ClojureUserGroupHH/)
  * [Italian Clojure User Group](http://groups.google.com/group/clojure-italy)
