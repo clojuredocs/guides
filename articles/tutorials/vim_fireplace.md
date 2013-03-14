@@ -1,5 +1,5 @@
 ---
-title: "Clojure with Vim and foreplay.vim"
+title: "Clojure with Vim and fireplace.vim"
 layout: article
 ---
 
@@ -11,37 +11,36 @@ Github](https://github.com/clojuredocs/cds).
 
 ## Overview
 
-[foreplay.vim](https://github.com/tpope/vim-foreplay) is a Vim plugin developed by [Tim Pope](http://tpo.pe/) which provides support for the "dynamic" aspects of Clojure development. Namely, connection to an [nREPL](https://github.com/clojure/tools.nrepl) server, code evaluation, code completion, and basically everything beyond syntax highlighting and indentation.
-
+[fireplace.vim](https://github.com/tpope/vim-fireplace) is a Vim plugin developed by [Tim Pope](http://tpo.pe/) which provides support for the "dynamic" aspects of Clojure development. Namely, connection to an [nREPL](https://github.com/clojure/tools.nrepl) server, code evaluation, code completion, and basically everything beyond syntax highlighting and indentation.
 
 This guide will cover installation and some basic usage within a typical Clojure project.
 
 ## About the Name
 
-If you or your friends and coworkers are uncomfortable with the name, just imagine your Canadian friend is confirming what the plugin's good for: "Fo' REPL, ay?"
+_fireplace was once called foreplay, but people weren't ready for that, so now it's fireplace_
 
 ## What About VimClojure?
 
-Until recently (late 2012), VimClojure was the preeminent plugin for Clojure development in Vim. Since then, its developer, Meikel Brandmeyer, has [acknowledged](https://groups.google.com/forum/?fromgroups=#!topic/vimclojure/B-UU8qctd5A) that VimClojure development has slowed to a trickle and that foreplay is the future. That said, VimClojure is still a viable and excellent development evironment.
+Until recently (late 2012), VimClojure was the preeminent plugin for Clojure development in Vim. Since then, its developer, Meikel Brandmeyer, has [acknowledged](https://groups.google.com/forum/?fromgroups=#!topic/vimclojure/B-UU8qctd5A) that VimClojure development has slowed to a trickle and that fireplace is the future. That said, VimClojure is still a viable and excellent development evironment.
 
-## What Versions of Clojure and foreplay Does This Guide Cover?
+## What Versions of Clojure and fireplace Does This Guide Cover?
 
-This guide covers Clojure 1.4 and the latest version of foreplay as of January 2013. It should work on most versions of both.
+This guide covers Clojure 1.4 and the latest version of fireplace as of January 2013. It should work on most versions of both.
 
 ## Essential References
 
-foreplay.vim lives on [github](https://github.com/tpope/vim-foreplay). That's the source of truth for development and where issues should be reported.
+fireplace.vim lives on [github](https://github.com/tpope/vim-fireplace). That's the source of truth for development and where issues should be reported.
 
 The [vimclojure mailing list](https://groups.google.com/forum/?fromgroups#!forum/vimclojure) remains the primary place to get help and ask questions related to Clojuring in Vim.
 
-Finally, don't forget the documentation that comes with the plugin itself. All features are documented there in standard Vim help format. Just `:help foreplay`, or [view it online](https://github.com/tpope/vim-foreplay/blob/master/doc/foreplay.txt). *I'm dead serious. READ THIS FILE.*
+Finally, don't forget the documentation that comes with the plugin itself. All features are documented there in standard Vim help format. Just `:help fireplace`, or [view it online](https://github.com/tpope/vim-fireplace/blob/master/doc/fireplace.txt). *I'm dead serious. READ THIS FILE.*
 
-## How foreplay.vim Works
-Before using foreplay, it's useful to have a basic understanding of how it works, especially when it comes to evaluating Clojure code. This will help avoid confusion and tears. foreplay itself is a collection of VimScript code running withing Vim. When it needs to evaluate some Clojure code (for example, you just required a namespace, or gave it a command to run the tests in a namespace) it sends commands to an nREPL server embedded in a Java Virtual Machine (JVM).
+## How fireplace.vim Works
+Before using fireplace, it's useful to have a basic understanding of how it works, especially when it comes to evaluating Clojure code. This will help avoid confusion and tears. fireplace itself is a collection of VimScript code running withing Vim. When it needs to evaluate some Clojure code (for example, you just required a namespace, or gave it a command to run the tests in a namespace) it sends commands to an nREPL server embedded in a Java Virtual Machine (JVM).
 
-_Note that because foreplay evaluates code synchronously, so if you evaluate a long-running command, **your entire Vim process will be blocked/frozen** until the operation completes. More on this below._
+_Note that because fireplace evaluates code synchronously, so if you evaluate a long-running command, **your entire Vim process will be blocked/frozen** until the operation completes. More on this below._
 
-Usually the task of running an nREPL server falls to Leiningen, but foreplay can connect to any nREPL server. See the [nREPL docs](https://github.com/clojure/tools.nrepl) for details.
+Usually the task of running an nREPL server falls to Leiningen, but fireplace can connect to any nREPL server. See the [nREPL docs](https://github.com/clojure/tools.nrepl) for details.
 
 ## Installing Vim
 TODO: Someone should write Vim installation instructions and basic usage here.
@@ -62,16 +61,16 @@ TODO: Ubuntu vim install instructions
 ### Windows
 TODO: Windows vim install instructions
 
-## Installing foreplay.vim
-Because foreplay.vim handles only the dynamic aspects of Clojure development, a separate plugin, [vim-clojure-static](https://github.com/guns/vim-clojure-static) (extracted from VimClojure and maintained by [Sung Pae](https://github.com/guns)) includes support for syntax highlighting, indentation, etc. You'll want to install both for a pleasant experience.
+## Installing fireplace.vim
+Because fireplace.vim handles only the dynamic aspects of Clojure development, a separate plugin, [vim-clojure-static](https://github.com/guns/vim-clojure-static) (extracted from VimClojure and maintained by [Sung Pae](https://github.com/guns)) includes support for syntax highlighting, indentation, etc. You'll want to install both for a pleasant experience.
 
-Installation is covered thoroughly in the [foreplay README](https://github.com/tpope/vim-foreplay/blob/master/README.markdown). Since it's likely to be most up-to-date, we'll defer to it for purposes of installation.
+Installation is covered thoroughly in the [fireplace README](https://github.com/tpope/vim-fireplace/blob/master/README.markdown). Since it's likely to be most up-to-date, we'll defer to it for purposes of installation.
 
 Once installed, there's really nothing to configure. Yay!
 
 ## Basics
 
-Let's go through the process of creating a simple project to demonstrate some of foreplay.vim's capabilities.
+Let's go through the process of creating a simple project to demonstrate some of fireplace.vim's capabilities.
 Because this author is a little lazy, we'll use the same example as the [emacs tutorial](/articles/tutorials/emacs.html). That is, a simple
 command-line argument parser.
 
@@ -110,7 +109,7 @@ nREPL server started on port 58197
 user=>
 ```
 
-_foreplay.vim will automatically figure out the nREPL port from the `target/repl-port` file written by Leiningen._
+_fireplace.vim will automatically figure out the nREPL port from the `target/repl-port` file written by Leiningen._
 
 Now we can start editing code (see [Editing](#editing) below for tips on effectively editing Clojure code in Vim).
 
@@ -127,9 +126,9 @@ Let's add a simple test. Execute `:e test/command_line_args/core_test.clj`, ente
               (parse-args args)))))
 ```
 
-To run the test, save the file, `:w`, and now we'll invoke our first foreplay.vim command, `cpr`. *All commands are run in normal mode, so bang on escape a few times first*. This performs a `(require ... :reload)` on the current buffer/namespace. Here we don't even get a chance to run the test. The code doesn't even compile because `command-line-args.core/parse-args` hasn't been defined yet. Let's fix that.
+To run the test, save the file, `:w`, and now we'll invoke our first fireplace.vim command, `cpr`. *All commands are run in normal mode, so bang on escape a few times first*. This performs a `(require ... :reload)` on the current buffer/namespace. Here we don't even get a chance to run the test. The code doesn't even compile because `command-line-args.core/parse-args` hasn't been defined yet. Let's fix that.
 
-*Note: Anytime foreplay reports an exception in a namespace, you can get the full stack trace by opening Vim's "location list" with `:lopen`. Hit enter on a Clojure stack frame to jump to the relevant source.*
+*Note: Anytime fireplace reports an exception in a namespace, you can get the full stack trace by opening Vim's "location list" with `:lopen`. Hit enter on a Clojure stack frame to jump to the relevant source.*
 
 The easiest way to get to the `command-line-args.core` namespace is to put your cursor on `command-line-args.core` in the `ns` declaration at the top of the file and hit `gf`. This key combination will open the file for the namespace under the cursor. *It even works for namespaces in jar files!*
 
@@ -156,12 +155,12 @@ Ran 1 tests containing 1 assertions.
 {:type :summary, :pass 0, :test 1, :error 0, :fail 1}
 ```
 
-Note that we know a few foreplay commands now:
+Note that we know a few fireplace commands now:
 
 * `gf` - Jumps to the namespace under the cursor
 * `cpr` and `cpR` - `(require :reload)` or `(require :reload-all)` the current namespace.
 * `:Eval (clojure code)` - Evaluate arbitrary Clojure code in the current namespace.
-* `:lopen` - Not really a foreplay command, but it opens the stacktrace for the last exception in the buffer.
+* `:lopen` - Not really a fireplace command, but it opens the stacktrace for the last exception in the buffer.
 
 Now we can fix some errors. Return to `command-line-args.core` and edit:
 
@@ -198,14 +197,14 @@ and the test passes.
 _Tip_: During testing you may get into the situation where you've deleted an old, possibly failing, test, yet it still runs because it's still in memory. Supposing the name of the test is `a-test`, you have a few options:
 
 * Hit `cqp` (or use `:Eval`) and run `(ns-unmap *ns* 'a-test)` to remove the test from the namespace.
-* Restart the Leiningen REPL. foreplay will re-initialize the connection the next time you run a command.
+* Restart the Leiningen REPL. fireplace will re-initialize the connection the next time you run a command.
 
-Wondering what `clojure.core/ns-unmap` does? In foreplay, use the command `:Doc ns-unmap` to see the docstring. If a symbol's under your cursor you can just hit `shift-K` to do the same thing.
+Wondering what `clojure.core/ns-unmap` does? In fireplace, use the command `:Doc ns-unmap` to see the docstring. If a symbol's under your cursor you can just hit `shift-K` to do the same thing.
 
 ## The Quasi-REPL and Evaluating Code
-Note we've learned another handy command, `cqp`, which opens foreplay's "quasi-repl" where you can execute Clojure code in the current namespace. Tab-completion and command history are supported there as you'd expect. If you need to do a little more editing or you'd like to edit and re-run a previous command, hit `cqc` to bring up a command-line window similar to what you'd get with `q:` in normal Vim.
+Note we've learned another handy command, `cqp`, which opens fireplace's "quasi-repl" where you can execute Clojure code in the current namespace. Tab-completion and command history are supported there as you'd expect. If you need to do a little more editing or you'd like to edit and re-run a previous command, hit `cqc` to bring up a command-line window similar to what you'd get with `q:` in normal Vim.
 
-Many times you'd like to just evaluate some snippet of code. foreplay.vim really shines here because it brings idiomatic Vim to bear on the problem. For example, it's common to have a snippet of test code you're playing with in a namespace, often in a `(comment )` at the end of the file. Let's say we have something like this:
+Many times you'd like to just evaluate some snippet of code. fireplace.vim really shines here because it brings idiomatic Vim to bear on the problem. For example, it's common to have a snippet of test code you're playing with in a namespace, often in a `(comment )` at the end of the file. Let's say we have something like this:
 
 ```clojure
 (comment
@@ -222,9 +221,9 @@ Say we wanted to evaluate the entire `(my-service-call ...)` expression. There a
 With all that it's easy to see we can evaluate the whole `my-service-call` expression, or any of the sub-expressions in the comment. Furthermore, if you're code's all referentially transparent and everything, the `cpX` family of commands have cousins of the form `c!X` which replace the expression with its result.
 
 ## The (non-quasi) REPL
-Unlike VimClojure, foreplay.vim doesn't have an integrated REPL. I (DR) miss it a little, but [REPL-y](https://github.com/trptcolin/reply), the REPL that ships with Leiningen is very nice and since it's separated from Vim there's much less chance of locking up Vim with a long-running or infinite operation.
+Unlike VimClojure, fireplace.vim doesn't have an integrated REPL. I (DR) miss it a little, but [REPL-y](https://github.com/trptcolin/reply), the REPL that ships with Leiningen is very nice and since it's separated from Vim there's much less chance of locking up Vim with a long-running or infinite operation.
 
-Keep in mind that the nREPL server (the lein REPL) and foreplay are both playing in the same JVM. foreplay can see changes you make in nREPL and vice versa. So you can make some changes, save and hit `cpr` to reload the namespace and switch over to the REPL and the changes will be there.
+Keep in mind that the nREPL server (the lein REPL) and fireplace are both playing in the same JVM. fireplace can see changes you make in nREPL and vice versa. So you can make some changes, save and hit `cpr` to reload the namespace and switch over to the REPL and the changes will be there.
 
 ## Editing
 This section includes some tips on basic Clojure code editing in Vim.
@@ -264,7 +263,7 @@ And so on. Getting these commands in muscle memory can really speed up working w
 _Tip: Vim has text objects for blocks enclosed in square brackets (vectors), quotes (strings), curly braces (maps, sets) etc. They're all invaluable. `:help text-objects` !!!_
 
 ## Code Completion
-Some code completion is available with foreplay. It is built using Vim's `omni-complete`
+Some code completion is available with fireplace. It is built using Vim's `omni-complete`
 system. When typing a symbol, hit `ctrl-x ctrl-o` to start omni-complete. A popup with a
 list of suggestions will appear. Use `ctrl-n` and `ctrl-p` to change the selection and hit
 enter to expand a selection into the buffer.
@@ -273,7 +272,7 @@ Note that Vim's built-in code completion, `ctrl-n` and `ctrl-p` in insert mode, 
 
 ## Getting Documentation
 
-foreplay has handy shortcuts for getting documentation for Clojure functions:
+fireplace has handy shortcuts for getting documentation for Clojure functions:
 
 * `shift-K`: Lookup the doc string for the symbol under the cursor. Works for Java classes as well.
 * `:Doc`: Lookup the doc string for a symbol entered in a prompt. Works for Java classes as well.

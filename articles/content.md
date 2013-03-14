@@ -38,9 +38,9 @@ A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workf
 
 A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
-### [foreplay.vim for Clojure Development](/articles/tutorials/vim_foreplay.html)
+### [fireplace.vim for Clojure Development](/articles/tutorials/vim_fireplace.html)
 
-A brief introduction to Clojure development in Vim with foreplay.vim.
+A brief introduction to Clojure development in Vim with fireplace.vim.
 
 ### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
@@ -218,7 +218,7 @@ This guide covers:
 
  * An overview of development tools
  * A brief intro to Emacs, nREPL, SLIME/Swank
- * A brief intro to Vim with foreplay.vim
+ * A brief intro to Vim with fireplace.vim
  * A brief intro to Counterclockwise (Eclipse plugin)
  * A brief intro to La Clojure (IntelliJ IDEA plugin)
 

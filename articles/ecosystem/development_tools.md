@@ -60,5 +60,5 @@ Two configuration recommendations for after you've installed LispIndent: In
 
 [Vim](http://www.vim.org/) is an efficient and full-featured text editor.
 
-See our [Vim tutorial](../tutorials/vim_foreplay.html) for more info.
+See our [Vim tutorial](../tutorials/vim_fireplace.html) for more info.
 
