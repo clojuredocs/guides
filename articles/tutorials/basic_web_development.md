@@ -19,7 +19,7 @@ Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
 Github](https://github.com/clojuredocs/cds).
 
-This guide uses Clojure 1.4, as well as current versions of the
+This guide uses Clojure 1.5, as well as current versions of the
 component libraries noted below.
 
 
@@ -32,7 +32,7 @@ little webapp:
   * Ring
   * Compojure
   * Hiccup
-  * SQLite
+  * H2
 
 
 
@@ -120,22 +120,11 @@ For more info, see:
 
 
 
-### SQLite
+### H2
 
-[SQLite](http://sqlite.org/) is a small, fast, and reliable SQL
-database program that uses a single flat file for storage and is
-serverless.
-
-> Note: for tighter integration with the underlying platform, you may
-> instead wish to use a Java-based embedded db such as [Apache
-> Derby](http://db.apache.org/derby/) or
-> [H2](http://www.h2database.com/html/main.html). In fact, this
-> tutorial may eventually be modified to use one of those instead.
-
-Make sure you've got sqlite installed. On Debian-based OS's,
-install like so:
-
-    sudo apt-get install sqlite3
+[H2](http://www.h2database.com/html/main.html) is a small and fast Java SQL
+database that could be embedded in your application or run in server
+mode. Single file is used for storage, also could be run fully in-memory.
 
 
 
@@ -148,13 +137,19 @@ lein new compojure my-webapp
 cd my-webapp
 ```
 
+Update the version of Clojure dependency to 1.5.1:
+
+```clojure
+[org.clojure/clojure "1.5.1"]
+```
+
 Add the following extra dependencies to your project.clj's
 :dependencies vector:
 
 ```clojure
-[hiccup "1.0.1"]
+[hiccup "1.0.2"]
 [org.clojure/java.jdbc "0.2.3"]
-[org.xerial/sqlite-jdbc "3.7.2"]
+[com.h2database/h2 "1.3.170"]
 ```
 
 (You might also remove the "-SNAPSHOT" from the project's version
@@ -191,29 +186,36 @@ h1 {
 
 ```bash
 mkdir db
-cd db
-sqlite3 my-webapp.db
+lein repl
 ```
 
-This will create a new my-webapp.db database file, and also put
-you at the `sqlite>` prompt. Create a table we'll use for our
-webapp, and add one record to start us off with:
+When in REPL, execute the following code to create a new `my-webapp.h2.db`
+database file in `db` subdirectory, create a table we'll use for our webapp,
+and add one record to start us off with:
 
+```clojure
+(require '[clojure.java.jdbc :as sql])
+(sql/with-connection
+    {:classname "org.h2.Driver"
+     :subprotocol "h2:file"
+     :subname "db/my-webapp"}
+
+    (sql/create-table :locations
+      [:id "bigint primary key auto_increment"]
+      [:x "integer"]
+      [:y "integer"])
+
+    (sql/insert-records :locations
+      {:x 8 :y 9})
+
+    (sql/with-query-results res
+      ["SELECT * FROM locations"]
+      (first res)))
+; ⇒ {:y 9, :x 8, :id 1}
 ```
-sqlite> create table locations (id integer primary key, x integer, y integer);
-sqlite> .tables
-locations
-sqlite> .schema locations
-CREATE TABLE locations (id integer primary key, x integer, y integer);
-sqlite> insert into locations (x, y) values (8, 9);
-sqlite> select * from locations;
-1|8|9
-```
 
-and hit ctrl-d to exit. Note that sqlite-specific commands start with
-a dot and don't end with a semicolon.
-
-`cd ..` back to the root of your project directory.
+and hit `ctrl-d` to exit. *(More details about `clojure.java.jdbc` would be
+provided in section about interactions with DB)*
 
 
 
@@ -377,9 +379,9 @@ Create a src/my_webapp/db.clj file and make it look like:
 (ns my-webapp.db
   (:require [clojure.java.jdbc :as sql]))
 
-(def db-spec {:classname "org.sqlite.JDBC"
-              :subprotocol "sqlite"
-              :subname "db/my-webapp.db"})
+(def db-spec {:classname "org.h2.Driver"
+              :subprotocol "h2:file"
+              :subname "db/my-webapp"})
 
 (defn add-location-to-db
   [x y]
