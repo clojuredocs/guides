@@ -137,19 +137,19 @@ lein new compojure my-webapp
 cd my-webapp
 ```
 
-Update the version of Clojure dependency to 1.5.1:
-
-```clojure
-[org.clojure/clojure "1.5.1"]
-```
-
 Add the following extra dependencies to your project.clj's
-:dependencies vector:
+`:dependencies` vector:
 
 ```clojure
 [hiccup "1.0.2"]
 [org.clojure/java.jdbc "0.2.3"]
 [com.h2database/h2 "1.3.170"]
+```
+
+Update the version of Clojure dependency to 1.5.1:
+
+```clojure
+[org.clojure/clojure "1.5.1"]
 ```
 
 (You might also remove the "-SNAPSHOT" from the project's version
@@ -185,37 +185,38 @@ h1 {
 ## Set up your database
 
 ```bash
-mkdir db
 lein repl
 ```
 
-When in REPL, execute the following code to create a new `my-webapp.h2.db`
-database file in `db` subdirectory, create a table we'll use for our webapp,
-and add one record to start us off with:
+When in REPL, execute the following code to create a new my-webapp.h2.db
+database file in db subdirectory of your project, create a table we'll use
+for our webapp, and add one record to start us off with:
 
 ```clojure
 (require '[clojure.java.jdbc :as sql])
 (sql/with-connection
-    {:classname "org.h2.Driver"
-     :subprotocol "h2:file"
-     :subname "db/my-webapp"}
+  {:classname "org.h2.Driver"
+   :subprotocol "h2:file"
+   :subname "db/my-webapp"}
 
-    (sql/create-table :locations
-      [:id "bigint primary key auto_increment"]
-      [:x "integer"]
-      [:y "integer"])
+  (sql/create-table :locations
+    [:id "bigint primary key auto_increment"]
+    [:x "integer"]
+    [:y "integer"])
 
-    (sql/insert-records :locations
-      {:x 8 :y 9})
+  (sql/insert-records :locations
+    {:x 8 :y 9})
 
-    (sql/with-query-results res
-      ["SELECT * FROM locations"]
-      (first res)))
+  (sql/with-query-results res
+    ["SELECT * FROM locations"]
+    (first res)))
 ; ⇒ {:y 9, :x 8, :id 1}
 ```
 
-and hit `ctrl-d` to exit. *(More details about `clojure.java.jdbc` would be
-provided in section about interactions with DB)*
+and hit `ctrl-d` to exit.
+
+(More details about `clojure.java.jdbc` would be provided in section about
+interaction with DB)
 
 
 
@@ -259,10 +260,10 @@ Make your handler.clj file look like this:
   (handler/site app-routes))
 ```
 
-Each of those expressions in `defroutes` like "(GET ...)" or "(POST
-...)" are so-called "routes". They each evaluate to a function that
+Each of those expressions in `defroutes` like `(GET ...)` or `(POST ...)` are
+so-called "routes". They each evaluate to a function that
 takes a ring request hashmap and returns a response hashmap. Your
-views/foo function's job is to return that response hashmap, but note
+`views/foo` function's job is to return that response hashmap, but note
 that Compojure is kind enough to make a suitable response map out of
 any html you return.
 
@@ -362,7 +363,7 @@ Here we've implemented each function used in handler.clj.
 
 Again, note that each of the functions with names ending in "-page"
 (the ones being called in handler.clj) is returning just a plain
-string consisting of html markup. In handler.clj's defroutes,
+string consisting of html markup. In handler.clj's `defroutes`,
 Compojure is helpfully taking care of placing that into a response
 hashmap for us.
 
@@ -409,13 +410,13 @@ Create a src/my_webapp/db.clj file and make it look like:
     results))
 ```
 
-Note that sql/with-query-results returns a seq of maps. Each map
+Note that `sql/with-query-results` returns a seq of maps. Each map
 entry's key is a column name (as a Clojure keyword), and its value is
 the value for that column.
 
 You'll also notice that we put results from db queries into a `doall`.
-This is because sql/with-query-results returns a lazy sequence, and we
-want to fully-realize it before leaving the sql/with-connection
+This is because `sql/with-query-results` returns a lazy sequence, and we
+want to fully-realize it before leaving the `sql/with-connection`
 expression.
 
 For more about how to use the the database functions, see the
