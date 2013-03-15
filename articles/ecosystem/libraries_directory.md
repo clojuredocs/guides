@@ -255,6 +255,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [clj-hector](https://github.com/pingles/clj-hector) ([at clojars](https://clojars.org/org.clojars.paul/clj-hector)): A simple Clojure client for Cassandra that wraps Hector
 
+  * [Alia](https://github.com/mpenet/alia) ([at clojars](https://clojars.org/cc.qbits/alia)): Cassandra CQL3 client for Clojure, [datastax/java-driver](https://github.com/datastax/java-driver) wrapper
+
 ### Amazon DynamoDB
 
   * [Rotary](https://github.com/weavejester/rotary) ([at clojars](https://clojars.org/rotary))
