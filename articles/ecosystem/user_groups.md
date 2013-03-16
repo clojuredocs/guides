@@ -49,9 +49,9 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Budapest Clojure User Group](http://www.meetup.com/Budapest-Clojure-User-Group/)
  * [Cambridge Clojurians](http://www.meetup.com/Cambridge-Clojurians/)
  * [Clojure Finland](https://groups.google.com/forum/#%21forum/clojure-finland)
+ * [Clojure Finland](https://groups.google.com/forum/?fromgroups#!forum/clojure-finland)
  * [Cologne Clojure User Group](http://www.meetup.com/clojure-cologne/)
  * [Copenhagen Clojure User Group](http://www.ative.dk/om-ative/arrangementer.aspx)
- * [Clojure Finland](https://groups.google.com/forum/?fromgroups#!forum/clojure-finland)
  * [French Riviera Clojure/Scala Meetup](http://www.meetup.com/riviera-scala-clojure), [@riviera_func](http://twitter.com/riviera_func)
  * [Hamburg Clojure User Group](http://www.meetup.com/ClojureUserGroupHH/)
  * [Italian Clojure User Group](http://groups.google.com/group/clojure-italy)
@@ -59,17 +59,17 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Lyon Clojure User Group](http://clojure-lyon.eventbrite.fr/)
  * [Manchester Clojure Dojo](http://manchester.clojuredojo.com/)
  * [München Clojure User Group](http://www.meetup.com/clj-muc/), [@cljmuc](http://twitter.com/cljmuc)
- * [Stockholm Clojure User Group](http://groups.google.com/group/stockholm-clojure-user-group), [@sclojug](http://twitter.com/sclojug)
- * [Zürich](http://www.meetup.com/zh-clj-Zurich-Clojure-User-Group/)
  * [Prague](http://www.meetup.com/Lambda-Meetup-Group/)
  * [Rotterdam/The Hague](http://www.meetup.com/ehrd-clj)
+ * [Stockholm Clojure User Group](http://groups.google.com/group/stockholm-clojure-user-group), [@sclojug](http://twitter.com/sclojug)
+ * [Zürich](http://www.meetup.com/zh-clj-Zurich-Clojure-User-Group/)
 
 ## South America
 
 TBD
 
 
-## Asia & Pacific
+## Middle East, Asia & Pacific
 
  * [Bangalore Clojure User Group](http://groups.google.com/group/bangalore-clj)
  * [Chinese Clojure User Group](https://groups.google.com/group/cn-clojure)
