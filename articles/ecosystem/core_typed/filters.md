@@ -24,8 +24,8 @@ core.typed collects more information than just types for each expression.
 A structure called a filter set is also inferred. A filter set is a collection
 of two filters:
 
-- a filter that is true is the expression is a true value, called the `then` filter
-- a filter that is true is the expression is a false value, called the `else` filter
+- a filter that is true if the expression is a true value, called the `then` filter
+- a filter that is true if the expression is a false value, called the `else` filter
 
 ### Trivial Filters
 
