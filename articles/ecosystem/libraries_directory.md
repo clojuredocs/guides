@@ -179,6 +179,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Validateur](http://clojurevalidations.info) ([at clojars](https://clojars.org/com.novemberain/validateur)): functional validations library inspired by Ruby's ActiveModel
 
   * [Metis](https://github.com/mylesmegyesi/metis): another validations library inspired by Ruby's ActiveModel
+  
+  * [Clj-Schema](https://github.com/runa-dev/clj-schema): Schemas for Clojure Data: validation and test data generators 
 
 
 ### URIs, URLs
