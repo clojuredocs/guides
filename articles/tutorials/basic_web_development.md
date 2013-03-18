@@ -19,7 +19,7 @@ Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
 Github](https://github.com/clojuredocs/cds).
 
-This guide uses Clojure 1.4, as well as current versions of the
+This guide uses Clojure 1.5, as well as current versions of the
 component libraries noted below.
 
 
@@ -32,7 +32,7 @@ little webapp:
   * Ring
   * Compojure
   * Hiccup
-  * SQLite
+  * H2
 
 
 
@@ -120,22 +120,14 @@ For more info, see:
 
 
 
-### SQLite
+### H2
 
-[SQLite](http://sqlite.org/) is a small, fast, and reliable SQL
-database program that uses a single flat file for storage and is
-serverless.
+[H2](http://www.h2database.com/html/main.html) is a small and fast Java SQL
+database that could be embedded in your application or run in server
+mode. Uses single file for storage, but also could be run as in-memory DB.
 
-> Note: for tighter integration with the underlying platform, you may
-> instead wish to use a Java-based embedded db such as [Apache
-> Derby](http://db.apache.org/derby/) or
-> [H2](http://www.h2database.com/html/main.html). In fact, this
-> tutorial may eventually be modified to use one of those instead.
-
-Make sure you've got sqlite installed. On Debian-based OS's,
-install like so:
-
-    sudo apt-get install sqlite3
+> Another similar Java-based embedded DB that could be used in your
+> application is [Apache Derby](http://db.apache.org/derby/).
 
 
 
@@ -149,12 +141,18 @@ cd my-webapp
 ```
 
 Add the following extra dependencies to your project.clj's
-:dependencies vector:
+`:dependencies` vector:
 
 ```clojure
-[hiccup "1.0.1"]
+[hiccup "1.0.2"]
 [org.clojure/java.jdbc "0.2.3"]
-[org.xerial/sqlite-jdbc "3.7.2"]
+[com.h2database/h2 "1.3.170"]
+```
+
+Update the version of Clojure dependency to 1.5.1:
+
+```clojure
+[org.clojure/clojure "1.5.1"]
 ```
 
 (You might also remove the "-SNAPSHOT" from the project's version
@@ -189,31 +187,39 @@ h1 {
 
 ## Set up your database
 
+A file with DB would be automatically created when you connect to it for the
+first time, so all necessary DB preparations could be done programmatically
+using the REPL (with help of `clojure.java.jdbc`):
+
 ```bash
-mkdir db
-cd db
-sqlite3 my-webapp.db
+lein repl
 ```
 
-This will create a new my-webapp.db database file, and also put
-you at the `sqlite>` prompt. Create a table we'll use for our
-webapp, and add one record to start us off with:
+Execute the following code to create a new my-webapp.h2.db database file in db
+subdirectory of your project, create a table we'll use for our webapp, and add
+one record to start us off with:
 
+```clojure
+(require '[clojure.java.jdbc :as sql])
+(sql/with-connection
+  {:classname "org.h2.Driver"
+   :subprotocol "h2:file"
+   :subname "db/my-webapp"}
+
+  (sql/create-table :locations
+    [:id "bigint primary key auto_increment"]
+    [:x "integer"]
+    [:y "integer"])
+
+  (sql/insert-records :locations
+    {:x 8 :y 9}))
 ```
-sqlite> create table locations (id integer primary key, x integer, y integer);
-sqlite> .tables
-locations
-sqlite> .schema locations
-CREATE TABLE locations (id integer primary key, x integer, y integer);
-sqlite> insert into locations (x, y) values (8, 9);
-sqlite> select * from locations;
-1|8|9
-```
 
-and hit ctrl-d to exit. Note that sqlite-specific commands start with
-a dot and don't end with a semicolon.
+and hit `ctrl-d` to exit.
 
-`cd ..` back to the root of your project directory.
+For more about how to use the database functions, see the
+[clojure.java.jdbc](https://github.com/clojure/java.jdbc) readme and
+docs.
 
 
 
@@ -257,10 +263,10 @@ Make your handler.clj file look like this:
   (handler/site app-routes))
 ```
 
-Each of those expressions in `defroutes` like "(GET ...)" or "(POST
-...)" are so-called "routes". They each evaluate to a function that
+Each of those expressions in `defroutes` like `(GET ...)` or `(POST ...)` are
+so-called "routes". They each evaluate to a function that
 takes a ring request hashmap and returns a response hashmap. Your
-views/foo function's job is to return that response hashmap, but note
+`views/foo` function's job is to return that response hashmap, but note
 that Compojure is kind enough to make a suitable response map out of
 any html you return.
 
@@ -360,7 +366,7 @@ Here we've implemented each function used in handler.clj.
 
 Again, note that each of the functions with names ending in "-page"
 (the ones being called in handler.clj) is returning just a plain
-string consisting of html markup. In handler.clj's defroutes,
+string consisting of html markup. In handler.clj's `defroutes`,
 Compojure is helpfully taking care of placing that into a response
 hashmap for us.
 
@@ -377,9 +383,9 @@ Create a src/my_webapp/db.clj file and make it look like:
 (ns my-webapp.db
   (:require [clojure.java.jdbc :as sql]))
 
-(def db-spec {:classname "org.sqlite.JDBC"
-              :subprotocol "sqlite"
-              :subname "db/my-webapp.db"})
+(def db-spec {:classname "org.h2.Driver"
+              :subprotocol "h2:file"
+              :subname "db/my-webapp"})
 
 (defn add-location-to-db
   [x y]
@@ -407,20 +413,16 @@ Create a src/my_webapp/db.clj file and make it look like:
     results))
 ```
 
-Note that sql/with-query-results returns a seq of maps. Each map
+Note that `sql/with-query-results` returns a seq of maps. Each map
 entry's key is a column name (as a Clojure keyword), and its value is
 the value for that column.
 
 You'll also notice that we put results from db queries into a `doall`.
-This is because sql/with-query-results returns a lazy sequence, and we
-want to fully-realize it before leaving the sql/with-connection
+This is because `sql/with-query-results` returns a lazy sequence, and we
+want to fully-realize it before leaving the `sql/with-connection`
 expression.
 
-For more about how to use the the database functions, see the
-[clojure.java.jdbc](https://github.com/clojure/java.jdbc) readme and
-docs.
-
-Of course, you can try out all these calls yourself in the repl,
+Of course, you can try out all these calls yourself in the REPL,
 if you like:
 
     ~/temp/my-webapp$ lein repl
@@ -510,3 +512,4 @@ it in the usual way:
 ## Contributors
 
 John Gabriele <jmg3000@gmail.com> (original author)
+Ivan Kryvoruchko <gildraug@gmail.com>
