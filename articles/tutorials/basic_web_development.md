@@ -512,3 +512,4 @@ it in the usual way:
 ## Contributors
 
 John Gabriele <jmg3000@gmail.com> (original author)
+Ivan Kryvoruchko <gildraug@gmail.com>
