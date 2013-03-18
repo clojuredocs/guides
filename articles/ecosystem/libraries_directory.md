@@ -147,8 +147,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Compojure](https://github.com/weavejester/compojure) ([at clojars](https://clojars.org/compojure)):
     concise routing library for Ring
 
-  * [lib-noir](https://github.com/noir-clojure/lib-noir) ([at clojars](https://clojars.org/lib-noir)):
-    set of useful web development libraries
+  * [Pedestal](http://pedestal.io/) ([at clojars](https://clojars.org/search?q=pedestal)):
+    an open source tool set for building web applications in Clojure
 
   * [Luminus](http://www.luminusweb.net/): lein template for creating batteries-included
     web applications using Ring, Compojure, lib-noir, and other libraries.
