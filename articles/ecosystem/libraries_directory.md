@@ -147,8 +147,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Compojure](https://github.com/weavejester/compojure) ([at clojars](https://clojars.org/compojure)):
     concise routing library for Ring
 
-  * [lib-noir](https://github.com/noir-clojure/lib-noir) ([at clojars](https://clojars.org/lib-noir)):
-    set of useful web development libraries
+  * [Pedestal](http://pedestal.io/) ([at clojars](https://clojars.org/search?q=pedestal)):
+    an open source tool set for building web applications in Clojure
 
   * [Luminus](http://www.luminusweb.net/): lein template for creating batteries-included
     web applications using Ring, Compojure, lib-noir, and other libraries.
@@ -179,6 +179,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
   * [Validateur](http://clojurevalidations.info) ([at clojars](https://clojars.org/com.novemberain/validateur)): functional validations library inspired by Ruby's ActiveModel
 
   * [Metis](https://github.com/mylesmegyesi/metis): another validations library inspired by Ruby's ActiveModel
+  
+  * [Clj-Schema](https://github.com/runa-dev/clj-schema) ([at clojars](https://clojars.org/org.clojars.runa/clj-schema)): Schemas for Clojure Data: validation and test data generators 
 
 
 ### URIs, URLs

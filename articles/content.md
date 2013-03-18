@@ -165,14 +165,14 @@ This guide covers:
  * Other topics related to metaprogramming
 
 
-### [Laziness](/articles/language/laziness.html) (TBD)
+### [Laziness and Lazy Sequences](/articles/language/laziness.html) (incomplete)
 
 This guide covers:
 
  * What are lazy sequences
- * Pitfalls with lazy sequences
  * How to create functions that produce lazy sequences
  * How to force evaluation
+ * Pitfalls with lazy sequences
 
 
 ### [Glossary](/articles/language/glossary.html)
