@@ -124,7 +124,10 @@ For more info, see:
 
 [H2](http://www.h2database.com/html/main.html) is a small and fast Java SQL
 database that could be embedded in your application or run in server
-mode. Single file is used for storage, also could be run fully in-memory.
+mode. Uses single file for storage, but also could be run as in-memory DB.
+
+> Another similar Java-based embedded DB that could be used in your
+> application is [Apache Derby](http://db.apache.org/derby/).
 
 
 
@@ -184,13 +187,17 @@ h1 {
 
 ## Set up your database
 
+A file with DB would be automatically created when you connect to it for the
+first time, so all necessary DB preparations could be done programmatically
+using the REPL (with help of `clojure.java.jdbc`):
+
 ```bash
 lein repl
 ```
 
-When in REPL, execute the following code to create a new my-webapp.h2.db
-database file in db subdirectory of your project, create a table we'll use
-for our webapp, and add one record to start us off with:
+Execute the following code to create a new my-webapp.h2.db database file in db
+subdirectory of your project, create a table we'll use for our webapp, and add
+one record to start us off with:
 
 ```clojure
 (require '[clojure.java.jdbc :as sql])
@@ -205,18 +212,14 @@ for our webapp, and add one record to start us off with:
     [:y "integer"])
 
   (sql/insert-records :locations
-    {:x 8 :y 9})
-
-  (sql/with-query-results res
-    ["SELECT * FROM locations"]
-    (first res)))
-; ⇒ {:y 9, :x 8, :id 1}
+    {:x 8 :y 9}))
 ```
 
 and hit `ctrl-d` to exit.
 
-(More details about `clojure.java.jdbc` would be provided in section about
-interaction with DB)
+For more about how to use the database functions, see the
+[clojure.java.jdbc](https://github.com/clojure/java.jdbc) readme and
+docs.
 
 
 
@@ -419,11 +422,7 @@ This is because `sql/with-query-results` returns a lazy sequence, and we
 want to fully-realize it before leaving the `sql/with-connection`
 expression.
 
-For more about how to use the the database functions, see the
-[clojure.java.jdbc](https://github.com/clojure/java.jdbc) readme and
-docs.
-
-Of course, you can try out all these calls yourself in the repl,
+Of course, you can try out all these calls yourself in the REPL,
 if you like:
 
     ~/temp/my-webapp$ lein repl
