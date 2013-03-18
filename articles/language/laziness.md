@@ -40,6 +40,14 @@ When it is necessary to fully realize a lazy sequence, Clojure provides a way to
 *force evaluation* (force realization).
 
 
+## Benefits of Lazy Sequences
+
+Lazy sequences have two main benefits:
+
+ * They can be infinite
+ * Full realization of interim results can be avoided
+
+
 ## Producing Lazy Sequences
 
 Lazy sequences are produced by functions. Such functions either use the `clojure.core/lazy-seq` macro
@@ -158,10 +166,26 @@ For example:
 ```
 
 
-## Caveats of Laziness
+## Lazy Sequences Chunking
 
-TBD
+There are two fundamental strategies for implementing lazy sequences:
 
+ * Realize elements one-by-one
+ * Realize elements in groups (chunks, batches)
+
+In Clojure 1.1+, lazy sequences are *chunked* (realized in chunks).
+
+For example, in the following code
+
+``` clojure
+(take 10 (range 1 1000000000000))
+```
+
+one-by-one realization would realize one element 10 times. With chunked sequences,
+elements are realized ahead of time in chunks (32 elements at a time).
+
+This reduces the number of realizations and, for many common workloads, improves
+efficiency of lazy sequences.
 
 
 ## Contributors
