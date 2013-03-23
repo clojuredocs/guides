@@ -63,18 +63,29 @@ Let’s define a function `emit-bash-form` that takes a Clojure form and returns
   to its argument."
   (cond 
     (= (class a) java.lang.String) a
-    (= (class a) java.lang.Integer) (str a)
+    (= (class a) java.lang.Long) (str a)
     (= (class a) java.lang.Double) (str a)
     :else (throw (Exception. "Fell through"))))
 ```
 
-The `cond` expression handles cases for a `String`, `Integer`, or `Double` argument, or throws an exception.
+The `cond` expression handles cases for a `String`, `Long`, or `Double` argument, or throws an exception.
 
 ```clojure
 user=> (emit-bash-form 1)
 "1"
 user=> (emit-bash-form "a")
 "a"
+```
+
+Now why did we chose to use a `Long` rather than an `Integer`? Under the hood, [Clojure uses the `Long` datatype for numbers. ](http://dev.clojure.org/display/doc/Documentation+for+1.3+Numerics)
+
+> Although it supports all primitives for the purposes of Java interoperability, pure Clojure uses only long and double. Clojure will seamlessly promote ints to longs and floats to doubles as needed.
+
+Quick and easy way to test this out.
+
+```clojure
+user=> (class 7)
+java.lang.Long
 ```
 
 Now if we want to add some more dispatches, we just need to add a new clause to our `cond` expression.
@@ -182,7 +193,7 @@ So let’s add a clause for `clojure.lang.PersistentList`.
       "println" (str "echo " (second a)))
 
     (= (class a) java.lang.String) a
-    (= (class a) java.lang.Integer) (str a)
+    (= (class a) java.lang.Long) (str a)
     (= (class a) java.lang.Double) (str a)
     :else (throw (Exception. "Fell through"))))
 ```
@@ -223,7 +234,7 @@ Let’s define a multimethod called emit-bash. Here is the complete multimethod.
   form)
 
 (defmethod emit-bash
-  java.lang.Integer
+  java.lang.Long
   [form]
   (str form))
 
@@ -282,7 +293,7 @@ Let’s say I’m happy with the Bash implementation. I feel like starting a new
   [form]
   form)
 
-(defmethod emit-batch java.lang.Integer
+(defmethod emit-batch java.lang.Long
   [form]
   (str form))
 
@@ -370,7 +381,7 @@ Remember the dispatch value is now a vector, notated with square brackets. In pa
   [form]
   form)
 
-(defmethod emit [::common java.lang.Integer]
+(defmethod emit [::common java.lang.Long]
   [form]
   (str form))
 
