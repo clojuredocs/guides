@@ -225,8 +225,8 @@ Let’s define a multimethod called emit-bash. Here is the complete multimethod.
 (defmethod emit-bash
   clojure.lang.PersistentList
   [form]
-  (case (name (first a))
-    "println" (str "echo " (second a))))
+  (case (name (first form))
+    "println" (str "echo " (second form))))
 
 (defmethod emit-bash
   java.lang.String
@@ -285,8 +285,8 @@ Let’s say I’m happy with the Bash implementation. I feel like starting a new
 
 (defmethod emit-batch clojure.lang.PersistentList
   [form]
-  (case (name (first a))
-    "println" (str "ECHO " (second a))
+  (case (name (first form))
+    "println" (str "ECHO " (second form))
     nil))
 
 (defmethod emit-batch java.lang.String
@@ -395,14 +395,14 @@ This should look familiar. The only methods that needs to be specialized are tho
 ```clojure
 (defmethod emit [::bash clojure.lang.PersistentList]
   [form]
-  (case (name (first a))
-    "println" (str "echo " (second a))
+  (case (name (first form))
+    "println" (str "echo " (second form))
     nil))
 
 (defmethod emit [::batch clojure.lang.PersistentList]
   [form]
-  (case (name (first a))
-    "println" (str "ECHO " (second a))
+  (case (name (first form))
+    "println" (str "ECHO " (second form))
     nil))
 ```
 
