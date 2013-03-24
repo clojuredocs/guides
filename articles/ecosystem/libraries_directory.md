@@ -161,6 +161,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 ### HTML Generation
 
   * [hiccup](https://clojars.org/hiccup): Generates HTML from Clojure data structures.
+  
+  * [Stencil](https://github.com/davidsantiago/stencil): Implements the Mustache templating language.
 
   * [markdown-clj](https://clojars.org/markdown-clj): Clojure based Markdown parsers for both Clojure and ClojureScript.
 
