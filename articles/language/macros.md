@@ -99,15 +99,20 @@ Such forms are called *special forms*. They are
  * new
  * set!
  * def
- * if
- * do
- * let
- * quote
  * var
  * fn
+ * if
+ * case
+ * do
+ * let (technically, `let*`)
+ * import
+ * letfn
+ * quote
  * loop, recur
- * throw, try, catch
- * monitor-enter
+ * throw, try, catch, finally
+ * deftype
+ * reify
+ * monitor-enter, monitor-exit
 
 Other forms are implemented with macros on top of special forms. For example, `and` is
 implemented on top of `if`:
