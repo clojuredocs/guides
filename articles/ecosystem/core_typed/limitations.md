@@ -38,8 +38,7 @@ eg. map's type:
      `(All [c a b ...]
                 [[a b ... b -> c] (U nil (Seqable a)) (U nil (Seqable b)) ... b -> (Seqable c)]))`
 
-                Currently core.typed does not support *any* checking of use or definition of
-                dotted functions, only syntax to define its type.
+We can't currently check the definitions of functions with dotted rest arguments.
 
 ## Rest Arguments
 

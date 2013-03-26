@@ -8,9 +8,9 @@ can help you verify your programs as correct, read on.
 
 ## "I use Clojure to avoid types!"
 
-Many of us move to Clojure as relief from Java and all its problems.
-Java's verbosity, redundant type annotations and "stupid" casts
-are often unfairly attributed to shortcomings of static types.
+Many programmers use Clojure as relief from popular typed languages such as Java or C#.
+Java's verbosity and redundant type annotations help make the move to Clojure feel liberating
+and enjoyable: so why go back to types?
 
 core.typed has a different story to tell:
 - type checking is optional
