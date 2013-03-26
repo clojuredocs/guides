@@ -168,7 +168,7 @@ To see what the macro expands to, we can use `clojure.core/macroexpand-1`:
 
 ``` clojure
 (macroexpand-1 '(unless (= 1 2) true false))
-;= (if false (do true false))
+;= (if false true false)
 ```
 
 This simplistic macro and the way we expanded it with `macroexpand-1`
