@@ -337,6 +337,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
  * [jclouds](http://www.jclouds.org/): unified APIs for dozens of cloud (IaaS) providers
 
+ * [Amazonica](https://github.com/mcohen01/amazonica): comprehensive Clojure client for the entire AWS API
+ 
  * [clj-ssh](https://github.com/hugoduncan/clj-ssh) ([at clojars](https://clojars.org/clj-ssh)): an SSH client
 
  * [ssh-transport](https://github.com/pallet/ssh-transport): executes commands over SSH
