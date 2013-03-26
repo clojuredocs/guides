@@ -239,7 +239,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Titanium](http://titanium.clojurewerkz.org): a Clojure graph library built on top of Titan
 
-  * [Hermes](https://github.com/gameclosure/hermes): a Clojure wrapper for Titan
+  * [Archimedes](https://github.com/zmaril/archimedes): a Clojure wrapper for Tinkerpop Blueprints
+
+  * [Ogre](https://github.com/zmaril/ogre): a Clojure library for querying Tinkerpop graphs
 
   * [Borneo](https://github.com/wagjo/borneo) ([at clojars](https://clojars.org/borneo))
 
