@@ -370,7 +370,7 @@ File I/O is covered by the JDK and commonly used via `clojure.java.io` functions
 
 Standard streams I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
-  * clojure.java.shell: Conveniently launch a sub-process providing
+  * clojure.java.shell (part of Clojure distribution): Conveniently launch a sub-process providing
     its stdin and collecting its stdout.
 
   * [conch](https://clojars.org/conch): for shelling out to external programs.
