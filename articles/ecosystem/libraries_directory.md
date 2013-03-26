@@ -344,6 +344,9 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ## Monitoring, metrics
 
+ * [metrics-clojure](https://github.com/sjl/metrics-clojure) ([at clojars](https://clojars.org/metrics-clojure)):
+   Clojure library on top of Yammer's Metrics
+
  * [clj-statsd](https://github.com/pyr/clj-statsd) ([at clojars](https://clojars.org/clj-statsd)): simple client library to interface with statsd
 
  * [pulse](https://github.com/heroku/pulse): Real-time Heroku operations dashboard
