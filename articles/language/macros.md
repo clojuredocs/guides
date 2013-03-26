@@ -229,7 +229,7 @@ of `(= 1 2)` (a list). We want `unless` to perform boolean evaluation on it,
 and that's what unquote (`~`) does as can be seen from macroexpansion:
 
 (macroexpand-1 '(unless (= 1 2) true false))
-;= (if false (do true false))
+;= (if false true false)
 
 Compare this with what the macro expands to when the unquote is removed:
 
