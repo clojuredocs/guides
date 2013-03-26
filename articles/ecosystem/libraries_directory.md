@@ -401,8 +401,9 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
   * [math.numeric-tower](https://github.com/clojure/math.numeric-tower): various utility math functions
 
-  * [math.combinatorics](https://github.com/clojure/math.combinatorics) common combinatorial functions
+  * [math.combinatorics](https://github.com/clojure/math.combinatorics): common combinatorial functions
 
+  * [core.matrix](https://github.com/mikera/matrix-api): matrix operations
 
 
 ## Email
