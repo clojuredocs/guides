@@ -353,7 +353,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
  * [pulse](https://github.com/heroku/pulse): Real-time Heroku operations dashboard
 
- * [riemann](https://github.com/aphyr/riemann) ([at clojars](https://clojars.org/riemann)): A network event stream processing system, in Clojure.
+ * [riemann](http://riemann.io) ([at clojars](https://clojars.org/riemann)): A network event stream processing system, in Clojure.
 
 
 ## I/O
