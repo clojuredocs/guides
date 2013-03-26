@@ -358,11 +358,12 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ## I/O
 
-### Files
+### Files, NIO, NIO2
 
 File I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
   * [fs](https://clojars.org/fs): utilities for working with the file system
+  * [nio](https://github.com/pjstadig/nio): Clojure library for working with for Java NIO classes
 
 
 ### Standard Streams, Subprocesses
