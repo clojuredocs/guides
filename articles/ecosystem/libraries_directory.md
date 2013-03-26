@@ -237,11 +237,14 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Neocons](https://clojureneo4j.info) ([at clojars](https://clojars.org/clojurewerkz/neocons)): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info)  with solid documentation
 
-  * [Titanium](http://titanium.clojurewerkz.org): a Clojure graph library built on top of Titan
+  * [Titanium](http://titanium.clojurewerkz.org) ([at clojars](https://clojars.org/clojurewerkz/titanium)):
+    a Clojure graph library built on top of Titan
 
-  * [Archimedes](https://github.com/zmaril/archimedes): a Clojure wrapper for Tinkerpop Blueprints
+  * [Archimedes](https://github.com/zmaril/archimedes) ([at clojars](https://clojars.org/zmaril/archimedes)):
+    a Clojure wrapper for Tinkerpop Blueprints
 
-  * [Ogre](https://github.com/zmaril/ogre): a Clojure library for querying Tinkerpop graphs
+  * [Ogre](https://github.com/zmaril/ogre) ([at clojars](https://clojars.org/zmaril/ogre)):
+    a Clojure library for querying Tinkerpop graphs
 
   * [Borneo](https://github.com/wagjo/borneo) ([at clojars](https://clojars.org/borneo))
 
