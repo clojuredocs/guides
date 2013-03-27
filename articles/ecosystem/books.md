@@ -95,6 +95,57 @@ To really appreciate it, however, you will need to have some real Clojure experi
 
 
 
+### Clojure Data Analysis Cookbook
+
+By Eric Rochester.
+
+#### Notes
+
+Covers multiple topics related to data analysis and data processing:
+
+ * Acquiring data
+ * Cleaning data
+ * Analyzing data
+ * Visualizing data
+ * Basic statistics
+ * Basic machine learning
+
+#### Where You Can Buy It
+
+ * From [Packt Publishing](http://www.packtpub.com/clojure-data-analysis-cookbook/book)
+
+
+
+### Clojure in Action, 2nd Ed
+
+By Amit Rathore.
+
+#### Notes
+
+Extended version of the first edition that covers Clojure 1.5, ClojureScript and Datomic.
+
+
+#### Where You Can Buy It
+
+ * From [Manning](http://www.manning.com/rathore2/), MEAP eBook (Kindle, ePub, PDF).
+
+
+
+### Clojure Made Simple
+
+By John Stevenson.
+
+#### Notes
+
+A small, beginner-oriented book for just a few bucks.
+
+#### Where You Can Buy It
+
+ * [ganxy.com](https://ganxy.com/i/77456/john-stevenson/clojure-made-simple)
+ * [Kindle version on Amazon](http://www.amazon.com/Clojure-Made-Simple-ebook/dp/B00BSY20HS)
+ * [Apple iBookStore](https://itunes.apple.com/us/book/clojure-made-simple/id618287958?mt=11)
+ * [Google Play](https://play.google.com/store/books/details/John_Stevenson_Clojure_Made_Simple?id=yqfBJYhvqJcC&feature=nav_result#?t=W251bGwsMSwxLDMsImJvb2steXFmQkpZaHZxSmNDIl0.)
+
 
 
 ### Practical Clojure
@@ -115,7 +166,7 @@ A good introductory book.
 
 
 
-### Clojure in Action
+### Clojure in Action, 1st Ed
 
 By Amit Rathore.
 
