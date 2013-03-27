@@ -237,9 +237,14 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [Neocons](https://clojureneo4j.info) ([at clojars](https://clojars.org/clojurewerkz/neocons)): Neocons is a feature rich idiomatic [Clojure client for the Neo4J REST API](http://clojureneo4j.info)  with solid documentation
 
-  * [Titanium](http://titanium.clojurewerkz.org): a Clojure graph library built on top of Titan
+  * [Titanium](http://titanium.clojurewerkz.org) ([at clojars](https://clojars.org/clojurewerkz/titanium)):
+    a Clojure graph library built on top of Titan
 
-  * [Hermes](https://github.com/gameclosure/hermes): a Clojure wrapper for Titan
+  * [Archimedes](https://github.com/zmaril/archimedes) ([at clojars](https://clojars.org/zmaril/archimedes)):
+    a Clojure wrapper for Tinkerpop Blueprints
+
+  * [Ogre](https://github.com/zmaril/ogre) ([at clojars](https://clojars.org/zmaril/ogre)):
+    a Clojure library for querying Tinkerpop graphs
 
   * [Borneo](https://github.com/wagjo/borneo) ([at clojars](https://clojars.org/borneo))
 
@@ -332,6 +337,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
  * [jclouds](http://www.jclouds.org/): unified APIs for dozens of cloud (IaaS) providers
 
+ * [Amazonica](https://github.com/mcohen01/amazonica): comprehensive Clojure client for the entire AWS API
+ 
  * [clj-ssh](https://github.com/hugoduncan/clj-ssh) ([at clojars](https://clojars.org/clj-ssh)): an SSH client
 
  * [ssh-transport](https://github.com/pallet/ssh-transport): executes commands over SSH
@@ -339,27 +346,31 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ## Monitoring, metrics
 
+ * [metrics-clojure](https://github.com/sjl/metrics-clojure) ([at clojars](https://clojars.org/metrics-clojure)):
+   Clojure library on top of Yammer's Metrics
+
  * [clj-statsd](https://github.com/pyr/clj-statsd) ([at clojars](https://clojars.org/clj-statsd)): simple client library to interface with statsd
 
  * [pulse](https://github.com/heroku/pulse): Real-time Heroku operations dashboard
 
- * [riemann](https://github.com/aphyr/riemann) ([at clojars](https://clojars.org/riemann)): A network event stream processing system, in Clojure.
+ * [riemann](http://riemann.io) ([at clojars](https://clojars.org/riemann)): A network event stream processing system, in Clojure.
 
 
 ## I/O
 
-### Files
+### Files, NIO, NIO2
 
 File I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
   * [fs](https://clojars.org/fs): utilities for working with the file system
+  * [nio](https://github.com/pjstadig/nio): Clojure library for working with for Java NIO classes
 
 
 ### Standard Streams, Subprocesses
 
 Standard streams I/O is covered by the JDK and commonly used via `clojure.java.io` functions.
 
-  * clojure.java.shell: Conveniently launch a sub-process providing
+  * clojure.java.shell (part of Clojure distribution): Conveniently launch a sub-process providing
     its stdin and collecting its stdout.
 
   * [conch](https://clojars.org/conch): for shelling out to external programs.
@@ -390,8 +401,9 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
 
   * [math.numeric-tower](https://github.com/clojure/math.numeric-tower): various utility math functions
 
-  * [math.combinatorics](https://github.com/clojure/math.combinatorics) common combinatorial functions
+  * [math.combinatorics](https://github.com/clojure/math.combinatorics): common combinatorial functions
 
+  * [core.matrix](https://github.com/mikera/matrix-api): matrix operations
 
 
 ## Email
