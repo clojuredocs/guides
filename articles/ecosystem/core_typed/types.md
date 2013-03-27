@@ -3,6 +3,111 @@ title: "core.typed Types"
 layout: article
 ---
 
+## Common types
+
+core.typed reuses Java and clojure.lang.* classes. The normal scoping rules apply in types,
+e.g., use `:import` to bring classes into scope.
+
+Note: `java.lang.*` classes are implicitly in scope in Clojure namespaces.
+
+### Numbers, Strings and other Java types
+
+core.typed follows the normal rules that apply to Clojure code.
+
+```clojure
+clojure.core.typed=> (cf 1 Long)
+java.lang.Long
+clojure.core.typed=> (cf 1.1 Double)
+java.lang.Double
+clojure.core.typed=> (cf "a" String)
+java.lang.String
+clojure.core.typed=> (cf \a Character)
+java.lang.Character
+```
+
+### Symbols and Keywords
+
+Symbols and Keywords are instances of their corresponding clojure.lang classes.
+
+```clojure
+clojure.core.typed=> (cf 'a clojure.lang.Symbol)
+clojure.lang.Symbol
+clojure.core.typed=> (cf :a clojure.lang.Keyword)
+clojure.lang.Keyword
+```
+
+### Seqables
+
+Seqables extend `(Seqable a)`, which is covariant in its argument.
+Types that extend `(Seqable a`) are capable of creating a sequence
+(aka. an `(ISeq a)`)  representation of itself.
+
+```clojure
+clojure.core.typed=> (cf {'a 2 'b 3} (Seqable (IMapEntry Symbol Number)))
+(clojure.lang.Seqable (clojure.lang.IMapEntry clojure.lang.Symbol java.lang.Number))
+clojure.core.typed=> (cf [1 2 3] (Seqable Number))
+(clojure.lang.Seqable java.lang.Number)
+clojure.core.typed=> (cf '#{a b c} (Seqable Symbol))
+```
+
+### Seqs
+
+Seqs extend `(IPersistentSeq a)`, which is covariant in its argument.
+
+```clojure
+clojure.core.typed=> (cf (seq [1 2]) (ISeq Number))
+(clojure.lang.ISeq java.lang.Number)
+```
+
+### Lists
+
+Lists extend `(IPersistentList a)`, which is covariant in its argument.
+
+```clojure
+clojure.core.typed=> (cf '(1 2) (IPersistentList Number))
+(clojure.lang.IPersistentList java.lang.Number)
+```
+
+### Vectors
+
+Vectors extend `(IPersistentVector a)`, which is covariant in its argument.
+
+```clojure
+clojure.core.typed=> (cf [1 2] (IPersistentVector Number))
+(clojure.lang.IPersistentVector java.lang.Number)
+```
+
+### Maps
+
+Maps extend `(IPersistentMap a b)`, which is covariant in both its arguments.
+
+```clojure
+clojure.core.typed=> (cf {'a 1 'b 3} (IPersistentMap Symbol Long))
+(clojure.lang.IPersistentMap clojure.lang.Symbol java.lang.Long)
+```
+
+### Sets
+
+Sets extend `(IPersistentSet a)`, which is covariant in its argument.
+
+```clojure
+clojure.core.typed=> (cf #{1 2 3} (IPersistentSet Number))
+(clojure.lang.IPersistentSet java.lang.Number)
+```
+
+### Atoms
+
+An Atom of type `(Atom w r)` can accept values of type `w` and provide values of type `r`.
+It is contravariant in `w` and covariant in `r`.
+
+Usually `w` and `r` are identical, so an alias `(clojure.core.typed/Atom1 wr)` is provided,
+which is equivalent to `(Atom wr wr)`.
+
+```clojure
+clojure.core.typed=> (cf (atom {}) (Atom1 (IPersistentMap Symbol Number)))
+(clojure.core.typed/Atom1 (clojure.lang.IPersistentMap clojure.lang.Symbol java.lang.Number))
+```
+
 ## Type Grammar
 
 A rough grammar for core.typed types.
