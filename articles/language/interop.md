@@ -542,7 +542,272 @@ CompilerException java.lang.IllegalArgumentException: More than one matching met
 
 ## gen-class and How to Implement Java Classes in Clojure
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+### Overview
+
+`gen-class` is a Clojure feature for implementing Java classes in Clojure. It is relatively
+rarely used compared to `proxy` and `reify` but is needed to implement executable classes
+(that `java` runner and IDEs can as program entry points).
+
+Unlike `proxy` and `reify`, `gen-class` defines named classes. They can be passed to Java
+APIs that expect class references. Classes defined with `gen-class` can extend
+base classes, implement any number of Java interfaces, define any number of constructors
+and define both instance and static methods.
+
+### AOT
+
+`gen-class` requires *ahead-of-time* (AOT) compilation. It means that
+before using the classes defined with `gen-class`, the Clojure
+compiler needs to produce `.class` files from `gen-class` definitions.
+
+### Class Definition With clojure.core/gen-class
+
+`clojure.core/gen-class` is a macro that uses a DSL for defining class
+methods, base class, implemented interfaces and so on.
+
+It takes a number of options:
+
+ * `:name` (a symbol): defines generated class name
+ * `:extends` (a symbol): name of the base class
+ * `:implements` (a collection): interfaces the class implements
+ * `:constructors` (a map): constructor signatures
+ * `:methods` (a collection): lists methods that will be implemented
+ * `:init` (symbol): defines a function that will be invoked with constructor arguments
+ * `:post-init` (symbol): defines a function that will be called with a constructed instance as its first argument
+ * `:state` (symbol): if supplied, a public final instance field with the given name will be created. Only makes sense when
+                      used with `:init`. State field value should be an atom or other ref type to allow state mutation.
+ * `:prefix` (string, default: `"-"`): methods will call functions named as `(str prefix method-name)`, e.g. `-getName` for `getName`.
+ * `:main` (boolean): if `true`, a public static main method will be generated for the class. It will delegate
+                      to a function named main with the prefix (`(str prefix "main")`), `-main` by default
+ * `:exposes`: TBD
+ * `:exposes-methods`: TBD
+ * `:factory`: TBD
+ * `:load-impl-ns`: TBD
+ * `:impl-ns`: TBD
+
+#### The :name Option
+
+TBD
+
+#### The :extends Option
+
+TBD
+
+#### The :implements Option
+
+TBD
+
+#### The :constructors Option
+
+TBD
+
+#### The :methods Option
+
+TBD
+
+#### The :init Option
+
+TBD
+
+#### The :post-init Option
+
+TBD
+
+#### The :state Option
+
+TBD
+
+#### The :prefix Option
+
+TBD
+
+#### The :main Option
+
+TBD
+
+#### The :exposes Option
+
+TBD
+
+#### The :exposes-methods Option
+
+TBD
+
+#### The :factory Option
+
+TBD
+
+#### The :load-impl-ns Option
+
+TBD
+
+#### The :impl-ns Option
+
+TBD
+
+
+
+### gen-class In The ns Macro
+
+`gen-class` can be used with existing namespaces by adding `(:gen-class)` to the
+`ns` macro. Here is a "hello, world" example command line app that uses `gen-class`
+to generate a class that JVM launcher (`java`) can run:
+
+``` clojure
+(ns genclassy.core
+  (:gen-class))
+
+(defn -main
+  [& args]
+  (println "Hello, World!"))
+```
+
+This will use the name of the namespace for class name and use the namespace for method
+implementation (see the `:impl-ns` option above).
+
+
+### Examples
+
+A medium size example taken from an open source library:
+
+``` clojure
+(ns clojurewerkz.quartzite.listeners.amqp.PublishingSchedulerListener
+  (:gen-class :implements   [org.quartz.SchedulerListener]
+              :init         init
+              :state        state
+              :constructors {[com.rabbitmq.client.Channel String String] []})
+  (:require [langohr.basic     :as lhb]
+            [clojure.data.json :as json])
+  (:use [clojurewerkz.quartzite.conversion])
+  (:import [org.quartz SchedulerListener SchedulerException Trigger TriggerKey JobDetail JobKey]
+           [com.rabbitmq.client Channel]
+           [java.util Date]
+           [clojurewerkz.quartzite.listeners.amqp PublishingSchedulerListener]))
+
+
+
+(defn publish
+  [^PublishingSchedulerListener this payload ^String type]
+  (let [{ :keys [channel exchange routing-key] } @(.state this)
+        payload (json/json-str payload)]
+    (lhb/publish channel exchange routing-key payload :type type)))
+
+
+(defn -init
+  [^Channel ch ^String exchange ^String routing-key]
+  [[] (atom { :channel ch :exchange exchange :routing-key routing-key })])
+
+
+(defmacro payloadless-publisher
+  [method-name message-type]
+  `(defn ~method-name
+     [this#]
+     (publish this# (json/json-str {}) ~message-type)))
+
+(payloadless-publisher -schedulerStarted       "quartz.scheduler.started")
+(payloadless-publisher -schedulerInStandbyMode "quartz.scheduler.standby")
+(payloadless-publisher -schedulingDataCleared  "quartz.scheduler.cleared")
+(payloadless-publisher -schedulerShuttingDown  "quartz.scheduler.shutdown")
+
+
+(defn -schedulerError
+  [this ^String msg ^SchedulerException cause]
+  (publish this (json/json-str { :message msg :cause (str cause) }) "quartz.scheduler.error"))
+
+
+(defn -jobScheduled
+  [this ^Trigger trigger]
+  (publish this (json/json-str { :group (-> trigger .getKey .getGroup) :key (-> trigger .getKey .getName) :description (.getDescription trigger) }) "quartz.scheduler.job-scheduled"))
+
+(defn -jobUnscheduled
+  [this ^TriggerKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.job-unscheduled"))
+
+(defn -triggerFinalized
+  [this ^Trigger trigger]
+  (publish this (json/json-str { :group (-> trigger .getKey .getGroup) :key (-> trigger .getKey .getName) :description (.getDescription trigger) }) "quartz.scheduler.trigger-finalized"))
+
+(defn -triggerPaused
+  [this ^TriggerKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.trigger-paused"))
+
+(defn -triggersPaused
+  [this ^String trigger-group]
+  (publish this (json/json-str { :group trigger-group }) "quartz.scheduler.triggers-paused"))
+
+(defn -triggerResumed
+  [this ^TriggerKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.trigger-resumed"))
+
+(defn -triggersResumed
+  [this ^String trigger-group]
+  (publish this (json/json-str { :group trigger-group }) "quartz.scheduler.triggers-resumed"))
+
+
+
+(defn -jobAdded
+  [this ^JobDetail detail]
+  (publish this (json/json-str { :job-detail (from-job-data (.getJobDataMap detail)) :description (.getDescription detail) }) "quartz.scheduler.job-added"))
+
+(defn -jobDeleted
+  [this ^JobKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.job-deleted"))
+
+(defn -jobPaused
+  [this ^JobKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.job-paused"))
+
+(defn -jobsPaused
+  [this ^String job-group]
+  (publish this (json/json-str { :group job-group }) "quartz.scheduler.jobs-paused"))
+
+(defn -jobResumed
+  [this ^JobKey key]
+  (publish this (json/json-str { :group (.getGroup key) :key (.getName key) }) "quartz.scheduler.job-resumed"))
+
+(defn -jobsResumed
+  [this ^String job-group]
+  (publish this (json/json-str { :group job-group }) "quartz.scheduler.jobs-resumed"))
+```
+
+### Inspecting Class Signatures
+
+When using `gen-class` for interoperability purposes, sometimes it is necessary to inspect the API
+of the class generated by `gen-class`.
+
+It can be inspected
+using [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html). Given the
+following Clojure namespace:
+
+``` clojure
+(ns genclassy.core
+  (:gen-class))
+
+(defn -main
+  [& args]
+  (println "Hello, World!"))
+```
+
+We can inspect the produced class like so:
+
+```
+# from target/classes, default .class files location used by Leiningen
+javap genclassy.core
+```
+
+will output
+
+``` java
+public class genclassy.core {
+  public static {};
+  public genclassy.core();
+  public java.lang.Object clone();
+  public int hashCode();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public static void main(java.lang.String[]);
+}
+```
+
 
 
 ## How To Extend Protocols to Java Classes

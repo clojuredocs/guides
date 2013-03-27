@@ -99,15 +99,20 @@ Such forms are called *special forms*. They are
  * new
  * set!
  * def
- * if
- * do
- * let
- * quote
  * var
  * fn
+ * if
+ * case
+ * do
+ * let (technically, `let*`)
+ * import
+ * letfn
+ * quote
  * loop, recur
- * throw, try, catch
- * monitor-enter
+ * throw, try, catch, finally
+ * deftype
+ * reify
+ * monitor-enter, monitor-exit
 
 Other forms are implemented with macros on top of special forms. For example, `and` is
 implemented on top of `if`:
@@ -163,7 +168,7 @@ To see what the macro expands to, we can use `clojure.core/macroexpand-1`:
 
 ``` clojure
 (macroexpand-1 '(unless (= 1 2) true false))
-;= (if false (do true false))
+;= (if false true false)
 ```
 
 This simplistic macro and the way we expanded it with `macroexpand-1`
@@ -224,7 +229,7 @@ of `(= 1 2)` (a list). We want `unless` to perform boolean evaluation on it,
 and that's what unquote (`~`) does as can be seen from macroexpansion:
 
 (macroexpand-1 '(unless (= 1 2) true false))
-;= (if false (do true false))
+;= (if false true false)
 
 Compare this with what the macro expands to when the unquote is removed:
 
