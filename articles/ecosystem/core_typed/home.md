@@ -32,11 +32,13 @@ We discuss some theory and design goals of core.typed.
 
 ### [Annotations](start/annotations.html)
 
-Where and how to annotate your code to help core.typed.
+Where and how to annotate your code to help core.typed check your code.
 
 ### [Types](types.html)
 
 Syntax and descriptions of core.typed types.
+
+### [Polymorphic Functions, Bounds and Higher-kinded Variables](poly_fn.html)
 
 ### [Filters](filters.html)
 
@@ -46,10 +48,11 @@ An overview of filters for occurrence typing.
 
 Typing definitions and usages of Clojure datatypes and protocols.
 
-### Multimethods
+### [Looping constructs](loops.html)
+
+core.typed provides several wrapper macros for common looping constructs.
 
 ### Dotted Functions
-### Polymorphism, Variance and F-Bounds
 ### Java Classes, Arrays and Interop
 
 ## Miscellaneous Tutorials
