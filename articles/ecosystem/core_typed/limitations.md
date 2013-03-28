@@ -67,8 +67,3 @@ positive propositions.
 Positive information infers just fine, like `(filter number? coll)`.
 The above idiom is useful when you are filtering something like a `(Seqable (U nil x))` and there is no
 predicate to test for `x`, so you can only test if something isn't `nil`.
-
-## Looping macros
-
-Looping macros like `for`, `dotimes`, and `doseq` are currently not supported, but
-are high priority for new features.
