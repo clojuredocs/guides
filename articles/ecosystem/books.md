@@ -133,14 +133,16 @@ Extended version of the first edition that covers Clojure 1.5, ClojureScript and
 
 ### Clojure Made Simple
 
-By John Stevenson.
+By [John Stevenson](https://twitter.com/jr0cket).
 
 #### Notes
 
-A small, beginner-oriented book for just a few bucks.
+A quick taste of Clojure for developers curious about the language.  Its aimed at the complete beginner who wants to give Clojure a quick try before making a big investment.  Its a short book in ebook only form and available for a few dollars.
 
 #### Where You Can Buy It
 
+ * [Official site](http://developerpress.com/en/clojure-made-simple-introduction-clojure)
+ * [Book support site](http://clojuremadesimple.co.uk/)
  * [ganxy.com](https://ganxy.com/i/77456/john-stevenson/clojure-made-simple)
  * [Kindle version on Amazon](http://www.amazon.com/Clojure-Made-Simple-ebook/dp/B00BSY20HS)
  * [Apple iBookStore](https://itunes.apple.com/us/book/clojure-made-simple/id618287958?mt=11)
