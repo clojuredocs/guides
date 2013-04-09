@@ -32,7 +32,7 @@ clojure.core.typed=> (cf abc)
 Use `clojure.core.typed/ann` to associate a static type with a var.
 
 ```clojure
-clojure.core.typed=> (ann abc Number)
+clojure.core.typed=> (cf (ann abc Number))
 [clojure.core.typed/abc java.lang.Number]
 clojure.core.typed=> (cf (def abc 1))
 clojure.lang.Var
@@ -51,10 +51,52 @@ would in the current namespace (aliases are recognised) to associate it with a s
 clojure.core.typed=> (cf clojure.core/*compile-path*)
 #<AssertionError java.lang.AssertionError: Assert failed: Untyped var reference: clojure.core/*compile-path*
 (contains? (clojure.core/deref *var-annotations*) nsym)>
-clojure.core.typed=> (ann clojure.core/*compile-path* String)
+clojure.core.typed=> (cf (ann clojure.core/*compile-path* String))
 [clojure.core/*compile-path* java.lang.String]
 clojure.core.typed=> (cf clojure.core/*compile-path*)
 java.lang.String
+```
+
+### Unchecked Vars
+
+We can instruct core.typed to ignore certain var definitions by adding `:nocheck` metadata
+to `ann` forms.
+
+```clojure
+(ns typed.nocheck
+  (:require [clojure.core.typed :refer [ann-nocheck ann check-ns]]))
+
+(ann ^:nocheck foo [Number -> Number])
+(defn foo [a]
+  'a)
+
+(ann bar [Number -> Number])
+(defn bar [b]
+  (+ 2 (foo b)))
+```
+
+### Var Warnings
+
+After type checking has been performed, core.typed warns about vars that have been assigned types
+but have no corresponding checked `def` form. The `def` must at least make a binding,
+so it would be a warning if the var was only `declare`d.
+
+```clojure
+(ns clojure.core.typed.test.nocheck
+  (:require [clojure.core.typed :refer [ann-nocheck ann check-ns]]))
+
+(ann ^:nocheck foo [Number -> Number])
+(defn foo [a]
+  'a)
+
+(ann bar [Number -> Number])
+(defn bar [b]
+  (+ 2 (foo b)))
+
+;(check-ns)
+; ...
+; WARNING: Var clojure.core.typed.test.var-usage/foo used without checking definition
+;=> nil
 ```
 
 ## Functions

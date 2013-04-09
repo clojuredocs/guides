@@ -9,7 +9,7 @@ layout: article
 
 Use `clojure.core.typed/ann` to assign types to vars
 
-eg. This call gives the var `my-fn` in the current namespace the type `[Any -> Any]` (a function of one argument).
+eg. Assign `my-fn` in the current namespace the type `[Any -> Any]` (a function of one argument).
 
 ```clojure
 (ann my-fn [Any -> Any])
@@ -19,6 +19,10 @@ eg. This call gives the var `my-fn` in the current namespace the type `[Any -> A
 
 Use `clojure.core.typed/check-ns` to type check the current namespace.
 This can be done at the REPL.
+
+Note: Global annotations like `ann` are only valid when found in a namespace currently being
+checked with `check-ns`, or wrapped in a `cf`. A raw `ann` in a REPL has *no effect*.
+Global annotations should be top-level forms or inside a (possibly nested) top-level `do`.
 
 ### All function arguments need to be annotated, or default to `Any`
 
