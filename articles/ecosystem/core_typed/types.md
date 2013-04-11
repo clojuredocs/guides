@@ -5,6 +5,137 @@ layout: article
 
 ## Common types
 
+### Any and Nothing
+
+Every type is a subtype to `Any`, written `x <: Any` for all types `x`. Equivalently, any place that `Any` is valid,
+any other type can be used. `Any` is also known as the "Top" type.
+
+Conversely, there are no types that are subtypes to `Nothing`. However for all types `x`
+it holds that `Nothing <: x`. Put another way, `Nothing` is a valid type to give use
+in positions expecting any other type. In practice, `Nothing` is not as useful as `Any`,
+and is usually used internally to detect dead code and other code properties.
+
+### Functions
+
+core.typed has a special function type, which is an *ordered intersection* of arities.
+It allows us to specify fine grained function invariants.
+
+Starting simply, 
+
+```clojure
+(Fn [Any -> Any])
+``` 
+
+is a function taking one argument of type `Any`. `[Any -> Any]`
+is an equivalent shorthand for single-arity function types.
+
+#### Multiple arities
+
+We can specify multiple arities:
+
+```clojure
+(Fn [Any -> Any]
+    [Any Any -> Any])
+``` 
+
+Here we can call a function of this type with either one or two arguments.
+In this case, the ordered intersection type acts as a simple overloading on arity.
+
+Finer invariants can be modelled by specifying multiple arities of the same arity:
+
+```clojure
+(Fn [Symbol -> Number]
+    [Number -> Symbol])
+```
+
+This function returns a `Number` if passed a `Symbol`, and returns a `Symbol` if passed a `Number`.
+
+The exact return type for a function application expression involving multiple arities
+is chosen by matching the actual types provided with each arities, top-to-bottom 
+(this explains why our functions are "ordered" intersections).
+In this case, each arity is disjoint.
+
+Specify overlapping arities hints at the power of ordered intersections.
+
+```clojure
+(Fn [Long -> Symbol]
+    [Number -> Keyword])
+```
+
+This contrived example always returns a `Symbol` for `Long` arguments.
+
+Beware, swapping the arities produces different results!
+
+```clojure
+(Fn [Number -> Keyword]
+    [Long -> Symbol])
+```
+
+The first arity always "wins" because `Number` is strictly more general than `Long`.
+Arities should be ordered from less-specific to more-specific.
+
+Finally, a common idiom is to provide a base arity, which has arguments at least as general
+as the ones above it.
+
+For example, we might `(Fn [Long -> Symbol] [Number -> Keyword])` want to handle the case where
+the argument is *either* a `Long` or a `Number`.
+We achieve this by defining a least-upper-bound with a union type.
+
+```clojure
+(Fn [Long -> Symbol]
+    [Number -> Keyword]
+    [(U Long Number) -> (U Symbol Keyword)])
+```
+
+Note the result type is sufficiently general to show the result type is either a `Symbol` or `Keyword`.
+
+#### Rest parameters
+
+Rest parameters are specified using a `*`.
+
+eg.
+
+```clojure
+(Fn [Any Number * -> Any])
+``` 
+
+is a function taking at least one parameter, and any number of parameters after it
+of type `Number`.
+
+#### Keyword parameters
+
+Keyword parameters are specified using `&` after the fixed domain.
+
+eg.
+
+```clojure
+(Fn [Any & {:a Number} -> Any])
+``` 
+
+is a function that takes a fixed parameter and an optional keyword argument `:a`, of 
+type `Number`.
+
+We can also specify mandatory keyword parameters:
+
+```clojure
+(Fn [Any & {} :mandatory {:a Number} -> Any])
+``` 
+
+is the same function, except the keyword argumetn `:a` now must be present when calling.
+
+We can express finer grained invariants by combining keyword types and ordered
+function intersection types:
+
+```clojure
+(Fn [Any & {} :mandatory {:a Number :b Number} -> Number]
+    [Any & {:a Number :b Number} -> Any])
+``` 
+
+This function type returns a `Number` if provided both `:a` and `:b` parameters,
+otherwise returns `Any` if some other combination of `:a` and `:b` is provided.
+
+### Java Classes
+
 core.typed reuses Java and clojure.lang.* classes. The normal scoping rules apply in types,
 e.g., use `:import` to bring classes into scope.
 
