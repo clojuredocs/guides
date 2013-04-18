@@ -385,7 +385,7 @@ function `keywordize`.
 
 First load and compile the buffer into the REPL process with `C-c
 C-k`. Change the namespace of the REPL buffer to the one of the file
-you're in with `C-c C-n`. Now switch to the REPL window with `C-x o`.
+you're in with `C-c M-n`. Now switch to the REPL window with `C-x o`.
 
 You now have access to the functions in this namespace that were
 defined when you compiled the file. Try it:
