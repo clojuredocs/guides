@@ -457,8 +457,10 @@ beginning (thanks to Mikael Sundberg for this suggestion):
     C-c C-k        Compile and load buffer
     C-x C-e        Evaluate sexp
     C-c M-o        Clear REPL buffer
+    C-c M-n        Change REPL's namespace to the one in buffer    
     M-.            Jump to definition
     M-p            Back through REPL history
+    M-n            Forward through REPL history    
     M-/            Auto-complete word
     q              Dismiss a temporary buffer that has appeared
     C-c C-d C-d    Show docs for function
