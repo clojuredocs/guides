@@ -58,6 +58,7 @@ Videos of talks about Clojure are often made available on [InfoQ](http://www.inf
 
  * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
  * [Clojure Koans Walkthroughs](http://www.youtube.com/playlist?list=PL1p6TgkbKXqyOwq6iSkce_EY5YWFHciHt)
+ * [Clojure Concurrency Tutorial](http://pluralsight.com/training/Courses/TableOfContents/clojure-concurrency-tutorial)
 
 
 
