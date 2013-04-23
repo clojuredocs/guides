@@ -449,20 +449,7 @@ buffer and re-run `nrepl-jack-in` to start another.
 
 ## Appendix ##
 
-Here are all the commands I have used that are not documented at the
-beginning (thanks to Mikael Sundberg for this suggestion):
-
-    C-c ,          Run tests
-    C-c '          View test failure messages
-    C-c C-k        Compile and load buffer
-    C-x C-e        Evaluate sexp
-    C-c M-o        Clear REPL buffer
-    M-.            Jump to definition
-    M-p            Back through REPL history
-    M-/            Auto-complete word
-    q              Dismiss a temporary buffer that has appeared
-    C-c C-d C-d    Show docs for function
-    C-x C-i        Fuzzy-find all symbols in buffer
+nREPL.el keyboard shortcuts can be found in [nREPL documentation](https://github.com/kingtim/nrepl.el#keyboard-shortcuts).
 
 ## Contributors
 
