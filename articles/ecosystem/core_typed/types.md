@@ -41,7 +41,7 @@ We can specify multiple arities:
 Here we can call a function of this type with either one or two arguments.
 In this case, the ordered intersection type acts as a simple overloading on arity.
 
-Finer invariants can be modelled by specifying multiple arities of the same arity:
+Finer invariants can be expressed by specifying multiple arities of the same arity:
 
 ```clojure
 (Fn [Symbol -> Number]
@@ -53,16 +53,18 @@ This function returns a `Number` if passed a `Symbol`, and returns a `Symbol` if
 The exact return type for a function application expression involving multiple arities
 is chosen by matching the actual types provided with each arities, top-to-bottom 
 (this explains why our functions are "ordered" intersections).
-In this case, each arity is disjoint.
+In this case, each arity is disjoint because no combination of arguments could
+potentially trigger both arities. More concretely, there is no type that is both
+a `Symbol` and a `Number`, so at most one arity triggers for any given arguments.
 
-Specify overlapping arities hints at the power of ordered intersections.
+Overlapping arities hints at the power of ordered intersections.
 
 ```clojure
 (Fn [Long -> Symbol]
     [Number -> Keyword])
 ```
 
-This contrived example always returns a `Symbol` for `Long` arguments.
+This type always returns a `Symbol` for `Long` arguments.
 
 Beware, swapping the arities produces different results!
 
@@ -72,14 +74,35 @@ Beware, swapping the arities produces different results!
 ```
 
 The first arity always "wins" because `Number` is strictly more general than `Long`.
-Arities should be ordered from less-specific to more-specific.
+Arities are usually ordered from more-specific parameters to less-specific parameters.
+
+What about arities that have partially overlapping parameters?
+Consider:
+
+```clojure
+(Fn [Long Any -> Keyword]
+    [Any Number -> Symbol])
+```
+
+Calling with `Long` `Long` arguments gives `Keyword`, and `Number` `Long` gives `Symbol`.
+
+Flipping the arities gives different results:
+
+```clojure
+(Fn [Any Number -> Symbol]
+    [Long Any -> Keyword])
+```
+
+Now `Long` `Long` gives `Symbol`, and `Number` `Long` gives `Symbol`.
+Partially overlapping arities can be tricky and can unexpectedly trigger earlier arities,
+so care must be taken here.
 
 Finally, a common idiom is to provide a base arity, which has arguments at least as general
 as the ones above it.
 
-For example, we might `(Fn [Long -> Symbol] [Number -> Keyword])` want to handle the case where
+For example, we might want our function of type `(Fn [Long -> Symbol] [Number -> Keyword])` to handle the case where
 the argument is *either* a `Long` or a `Number`.
-We achieve this by defining a least-upper-bound with a union type.
+We can express this by using a union (to express a least-upper-bound of `Long` and `Number`).
 
 ```clojure
 (Fn [Long -> Symbol]
@@ -171,7 +194,7 @@ clojure.lang.Keyword
 
 Seqables extend `(Seqable a)`, which is covariant in its argument.
 Types that extend `(Seqable a`) are capable of creating a sequence
-(aka. an `(ISeq a)`)  representation of itself.
+(aka. an `(ISeq a)`)  representation of itself via functions like `seq`.
 
 ```clojure
 clojure.core.typed=> (cf {'a 2 'b 3} (Seqable (IMapEntry Symbol Number)))
@@ -179,11 +202,12 @@ clojure.core.typed=> (cf {'a 2 'b 3} (Seqable (IMapEntry Symbol Number)))
 clojure.core.typed=> (cf [1 2 3] (Seqable Number))
 (clojure.lang.Seqable java.lang.Number)
 clojure.core.typed=> (cf '#{a b c} (Seqable Symbol))
+(clojure.lang.Seqable clojure.lang.Symbol)
 ```
 
 ### Seqs
 
-Seqs extend `(IPersistentSeq a)`, which is covariant in its argument.
+Seqs extend `(ISeq a)`, which is covariant in its argument.
 
 ```clojure
 clojure.core.typed=> (cf (seq [1 2]) (ISeq Number))
