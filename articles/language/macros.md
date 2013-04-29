@@ -81,7 +81,7 @@ languages) that are then evaluated:
  * Lists evaluate to invocations (calls) of functions and so on
  * Symbols are resolved to a var value
 
-Expressions that can be evaluated (invoked) are known as *forms*. Forms consist of:
+Expressions that can be evaluated (invoked) are known as *forms*. Forms are:
 
  * Functions
  * Macros
@@ -89,92 +89,44 @@ Expressions that can be evaluated (invoked) are known as *forms*. Forms consist 
 
 ### Special Forms
 
-The reader parses some forms in special ways that are not consistent
-with the rest of Clojure's syntax.
+While Clojure reader can be extended in Clojure itself, some parts of what
+forms the syntax of Clojure is built into the compiler.
 
-Such forms are called *special forms*. They consist of
+Such forms are called *special forms*. They are
 
  * . (the dot special form)
+ * .. (the double dot special form)
  * new
  * set!
  * def
  * var
- * fn* (`fn` without destructuring)
+ * fn
  * if
- * case* (internal implementation of `case`)
+ * case
  * do
- * let* (`let` without destructuring)
- * letfn* (`letfn` without destructuring)
- * clojure.core/import* (`import`)
+ * let (technically, `let*`)
+ * import
+ * letfn
  * quote
- * loop* (`loop` without destructuring)
- * recur
+ * loop, recur
  * throw, try, catch, finally
- * deftype* (internals of `deftype`)
- * reify* (internals of `reify`)
+ * deftype
+ * reify
  * monitor-enter, monitor-exit
 
-Only a handful of special forms are used directly in user code (like `do` and `if`), while others
-are used to build more user friendly interfaces (like using `deftype` over the special form `deftype*`).
+Other forms are implemented with macros on top of special forms. For example, `and` is
+implemented on top of `if`:
 
-Special forms are restrictive in their use and do not interact cleanly with several area of Clojure.
+``` clojure
+user> (macroexpand '(and true false true))
+;; formatted for readability
+(let* [and__3822__auto__ true]
+  (if and__3822__auto__
+      (clojure.core/and false true)
+      and__3822__auto__))
+```
 
- * Special forms must be a list with a special name as the first element.
 
-   A special name in a higher-order context is not a special form.
-
-   ```clojure
-   user=> do
-   CompilerException java.lang.RuntimeException: Unable to resolve symbol: do in this context, compiling:(NO_SOURCE_PATH:0:0) 
-   ```
-
-   Macros have a similar restriction, but notice: the macro's var is identified in the error while
-   special names have no meaning at all outside the first element of a list.
-
-   ```
-   user=> dosync
-   CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/dosync, compiling:(NO_SOURCE_PATH:0:0) 
-   ```
-
- * Special form names are not namespace-qualified.
-
-   Most special forms (all except `clojure.core/import*`) are not namespace
-   qualified. The reader must circumvent syntax quote's policy of namespace-qualifying
-   all symbols.
-
-   ```clojure
-   user=> `a
-   user/a
-   user=> `do
-   do
-   user=> `if
-   if
-   user=> `import*
-   user/import*
-   ```
-
- * Special forms conflict with local scope.
-  
-   Never use special names as local binding or global variable names.
-
-   ```clojure
-   user=> (let [do 1] do)
-   nil
-   ```
-
-   Ouch!
-
-   This includes destructuring:
-
-   ```clojure
-   user=> (let [{:keys [do]} {:do 1}] do)
-   nil
-   ```
-
-   Note: Be wary of maps with keyword keys with special names, they are more
-   likely to be destructured this way.
-
-Keep these special cases in mind as you work through the tutorial.
 
 ## First Taste of Macros
 
@@ -330,14 +282,13 @@ The unquote-splicing operator is replaced by the reader with a call to a core
 Clojure function, `clojure.core/unquote-splicing`.
 
 
-## Macro Hygiene and gensym
+## Macro Hygiene and gen-sym
 
 When writing a macro, there is a possibility that the macro will interact with
 vars or locals outside of it in unexpected ways, for example, by [shadowing](http://en.wikipedia.org/wiki/Variable_shadowing) them.
 Such macros are known as *unhygienic macros*.
 
-Clojure does not implement a full solution to hygienic macros but
-provides solutions to the biggest pitfalls of unhygienic macros by enforcing several restrictions:
+Clojure compiler does not allow unhygienic macros by enforcing several restrictions:
 
  * Symbols within a syntax quoted form are namespace-qualified
  * Unique symbol name generation (aka *gensyms*)
@@ -362,8 +313,6 @@ Macroexpansion demonstrates that the Clojure compiler makes the `b` symbol names
 (`user` is the default namespace in the Clojure REPL). This helps avoid var and local
 shadowing.
 
-Note: Special forms are not qualified. See section 'Special Forms' in this tutorial.
-
 ### Generated Symbols (gensyms)
 
 Automatic namespace generation is fine in some cases, but not every time. Sometimes
@@ -380,7 +329,7 @@ take an optional base string:
 ```
 
 There is a shortcut: if a symbol ends in `#` within a syntax quote form, it will be
-expanded by the compiler into a gensym (aka. an auto-gensym):
+expanded by the compiler into a generated symbol:
 
 ``` clojure
 (defmacro yes-no->boolean
@@ -393,15 +342,9 @@ expanded by the compiler into a gensym (aka. an auto-gensym):
 ;= (clojure.core/let [b__148__auto__ (clojure.core/= "yes" "yes")] b__148__auto__)
 ```
 
-The `b__148__auto__` name was generated by the compiler to make unwanted variable
-capture very unlikely in practice, and impossible if all bindings are named with auto-gensym.
+The `b__148__auto__` name was generated by the compiler and it is guaranteed to
+be unique within the scope.
 
-Theoretically, Clojure's approach to generating uncaptured gensyms (incrementing a global counter) can be circumvented
-via a mischievous macro or very bad luck.
-
-Tip: 
-Avoid code with `__` in local binding names. This ensures
-auto-gensyms are *never* captured in unwanted ways.
 
 ## Macroexpansions
 
@@ -470,5 +413,4 @@ structures. `clojure.edn` was introduced in Clojure 1.5.
 
 ## Contributors
 
-* Michael Klishin <michael@defprotocol.org>, 2013 (original author)
-* Ambrose Bonnaire-Sergeant <abonnairesergeant@gmail.com>, 2013
+Michael Klishin <michael@defprotocol.org>, 2013 (original author)
