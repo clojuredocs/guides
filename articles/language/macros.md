@@ -114,67 +114,8 @@ Such forms are called *special forms*. They consist of
  * reify* (internals of `reify`)
  * monitor-enter, monitor-exit
 
-Only a handful of special forms are used directly in user code (like `do` and `if`), while others
-are used to build more user friendly interfaces (like using `deftype` over the special form `deftype*`).
-
-Special forms are restrictive in their use and do not interact cleanly with several area of Clojure.
-
- * Special forms must be a list with a special name as the first element.
-
-   A special name in a higher-order context is not a special form.
-
-   ```clojure
-   user=> do
-   CompilerException java.lang.RuntimeException: Unable to resolve symbol: do in this context, compiling:(NO_SOURCE_PATH:0:0) 
-   ```
-
-   Macros have a similar restriction, but notice: the macro's var is identified in the error while
-   special names have no meaning at all outside the first element of a list.
-
-   ```
-   user=> dosync
-   CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/dosync, compiling:(NO_SOURCE_PATH:0:0) 
-   ```
-
- * Special form names are not namespace-qualified.
-
-   Most special forms (all except `clojure.core/import*`) are not namespace
-   qualified. The reader must circumvent syntax quote's policy of namespace-qualifying
-   all symbols.
-
-   ```clojure
-   user=> `a
-   user/a
-   user=> `do
-   do
-   user=> `if
-   if
-   user=> `import*
-   user/import*
-   ```
-
- * Special forms conflict with local scope.
-  
-   Never use special names as local binding or global variable names.
-
-   ```clojure
-   user=> (let [do 1] do)
-   nil
-   ```
-
-   Ouch!
-
-   This includes destructuring:
-
-   ```clojure
-   user=> (let [{:keys [do]} {:do 1}] do)
-   nil
-   ```
-
-   Note: Be wary of maps with keyword keys with special names, they are more
-   likely to be destructured this way.
-
-Keep these special cases in mind as you work through the tutorial.
+Some special forms are used directly in user code (like `do` and `if`), while others
+are only used to build more user friendly interfaces (like using `deftype` over the special form `deftype*`).
 
 ## First Taste of Macros
 
@@ -467,6 +408,67 @@ does not perform arbitrary code execution and is safer. `clojure.edn/read-string
 the [EDN format](https://github.com/edn-format/edn), a subset of Clojure syntax for data
 structures. `clojure.edn` was introduced in Clojure 1.5.
 
+
+## Special Forms in Detail
+
+Special forms are restrictive in their use and do not interact cleanly with several area of Clojure.
+
+ * Special forms must be a list with a special name as the first element.
+
+   A special name in a higher-order context is not a special form.
+
+   ```clojure
+   user=> do
+   CompilerException java.lang.RuntimeException: Unable to resolve symbol: do in this context, compiling:(NO_SOURCE_PATH:0:0) 
+   ```
+
+   Macros have a similar restriction, but notice: the macro's var is identified in the error while
+   special names have no meaning at all outside the first element of a list.
+
+   ```
+   user=> dosync
+   CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/dosync, compiling:(NO_SOURCE_PATH:0:0) 
+   ```
+
+ * Special form names are not namespace-qualified.
+
+   Most special forms (all except `clojure.core/import*`) are not namespace
+   qualified. The reader must circumvent syntax quote's policy of namespace-qualifying
+   all symbols.
+
+   ```clojure
+   user=> `a
+   user/a
+   user=> `do
+   do
+   user=> `if
+   if
+   user=> `import*
+   user/import*
+   ```
+
+ * Special forms conflict with local scope.
+  
+   Never use special names as local binding or global variable names.
+
+   ```clojure
+   user=> (let [do 1] do)
+   nil
+   ```
+
+   Ouch!
+
+   This includes destructuring:
+
+   ```clojure
+   user=> (let [{:keys [do]} {:do 1}] do)
+   nil
+   ```
+
+   Note: Be wary of maps with keyword keys with special names, they are more
+   likely to be destructured this way.
+
+Keep these special cases in mind as you work through the tutorial.
 
 ## Contributors
 
