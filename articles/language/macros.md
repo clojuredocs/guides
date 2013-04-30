@@ -303,7 +303,7 @@ Macroexpansion demonstrates that the Clojure compiler makes the `b` symbol names
 (`user` is the default namespace in the Clojure REPL). This helps avoid var and local
 shadowing.
 
-Note: Special forms are not qualified. See section 'Special Forms' in this tutorial.
+Note: Special forms are not necessarily qualified. See section 'Special Forms in Detail'.
 
 ### Generated Symbols (gensyms)
 
