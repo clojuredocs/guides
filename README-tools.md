@@ -24,16 +24,12 @@ by running the following in the CDS repository root:
 > run the gem-installed `jekyll` to view your local version of
 > the site.
 
-Then install Pygments via your OS-specific package installer, or else using `pip` (assuming you've installed pip):
-
-    pip install pygments
-
 
 ## How To Run A Development Server
 
-    ./bin/jekyll --server --auto
+    ./bin/jekyll serve --watch
 
-The server will be started at `localhost:4000`.
+The server will be started at [localhost:4000](http://localhost:4000).
 
 
 
@@ -41,4 +37,4 @@ The server will be started at `localhost:4000`.
 
 To regenerate the entire site, use
 
-      ./bin/jekyll
+      ./bin/jekyll build

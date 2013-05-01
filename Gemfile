@@ -1,7 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
-gem "jekyll"
-# gem "rdiscount"
+gem "jekyll", ">= 1.0.0.rc1"
 gem "redcarpet"
-gem "haml"
-gem "RedCloth"
