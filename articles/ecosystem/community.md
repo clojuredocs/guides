@@ -57,8 +57,9 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
 Videos of talks about Clojure are often made available on [InfoQ](http://www.infoq.com/clojure), and [Clojure YouTube channel](https://www.youtube.com/user/ClojureTV).
 
  * [Full Disclojure](http://vimeo.com/channels/fulldisclojure/videos) is a series of screencasts about Clojure
- * [Clojure Koans Walkthroughs](http://www.youtube.com/playlist?list=PL1p6TgkbKXqyOwq6iSkce_EY5YWFHciHt)
  * [Clojure Concurrency Tutorial](http://pluralsight.com/training/Courses/TableOfContents/clojure-concurrency-tutorial)
+ * [Clojure Inside Out](http://shop.oreilly.com/product/0636920030409.do) from O'Reilly
+ * [Clojure Koans Walkthroughs](http://www.youtube.com/playlist?list=PL1p6TgkbKXqyOwq6iSkce_EY5YWFHciHt)
 
 
 
