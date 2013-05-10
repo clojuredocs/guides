@@ -330,6 +330,12 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
  * [clojure-opennlp](https://github.com/dakrone/clojure-opennlp) ([at clojars](https://clojars.org/clojure-opennlp))
 
 
+## Parsers, Parser Combinators, Language Construction
+
+ * [Instaparse](https://github.com/Engelberg/instaparse) ([at clojars](https://clojars.org/instaparse))
+
+ * [Kern](https://github.com/blancas/kern) ([at clojars](https://clojars.org/org.blancas/kern))
+
 
 ## Automation, Provisioning, DevOps Tools
 
