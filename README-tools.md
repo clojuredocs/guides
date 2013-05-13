@@ -24,8 +24,10 @@ by running the following in the CDS repository root:
 > run the gem-installed `jekyll` to view your local version of
 > the site.
 
-
 ## How To Run A Development Server
+
+Before you run `jekyll` the first time, you will need to create an empty folder called
+`_site` in the CDS repository root.
 
     ./bin/jekyll serve --watch
 
