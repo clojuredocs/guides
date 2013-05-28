@@ -137,7 +137,7 @@ produce no side effects.
 A logical entity in your program that may change over time --- it may
 take on different states at different times, but it still means the
 same logical entity. Clojure uses [reference types](#reference_types)
-to represent identities.
+to represent identities.  This is not to be confused with the `identity` function that just returns the argument given to it.
 
 
 
@@ -307,7 +307,7 @@ for example, `#""`, `#{}`, quoting, etc.
 
 When the next value in a [lazy](#lazy) sequence is accessed for the
 first time, and is computed so as to made available, it is said to
-have been "realized".
+have been "realized".  This term is also used to refer to the status of [promises](concurrency_and_parallelism.html#promises), [futures](concurrency_and_parallelism.html#futures), and [delays](concurrency_and_parallelism.html#delays).  That is, if a promise (for example) is realized then that means its value has been delivered and is accessible via [dereferencing](#dereference).
 
 
 
@@ -339,7 +339,7 @@ various compilier optimizations.
 
 Short for: "Read, Eval, Print, Loop".  The REPL reads in text through
 the [reader](#reader) transforming it into a Clojure data structure,
-[evaluates](#evaluator) the data structure as code, prints the result 
+[evaluates](#evaluator) the data structure as code, prints the result
 of the evaluation, and loops back waiting to read the next input string.
 
 
