@@ -41,6 +41,7 @@ Channel logs are available at [clojure-log.n01se.net](http://clojure-log.n01se.n
   * [Clojuredocs](http://clojuredocs.org/): Clojure API reference, with examples
   * [Clojure API Cheatsheet](http://jafingerhut.github.com/cheatsheet-clj-1.3/cheatsheet-tiptip-no-cdocs-summary.html)
   * [Clojure Koans](http://clojurekoans.com/)
+  * [GetClojure](http://www.getclojure.org): Tens of thousands of searchable Clojure examples mined from all over the internet.
 
 ## Courses
 

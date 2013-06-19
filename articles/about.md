@@ -32,7 +32,7 @@ design goals, the ecosystem and operations is just as important. CDS will try to
 
 What's *not* here:
 
-  * Cheatsheets. The official [Clojure cheatsheet](http://clojure.org/cheatsheet) is very good.
+  * Cheatsheets. The official [Clojure cheatsheet](http://clojure.org/cheatsheet) is very good.  There is also an unofficial [ClojureScript cheasheet](https://github.com/fogus/clojurescript-cheatsheet) available for download and contribution.
   * API reference docs. Those can currently be found (with examples) at [Clojuredocs](http://clojuredocs.org/).
 
 Clojuredocs needs a lot of work and redesign (as in, the way it works) which will take a while. CDS is not concerned with providing the API reference;
@@ -76,16 +76,16 @@ a while.
 ### Tools & Ecosystem guides
 
 These guides cover key Clojure ecosystem tools such as [Leiningen](http://leiningen.org), [Clojars](http://clojars.org), [REPLy](https://github.com/trptcolin/reply),
-nREPL, Emacs clojure-mode, VimClojure, Counterclockwise, La Clojure, etc. It also covers important ecosystem projects that are not tools: books,
-ClojureSphere, ClojureWerkz, Flatland and so on.
+[nREPL](https://github.com/clojure/tools.nrepl), [Emacs clojure-mode](https://github.com/technomancy/clojure-mode), VimClojure, [Counterclockwise](https://code.google.com/p/counterclockwise/), [La Clojure](http://plugins.jetbrains.com/plugin?pluginId=4050), etc. It also covers important ecosystem projects that are not tools: books,
+[ClojureSphere](http://www.clojuresphere.com/), [ClojureWerkz](http://clojurewerkz.org/), [Flatland](https://github.com/flatland) and so on.
 
-Target audience: all developers using or interested in the language.
+Target audience: all developers using or interested in the Clojure programming language.
 
 
 
 ### Cookbooks
 
-Concise Clojure example code, categorized by subject.
+Concise [Clojure example code](content.html#cookbooks), categorized by subject.
 
 
 
