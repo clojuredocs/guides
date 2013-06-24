@@ -4,7 +4,10 @@ layout: article
 ---
 
 Here are some examples of using clojure.java.jdbc to manipulate data with SQL.
-These examples assume a simple table called fruit (see [Manipulating tables with DDL](using_ddl.html)).
+These examples assume a simple table called fruit (see [Manipulating tables with DDL](using_ddl.html)). These examples all assume the following in your `ns` declaration:
+
+    (:require [clojure.java.jdbc :as j])
+
 ## Inserting multiple rows
 If you want to insert complete rows, you can use *insert!* and provide the values as a simple vector for each row. Every column's value must be present in the same order the columns are declared in the table. This performs a series of insert statement. If you attempt to insert a single row, a map of the generated keys will be returned.
 
