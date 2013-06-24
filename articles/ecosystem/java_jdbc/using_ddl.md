@@ -34,7 +34,7 @@ To drop a table, use *drop-table* to generate the DDL with the table name.
       "Drop a table"
       [db-spec]
       (try
-        (sql/db-do-commands db-spec
+        (jdbc/db-do-commands db-spec
           (ddl/drop-table :fruit))
         (catch Exception _)))
 
