@@ -67,7 +67,7 @@ Videos of talks about Clojure are often made available on [InfoQ](http://www.inf
 ## Podcasts About Clojure
 
  * [Mostly λazy… a Clojure podcast](http://mostlylazy.com/) by Chas Emerick
-
+ * [Relevance Podcast](http://thinkrelevance.com/blog/tags/podcast) by Craig Andera often discusses topics relevant to Clojure and ClojureScript.
 
 
 ## Code Repositories
