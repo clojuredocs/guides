@@ -17,7 +17,7 @@ What's *not* here:
   * Cheatsheets. Those can be found at
     [clojure.org/cheatsheet](http://clojure.org/cheatsheet), or with
     tooltips at
-    [jafingerhut.github.com](http://jafingerhut.github.com).  There is also a separate [ClojureScript-specific cheatsheet](https://github.com/fogus/clojurescript-cheatsheet) available for download.
+    [jafingerhut.github.com](http://jafingerhut.github.com).  There is also an unofficial [ClojureScript cheatsheet](https://github.com/fogus/clojurescript-cheatsheet) available for download and contribution.
   * API reference docs. Those can currently be found (with examples)
     at [Clojuredocs](http://clojuredocs.org/).
 
