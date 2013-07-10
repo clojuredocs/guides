@@ -121,7 +121,7 @@ just use the `clojure.xml` library to parse the NZB file, we get a
 tree based representation. For example:
 
 ```clojure
-(-> "example.nzb" io/resource io/file xml/parse)
+(-> "example.nzb" xml/parse)
 {:tag :nzb,
  :attrs {:xmlns "http://www.newzbin.com/DTD/2003/nzb"},
  :content
@@ -173,7 +173,7 @@ it in a REPL and start with the root node of our NZB file:
 (require '[clojure.zip :as zip])
 (require '[clojure.data.zip.xml :as zip-xml])
 
-(def root (-> "example.nzb" io/resource io/file xml/parse zip/xml-zip))
+(def root (-> "example.nzb" xml/parse zip/xml-zip))
 ```
 
 Now we have a zipper for the root element of our document, we can
