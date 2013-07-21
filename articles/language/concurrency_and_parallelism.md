@@ -24,11 +24,11 @@ This guide covers Clojure 1.5.
 
 ## Before You Read This Guide
 
-This is one of the most hardcore guide of the entire Clojure documentation
+This is one of the most hardcore guides of the entire Clojure documentation
 project. It describes concepts that are simple but may seem foreign at first.
 These concepts are some of the key points of Clojure
 design. Understanding them may take some time for folks without
-concurrent programming background. Don't let this learning curve
+a concurrent programming background. Don't let this learning curve
 discourage you.
 
 If some parts are not clear, please ask for clarification [on the
