@@ -508,3 +508,7 @@ Standard streams I/O is covered by the JDK and commonly used via `clojure.java.i
  * [tools.trace](https://github.com/clojure/tools.trace): a tracing library
 
  * [criterium](https://github.com/hugoduncan/criterium) ([at clojars](https://clojars.org/criterium)): a benchmarking library that tries to address common benchmarking pitfalls
+
+ * [print-foo](https://github.com/AlexBaranosky/print-foo) ([at clojars](https://clojars.org/print-foo)): A library of print debugging macros. 
+
+ * [gui-diff](https://github.com/AlexBaranosky/gui-diff) ([at clojars](https://clojars.org/gui-diff)): Tools for side-by-side diffing of Clojure data structures and clojure.test failures
