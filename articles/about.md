@@ -32,7 +32,7 @@ design goals, the ecosystem and operations is just as important. CDS will try to
 
 What's *not* here:
 
-  * Cheatsheets. The official [Clojure cheatsheet](http://clojure.org/cheatsheet) is very good.  There is also an unofficial [ClojureScript cheasheet](https://github.com/fogus/clojurescript-cheatsheet) available for download and contribution.
+  * Cheatsheets. The official [Clojure cheatsheet](http://clojure.org/cheatsheet) is very good.  There is also an unofficial [ClojureScript cheatsheet](https://github.com/fogus/clojurescript-cheatsheet) available for download and contribution.
   * API reference docs. Those can currently be found (with examples) at [Clojuredocs](http://clojuredocs.org/).
 
 Clojuredocs needs a lot of work and redesign (as in, the way it works) which will take a while. CDS is not concerned with providing the API reference;
@@ -44,10 +44,10 @@ only tutorials, guides, and linking to other relevant resources.
 
 CDS is structured as a number of guides. They broadly fall into 4 categories:
 
-  * Tutorials
-  * Language guides
-  * Tool guides
-  * Cookbooks
+  * [Tutorials](content.html#clojure_tutorials)
+  * [Language guides](content.html#clojure_language_guides)
+  * [Tool guides](content.html#the_clojure_ecosystem)
+  * [Cookbooks](content.html#cookbooks)
 
 
 ### Tutorials
