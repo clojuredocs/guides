@@ -9,7 +9,7 @@ Clojure development tools available.
 This work is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
 3.0 Unported License</a> (including images & stylesheets). The source is
-available [on Github](https://github.com/clojuredocs/cds).
+available [on Github](https://github.com/clojuredocs/guides).
 
 
 ## Editors & IDEs
@@ -61,4 +61,3 @@ Two configuration recommendations for after you've installed LispIndent: In
 [Vim](http://www.vim.org/) is an efficient and full-featured text editor.
 
 See our [Vim tutorial](../tutorials/vim_fireplace.html) for more info.
-

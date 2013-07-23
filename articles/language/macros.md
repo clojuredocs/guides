@@ -12,7 +12,7 @@ This work is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
 Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
-Github](https://github.com/clojuredocs/cds).
+Github](https://github.com/clojuredocs/guides).
 
 
 
@@ -33,7 +33,7 @@ discourage you.
 If some parts are not clear, please ask for clarification [on the
 mailing
 list](https://groups.google.com/forum/?fromgroups#!forum/clojure) or
-[file an issue](https://github.com/clojuredocs/cds/issues) on GitHub.
+[file an issue](https://github.com/clojuredocs/guides/issues) on GitHub.
 We will work hard on making this guide easy to follow with edits and
 images to illustrate the concepts.
 
@@ -340,7 +340,7 @@ capture very unlikely in practice, and impossible if all bindings are named with
 Theoretically, Clojure's approach to generating uncaptured gensyms (incrementing a global counter) can be circumvented
 via a mischievous macro or very bad luck.
 
-Tip: 
+Tip:
 Avoid code with `__` in local binding names. This ensures
 auto-gensyms are *never* captured in unwanted ways.
 
@@ -419,7 +419,7 @@ Special forms are restrictive in their use and do not interact cleanly with seve
 
    ```clojure
    user=> do
-   CompilerException java.lang.RuntimeException: Unable to resolve symbol: do in this context, compiling:(NO_SOURCE_PATH:0:0) 
+   CompilerException java.lang.RuntimeException: Unable to resolve symbol: do in this context, compiling:(NO_SOURCE_PATH:0:0)
    ```
 
    Macros have a similar restriction, but notice: the macro's var is identified in the error while
@@ -427,7 +427,7 @@ Special forms are restrictive in their use and do not interact cleanly with seve
 
    ```
    user=> dosync
-   CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/dosync, compiling:(NO_SOURCE_PATH:0:0) 
+   CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/dosync, compiling:(NO_SOURCE_PATH:0:0)
    ```
 
  * Special form names are not namespace-qualified.
@@ -448,7 +448,7 @@ Special forms are restrictive in their use and do not interact cleanly with seve
    ```
 
  * Special forms conflict with local scope.
-  
+
    Never use special names as local binding or global variable names.
 
    ```clojure

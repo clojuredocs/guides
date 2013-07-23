@@ -3,7 +3,7 @@ title: "Table of Contents"
 layout: article
 ---
 
-[The content](https://github.com/clojuredocs/cds) is a categorized and
+[The content](https://github.com/clojuredocs/guides) is a categorized and
 manifold collection of documentation guides for the Clojure programming language and
 its ecosystem.
 

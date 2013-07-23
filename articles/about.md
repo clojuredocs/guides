@@ -102,14 +102,14 @@ News and announcements are posted [on Twitter](http://twitter.com/clojuredocs).
 
 ## Reporting Issues
 
-If you find a mistake, poor grammar, an important topic not covered, or an outdated example, please [file an issue](http://github.com/clojuredocs/cds/issues) on Github.
+If you find a mistake, poor grammar, an important topic not covered, or an outdated example, please [file an issue](http://github.com/clojuredocs/guides/issues) on Github.
 
 
 ## Contributing
 
 CDS uses [ClojureWerkz Docslate](https://github.com/clojurewerkz/docslate). All tutorials and guides are written in Markdown.
 
-The toolchain and setup process are described [in the README](https://github.com/clojuredocs/cds/blob/master/README-tools.md).
+The toolchain and setup process are described [in the README](https://github.com/clojuredocs/guides/blob/master/README-tools.md).
 
 To submit changes, create a branch and make your changes on it. Once you are done with your changes and all tests pass, submit a pull request
 on GitHub.

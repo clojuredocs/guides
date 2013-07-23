@@ -7,7 +7,7 @@ This work is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
 Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
-Github](https://github.com/clojuredocs/cds).
+Github](https://github.com/clojuredocs/guides).
 
 
 ## What Version of Clojure Does This Guide Cover?
@@ -92,7 +92,7 @@ Download the file named `emacs-24.1-bin-i386.zip` and unzip it in a new folder.
 Avoid folder with spaces in their names such as `C:\Documents and Settings`.
 Prefer folder names such as `C:\emacs-24.1`.
 
-[Create an environment variable](http://support.microsoft.com/kb/310519#tocHeadRef) 
+[Create an environment variable](http://support.microsoft.com/kb/310519#tocHeadRef)
 with name HOME and value equal to the location of your home folder; in Windows
 XP, it's `C:\Documents and Settings\YourUsername`, in Windows 7, it's
 `C:\Users\YourUsername`. With this variable set, you can use the tilde character
@@ -285,8 +285,8 @@ is there with the following:
 
 ```clojure
 (deftest pairs-of-values
-   (let [args ["--server" "localhost" 
-               "--port" "8080" 
+   (let [args ["--server" "localhost"
+               "--port" "8080"
                "--environment" "production"]]
       (is (= {:server "localhost"
               :port "8080"
@@ -321,9 +321,9 @@ our cursor over the red bar and press `C-c '`. This shows the problem
 with the assertion in the mini-buffer:
 
 ```clojure
-(not (= {:server "localhost", 
-         :port "8080", 
-         :environment "production"} 
+(not (= {:server "localhost",
+         :port "8080",
+         :environment "production"}
         {}))
 ```
 
@@ -339,11 +339,11 @@ Anyway, our map was empty as expected. Let's fix that:
 Running our tests again we now get another error:
 
 ```clojure
-(not (= {:server "localhost", 
-         :port "8080", 
-         :environment "production"} 
-        {"--port" "8080", 
-         "--server" "localhost", 
+(not (= {:server "localhost",
+         :port "8080",
+         :environment "production"}
+        {"--port" "8080",
+         "--server" "localhost",
          "--environment" "production"}))
 ```
 
@@ -370,7 +370,7 @@ instance, if you delete a function definition but still call it from
 other functions, you won't notice until your process is restarted.
 
 So that is an extremely simple example of a workflow using Emacs with
-clojure-mode and clojure-test-mode. 
+clojure-mode and clojure-test-mode.
 
 ## Using the REPL ##
 

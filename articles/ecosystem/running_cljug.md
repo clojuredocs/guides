@@ -12,7 +12,7 @@ This guide covers:
  * Meeting ideas
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
-(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/guides).
 
 ## Starting a user group
 
@@ -65,7 +65,7 @@ Once you get to a certain size (or if you are fortunate to have good companies i
 
 Looking for meeting ideas? Here's some ideas....
 
- * Work through through the [Clojure Koans](https://github.com/functional-koans/clojure-koans) 
+ * Work through through the [Clojure Koans](https://github.com/functional-koans/clojure-koans)
  * Work through problems from [4Clojure](http://www.4clojure.com/)
  * Run a session on getting set up on Emacs with Clojure (or Vim, or ...)
  * Work through [Project Euler](http://projecteuler.net/) problems

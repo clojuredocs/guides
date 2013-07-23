@@ -7,7 +7,7 @@ This work is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
 Attribution 3.0 Unported License</a> (including images &
 stylesheets). The source is available [on
-Github](https://github.com/clojuredocs/cds).
+Github](https://github.com/clojuredocs/guides).
 
 
 ## What Version of Clojure Does This Guide Cover?
@@ -51,7 +51,7 @@ Now edit `project.clj` to contain the following:
 
 We are including a dependency on
 [clojure.data.zip](http://github.com/clojure/data.zip), which is a
-"system for filtering trees, and XML trees in particular". 
+"system for filtering trees, and XML trees in particular".
 
 Make a dir called `dev-resources` at the root of your project, and
 create a file named `example.nzb` inside of it. This will be the file

@@ -13,7 +13,7 @@ This guide covers:
  * Other topics related to interop
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
-(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/cds).
+(including images & stylesheets). The source is available [on Github](https://github.com/clojuredocs/guides).
 
 ## What Version of Clojure Does This Guide Cover?
 
@@ -497,7 +497,7 @@ that delegates to a Clojure function:
 ;; outputs "Executed from a function"
 ```
 
-TBD: more realistic examples | [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TBD: more realistic examples | [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
 
 
 ## Clojure Functions Implement Runnable and Callable
@@ -939,7 +939,7 @@ This is covered in the [Concurrency and Parallelism guide](/articles/language/co
 
 ## Wrapping Up
 
-TBD: [How to Contribute](https://github.com/clojuredocs/cds#how-to-contribute)
+TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
 
 
 ## Contributors
