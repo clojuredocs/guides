@@ -299,26 +299,24 @@ the command line to a local called args, and asserting that the
 return from a function called `parse-args` is equal to those command
 line args turned into a simple map.
 
-Compile the file `C-c C-k`. We should get an error in a buffer
-complaining that `parse-args` does not exist. To dismiss this buffer,
-switch to the window containing the stack trace with `C-x o` and press
-`q`. The buffer should go away, and the cursor should be back in the
-code where you left it. Let's try to fix the exception by opening
-`core.clj` (`C-x C-f`) and adding the following definition:
+Compile the file `C-c C-k`. We should get an error message at the bottom
+of them emacs window complaining that clojure can't find parse-args.
+Let's try to fix the exception by opening `core.clj` (`C-x C-f`) and
+adding the following definition:
 
 ```clojure
 (defn parse-args [args]
   {})
 ```
 
-Save the file (`C-x C-s`), switch back to the test buffer (`C-x b
-ENTER`) and try compiling again (`C-c C-k`). This time it will
-succeed, so try running the tests with `C-c C-,` and you should get a
-message in the mini-buffer (the small line at the bottom of you
-screen) telling you one test has failed AND you should have a red bar
-across the `is` assertion. To check what the problem was, we can move
-our cursor over the red bar and press `C-c '`. This shows the problem
-with the assertion in the mini-buffer:
+Compile this with `C-c C-k`, save it (`C-x C-s`), switch back to the
+test buffer (`C-x b ENTER`) and try compiling again (`C-c C-k`). This
+time it will succeed, so try running the tests with `C-c C-,` and you
+should get a message in the mini-buffer (the small line at the bottom of
+you screen) telling you one test has failed AND you should have a red
+bar across the `is` assertion. To check what the problem was, we can
+move our cursor over the red bar and press `C-c '`. This shows the
+problem with the assertion in the mini-buffer:
 
 ```clojure
 (not (= {:server "localhost",
@@ -404,11 +402,12 @@ Let's go ahead and create our new function in `core.clj`:
   (into {} (map keywordize (partition 2 args))))
 ```
 
-Now we have a couple of options, we could re-compile the whole file again
-(`C-c C-k`) or we could evaluate each function on its own by going to
-the end of the s-exp and using `C-x C-e` which sends the s-exp to the
-running REPL. Now switching back to the REPL we can try out our
-keywordize function:
+Now we have a couple of options, we could re-compile the whole file
+again (`C-c C-k`) or we could evaluate each function on its own by going
+to the end of the s-exp and using `C-x C-e` which sends the s-exp to the
+running REPL. Now switching back to the core.clj namespace (`C-c M-n`)
+and switching back to the REPL buffer we can try out our keywordize
+function:
 
     command-line-args.core> (keywordize ["--oh" "hai"])
     [:oh "hai"]
@@ -435,7 +434,7 @@ gives you the docstring for a given function:
       Same as print followed by (newline)
     nil
 
-However there is a shortcut `C-c C-d C-d` when your cursor is over a
+However there is a shortcut `C-c C-d` when your cursor is over a
 function name. This will show the Clojure doc in a new window. If
 instead you want to jump to the source of the function you can use
 `M-.`, which is awesome. This works on your own functions as well as
