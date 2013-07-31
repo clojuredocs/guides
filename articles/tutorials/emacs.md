@@ -434,7 +434,7 @@ gives you the docstring for a given function:
       Same as print followed by (newline)
     nil
 
-However there is a shortcut `C-c C-d C-d` when your cursor is over a
+However there is a shortcut `C-c C-d` when your cursor is over a
 function name. This will show the Clojure doc in a new window. If
 instead you want to jump to the source of the function you can use
 `M-.`, which is awesome. This works on your own functions as well as
