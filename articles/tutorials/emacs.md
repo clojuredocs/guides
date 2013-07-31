@@ -309,14 +309,14 @@ adding the following definition:
   {})
 ```
 
-Save the file (`C-x C-s`), switch back to the test buffer (`C-x b
-ENTER`) and try compiling again (`C-c C-k`). This time it will
-succeed, so try running the tests with `C-c C-,` and you should get a
-message in the mini-buffer (the small line at the bottom of you
-screen) telling you one test has failed AND you should have a red bar
-across the `is` assertion. To check what the problem was, we can move
-our cursor over the red bar and press `C-c '`. This shows the problem
-with the assertion in the mini-buffer:
+Compile this with `C-c C-k`, save it (`C-x C-s`), switch back to the
+test buffer (`C-x b ENTER`) and try compiling again (`C-c C-k`). This
+time it will succeed, so try running the tests with `C-c C-,` and you
+should get a message in the mini-buffer (the small line at the bottom of
+you screen) telling you one test has failed AND you should have a red
+bar across the `is` assertion. To check what the problem was, we can
+move our cursor over the red bar and press `C-c '`. This shows the
+problem with the assertion in the mini-buffer:
 
 ```clojure
 (not (= {:server "localhost",
