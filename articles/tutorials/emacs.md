@@ -299,12 +299,10 @@ the command line to a local called args, and asserting that the
 return from a function called `parse-args` is equal to those command
 line args turned into a simple map.
 
-Compile the file `C-c C-k`. We should get an error in a buffer
-complaining that `parse-args` does not exist. To dismiss this buffer,
-switch to the window containing the stack trace with `C-x o` and press
-`q`. The buffer should go away, and the cursor should be back in the
-code where you left it. Let's try to fix the exception by opening
-`core.clj` (`C-x C-f`) and adding the following definition:
+Compile the file `C-c C-k`. We should get an error message at the bottom
+of them emacs window complaining that clojure can't find parse-args.
+Let's try to fix the exception by opening `core.clj` (`C-x C-f`) and
+adding the following definition:
 
 ```clojure
 (defn parse-args [args]
