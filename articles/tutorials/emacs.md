@@ -402,11 +402,12 @@ Let's go ahead and create our new function in `core.clj`:
   (into {} (map keywordize (partition 2 args))))
 ```
 
-Now we have a couple of options, we could re-compile the whole file again
-(`C-c C-k`) or we could evaluate each function on its own by going to
-the end of the s-exp and using `C-x C-e` which sends the s-exp to the
-running REPL. Now switching back to the REPL we can try out our
-keywordize function:
+Now we have a couple of options, we could re-compile the whole file
+again (`C-c C-k`) or we could evaluate each function on its own by going
+to the end of the s-exp and using `C-x C-e` which sends the s-exp to the
+running REPL. Now switching back to the core.clj namespace (`C-c M-n`)
+and switching back to the REPL buffer we can try out our keywordize
+function:
 
     command-line-args.core> (keywordize ["--oh" "hai"])
     [:oh "hai"]
