@@ -93,6 +93,11 @@ embeds special tags and filters inside HTML templates to insert and
 manipulate data.
 
 
+### Selmer
+[Selmer](https://github.com/yogthos/Selmer) is also modeled after the Django 
+templating system with a primary goal of performance.
+
+
 ### Enlive and Laser
 
 [Enlive](https://github.com/cgrand/enlive) and
