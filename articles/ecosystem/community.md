@@ -100,6 +100,13 @@ In no particular order:
   * [EuroClojure](http://euroclojure.com/)
   * [Clojure/West](http://clojurewest.org/)
   * [StrangeLoop](https://thestrangeloop.com/) (not about Clojure but often has strong Clojure community presence)
+  * [Lambda Jam](http://lambdajam.com/) (also not about Clojure but has strong Clojure community presence)
+
+
+## Email Newsletters
+
+  * [Clojure Gazette](http://www.clojuregazette.com/)
+  * [(def newsletter)](http://defnewsletter.com/)
 
 
 ## Core development
