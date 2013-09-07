@@ -723,8 +723,22 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 ### iterate
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
-TODO: Simple image accompaniment.
+`iterate` takes a function and an initial value, returns the result of
+applying the function on that initial value, then applies the function
+again on the resultant value, and repeats forever, lazily. Note that the
+function *iterates* on the value.
+
+```clojure
+(take 5 (iterate inc 1))
+;; ⇒ (1 2 3 4 5)
+
+(defn multiply-by-two
+  [value]
+  (* 2 value))
+
+(take 10 (iterate multiply-by-two 1))
+;; ⇒ (1 2 4 8 16 32 64 128 256 512)
+```
 
 ### get-in
 
