@@ -27,7 +27,18 @@ of Clojure (1.3+).
 ## Books About Clojure
 
 
-### 
+### Clojure For The Brave and True
+
+By Daniel Higginbotham.
+
+#### Notes
+
+A book for beginners. Covers the language and key parts of the ecosystem.
+
+
+#### Where You Can Buy It
+
+ * [Official Site](http://www.braveclojure.com/)
 
 
 ### Clojure Cookbook
