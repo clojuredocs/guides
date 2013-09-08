@@ -27,6 +27,9 @@ of Clojure (1.3+).
 ## Books About Clojure
 
 
+### 
+
+
 ### Clojure Cookbook
 
 By Luke VanderHart, Ryan Neufeld.
@@ -35,6 +38,10 @@ By Luke VanderHart, Ryan Neufeld.
 
 [Crowdsourced](https://github.com/clojure-cookbook/clojure-cookbook/blob/master/CONTRIBUTING.md) cookbook of about 200 recipes from O'Reilly. Work in progress
 as of September 2013 but over 100 recipes are already available in the repository.
+
+#### Where You Can Buy It
+
+ * [Official Site](http://clojure-cookbook.com)
 
 
 ### Functional Programming for the Object-Oriented Programmer
