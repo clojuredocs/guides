@@ -80,7 +80,7 @@ different guarantees about ordering. Hash maps are typically instantiated with l
 {:language "Clojure" :creator "Rich Hickey"}
 ```
 
-Commas can be used in map literals (Clojure compiler treats the as whitespace):
+Commas can be used in map literals (Clojure compiler treats the comma as whitespace):
 
 ``` clojure
 {:language "Clojure", :creator "Rich Hickey"}
@@ -129,7 +129,8 @@ literals:
 ["clojure" "scala" "erlang" "f#" "haskell" "ocaml"]
 ```
 
-Commas can be used to separate vector elements (Clojure compiler treats the as whitespace):
+Commas can be used to separate vector elements (Clojure compiler treats
+the comma as whitespace):
 
 ``` clojure
 ["clojure", "scala", "erlang", "f#", "haskell", "ocaml"]
@@ -162,7 +163,8 @@ When used as "just" data structures, lists are typically instantiated with liter
 '("clojure" "scala" "erlang" "f#" "haskell" "ocaml")
 ```
 
-Commas can be used to separate list elements (Clojure compiler treats the as whitespace):
+Commas can be used to separate list elements (Clojure compiler treats
+the comma as whitespace):
 
 ``` clojure
 '("clojure", "scala", "erlang", "f#", "haskell", "ocaml")
