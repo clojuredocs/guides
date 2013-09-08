@@ -14,14 +14,28 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-As of December 2012, Clojure has 7 books published about it, plus one about ClojureScript. This guide lists them in
-reverse chronological order and intended to provide a very brief overview of each. It is by no means comprehensive and
-may be quite opinionated. The goal is to identify books that are more useful to newcomers than others and
-recommend books that cover recent releases of Clojure (1.3+).
+As of September 2013, Clojure has 9 books published (or available for
+preview) about it, plus one about ClojureScript. This guide lists them
+in reverse chronological order and intended to provide a very brief
+overview of each. It is by no means comprehensive and may be quite
+opinionated. The goal is to identify books that are more useful to
+newcomers than others and recommend books that cover recent releases
+of Clojure (1.3+).
 
 
 
 ## Books About Clojure
+
+
+### Clojure Cookbook
+
+By Luke VanderHart, Ryan Neufeld.
+
+#### Notes
+
+[Crowdsourced](https://github.com/clojure-cookbook/clojure-cookbook/blob/master/CONTRIBUTING.md) cookbook of about 200 recipes from O'Reilly. Work in progress
+as of September 2013 but over 100 recipes are already available in the repository.
+
 
 ### Functional Programming for the Object-Oriented Programmer
 
