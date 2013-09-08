@@ -723,23 +723,131 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 ### iterate
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
-TODO: Simple image accompaniment.
+`iterate` takes a function and an initial value, returns the result of
+applying the function on that initial value, then applies the function
+again on the resultant value, and repeats forever, lazily. Note that the
+function *iterates* on the value.
+
+```clojure
+(take 5 (iterate inc 1))
+;; ⇒ (1 2 3 4 5)
+
+(defn multiply-by-two
+  [value]
+  (* 2 value))
+
+(take 10 (iterate multiply-by-two 1))
+;; ⇒ (1 2 4 8 16 32 64 128 256 512)
+```
 
 ### get-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
-TODO: Simple image accompaniment.
+`get-in` is used to *get* a value that is deep *inside* a data
+structure.
+
+You have to provide the data structure and a sequence of keys, where a
+key is valid at each subsequent level of the nested data structure.
+
+If the sequence of keys does not lead to a valid path, `nil` is
+returned.
+
+```clojure
+(def family
+  {:dad {:shirt 5
+         :pant 6
+         :shoes 4}
+   :mom {:dress {:work 6
+                 :casual 7}
+         :book 3}
+   :son {:toy 5
+         :homework 1}})
+
+(get-in family [:dad :shirt])
+;; ⇒ 5
+
+(get-in family [:mom :dress])
+;; ⇒ {:work 6, :casual 7}
+
+(get-in family [:mom :dress :casual])
+;; ⇒ 7
+
+(get-in family [:son :pant])
+;; ⇒ nil
+
+(def locations
+  [:office :home :school])
+
+(get-in locations [1])
+;; ⇒ :home
+```
 
 ### update-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
-TODO: Simple image accompaniment.
+`update-in` is used to *update* a value deep inside a structure
+*in-place*.
+
+Note that since data structures are immutable, it only returns a
+"modified" data structure, it does not actually alter the original
+reference.
+
+The "update" function takes the old value and returns a new value which
+`update-in` uses in the new modified data structure.
+
+```clojure
+(def family
+  {:dad {:shirt 5
+         :pant 6
+         :shoes 4}
+   :mom {:dress {:work 6
+                 :casual 7}
+         :book 3}
+   :son {:toy 5
+         :homework 1}})
+
+(update-in family [:dad :pant] inc)
+;; ⇒ {:son {:toy 5, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pant 7}}
+;; Notice that "pant" gets incremented
+
+(def locations
+  [:office :home :school])
+
+(update-in locations [2] #(keyword (str "high-" (name %))))
+;; ⇒ [:office :home :high-school]
+```
 
 ### assoc-in
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
-TODO: Simple image accompaniment.
+`assoc-in` is used to *associate* a new value deep inside a structure
+*in-place*.
+
+Note that since data structures are immutable, it only returns a
+"modified" data structure, it does not actually alter the original
+reference.
+
+Note the difference between `update-in` and `assoc-in`: `update-in`
+takes a function that applies on the old value to return a new value,
+whereas `assoc-in` takes a new value as-is.
+
+```clojure
+(def family
+  {:dad {:shirt 5
+         :pant 6
+         :shoes 4}
+   :mom {:dress {:work 6
+                 :casual 7}
+         :book 3}
+   :son {:toy 5
+         :homework 1}})
+
+(assoc-in family [:son :crayon] 3)
+;; ⇒ {:son {:toy 5, :crayon 3, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pant 6}}
+
+(def locations
+  [:office :home :school])
+
+(assoc-in locations [3] :high-school)
+;; ⇒ [:office :home :school :high-school]
+```
 
 ### keys
 
