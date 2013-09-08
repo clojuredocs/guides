@@ -350,7 +350,7 @@ follow the principle of least surprise. In real world projects, however, the dif
 algorithmic complexity and other runtime characteristics of various collection types often cannot
 be ignored. Keep this in mind.
 
-You can find more information in the [clojure.core Overview](/articles/languages/core_overview.html) and [Clojure cheatsheet](http://clojure.org/cheatsheet).
+You can find more information in the [clojure.core Overview](/articles/language/core_overview.html) and [Clojure cheatsheet](http://clojure.org/cheatsheet).
 
 
 ### count
@@ -377,7 +377,7 @@ can cause a variety of otherwise cryptic errors.
 ;; ⇒ false
 
 ;; will be fully realized when using (count (range 10))
-(counted? (range 10)
+(counted? (range 10))
 ;; ⇒ false
 
 ;; Constant time return of (count)
@@ -474,7 +474,7 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 `assoc` takes a key and a value and returns a collection of the same type as the supplied collection with the key mapped to the new value.
 
-`assoc` is similar to get in how it works with maps, records or vectors. When applied to a map or record, the same type is returned with the key/value pairs added or modified.  When applied to a vector, a vector is returned with the key acting as an index and the index being replaced by the value.
+`assoc` is similar to `get` in how it works with maps, records or vectors. When applied to a map or record, the same type is returned with the key/value pairs added or modified.  When applied to a vector, a vector is returned with the key acting as an index and the index being replaced by the value.
 
 Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
 
@@ -805,7 +805,7 @@ returned.
 ```clojure
 (def family
   {:dad {:shirt 5
-         :pant 6
+         :pants 6
          :shoes 4}
    :mom {:dress {:work 6
                  :casual 7}
@@ -822,7 +822,7 @@ returned.
 (get-in family [:mom :dress :casual])
 ;; ⇒ 7
 
-(get-in family [:son :pant])
+(get-in family [:son :pants])
 ;; ⇒ nil
 
 (def locations
@@ -847,7 +847,7 @@ The "update" function takes the old value and returns a new value which
 ```clojure
 (def family
   {:dad {:shirt 5
-         :pant 6
+         :pants 6
          :shoes 4}
    :mom {:dress {:work 6
                  :casual 7}
@@ -855,9 +855,9 @@ The "update" function takes the old value and returns a new value which
    :son {:toy 5
          :homework 1}})
 
-(update-in family [:dad :pant] inc)
-;; ⇒ {:son {:toy 5, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pant 7}}
-;; Notice that "pant" gets incremented
+(update-in family [:dad :pants] inc)
+;; ⇒ {:son {:toy 5, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pants 7}}
+;; Notice that "pants" gets incremented
 
 (def locations
   [:office :home :school])
@@ -882,7 +882,7 @@ whereas `assoc-in` takes a new value as-is.
 ```clojure
 (def family
   {:dad {:shirt 5
-         :pant 6
+         :pants 6
          :shoes 4}
    :mom {:dress {:work 6
                  :casual 7}
@@ -891,7 +891,7 @@ whereas `assoc-in` takes a new value as-is.
          :homework 1}})
 
 (assoc-in family [:son :crayon] 3)
-;; ⇒ {:son {:toy 5, :crayon 3, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pant 6}}
+;; ⇒ {:son {:toy 5, :crayon 3, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}, :dad {:shoes 4, :shirt 5, :pants 6}}
 
 (def locations
   [:office :home :school])
@@ -902,7 +902,7 @@ whereas `assoc-in` takes a new value as-is.
 
 ### keys
 
-`key`s returns a sequence of the keys in a map or record.
+`keys` returns a sequence of the keys in a map or record.
 
 ```clojure
 (keys {1 "one" 2 "two" 3 "three"})
