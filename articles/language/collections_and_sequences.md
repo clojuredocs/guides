@@ -162,7 +162,15 @@ When used as "just" data structures, lists are typically instantiated with liter
 '("clojure" "scala" "erlang" "f#" "haskell" "ocaml")
 ```
 
-Commas can be used to separate list elements (Clojure compiler treats the as whitespace):
+Or you can explicitly use the `list` form:
+
+```clojure
+(list 1 2 3 4)
+;; ⇒ (1 2 3 4)
+```
+
+Commas can be used to separate list elements (Clojure compiler treats
+the comma as whitespace):
 
 ``` clojure
 '("clojure", "scala", "erlang", "f#", "haskell", "ocaml")
