@@ -939,13 +939,24 @@ If there are fewer than `n` items in `coll`, all items will be returned.
 
 ### take-while
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
+`take-while` returns a lazy sequence of items from a collection as long
+as the predicate returns `true` for each item:
+
+```clojure
+(take-while #(< % 5) (range))
+;; ⇒ (0 1 2 3 4)
+```
 
 ### drop-while
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
+`drop-while` drops items from a collection as long as the predicate
+returns `false` for the item and when the first non-false item is found,
+it returns a lazy sequence from that item onwards:
 
-
+```clojure
+(drop-while #(< % 5) (range 10))
+;; ⇒ (5 6 7 8 9)
+```
 
 ## Transients
 
