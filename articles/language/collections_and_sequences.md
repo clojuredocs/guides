@@ -877,7 +877,25 @@ whereas `assoc-in` takes a new value as-is.
 
 ### select-keys
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
+`select-keys` is used to extract a subset of a map:
+
+```clojure
+(def family
+  {:dad {:shirt 5
+         :pant 6
+         :shoes 4}
+   :mom {:dress {:work 6
+                 :casual 7}
+         :book 3}
+   :son {:toy 5
+         :homework 1}})
+
+(select-keys family [:dad])
+;; ⇒ {:dad {:shoes 4, :shirt 5, :pant 6}}
+
+(select-keys family [:mom :son])
+;; ⇒ {:son {:toy 5, :homework 1}, :mom {:dress {:work 6, :casual 7}, :book 3}}
+```
 
 ### take
 
