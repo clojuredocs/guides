@@ -295,14 +295,14 @@ is there with the following:
 ```
 
 We are simply assigning a list of arguments as they would arrive from
-the command line to a local called args, and asserting that the
-return from a function called `parse-args` is equal to those command
-line args turned into a simple map.
+the command line to a local variable called args, and asserting that the
+return value from a function called `parse-args` is equal to those
+command line args turned into a simple map.
 
-Compile the file `C-c C-k`. We should get an error message at the bottom
-of them emacs window complaining that clojure can't find parse-args.
-Let's try to fix the exception by opening `core.clj` (`C-x C-f`) and
-adding the following definition:
+Compile the file with `C-c C-k`. We should get an error message at the
+bottom of the emacs window complaining that clojure can't find
+parse-args.  Let's try to fix the exception by opening `core.clj` (`C-x
+C-f`) and adding the following definition:
 
 ```clojure
 (defn parse-args [args]
@@ -313,7 +313,7 @@ Compile this with `C-c C-k`, save it (`C-x C-s`), switch back to the
 test buffer (`C-x b ENTER`) and try compiling again (`C-c C-k`). This
 time it will succeed, so try running the tests with `C-c C-,` and you
 should get a message in the mini-buffer (the small line at the bottom of
-you screen) telling you one test has failed AND you should have a red
+your screen) telling you one test has failed AND you should have a red
 bar across the `is` assertion. To check what the problem was, we can
 move our cursor over the red bar and press `C-c '`. This shows the
 problem with the assertion in the mini-buffer:
@@ -444,7 +444,7 @@ single file you can use `M-x imenu` to list them and jump to one.
 
 When you are finished with the repl (or if for some reason it has
 gotten into a bad state), you can simply kill the `*nrepl*`
-buffer and re-run `nrepl-jack-in` to start another.
+buffer by typing `C-x k` and re-run `nrepl-jack-in` to start another.
 
 ## Appendix ##
 
