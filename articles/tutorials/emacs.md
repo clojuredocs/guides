@@ -295,7 +295,7 @@ is there with the following:
 ```
 
 We are simply assigning a list of arguments as they would arrive from
-the command line to a local variable called args, and asserting that the
+the command line to a local called args, and asserting that the
 return value from a function called `parse-args` is equal to those
 command line args turned into a simple map.
 
