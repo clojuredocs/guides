@@ -601,7 +601,7 @@ can cause a variety of otherwise cryptic errors.
 ;; ⇒ false
 
 ;; will be fully realized when using (count (range 10))
-(counted? (range 10)
+(counted? (range 10))
 ;; ⇒ false
 
 ;; Constant time return of (count)
