@@ -996,8 +996,7 @@ To create an immutable data structure out of a transient, use `clojure.core/pers
 ```
 
 In conclusion: use transients only as an optimization technique and only
-after profiling and identifying hot spots in your code. Guessing is the
-shortest way we know to blowing the performance.
+after profiling and identifying hot spots in your code.
 
 
 ## Custom Collections and Sequences
