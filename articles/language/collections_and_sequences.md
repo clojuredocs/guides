@@ -677,13 +677,25 @@ Sets can also be used as functions and will return the first item in the collect
 
 ### map
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
 TODO: Simple image accompaniment.
+
+`map` applies a function to each item in a collection, returning a list of results back.
+
+```clojure
+(map #(+ 1 %) [1 2 3 4])
+;; ⇒ (2 3 4 5)
+```
 
 ### reduce
 
-TBD: [How to Contribute](https://github.com/clojuredocs/guides#how-to-contribute)
 TODO: Simple image accompaniment.
+
+`reduce` applies a function to each item in a collection, passing the result of each call into the next invocation, and returns the final result.
+
+```clojure
+(reduce + [1 2 3 4])
+;; ⇒ 10
+```
 
 ### filter
 
