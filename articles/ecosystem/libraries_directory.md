@@ -18,7 +18,7 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
 ### General
 
-  * [useful](https://clojars.org/useful)
+  * [useful](https://github.com/flatland/useful) ([at clojars](https://clojars.org/useful))
 
   * [ClojureWerkz Support](http://github.com/clojurewerkz/support) ([at clojars](https://clojars.org/clojurewerkz/support))
 
