@@ -22,6 +22,8 @@ For more comprehensive overview of the Clojure library ecosystem, please see [Cl
 
   * [ClojureWerkz Support](http://github.com/clojurewerkz/support) ([at clojars](https://clojars.org/clojurewerkz/support))
 
+  * [medley](https://github.com/weavejester/medley) ([at clojars](https://clojars.org/medley))
+
 
 ## Applications & Environment
 
