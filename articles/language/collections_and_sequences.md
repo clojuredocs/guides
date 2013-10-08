@@ -677,29 +677,59 @@ Sets can also be used as functions and will return the first item in the collect
 
 ### map
 
-TODO: Simple image accompaniment.
+`map` is used to sequence of values and generate a new sequence of
+values.
 
-`map` applies a function to each item in a collection, returning a list of results back.
+Essentially, you're creating a *mapping* from an old sequence of values
+to a new sequence of values.
 
 ```clojure
-(map #(+ 1 %) [1 2 3 4])
-;; ⇒ (2 3 4 5)
+(def numbers
+  (range 1 10))
+;; ⇒ (1 2 3 4 5 6 7 8 9)
+
+(map (partial * 2) numbers)
+;; ⇒ (2 4 6 8 10 12 14 16 18)
+
+(def scores
+  {:clojure 10
+   :scala 9
+   :jruby 8})
+
+(map #(str "Team " (name (key %)) " has scored " (val %)) scores)
+;; ⇒ ("Team scala has scored 9" "Team jruby has scored 8" "Team clojure has scored 10")
 ```
 
 ### reduce
 
-TODO: Simple image accompaniment.
-
-`reduce` applies a function to each item in a collection, passing the result of each call into the next invocation, and returns the final result.
+`reduce` takes a sequence of values and a function. It applies that
+function repeatedly with the sequence of values to *reduce* it to a
+single value.
 
 ```clojure
-(reduce + [1 2 3 4])
-;; ⇒ 10
+(def numbers
+  (range 1 10))
+;; ⇒ (1 2 3 4 5 6 7 8 9)
+
+(reduce + numbers)
+;; ⇒ 45
+
+(def scores
+  {:clojure 10
+   :scala 9
+   :jruby 8})
+
+(reduce + (vals scores))
+;; ⇒ 27
+
+;; Provide an initial value for the calculation
+(reduce + 10 (vals scores))
+;; ⇒ 37
 ```
 
 ### filter
 
-`filters` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`
+`filter` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`.
 
 ```clojure
 (filter even? (range 10))
