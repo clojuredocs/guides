@@ -53,6 +53,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Cologne Clojure User Group](http://www.meetup.com/clojure-cologne/)
  * [Copenhagen Clojure User Group](http://www.ative.dk/om-ative/arrangementer.aspx)
  * [French Riviera Clojure/Scala Meetup](http://www.meetup.com/riviera-scala-clojure), [@riviera_func](http://twitter.com/riviera_func)
+ * [Göteborg Clojure User Group](http://www.meetup.com/got-clj/), [@Gotclj](https://twitter.com/Gotclj)
  * [Hamburg Clojure User Group](http://www.meetup.com/ClojureUserGroupHH/)
  * [Italian Clojure User Group](http://groups.google.com/group/clojure-italy)
  * [London Clojurians](http://londonclojurians.org/)
