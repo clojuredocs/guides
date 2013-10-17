@@ -90,11 +90,12 @@ or else in the repl you've loaded it:
 (str/triml "  foo  ") ;=> "foo  "
 (str/trimr "  foo  ") ;=> "  foo"
 
-;; Split into sequence
-(str/split-lines "foo
-bar")                             ;=> ["foo" "bar"]
+;; Multiple substrings
+(seq "foo")                       ;=> (\f \o \o)
 (str/split "foo/bar/quux" #"/")   ;=> ["foo" "bar" "quux"]
 (str/split "foo/bar/quux" #"/" 2) ;=> ["foo" "bar/quux"]
+(str/split-lines "foo
+bar")                             ;=> ["foo" "bar"]
 
 ;; Case
 (str/lower-case "fOo") ;=> "foo"
