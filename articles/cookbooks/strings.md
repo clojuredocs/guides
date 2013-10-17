@@ -41,13 +41,14 @@ characters](http://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#un
 UTF-16 characters don't always map nicely to user-perceived
 characters.
 
-For example, sometimes a single Unicode "code point" may require 2
-UTF-16 characters to encode it.
+For instance, it would be nice if a single Unicode "code point"
+corresponded to a user-perceived character. But alas, one
+counterexample is Korean's Jamo, where user-perceived characters are
+composed from two or three Unicode code points.
 
-And even then, a full Unicode code point sometimes won't correspond to
-a user-perceived character ("grapheme cluster"). For instance, take
-Korean's Hangul Jamo, where user-perceived characters are composed
-from two or three Unicode code points.
+As another complication, sometimes a single Unicode "code point" may
+require 2 UTF-16 characters to encode it.
+
 
 
 ## Preliminaries
@@ -219,12 +220,7 @@ before, the whole match is the 0th group.)
 
 ## TBD:
 
-* string buffers
-* explain javadoc
 * format http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
 * cl-format
-* can turn it into a seq (useful?)
-* surrogate
-* streams and strings (println, redirecting stdout...)
 * encodings, bytes
 * counting unicode code points
