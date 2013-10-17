@@ -50,7 +50,6 @@ As another complication, sometimes a single Unicode "code point" may
 require 2 UTF-16 characters to encode it.
 
 
-
 ## Preliminaries
 
 Some examples use
@@ -116,22 +115,6 @@ bar")                             ;=> ["foo" "bar"]
 (Float/parseFloat "2")                   ;=> 2.0
 ```
 
-### Format strings
-
-http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
-
-``` clojure
-(format "%1$tY-%1$tm-%1$td" #inst"2000-01-02T00:00:00") ;=> "2000-01-02"
-
-(format "New year: %2$tY. Old year: %1$tY"
-        #inst"2000-01-02T00:00:00"
-        #inst"2010-01-02T00:00:00")
-;=> "New year: 2010. Old year: 2000"
-
-
-
-```
-
 ### Parsing Clojure data
 
 ``` clojure
@@ -161,6 +144,7 @@ on. When replacing text, you could refer to the 0th group as `$0`, the
 You can nest groups. (The left-most parenthesis represents the 1st
 group, the second-left-most parenthesis is the 2nd group, etc. As
 before, the whole match is the 0th group.)
+
 
 #### Matching
 
@@ -192,7 +176,6 @@ before, the whole match is the 0th group.)
              "$2 ($1)")
 ;=> "12.3 (Bolivia),19.8 (Mozambique)"
 
-
 ;; A function can generate replacements.
 (str/replace "Bolivia 12.3%,Mozambique 19.8%"
              #"(\w+)\s([.0-9]+)%,?"
@@ -215,6 +198,41 @@ before, the whole match is the 0th group.)
       (print name))
     (print "...")))
 ;=> "We have shrimp-kabobs, shrimp creole, shrimp gumbo..."
+```
+
+
+### Format strings
+
+http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
+
+``` clojure
+(format "%s enjoyed %s%%." "Mozambique" 19.8) ;=> "Mozambique enjoyed 19.8%."
+
+(format "%1$tY-%1$tm-%1$td" #inst"2000-01-02T00:00:00") ;=> "2000-01-02"
+
+(format "New year: %2$tY. Old year: %1$tY"
+        #inst"2000-01-02T00:00:00"
+        #inst"2010-01-02T00:00:00")
+;=> "New year: 2010. Old year: 2000"
+```
+
+
+### CL-Format
+
+`cl-format` is Common Lisp's notoriously powerful string formatting
+mini-language. Entertainingly described in [Practical Common
+Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
+exhaustive reference is [Common Lisp's
+Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
+
+``` clojure
+(pp/cl-format nil "~{~{~a had ~s percentage point~:p.~}~^~%~}"
+                  {"Bolivia" 12.3
+                   "Mozambique" 19.8
+                    "US" 1})
+;=> "Bolivia had 12.3 percentage points.
+;Mozambique had 19.8 percentage points.
+;US had 1 percentage point."
 ```
 
 
