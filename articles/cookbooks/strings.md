@@ -31,30 +31,22 @@ Clojure supports some convenient notations:
     #"\d"    Regex (in this case, one which matches a single digit)
     \f       Character (in this case, the letter 'f')
 
-
-
-### Caveat
-
-Natural language offers no guarantees for easy or efficient
-programming, as human brains and electronic computers are rather
-different devices. Java strings (sequences of [UTF-16
+**Caveat:** human brains and electronic computers are rather different
+devices. So Java strings (sequences of [UTF-16
 characters](http://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#unicode))
-don't always map nicely to user-perceived characters.
-
-For instance, it would be nice if a single Unicode "code point"
-corresponded to a user-perceived character. They often do. But alas,
-one counterexample is Korean's Jamo, where user-perceived characters
-are composed from two or three Unicode code points.
-
-As another complication, sometimes a single Unicode "code point" may
-require 2 UTF-16 characters to encode it. So, the more you care about
-strings-as-natural-language-interface, the more care you should take.
+don't always map nicely to user-perceived characters. For example, a
+single Unicode "code point" doesn't necessarily equal a user-perceived
+character (as in Korean's Jamo, where user-perceived characters are
+composed from two or three Unicode code points.) Also, a Unicode code
+point may sometimes require 2 UTF-16 characters to encode it.
 
 
 ## Preliminaries
 
 Some examples use
-[clojure.string](http://clojure.github.io/clojure/clojure.string-api.html). We'll
+[clojure.string](http://clojure.github.io/clojure/clojure.string-api.html),
+[clojure.edn](https://github.com/edn-format/edn) and
+[clojure.pprint](http://clojure.github.io/clojure/clojure.pprint-api.html). We'll
 assume your `ns` macro contains:
 
 ``` clojure
@@ -146,15 +138,10 @@ reference.](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.htm
 Regex groups are useful, when we want to match more than one
 substring. (Or refer to matches later.)
 
-In the regex `#"(group-1) (group-2)"`, the 0th group is the whole
-match. The 1st group is what's in the first parenthesis, and so
-on. When replacing text, you could refer to the 0th group as `$0`, the
-1st group as `$1`, etc.
-
-You can nest groups. (The left-most parenthesis represents the 1st
-group, the second-left-most parenthesis is the 2nd group, etc. As
-before, the whole match is the 0th group.)
-
+**Groups:** In the regex `#"(group-1) (group-2)"`, the 0th group is
+the whole match. The 1st group is started by the left-most `(`, the
+2nd group is started by the second-left-most `(`, etc. You can even
+nest groups.
 
 #### Matching
 
@@ -214,7 +201,7 @@ things easier to parse.
 ;;
 
 ;; Quick implementation of http://www.json.org/
-(def untested-json-parser
+(def barely-tested-json-parser
   (insta/parser
    "Object = <'{'> <w*> (members <w*>)* <'}'>
     <members> = pair (<w*> <','> <w*> members)*
@@ -233,7 +220,7 @@ things easier to parse.
     string = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
     <w> = #'\\s+'"))
 
-(untested-json-parser "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
+(barely-tested-json-parser "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
 ;=> [:Object
 ;    [:string "foo"]
 ;    [:Object
@@ -269,12 +256,8 @@ mini-language. Entertainingly described in [Practical Common
 Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
 exhaustive reference is [Common Lisp's
 Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
-
 Few Clojure users will be familiar with cl-format, so try not to go
-overboard with it. (It's even controversial among Common Lisp users.)
-When used sparingly, it's more readable than a big mess of control
-flow. On the other hand, there's a reason we don't program in
-cl-format's mini-language all the time.
+overboard with it.
 
 ``` clojure
 (pp/cl-format nil "~{~{~a had ~s percentage point~:p.~}~^~%~}"
