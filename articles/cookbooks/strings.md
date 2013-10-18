@@ -18,14 +18,14 @@ Github](https://github.com/clojuredocs/guides).
 
 Strings are [plain Java
 strings](http://docs.oracle.com/javase/7/docs/api/java/lang/String.html).
-This means that you have access to the wealth of tools which operate
-on Java strings. Since Java strings are immutable, they're convenient
-to use in Clojure.
+So you have access to the wealth of tools which operate on Java
+strings. Since Java strings are immutable, they're convenient to use
+in Clojure.
 
 One downside of Java strings is that you can't add Clojure metadata to
 them.
 
-Clojure supports the following convenient notations:
+Clojure supports some convenient notations:
 
     "foo"    String
     #"\d"    Regex (in this case, one which matches a single digit)
@@ -35,19 +35,20 @@ Clojure supports the following convenient notations:
 
 ### Caveat
 
-Human brains and electronic computers aren't always in sync. Java
-strings are sequences of [UTF-16
-characters](http://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#unicode). But
-UTF-16 characters don't always map nicely to user-perceived
-characters.
+Natural language offers no guarantees for easy or efficient
+programming, as human brains and electronic computers are rather
+different devices. Java strings (sequences of [UTF-16
+characters](http://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#unicode))
+don't always map nicely to user-perceived characters.
 
 For instance, it would be nice if a single Unicode "code point"
-corresponded to a user-perceived character. But alas, one
-counterexample is Korean's Jamo, where user-perceived characters are
-composed from two or three Unicode code points.
+corresponded to a user-perceived character. They often do. But alas,
+one counterexample is Korean's Jamo, where user-perceived characters
+are composed from two or three Unicode code points.
 
 As another complication, sometimes a single Unicode "code point" may
-require 2 UTF-16 characters to encode it.
+require 2 UTF-16 characters to encode it. So, the more you care about
+strings-as-natural-language-interface, the more care you should take.
 
 
 ## Preliminaries
@@ -117,14 +118,22 @@ bar")                             ;=> ["foo" "bar"]
 (Float/parseFloat "2")                   ;=> 2.0
 ```
 
-### Parsing Clojure data
+### Parsing more exotic Clojure data
+
+[edn](https://github.com/edn-format/edn) is a useful subset of Clojure
+data, useful for communicating with other computers. A bit like JSON,
+but in many ways more principled. (For instance, you can tag values,
+so you're not always stuffing random date formats into strings or
+whatever, leaving your users to figure out how to parse it.)
+
+The sledgehammer is `read-string`. Lets you parse any valid Clojure
+data. Its power is a **major security risk**, as it can run arbitrary
+code.  If you must use it, remember to set `*read-eval*` to `false`.
 
 ``` clojure
 (edn/read-string "0xffff") ;=> 65535
 
-;; If you really want to load Clojure data which edn doesn't support,
-;; to do it safely, ensure *read-eval* is false.
-(binding [*read-eval* false]
+(binding [*read-eval* false]  ;; Security
   (read-string "#\"[abc]\""))
 ;=> #"[abc]"
 ```
@@ -134,7 +143,6 @@ bar")                             ;=> ["foo" "bar"]
 
 [Regex
 reference.](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)
-
 Regex groups are useful, when we want to match more than one
 substring. (Or refer to matches later.)
 
@@ -189,7 +197,8 @@ before, the whole match is the 0th group.)
 ;"
 ```
 
-### Streams
+
+### Leveraging streams
 
 ``` clojure
 ;; Redirect standard output (*out*) to string
@@ -205,7 +214,7 @@ before, the whole match is the 0th group.)
 
 ### Format strings
 
-http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
+[Reference.](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html)
 
 ``` clojure
 (format "%s enjoyed %s%%." "Mozambique" 19.8) ;=> "Mozambique enjoyed 19.8%."
@@ -246,7 +255,6 @@ cl-format's mini-language all the time.
 
 ## TBD:
 
-* format http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
-* cl-format
 * encodings, bytes
 * counting unicode code points
+* instaparse
