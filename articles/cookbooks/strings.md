@@ -233,7 +233,7 @@ things easier to parse.
     string = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
     <w> = #'\\s+'"))
 
-(json-untested "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
+(untested-json-parser "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
 ;=> [:Object
 ;    [:string "foo"]
 ;    [:Object
