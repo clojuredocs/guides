@@ -60,7 +60,8 @@ assume your `ns` macro contains:
 ``` clojure
 (:require [clojure.string :as str]
           [clojure.edn :as edn]
-          [clojure.pprint :as pp])
+          [clojure.pprint :as pp]
+          [instaparse.core :as insta])
 ```
 
 or else in the repl you've loaded it:
@@ -69,6 +70,7 @@ or else in the repl you've loaded it:
 (require '[clojure.string :as str])
 (require '[clojure.edn :as edn])
 (require '[clojure.pprint :as pp])
+(require '[instaparse.core :as insta])
 ```
 
 
