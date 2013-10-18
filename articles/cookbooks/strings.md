@@ -16,29 +16,27 @@ Github](https://github.com/clojuredocs/guides).
 
 ## Overview
 
-Strings are [plain Java
+* Strings are [plain Java
 strings](http://docs.oracle.com/javase/7/docs/api/java/lang/String.html).
-So you have access to the wealth of tools which operate on Java
-strings. Since Java strings are immutable, they're convenient to use
-in Clojure.
+You can use anything which operates on them.
+* Java strings are immutable, so they're convenient to use in Clojure.
+* You can't add metadata to Java strings.
+* Clojure supports some convenient notations:
 
-One downside of Java strings is that you can't add Clojure metadata to
-them.
-
-Clojure supports some convenient notations:
-
+```
     "foo"    String
     #"\d"    Regex (in this case, one which matches a single digit)
     \f       Character (in this case, the letter 'f')
+```
 
-**Caveat:** human brains and electronic computers are rather different
+* **Caveat:** Human brains and electronic computers are rather different
 devices. So Java strings (sequences of [UTF-16
 characters](http://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#unicode))
 don't always map nicely to user-perceived characters. For example, a
 single Unicode "code point" doesn't necessarily equal a user-perceived
-character (as in Korean's Jamo, where user-perceived characters are
-composed from two or three Unicode code points.) Also, a Unicode code
-point may sometimes require 2 UTF-16 characters to encode it.
+character. (Like Korean Hangul Jamo, where user-perceived characters
+are composed from two or three Unicode code points.) Also, a Unicode
+code point may sometimes require 2 UTF-16 characters to encode it.
 
 
 ## Preliminaries
@@ -156,35 +154,36 @@ nest groups.
 (re-find #"\d+" "foobar") ;=> nil
 
 ;; Return first matching groups.
-(re-matches #"(\w+)\s([.0-9]+)%"
-            "Mozambique 19.8%")
-;=> ["Mozambique 19.8%" "Mozambique" "19.8"]
+(re-matches #"(@\w+)\s([.0-9]+)%"
+            "@shanley 19.8%")
+;=>["@shanley 19.8%" "@shanley" "19.8"]
 
 ;; Return seq of all matching groups.
-(re-seq #"(\w+)\s([.0-9]+)%"
-        "Bolivia 12.3%,Mozambique 19.8%")
-;=> (["Bolivia 12.3%"    "Bolivia"    "12.3"]
-;    ["Mozambique 19.8%" "Mozambique" "19.8"])
+(re-seq #"(@\w+)\s([.0-9]+)%"
+        "@davidgraeber 12.3%,@shanley 19.8%")
+;=> (["@davidgraeber 12.3%" "@davidgraeber" "12.3"]
+;    ["@shanley 19.8%" "@shanley" "19.8"])
 ```
 
 #### Replacing
 
 ```clojure
 ;; Use $0, $1, etc to refer to matched groups.
-(str/replace "Bolivia 12.3%,Mozambique 19.8%"
-             #"(\w+)\s([.0-9]+)%"
+(str/replace "@davidgraeber 12.3%,@shanley 19.8%"
+             #"(@\w+)\s([.0-9]+)%"
              "$2 ($1)")
-;=> "12.3 (Bolivia),19.8 (Mozambique)"
+;=> "12.3 (@davidgraeber),19.8 (@shanley)"
 
 ;; A function can generate replacements.
-(str/replace "Bolivia 12.3%,Mozambique 19.8%"
-             #"(\w+)\s([.0-9]+)%,?"
-             (fn [[_ country percent]]
-               (let [points (-> percent Float/parseFloat (* 100) Math/round)]
-                 (str country " has " points " points of growth.\n"))))
-;=> "Bolivia has 1230 points of growth.
-;Mozambique has 1980 points of growth.
-;"
+(println
+  (str/replace "@davidgraeber 12.3%,@shanley 19.8%"
+               #"(@\w+)\s([.0-9]+)%,?"
+               (fn [[_ person percent]]
+                   (let [points (-> percent Float/parseFloat (* 100) Math/round)]
+                     (str person "'s followers grew " points " points.\n")))))
+;print=> @davidgraeber's followers grew 1230 points.
+;print=> @shanley's followers grew 1980 points.
+;print=>
 ```
 
 
