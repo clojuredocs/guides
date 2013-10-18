@@ -215,10 +215,12 @@ before, the whole match is the 0th group.)
 ### Format strings
 
 [Reference.](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html)
+A well-known templating language to print text.
 
 ``` clojure
 (format "%s enjoyed %s%%." "Mozambique" 19.8) ;=> "Mozambique enjoyed 19.8%."
 
+;; The %1$ prefix allows you to keep referring to the first arg.
 (format "%1$tY-%1$tm-%1$td" #inst"2000-01-02T00:00:00") ;=> "2000-01-02"
 
 (format "New year: %2$tY. Old year: %1$tY"
