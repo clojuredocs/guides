@@ -200,9 +200,8 @@ before, the whole match is the 0th group.)
 
 ### Context-free grammars
 
-[Instaparse](https://github.com/Engelberg/instaparse) is a library
-whose goal is to answer this question: *"What if context-free grammars
-were as easy to use as regular expressions?"*
+[Instaparse](https://github.com/Engelberg/instaparse) makes many
+things easier to parse.
 
 ``` clojure
 ;; This will need to be in your project.clj (this may be an outdated version):
@@ -214,44 +213,34 @@ were as easy to use as regular expressions?"*
 ;;   (require '[instaparse.core :as insta])
 ;;
 
-(def user-info-format
+;; Quick implementation of http://www.json.org/
+(def untested-json-parser
   (insta/parser
-   "<expr> = name-and-info (<whitespace> name-and-info)*
-    <name-and-info> = name <whitespace> info
-    name = #'@[\\w\\-_]+'
-    info = <start-tag> #'[^<>]*' <end-tag>
-    start-tag = '<'
-    end-tag = '>'
-    whitespace = #'\\s+'"))
+   "Object = <'{'> <w*> (members <w*>)* <'}'>
+    <members> = pair (<w*> <','> <w*> members)*
+    <pair> = string <w*> <':'> <w*> value
+    <value> = string | number | Object | array | 'true' | 'false' | 'null'
+    array = <'['> elements* <']'>
+    <elements> = value <w*> (<','> <w*> elements)*
+    number = int frac? exp?
+    <int> = '-'? digits
+    <frac> = '.' digits
+    exp = e digits
+    <e> = <('e' | 'E')> (<'+'> | '-')?
+    <digits> = #'[0-9]+'
+    (* First sketched state machine, then wrote regex syntax,
+       then added all the escape-backslashes. *)
+    string = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
+    <w> = #'\\s+'"))
 
-(user-info-format "@shanley <will troll for social justice>
-                   @juliepagano <programmer, feminist>
-                   @ashedryden <developer, rubyist, conf organizer>")
-;=> ([:name "@shanley"]
-;    [:info "will troll for social justice"]
-;    [:name "@juliepagano"]
-;    [:info "programmer, feminist"]
-;    [:name "@ashedryden"]
-;    [:info "developer, rubyist, conf organizer"])
-
-
-(def sentence-parser
-  (insta/parser
-   "Sentence = NounPhrase <Space> VerbPhrase
-    NounPhrase = Noun | Adjective <Space> NounPhrase
-    VerbPhrase = Verb | Verb <Space> NounPhrase
-    <Space> = ' '
-    Adjective = 'green' | 'colorless'
-    Noun = 'ideas'
-    Verb = 'sleep' | Verb <Space> Adverb
-    Adverb = 'furiously'"))
-
-(sentence-parser "colorless green ideas sleep furiously")
-;=> [:Sentence
-;    [:NounPhrase
-;     [:Adjective "colorless"]
-;     [:NounPhrase [:Adjective "green"] [:NounPhrase [:Noun "ideas"]]]]
-;    [:VerbPhrase [:Verb [:Verb "sleep"] [:Adverb "furiously"]]]]
+(json-untested "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
+;=> [:Object
+;    [:string "foo"]
+;    [:Object
+;     [:string "bar"]
+;     [:number "10" [:exp "-" "9"]]
+;     [:string "quux"]
+;     [:array [:number "1"] [:number "2"] [:number "3"]]]]
 ```
 
 
