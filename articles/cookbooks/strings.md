@@ -251,8 +251,9 @@ A well-known templating language to print text.
 
 ### CL-Format
 
-`cl-format` is Common Lisp's notorious, powerful string formatting
-mini-language. Entertainingly described in [Practical Common
+`cl-format` is a port of Common Lisp's notorious, powerful string
+formatting mini-language. Entertainingly described in [Practical
+Common
 Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
 exhaustive reference is [Common Lisp's
 Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
