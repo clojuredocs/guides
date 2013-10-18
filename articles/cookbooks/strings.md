@@ -305,3 +305,8 @@ cl-format's mini-language all the time.
 
 * encodings, bytes
 * counting unicode code points
+
+
+## Contributors
+
+Tj Gabbour <tjg@simplevalue.de>, 2013 (original author)
