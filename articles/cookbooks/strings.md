@@ -60,8 +60,7 @@ assume your `ns` macro contains:
 ``` clojure
 (:require [clojure.string :as str]
           [clojure.edn :as edn]
-          [clojure.pprint :as pp]
-          [instaparse.core :as insta])
+          [clojure.pprint :as pp])
 ```
 
 or else in the repl you've loaded it:
@@ -70,7 +69,6 @@ or else in the repl you've loaded it:
 (require '[clojure.string :as str])
 (require '[clojure.edn :as edn])
 (require '[clojure.pprint :as pp])
-(require '[instaparse.core :as insta])
 ```
 
 
@@ -207,6 +205,15 @@ whose goal is to answer this question: *"What if context-free grammars
 were as easy to use as regular expressions?"*
 
 ``` clojure
+;; This will need to be in your project.clj (this may be an outdated version):
+;; :dependencies [[instaparse "1.2.4"]]
+;;
+;;  We'll assume your ns macro contains:
+;;   (:require [instaparse.core :as insta])
+;; or else in the repl you've loaded it:
+;;   (require '[instaparse.core :as insta])
+;;
+
 (def user-info-format
   (insta/parser
    "<expr> = name-and-info (<whitespace> name-and-info)*
