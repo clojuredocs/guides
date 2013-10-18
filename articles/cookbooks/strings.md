@@ -188,11 +188,13 @@ nest groups.
 ### Context-free grammars
 
 [Instaparse](https://github.com/Engelberg/instaparse) makes many
-things easier to parse.
+things easier to parse. Below is a quick implementation of [JSON's
+grammar](http://www.json.org/) which isn't seriously tested. (Use
+[data.json](https://github.com/clojure/data.json) instead.)
 
 ``` clojure
-;; This will need to be in your project.clj (this may be an outdated version):
-;; :dependencies [[instaparse "1.2.4"]]
+;; Your project.clj should contain this (you may need to restart your JVM):
+;;   :dependencies [[instaparse "1.2.4"]]
 ;;
 ;;  We'll assume your ns macro contains:
 ;;   (:require [instaparse.core :as insta])
@@ -200,12 +202,11 @@ things easier to parse.
 ;;   (require '[instaparse.core :as insta])
 ;;
 
-;; Quick implementation of http://www.json.org/
 (def barely-tested-json-parser
   (insta/parser
    "Object = <'{'> <w*> (members <w*>)* <'}'>
     <members> = pair (<w*> <','> <w*> members)*
-    <pair> = string <w*> <':'> <w*> value
+    pair = string <w*> <':'> <w*> value
     <value> = string | number | Object | array | 'true' | 'false' | 'null'
     array = <'['> elements* <']'>
     <elements> = value <w*> (<','> <w*> elements)*
@@ -220,14 +221,14 @@ things easier to parse.
     string = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
     <w> = #'\\s+'"))
 
-(barely-tested-json-parser "{\"foo\": {\"bar\": 10e-9, \"quux\": [1,2,3]}}")
+(barely-tested-json-parser "{\"foo\": {\"bar\": 99.9e-9, \"quux\": [1, 2, -3]}}")
 ;=> [:Object
-;    [:string "foo"]
-;    [:Object
-;     [:string "bar"]
-;     [:number "10" [:exp "-" "9"]]
-;     [:string "quux"]
-;     [:array [:number "1"] [:number "2"] [:number "3"]]]]
+;     [:pair [:string "foo"]
+;            [:Object
+;             [:pair [:string "bar"]
+;                    [:number "99" "." "9" [:exp "-" "9"]]]
+;             [:pair [:string "quux"]
+;                    [:array [:number "1"] [:number "2"] [:number "-" "3"]]]]]]
 ```
 
 
