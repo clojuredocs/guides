@@ -58,7 +58,8 @@ assume your `ns` macro contains:
 
 ``` clojure
 (:require [clojure.string :as str]
-          [clojure.edn :as edn])
+          [clojure.edn :as edn]
+          [clojure.pprint :as pp])
 ```
 
 or else in the repl you've loaded it:
@@ -66,6 +67,7 @@ or else in the repl you've loaded it:
 ``` clojure
 (require '[clojure.string :as str])
 (require '[clojure.edn :as edn])
+(require '[clojure.pprint :as pp])
 ```
 
 
@@ -219,11 +221,17 @@ http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
 
 ### CL-Format
 
-`cl-format` is Common Lisp's notoriously powerful string formatting
+`cl-format` is Common Lisp's notorious, powerful string formatting
 mini-language. Entertainingly described in [Practical Common
 Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
 exhaustive reference is [Common Lisp's
 Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
+
+Few Clojure users will be familiar with cl-format, so try not to go
+overboard with it. (It's even controversial among Common Lisp users.)
+When used sparingly, it's more readable than a big mess of control
+flow. On the other hand, there's a reason we don't program in
+cl-format's mini-language all the time.
 
 ``` clojure
 (pp/cl-format nil "~{~{~a had ~s percentage point~:p.~}~^~%~}"
