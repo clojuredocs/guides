@@ -100,6 +100,9 @@ bar")                             ;=> ["foo" "bar"]
 ;; Escaping
 (str/escape "foo|bar|quux" {\| "||"}) ;=> "foo||bar||quux"
 
+;; Get byte array of given encoding
+(.getBytes "foo" "UTF-8") ;=> #<byte[] [B@3c3660>
+
 ;; Parsing keywords
 (keyword "foo")    ;=> :foo
 
