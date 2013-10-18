@@ -202,6 +202,10 @@ before, the whole match is the 0th group.)
 
 ### Context-free grammars
 
+[Instaparse](https://github.com/Engelberg/instaparse) is a library
+whose goal is to answer this question: *"What if context-free grammars
+were as easy to use as regular expressions?"*
+
 ``` clojure
 (def user-info-format
   (insta/parser
@@ -305,4 +309,3 @@ cl-format's mini-language all the time.
 
 * encodings, bytes
 * counting unicode code points
-* instaparse
