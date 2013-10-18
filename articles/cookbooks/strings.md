@@ -116,26 +116,26 @@ bar")                             ;=> ["foo" "bar"]
 (bigdec "20000000000000000000.00000000") ;=> 20000000000000000000.00000000M
 (Integer/parseInt "2")                   ;=> 2
 (Float/parseFloat "2")                   ;=> 2.0
-```
 
-### Parsing more exotic Clojure data
-
-[edn](https://github.com/edn-format/edn) is a useful subset of Clojure
-data, useful for communicating with other computers. A bit like JSON,
-but in many ways more principled. (For instance, you can tag values,
-so you're not always stuffing random date formats into strings or
-whatever, leaving your users to figure out how to parse it.)
-
-The sledgehammer is `read-string`. Lets you parse any valid Clojure
-data. Its power is a **major security risk**, as it can run arbitrary
-code.  If you must use it, remember to set `*read-eval*` to `false`.
-
-``` clojure
+;; Parsing edn, a subset of Clojure forms.
 (edn/read-string "0xffff") ;=> 65535
 
-(binding [*read-eval* false]  ;; Security
+;; The sledgehammer approach to reading Clojure forms.
+;; SECURITY WARNING: Ensure *read-eval* is false, unless you want to
+;; potentially execute arbitrary code.
+(binding [*read-eval* false]
   (read-string "#\"[abc]\""))
 ;=> #"[abc]"
+
+;; with-out-str redirects standard output (*out*) to a string,
+;; providing an easy way to build strings.
+(let [shrimp-varieties ["shrimp-kabobs" "shrimp creole" "shrimp gumbo"]]
+  (with-out-str
+    (print "We have ")
+    (doseq [name (str/join ", " shrimp-varieties)]
+      (print name))
+    (print "...")))
+;=> "We have shrimp-kabobs, shrimp creole, shrimp gumbo..."
 ```
 
 
@@ -241,20 +241,6 @@ things easier to parse.
 ;     [:number "10" [:exp "-" "9"]]
 ;     [:string "quux"]
 ;     [:array [:number "1"] [:number "2"] [:number "3"]]]]
-```
-
-
-### Leveraging streams
-
-``` clojure
-;; Redirect standard output (*out*) to string
-(let [shrimp-varieties ["shrimp-kabobs" "shrimp creole" "shrimp gumbo"]]
-  (with-out-str
-    (print "We have ")
-    (doseq [name (str/join ", " shrimp-varieties)]
-      (print name))
-    (print "...")))
-;=> "We have shrimp-kabobs, shrimp creole, shrimp gumbo..."
 ```
 
 
