@@ -198,6 +198,50 @@ before, the whole match is the 0th group.)
 ```
 
 
+### Context-free grammars
+
+``` clojure
+(def user-info-format
+  (insta/parser
+   "<expr> = name-and-info (<whitespace> name-and-info)*
+    <name-and-info> = name <whitespace> info
+    name = #'@[\\w\\-_]+'
+    info = <start-tag> #'[^<>]*' <end-tag>
+    start-tag = '<'
+    end-tag = '>'
+    whitespace = #'\\s+'"))
+
+(user-info-format "@shanley <will troll for social justice>
+                   @juliepagano <programmer, feminist>
+                   @ashedryden <developer, rubyist, conf organizer>")
+;=> ([:name "@shanley"]
+;    [:info "will troll for social justice"]
+;    [:name "@juliepagano"]
+;    [:info "programmer, feminist"]
+;    [:name "@ashedryden"]
+;    [:info "developer, rubyist, conf organizer"])
+
+
+(def sentence-parser
+  (insta/parser
+   "Sentence = NounPhrase <Space> VerbPhrase
+    NounPhrase = Noun | Adjective <Space> NounPhrase
+    VerbPhrase = Verb | Verb <Space> NounPhrase
+    <Space> = ' '
+    Adjective = 'green' | 'colorless'
+    Noun = 'ideas'
+    Verb = 'sleep' | Verb <Space> Adverb
+    Adverb = 'furiously'"))
+
+(sentence-parser "colorless green ideas sleep furiously")
+;=> [:Sentence
+;    [:NounPhrase
+;     [:Adjective "colorless"]
+;     [:NounPhrase [:Adjective "green"] [:NounPhrase [:Noun "ideas"]]]]
+;    [:VerbPhrase [:Verb [:Verb "sleep"] [:Adverb "furiously"]]]]
+```
+
+
 ### Leveraging streams
 
 ``` clojure
