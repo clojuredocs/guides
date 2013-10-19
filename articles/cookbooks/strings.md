@@ -264,6 +264,7 @@ tested nor a featureful parser. Use
                        :number (comp edn/read-string str)}))
 ;=> {"foo" {"quux" [1 2 -3], "bar" 9.99E-8}}
 
+
 ;; Now we can appreciate what those <angle-brackets> were all about.
 ;;
 ;; When to the right of the grammar's =, it totally hides the enclosed
