@@ -259,8 +259,8 @@ Java's templating mini-language.
 
 (format "New year: %2$tY. Old year: %1$tY"
         #inst"2000-01-02T00:00:00"
-        #inst"2010-01-02T00:00:00")
-;=> "New year: 2010. Old year: 2000"
+        #inst"3111-12-31T00:00:00")
+;=> "New year: 3111. Old year: 2000"
 ```
 
 
