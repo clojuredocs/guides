@@ -327,13 +327,15 @@ This guide covers:
 
 ## Cookbooks
 
-### [Strings](/articles/cookbooks/strings.html) (TBD)
+### [Strings](/articles/cookbooks/strings.html)
 
 This cookbook covers:
 
  * How to work with strings
- * How to work with regular expressions
  * How to work with characters
+ * How to work with regular expressions
+ * How to work with context-free grammars
+ * How to format text
 
 ### [Mathematics](/articles/cookbooks/math.html)
 
