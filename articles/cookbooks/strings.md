@@ -276,7 +276,7 @@ in Common Lisp's Hyperspec.
 Remember that `cl-format` represents a (potentially unreadable)
 language which your audience didn't sign up to learn. If you're the
 sort of person who likes it, try to only use it in that sweetspot
-where it provides high clarity for little complexity.
+where it provides clarity for little complexity.
 
 ``` clojure
 ;; The first param prints to *out* if true. To string if false.
