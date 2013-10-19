@@ -215,7 +215,6 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
 ;;   (:require [instaparse.core :as insta])
 ;; or else in the repl you've loaded it:
 ;;   (require '[instaparse.core :as insta])
-;;
 
 (def barely-tested-json-parser
   (insta/parser
@@ -250,7 +249,7 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
 ### Format strings
 
 [Reference.](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html)
-A well-known templating language to print text.
+Java's templating mini-language.
 
 ``` clojure
 (format "%s enjoyed %s%%." "Mozambique" 19.8) ;=> "Mozambique enjoyed 19.8%."
@@ -268,16 +267,16 @@ A well-known templating language to print text.
 ### CL-Format
 
 `cl-format` is a port of Common Lisp's notorious, powerful string
-formatting mini-language. Entertainingly described in [Practical
-Common
-Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
-exhaustive reference is [Common Lisp's
-Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
+formatting
+mini-language. [Tutorial](http://www.gigamonkeys.com/book/a-few-format-recipes.html)
+in Practical Common
+Lisp. [Reference](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm)
+in Common Lisp's Hyperspec.
 
 Remember that `cl-format` represents a (potentially unreadable)
-language which your audience didn't sign up to learn. So try to only
-use it in that sweetspot where it provides high clarity for little
-complexity.
+language which your audience didn't sign up to learn. If you're the
+sort of person who likes it, try to only use it in that sweetspot
+where it provides high clarity for little complexity.
 
 ``` clojure
 ;; The first param prints to *out* if true. To string if false.
