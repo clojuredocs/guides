@@ -132,20 +132,15 @@ bar")                             ;=> ["foo" "bar"]
 (binding [*read-eval* false]
   (read-string "#\"[abc]\""))
 ;=> #"[abc]"
-
-;; with-out-str redirects standard output (*out*) to a string,
-;; providing an easy way to build strings.
-(let [shrimp-varieties ["shrimp-kabobs" "shrimp creole" "shrimp gumbo"]]
-  (with-out-str
-    (print "We have ")
-    (doseq [name (str/join ", " shrimp-varieties)]
-      (print name))
-    (print "...")))
-;=> "We have shrimp-kabobs, shrimp creole, shrimp gumbo..."
 ```
 
 
-### Regexes
+### Parsing complex strings
+
+#### Regexes
+
+Regexes offer a boost in string-matching power. You can express ideas
+like repetition, alternatives, etc.
 
 [Regex
 reference.](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)
@@ -157,37 +152,47 @@ started by the left-most `(`, the 2nd group is started by the
 second-left-most `(`, etc. You can even nest groups. You can refer to
 groups later using `$0`, `$1`, etc.
 
-#### Matching
+**Matching**
 
 ```clojure
 ;; Simple matching
 (re-find #"\d+" "foo 123 bar") ;=> "123"
 
-;; Failed matching
+;; What happens when a match fails.
 (re-find #"\d+" "foobar") ;=> nil
 
-;; Return first matching groups.
+;; Return only the first groups which satisfy match.
 (re-matches #"(@\w+)\s([.0-9]+)%"
             "@shanley 19.8%")
 ;=>["@shanley 19.8%" "@shanley" "19.8"]
 
-;; Return seq of all matching groups.
+;; Return seq of all matching groups which occur in string.
 (re-seq #"(@\w+)\s([.0-9]+)%"
         "@davidgraeber 12.3%,@shanley 19.8%")
 ;=> (["@davidgraeber 12.3%" "@davidgraeber" "12.3"]
 ;    ["@shanley 19.8%" "@shanley" "19.8"])
 ```
 
-#### Replacing
+**Replacing**
+
+We use `str/replace`. Aside from the first arg (the initial string),
+the next two args are match and replacement:
+
+```
+   match / replacement can be:
+     string / string
+     char / char
+     pattern / (string or function of match).
+```
 
 ```clojure
-;; Use $0, $1, etc to refer to matched groups.
+;; In the replacement string, $0, $1, etc refer to matched groups.
 (str/replace "@davidgraeber 12.3%,@shanley 19.8%"
-             #"(@\w+)\s([.0-9]+)%"
+             #"(@\S+)\s([.0-9]+)%"
              "$2 ($1)")
 ;=> "12.3 (@davidgraeber),19.8 (@shanley)"
 
-;; A function can generate replacements.
+;; Using a function to replace text gives us power.
 (println
   (str/replace "@davidgraeber 12.3%,@shanley 19.8%"
                #"(@\w+)\s([.0-9]+)%,?"
@@ -200,11 +205,14 @@ groups later using `$0`, `$1`, etc.
 ```
 
 
-### Context-free grammars
+#### Context-free grammars
 
-[Instaparse](https://github.com/Engelberg/instaparse) makes many
-things easier to parse. Below is a quick implementation of [JSON's
-grammar](http://www.json.org/) which isn't seriously tested. (Use
+Context-free grammars offer yet another boost in expressive matching
+power, compared to regexes. You can express ideas like nesting.
+
+We'll use [Instaparse](https://github.com/Engelberg/instaparse) on
+[JSON's grammar](http://www.json.org/).  (This example isn't seriously
+tested nor a featureful parser. Use
 [data.json](https://github.com/clojure/data.json) instead.)
 
 ``` clojure
@@ -218,7 +226,9 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
 
 (def barely-tested-json-parser
   (insta/parser
-   "Object     = <'{'> <w*> (members <w*>)* <'}'>
+   "(* Capitalizing Object is an optional convention, telling the audience
+       where parsing starts. No effect on parsing. *)
+    Object     = <'{'> <w*> (members <w*>)* <'}'>
     <members>  = pair (<w*> <','> <w*> members)*
     pair       = string <w*> <':'> <w*> value
     <value>    = string | number | Object | array | 'true' | 'false' | 'null'
@@ -231,7 +241,7 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
     <e>        = <('e' | 'E')> (<'+'> | '-')?
     <digits>   = #'[0-9]+'
     (* First sketched state machine; then it was easier to figure out
-       regex syntax and all the escape-backslashes. *)
+       regex syntax and all the maddening escape-backslashes. *)
     string     = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
     <w>        = #'\\s+'"))
 
@@ -243,20 +253,52 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
 ;                    [:number "99" "." "9" [:exp "-" "9"]]]
 ;             [:pair [:string "quux"]
 ;                    [:array [:number "1"] [:number "2"] [:number "-" "3"]]]]]]
+
+;; Now we can see what those <angle-brackets> were all about.
+;;
+;; When to the right of the grammar's =, it totally hides the enclosed
+;; thing in the output. For example, we don't care about whitespace,
+;; so we hide it with <w*>.
+;;
+;; When to the left of the grammar's =, it merely prevents a level of
+;; nesting in the output. For example, "members" is a rather
+;; artificial entity, so we prevent a pointless level of nesting with
+;; <members>.
 ```
 
 
-### Format strings
+### Building complex strings
 
-[Reference.](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html)
-Java's templating mini-language.
+#### Redirecting streams
+
+`with-out-str` provides a simple way to build strings. It redirects
+standard output (`*out*`) to a fresh `StringWriter`, then returns the
+resulting string. So you can use functions like `print`, *even in
+nested functions*, and get the resulting string at the end.
 
 ``` clojure
+(let [shrimp-varieties ["shrimp-kabobs" "shrimp creole" "shrimp gumbo"]]
+  (with-out-str
+    (print "We have ")
+    (doseq [name (str/join ", " shrimp-varieties)]
+      (print name))
+    (print "...")))
+;=> "We have shrimp-kabobs, shrimp creole, shrimp gumbo..."
+```
+
+#### Format strings
+
+Java's templating mini-language helps you build many strings
+conveniently. [Reference.](http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html)
+
+``` clojure
+;; %s is most commonly used to print args. Escape %'s with %%.
 (format "%s enjoyed %s%%." "Mozambique" 19.8) ;=> "Mozambique enjoyed 19.8%."
 
 ;; The 1$ prefix allows you to keep referring to the first arg.
 (format "%1$tY-%1$tm-%1$td" #inst"2000-01-02T00:00:00") ;=> "2000-01-02"
 
+;; Again, 1$, 2$, etc prefixes let us refer to args in arbitrary orders.
 (format "New year: %2$tY. Old year: %1$tY"
         #inst"2000-01-02T00:00:00"
         #inst"3111-12-31T00:00:00")
@@ -264,19 +306,23 @@ Java's templating mini-language.
 ```
 
 
-### CL-Format
+#### CL-Format
 
 `cl-format` is a port of Common Lisp's notorious, powerful string
-formatting
-mini-language. [Tutorial](http://www.gigamonkeys.com/book/a-few-format-recipes.html)
-in Practical Common
-Lisp. [Reference](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm)
-in Common Lisp's Hyperspec.
+formatting mini-language. For example, you can build strings from
+sequences. (As well as oddities like print numbers in English or two
+varieties of Roman numerals.) However, it's weaker than plain `format`
+with printing dates and referring to args in arbitrary order.
 
 Remember that `cl-format` represents a (potentially unreadable)
 language which your audience didn't sign up to learn. If you're the
-sort of person who likes it, try to only use it in that sweetspot
-where it provides clarity for little complexity.
+sort of person who likes it, try to only use it in sweetspots where it
+provides clarity for little complexity.
+
+[Tutorial](http://www.gigamonkeys.com/book/a-few-format-recipes.html)
+in Practical Common
+Lisp. [Reference](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm)
+in Common Lisp's Hyperspec.
 
 ``` clojure
 ;; The first param prints to *out* if true. To string if false.
