@@ -82,9 +82,9 @@ or else in the repl you've loaded it:
 ;; -1, which you have to test for. And characters like \o are
 ;; instances of java.lang.Character, which you may have to convert to
 ;; int or String.
-(.indexOf "foo" "oo")     ;=> 1
-(.indexOf "foo" "x")      ;=> -1
-(.indexOf "foo" (int \o)) ;=> 1
+(.indexOf "foo" "oo")         ;=> 1
+(.indexOf "foo" "x")          ;=> -1
+(.lastIndexOf "foo" (int \o)) ;=> 2
 
 ;; Substring
 (subs "0123" 1)       ;=> "123"
