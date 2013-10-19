@@ -256,7 +256,15 @@ tested nor a featureful parser. Use
 ;             [:pair [:string "quux"]
 ;                    [:array [:number "1"] [:number "2"] [:number "-" "3"]]]]]]
 
-;; Now we can see what those <angle-brackets> were all about.
+;; That last output is a bit verbose. Let's process it further.
+(->> (barely-tested-json-parser "{\"foo\": {\"bar\": 99.9e-9, \"quux\": [1, 2, -3]}}")
+     (insta/transform {:Object hash-map
+                       :string str
+                       :array vector
+                       :number (comp edn/read-string str)}))
+;=> {"foo" {"quux" [1 2 -3], "bar" 9.99E-8}}
+
+;; Now we can appreciate what those <angle-brackets> were all about.
 ;;
 ;; When to the right of the grammar's =, it totally hides the enclosed
 ;; thing in the output. For example, we don't care about whitespace,
