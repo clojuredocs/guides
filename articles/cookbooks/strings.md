@@ -155,7 +155,7 @@ substring. (Or refer to matches later.)
 **Groups:** In the regex `#"(group-1) (group-2)"`, the 0th group is
 the whole match. The 1st group is started by the left-most `(`, the
 2nd group is started by the second-left-most `(`, etc. You can even
-nest groups. You can refer to groups using `$0`, `$1`, etc.
+nest groups. You can refer to groups later using `$0`, `$1`, etc.
 
 #### Matching
 
