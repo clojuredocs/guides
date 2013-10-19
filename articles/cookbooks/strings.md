@@ -277,21 +277,16 @@ Few Clojure users will be familiar with cl-format, so try not to go
 overboard with it.
 
 ``` clojure
-(pp/cl-format nil "~{~{~a had ~s percentage point~:p.~}~^~%~}"
-                  {"Bolivia" 12.3
-                   "Mozambique" 19.8
-                    "US" 1})
-;=> "Bolivia had 12.3 percentage points.
-;Mozambique had 19.8 percentage points.
-;US had 1 percentage point."
+;; The first param prints to *out* if true. To string if false.
+;; To a stream if it's a stream.
+(pp/cl-format true "~{~{~a had ~s percentage point~:p.~}~^~%~}"
+              {"@davidgraeber" 12.3
+               "@shanley" 19.8
+               "@tjgabbour" 1})
+;print=> @davidgraeber had 12.3 percentage points.
+;print=> @tjgabbour had 1 percentage point.
+;print=> @shanley had 19.8 percentage points.
 ```
-
-
-## TBD:
-
-* encodings, bytes
-* counting unicode code points
-
 
 ## Contributors
 
