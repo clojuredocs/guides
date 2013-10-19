@@ -64,6 +64,8 @@ or else in the repl you've loaded it:
 
 ## Recipes
 
+### Basics
+
 ``` clojure
 ;; Size measurements
 (count "0123")      ;=> 4
