@@ -24,9 +24,9 @@ You can use anything which operates on them.
 * Clojure supports some convenient notations:
 
 ```
-    "foo"    String
-    #"\d"    Regex (in this case, one which matches a single digit)
-    \f       Character (in this case, the letter 'f')
+    "foo"    java.lang.String
+    #"\d"    java.util.regex.Pattern (in this case, one which matches a single digit)
+    \f       java.lang.Character (in this case, the letter 'f')
 ```
 
 * **Caveat:** Human brains and electronic computers are rather different
