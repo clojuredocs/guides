@@ -273,8 +273,11 @@ Common
 Lisp](http://www.gigamonkeys.com/book/a-few-format-recipes.html). The
 exhaustive reference is [Common Lisp's
 Hyperspec](http://www.lispworks.com/documentation/HyperSpec/Body/22_c.htm).
-Few Clojure users will be familiar with cl-format, so try not to go
-overboard with it.
+
+Remember that `cl-format` represents a (potentially unreadable)
+language which your audience didn't sign up to learn. So try to only
+use it in that sweetspot where it provides high clarity for little
+complexity.
 
 ``` clojure
 ;; The first param prints to *out* if true. To string if false.
@@ -286,6 +289,16 @@ overboard with it.
 ;print=> @davidgraeber had 12.3 percentage points.
 ;print=> @tjgabbour had 1 percentage point.
 ;print=> @shanley had 19.8 percentage points.
+
+(def format-string "~{~#[~;~a~;~a and ~a~:;~@{~a~#[~;, and ~:;, ~]~}~]~}")
+(pp/cl-format nil format-string [])
+;=> ""
+(pp/cl-format nil format-string ["@shanley"])
+;=> "@shanley"
+(pp/cl-format nil format-string ["@shanley", "@davidgraeber"])
+;=> "@shanley and @davidgraeber"
+(pp/cl-format nil format-string ["@shanley", "@davidgraeber", "@sarahkendzior"])
+;=> "@shanley, @davidgraeber, and @sarahkendzior"
 ```
 
 ## Contributors
