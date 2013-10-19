@@ -65,7 +65,7 @@ or else in the repl you've loaded it:
 ## Recipes
 
 ``` clojure
-;; Counting
+;; Size measurements
 (count "0123")      ;=> 4
 (empty? "0123")     ;=> false
 (empty? "")         ;=> true
