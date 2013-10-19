@@ -76,6 +76,16 @@ or else in the repl you've loaded it:
 (str/join ["0" "1" "2"])     ;=> "012"
 (str/join "." ["0" "1" "2"]) ;=> "0.1.2"
 
+;; Matching using plain Java methods.
+;;
+;; You might prefer regexes for these. For instance, failure returns
+;; -1, which you have to test for. And characters like \o are
+;; instances of java.lang.Character, which you may have to convert to
+;; int or String.
+(.indexOf "foo" "oo")     ;=> 1
+(.indexOf "foo" "x")      ;=> -1
+(.indexOf "foo" (int \o)) ;=> 1
+
 ;; Substring
 (subs "0123" 1)       ;=> "123"
 (subs "0123" 1 3)     ;=> "12"
@@ -114,8 +124,11 @@ bar")                             ;=> ["foo" "bar"]
 (edn/read-string "0xffff") ;=> 65535
 
 ;; The sledgehammer approach to reading Clojure forms.
-;; SECURITY WARNING: Ensure *read-eval* is false, unless you want to
-;; potentially execute arbitrary code.
+;;
+;; SECURITY WARNING: Ensure *read-eval* is false when dealing with
+;; strings you don't 100% trust. Even though *read-eval* is false by
+;; default since Clojure 1.5, be paranoid and set it to false right
+;; before you use it, because anything could've re-bound it to true.
 (binding [*read-eval* false]
   (read-string "#\"[abc]\""))
 ;=> #"[abc]"
