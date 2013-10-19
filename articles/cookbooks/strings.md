@@ -219,22 +219,22 @@ grammar](http://www.json.org/) which isn't seriously tested. (Use
 
 (def barely-tested-json-parser
   (insta/parser
-   "Object = <'{'> <w*> (members <w*>)* <'}'>
-    <members> = pair (<w*> <','> <w*> members)*
-    pair = string <w*> <':'> <w*> value
-    <value> = string | number | Object | array | 'true' | 'false' | 'null'
-    array = <'['> elements* <']'>
+   "Object     = <'{'> <w*> (members <w*>)* <'}'>
+    <members>  = pair (<w*> <','> <w*> members)*
+    pair       = string <w*> <':'> <w*> value
+    <value>    = string | number | Object | array | 'true' | 'false' | 'null'
+    array      = <'['> elements* <']'>
     <elements> = value <w*> (<','> <w*> elements)*
-    number = int frac? exp?
-    <int> = '-'? digits
-    <frac> = '.' digits
-    exp = e digits
-    <e> = <('e' | 'E')> (<'+'> | '-')?
-    <digits> = #'[0-9]+'
-    (* First sketched state machine, then wrote regex syntax,
-       then added all the escape-backslashes. *)
-    string = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
-    <w> = #'\\s+'"))
+    number     = int frac? exp?
+    <int>      = '-'? digits
+    <frac>     = '.' digits
+    exp        = e digits
+    <e>        = <('e' | 'E')> (<'+'> | '-')?
+    <digits>   = #'[0-9]+'
+    (* First sketched state machine; then it was easier to figure out
+       regex syntax and all the escape-backslashes. *)
+    string     = <'\\\"'> #'([^\"\\\\]|\\\\.)*' <'\\\"'>
+    <w>        = #'\\s+'"))
 
 (barely-tested-json-parser "{\"foo\": {\"bar\": 99.9e-9, \"quux\": [1, 2, -3]}}")
 ;=> [:Object
