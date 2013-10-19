@@ -228,19 +228,17 @@ tested nor a featureful parser. Use
 
 (def barely-tested-json-parser
   (insta/parser
-   "(* Capitalizing Object is an optional convention, telling the audience
-       where parsing starts. No effect on parsing. *)
-    Object     = <'{'> <w*> (members <w*>)* <'}'>
+   "object     = <'{'> <w*> (members <w*>)* <'}'>
     <members>  = pair (<w*> <','> <w*> members)*
-    pair       = string <w*> <':'> <w*> value
-    <value>    = string | number | Object | array | 'true' | 'false' | 'null'
+    <pair>     = string <w*> <':'> <w*> value
+    <value>    = string | number | object | array | 'true' | 'false' | 'null'
     array      = <'['> elements* <']'>
     <elements> = value <w*> (<','> <w*> elements)*
     number     = int frac? exp?
     <int>      = '-'? digits
     <frac>     = '.' digits
-    exp        = e digits
-    <e>        = <('e' | 'E')> (<'+'> | '-')?
+    <exp>      = e digits
+    <e>        = ('e' | 'E') (<'+'> | '-')?
     <digits>   = #'[0-9]+'
     (* First sketched state machine; then it was easier to figure out
        regex syntax and all the maddening escape-backslashes. *)
@@ -248,17 +246,17 @@ tested nor a featureful parser. Use
     <w>        = #'\\s+'"))
 
 (barely-tested-json-parser "{\"foo\": {\"bar\": 99.9e-9, \"quux\": [1, 2, -3]}}")
-;=> [:Object
-;     [:pair [:string "foo"]
-;            [:Object
-;             [:pair [:string "bar"]
-;                    [:number "99" "." "9" [:exp "-" "9"]]]
-;             [:pair [:string "quux"]
-;                    [:array [:number "1"] [:number "2"] [:number "-" "3"]]]]]]
+;=> [:object
+;     [:string "foo"]
+;     [:object
+;       [:string "bar"]
+;       [:number "99" "." "9" "e" "-" "9"]
+;       [:string "quux"]
+;       [:array [:number "1"] [:number "2"] [:number "-" "3"]]]]
 
 ;; That last output is a bit verbose. Let's process it further.
 (->> (barely-tested-json-parser "{\"foo\": {\"bar\": 99.9e-9, \"quux\": [1, 2, -3]}}")
-     (insta/transform {:Object hash-map
+     (insta/transform {:object hash-map
                        :string str
                        :array vector
                        :number (comp edn/read-string str)}))
