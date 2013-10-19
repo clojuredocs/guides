@@ -149,13 +149,13 @@ bar")                             ;=> ["foo" "bar"]
 
 [Regex
 reference.](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)
-Regex groups are useful, when we want to match more than one
-substring. (Or refer to matches later.)
 
-**Groups:** In the regex `#"(group-1) (group-2)"`, the 0th group is
-the whole match. The 1st group is started by the left-most `(`, the
-2nd group is started by the second-left-most `(`, etc. You can even
-nest groups. You can refer to groups later using `$0`, `$1`, etc.
+**Groups:** Regex groups are useful, when we want to match more than
+one substring. (Or refer to matches later.) In the regex `#"(group-1)
+(group-2)"`, the 0th group is the whole match. The 1st group is
+started by the left-most `(`, the 2nd group is started by the
+second-left-most `(`, etc. You can even nest groups. You can refer to
+groups later using `$0`, `$1`, etc.
 
 #### Matching
 
