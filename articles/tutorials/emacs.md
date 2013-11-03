@@ -39,7 +39,7 @@ correctly.
 Once brew is installed, you can install Emacs 24 using:
 
 ```bash
-$ brew install emacs --cocoa
+$ brew install emacs --cocoa --srgb
 $ brew linkapps Emacs
 ```
 
@@ -148,7 +148,7 @@ by hand.
                       starter-kit-eshell
                       clojure-mode
                       clojure-test-mode
-                      nrepl))
+                      cider))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -273,10 +273,10 @@ explanation of the project structure.
 Let's start up a live repl session.
 
 ```
-M-x nrepl-jack-in
+M-x cider-jack-in
 ```
 
-This should open up a new window looking at our \*nrepl\* buffer.
+This should open up a new window looking at our \*cider\* buffer.
 
 First thing to do is add a simple test (in fact the only test we will
 be adding because by default, we get it right first time). Open the
@@ -325,7 +325,7 @@ problem with the assertion in the mini-buffer:
         {}))
 ```
 
-The failure message will also be shown in the `*nrepl*` buffer.
+The failure message will also be shown in the `*cider*` buffer.
 
 Anyway, our map was empty as expected. Let's fix that:
 
@@ -375,7 +375,7 @@ clojure-mode and clojure-test-mode.
 One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
 open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
-two so you have the `core.clj` and `*nrepl*` buffers open.
+two so you have the `core.clj` and `*cider*` buffers open.
 Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
 decided you want to pull out the anonymous function to be a named
@@ -443,12 +443,12 @@ stack and return to where you were. For all the definitions in a
 single file you can use `M-x imenu` to list them and jump to one.
 
 When you are finished with the repl (or if for some reason it has
-gotten into a bad state), you can simply kill the `*nrepl*`
-buffer by typing `C-x k` and re-run `nrepl-jack-in` to start another.
+gotten into a bad state), you can simply kill the `*cider*`
+buffer by typing `C-x k` and re-run `cider-jack-in` to start another.
 
 ## Appendix ##
 
-nREPL.el keyboard shortcuts can be found in [nREPL documentation](https://github.com/kingtim/nrepl.el#keyboard-shortcuts).
+CIDER keyboard shortcuts can be found in [CIDER documentation](https://github.com/clojure-emacs/cider#keyboard-shortcuts).
 
 ## Contributors
 
