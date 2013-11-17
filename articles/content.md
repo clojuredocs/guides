@@ -193,6 +193,22 @@ This guide covers:
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
 
+### [Books](/articles/ecosystem/books.html)
+
+This guide covers:
+
+ * Books on Clojure
+ * Books on ClojureScript
+
+
+### [Maven for Clojure Development](/articles/ecosystem/maven.html)
+
+This guide covers:
+
+ * An overview of Apache Maven
+ * Maven Clojure plugin
+
+
 ### [core.typed](/articles/ecosystem/core_typed/home.html)
 
  * What is Clojure core.typed
@@ -211,22 +227,6 @@ This guide covers:
  * How to use connection pooling
  * How to use the basic SQL DSL in java.jdbc.sql
  * Where to go beyond java.jdbc
-
-
-### [Books](/articles/ecosystem/books.html)
-
-This guide covers:
-
- * Books on Clojure
- * Books on ClojureScript
-
-
-### [Maven for Clojure Development](/articles/ecosystem/maven.html)
-
-This guide covers:
-
- * An overview of Apache Maven
- * Maven Clojure plugin
 
 
 ### [Library Development and Distribution](/articles/ecosystem/libraries_authoring.html)
