@@ -164,6 +164,14 @@ This guide includes definitons of various Clojure-related terminology.
 
 ## The Clojure Ecosystem
 
+### [Books](/articles/ecosystem/books.html)
+
+This guide covers:
+
+ * Books on Clojure
+ * Books on ClojureScript
+
+
 ### [Getting Started with Leiningen](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
 
 This guide covers:
@@ -177,6 +185,16 @@ This guide covers:
  * How to compile your code and dependencies into a single JAR for deployment ("überjar")
  * How to share (publish) a library
 
+### [Maven for Clojure Development](/articles/ecosystem/maven.html)
+
+This guide covers:
+
+ * An overview of Apache Maven
+ * Maven Clojure plugin
+
+### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html)
+
+A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
 ### [Clojure Community](/articles/ecosystem/community.html)
 
@@ -186,28 +204,6 @@ This guide covers:
  * Clojure conferences
  * Local Clojure user groups
  * Other Clojure community resources
-
-
-### [Clojure Library Directory](/articles/ecosystem/libraries_directory.html)
-
-A curated and highly opinionated categorized directory of available Clojure libraries and tools.
-
-
-### [Books](/articles/ecosystem/books.html)
-
-This guide covers:
-
- * Books on Clojure
- * Books on ClojureScript
-
-
-### [Maven for Clojure Development](/articles/ecosystem/maven.html)
-
-This guide covers:
-
- * An overview of Apache Maven
- * Maven Clojure plugin
-
 
 ### [core.typed](/articles/ecosystem/core_typed/home.html)
 
