@@ -193,17 +193,6 @@ This guide covers:
 A curated and highly opinionated categorized directory of available Clojure libraries and tools.
 
 
-### [Editors & IDEs](/articles/ecosystem/development_tools.html) (incomplete)
-
-This guide covers:
-
- * An overview of development tools
- * A brief intro to Emacs, nREPL, SLIME/Swank
- * A brief intro to Vim with fireplace.vim
- * A brief intro to Counterclockwise (Eclipse plugin)
- * A brief intro to La Clojure (IntelliJ IDEA plugin)
-
-
 ### [core.typed](/articles/ecosystem/core_typed/home.html)
 
  * What is Clojure core.typed
