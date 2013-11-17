@@ -10,13 +10,13 @@ its ecosystem.
 We recognize that different Clojure users have different level of expertise
 and separates content into several groups:
 
- * [Tutorials](#tutorials)
- * [Core language guides](#clojure_language_guides)
+ * [Tutorials](#essentials)
+ * [Core language guides](#language_guides)
  * [The Ecosystem](#the_ecosystem) (tools, libraries, community, books) guides
- * [Cookbooks](#cookbooks)
+ * [Cookbooks](#tutorials_and_cookbooks)
 
 
-## Clojure Tutorials
+## Essentials
 
 ### [Getting Started](/articles/tutorials/getting_started.html)
 
@@ -34,38 +34,19 @@ basics.
 A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
 
 
-### [Eclipse and Counterclockwise for Clojure Development](/articles/tutorials/eclipse.html)
-
-A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
-
-### [fireplace.vim for Clojure Development](/articles/tutorials/vim_fireplace.html)
+### [Vim for Clojure Development](/articles/tutorials/vim_fireplace.html)
 
 A brief introduction to Clojure development in Vim with fireplace.vim.
 
-### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
-A brief tutorial/walkthrough of building a small web app using Ring,
-Compojure, Hiccup, and SQLite.
+### [Eclipse for Clojure Development](/articles/tutorials/eclipse.html)
 
-### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
-
-This guide covers:
-
- * How to parse XML in Clojure with zippers (`clojure.data.zip`)
-
-### [Growing a DSL with Clojure](/articles/tutorials/growing_a_dsl_with_clojure.html)
-
-How to create a simple DSL with Clojure.
-
-Includes introductions to:
-
- * Multimethods
- * Hierarchies
- * Metaprogramming and the "Code as data" philosophy
+A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 
 
-## Clojure Language Guides
+
+## Language Guides
 
 ### [Functions](/articles/language/functions.html)
 
@@ -309,13 +290,6 @@ This guide covers:
  * Popular tools and libraries in the area
 
 
-### [Web Development (Overview)](/articles/ecosystem/web_development.html) (TBD)
-
-This guide covers:
-
- * Popular tools and libraries in the area
-
-
 
 ### [Clojure User Groups](/articles/ecosystem/user_groups.html)
 
@@ -325,7 +299,29 @@ This guide covers:
 
 
 
-## Cookbooks
+## Tutorials and Cookbooks
+
+### [Basic Web Development](/articles/tutorials/basic_web_development.html)
+
+A brief tutorial/walkthrough of building a small web app using Ring,
+Compojure, Hiccup, and SQLite.
+
+### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
+
+This guide covers:
+
+ * How to parse XML in Clojure with zippers (`clojure.data.zip`)
+
+### [Growing a DSL with Clojure](/articles/tutorials/growing_a_dsl_with_clojure.html)
+
+How to create a simple DSL with Clojure.
+
+Includes introductions to:
+
+ * Multimethods
+ * Hierarchies
+ * Metaprogramming and the "Code as data" philosophy
+
 
 ### [Strings](/articles/cookbooks/strings.html)
 
