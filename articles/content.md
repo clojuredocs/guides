@@ -11,9 +11,9 @@ We recognize that different Clojure users have different level of expertise
 and separates content into several groups:
 
  * [Tutorials](#essentials)
- * [Core language guides](#language_guides)
- * [The Ecosystem](#the_ecosystem) (tools, libraries, community, books) guides
- * [Cookbooks](#tutorials_and_cookbooks)
+ * [Core language guides](#language-guides)
+ * [The Ecosystem](#the-clojure-ecosystem) (tools, libraries, community, books) guides
+ * [Cookbooks](#tutorials-and-cookbooks)
 
 
 ## Essentials
