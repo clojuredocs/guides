@@ -10,10 +10,10 @@ its ecosystem.
 We recognize that different Clojure users have different level of expertise
 and separates content into several groups:
 
- * [Tutorials](#essentials)
+ * [Essentials](#essentials)
  * [Core language guides](#language-guides)
  * [The Ecosystem](#the-clojure-ecosystem) (tools, libraries, community, books) guides
- * [Cookbooks](#tutorials-and-cookbooks)
+ * [Tutorials & Cookbooks](#tutorials-and-cookbooks)
 
 
 ## Essentials
