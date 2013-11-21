@@ -26,6 +26,24 @@ of Clojure (1.3+).
 
 ## Books About Clojure
 
+Note: books are listed in reverse chronological order.
+
+
+### Clojure High Performance Programming
+
+By Shantanu Kumar.
+
+#### Notes
+
+A book on all things performant code in Clojure and on the JVM: profiling,
+benchmarking, data structures, laziness impact, and more.
+
+#### Where You Can Buy It
+
+ * [Packt Publishing](http://www.packtpub.com/clojure-high-performance-programming/book): eBook, paperback
+ * [Amazon](http://www.amazon.com/Clojure-Performance-Programming-Shantanu-Kumar-ebook/dp/B00GTE1RVW/): eBook (Kindle), paperback
+ 
+
 
 ### Clojure For The Brave and True
 
