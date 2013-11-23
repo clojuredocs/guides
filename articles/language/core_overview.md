@@ -1411,7 +1411,8 @@ correlating to the provided sequence along with the provided value as
 the value of the final key.
 
 ```clojure
-TBD: example
+user> (assoc-in {:profile {:personal {:age 28}}} [:profile :personal :location] "Vancouver, BC")
+;= {:profile {:personal {:location "Vancouver, BC", :age 28}}}
 ```
 
 TBD: Simple image accompaniment.
