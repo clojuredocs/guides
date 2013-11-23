@@ -240,7 +240,8 @@ The point of recursion is the nearest `fn` or `loop` form determined lexically.
 `recur` does not bind `&` in variadic functions and in these situations an empty seq must be passed by `recur`.
 
 ```clojure
-(defn count-up [result x y]
+(defn count-up
+  [result x y]
   (if (= x y)
     result
     (recur (conj result x) (inc x) y)))
@@ -263,7 +264,8 @@ TBD: more examples
 The implicit `let` that `loop` provides binds each symbol to the init-expression. `recur` then binds new values when returning the execution point to `loop`.
 
 ```clojure
-(defn count-up [start total]
+(defn count-up
+  [start total]
   (loop [result []
          x start
          y total]
@@ -294,7 +296,8 @@ Since `trampoline` calls the returned functions with no arguments, you must supp
 ```clojure
 (declare count-up1 count-up2) ;; see `declare` for why this is needed
 
-(defn count-up1 [result start total]
+(defn count-up1
+  [result start total]
   (if (= start total)
     result
     #(count-up2 (conj result start) (inc start) total))) ;; returns an anonymous function
