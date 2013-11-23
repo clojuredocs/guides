@@ -1423,7 +1423,8 @@ TBD: Simple image accompaniment.
 
 `select-keys` takes an associative collection and a sequence of keys.
 
-`select-keys` returns a map containing only the entries that have a key which is also present in the sequence of keys.
+`select-keys` returns a map containing only the entries that have a
+key which is also present in the sequence of keys.
 
 ```clojure
 TBD: example
