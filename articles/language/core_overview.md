@@ -547,11 +547,19 @@ provided.
 ([map key val & kvs])
 ```
 
-`assoc` takes a key and a value and returns a collection of the same type as the supplied collection with the key mapped to the new value.
+`assoc` takes a key and a value and returns a collection of the same
+type as the supplied collection with the key mapped to the new value.
 
-`assoc` is similar to get in how it works with maps, records or vectors. When applied to a map or record, the same type is returned with the key/value pairs added or modified.  When applied to a vector, a vector is returned with the key acting as an index and the index being replaced by the value.
+`assoc` is similar to get in how it works with maps, records or
+vectors. When applied to a map or record, the same type is returned
+with the key/value pairs added or modified.  When applied to a vector,
+a vector is returned with the key acting as an index and the index
+being replaced by the value.
 
-Since maps and records can not contain multiple equivalent keys, supplying `assoc` with a key/value that exists in the one will cause `assoc` to return modify the key at that value in the result and not duplicate the key.
+Since maps and records can not contain multiple equivalent keys,
+supplying `assoc` with a key/value that exists in the one will cause
+`assoc` to return modify the key at that value in the result and not
+duplicate the key.
 
 ```clojure
 (assoc {:a 1} :b 2)
@@ -560,12 +568,13 @@ Since maps and records can not contain multiple equivalent keys, supplying `asso
 (assoc {:a 1 :b 45 :c 3} :b 2)
 ;; ⇒ {:a 1, :c 3, :b 2}
 
-(defrecord Hand [index middle ring pinky thumb])
-(assoc (Hand. 3 4 3.5 2 2) :index 3.75)
-;; ⇒ #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
-```
-When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector.
-The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
+(defrecord Hand [index middle ring pinky thumb]) (assoc (Hand. 3 4 3.5
+2 2) :index 3.75) ;; ⇒ #user.Hand{:index 3.75, :middle 4, :ring 3.5,
+:pinky 2, :thumb 2} ``` When using `assoc` with a vector, the key is
+the index and the value is the value to assign to that index in the
+returned vector.  The key must be <= (count vector) or a
+"IndexOutOfBoundsException" will occur. `assoc` can not be used to add
+an item to a vector.
 
 ```clojure
 (assoc [1 2 76] 2 3) ;= [1 2 3]
@@ -585,7 +594,10 @@ The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `
 
 `dissoc` takes a map and a variable number of keys.
 
-`dissoc` returns a map with the supplied keys, and subsequently their values, removed. Unlike `assoc`, `dissoc` does not work on vectors. When a record is provided, `dissoc` returns a map. For similar functionality with vectors, see `subvec` and `concat`.
+`dissoc` returns a map with the supplied keys, and subsequently their
+values, removed. Unlike `assoc`, `dissoc` does not work on
+vectors. When a record is provided, `dissoc` returns a map. For
+similar functionality with vectors, see `subvec` and `concat`.
 
 ```clojure
 (dissoc {:a 1 :b 2 :c 3} :b)
