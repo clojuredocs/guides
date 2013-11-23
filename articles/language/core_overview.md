@@ -437,11 +437,14 @@ TBD: Simple image accompaniment.
 ([f c1 c2 c3 & colls])
 ```
 
-`map` takes a function and one or more collections.
+`map` takes a function and one or more collections.  `map` passes an
+item from each collection, in order, to the function and returns a
+lazy sequence of the results.
 
-`map` passes an item from each collection, in order, to the function and returns a lazy sequence of the results.
-
-The function provided to `map` must support an arity matching the number of collections passed. Due to this, when using more than one collection, map stops processing items when any collection runs out of items.
+The function provided to `map` must support an arity matching the
+number of collections passed. Due to this, when using more than one
+collection, map stops processing items when any collection runs out of
+items.
 
 ```clojure
 TBD: Examples
