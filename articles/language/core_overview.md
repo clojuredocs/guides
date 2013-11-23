@@ -1157,11 +1157,16 @@ TBD: example
 
 `partition-all` takes a number, an optional step and a collection.
 
-`partition-all` sequentially takes a provided number of items from the collection in sequence and puts them into lists. This lazy sequence of lists is returned.
+`partition-all` sequentially takes a provided number of items from the
+collection in sequence and puts them into lists. This lazy sequence of
+lists is returned.
 
-If a step is provided, the lists in the returned lazy sequence start at offsets in the provided collection of that number items in the list.
+If a step is provided, the lists in the returned lazy sequence start
+at offsets in the provided collection of that number items in the
+list.
 
-If there are not enough items to fill the last list in the returned lazy sequence, the remaining items will be used in the last list.
+If there are not enough items to fill the last list in the returned
+lazy sequence, the remaining items will be used in the last list.
 
 ```clojure
 TBD: example
@@ -1197,7 +1202,8 @@ See: [not-empty](not-empty_desc)
 
 `juxt` takes a variable number of functions.
 
-`juxt` returns a function that will return a vector consisting of the result of each of those functions to a provided argument.
+`juxt` returns a function that will return a vector consisting of the
+result of each of those functions to a provided argument.
 
 ```clojure
 TBD: examples
@@ -1218,7 +1224,9 @@ TBD: Simple image accompaniment.
 
 `comp` takes a variable number of functions.
 
-`comp` returns a function that will return the result of applying the rightmost function to the provided argument, then the second rightmost function to the result of that etc...
+`comp` returns a function that will return the result of applying the
+rightmost function to the provided argument, then the second rightmost
+function to the result of that etc.
 
 ```clojure
 TBD: examples
@@ -1237,7 +1245,9 @@ TBD: Simple image accompaniment.
 
 `fnil` takes a function and one to three arguments.
 
-`fnil` returns a function that replaces any nil arguments with the provided values. `fnil` only supports supports patching 3 arguments, but will pass any arguments beyond that un-patched.
+`fnil` returns a function that replaces any nil arguments with the
+provided values. `fnil` only supports supports patching 3 arguments,
+but will pass any arguments beyond that un-patched.
 
 ```clojure
 (defn say-info [name location hobby]
@@ -1261,7 +1271,8 @@ TBD: Simple image accompaniment.
 
 `apply` takes a variable number of arguments and a collection.
 
-`apply` effectively unrolls the supplied args and a collection into a list of arguments to the supplied function.
+`apply` effectively unrolls the supplied args and a collection into a
+list of arguments to the supplied function.
 
 ``` clojure
 (str ["Hel" "lo"])
@@ -1297,7 +1308,11 @@ Note that apply can not be used with macros.
 
 `->` takes a value and optionally one or more expressions.
 
-`->` takes the first argument and inserts it as the second item in the next form, or creates a list with the first argument as the second item. The return value of that expression is inserted as the second item in the next form, making a list if necessary.  This continues until all expressions are evaluated and the final value is returned.
+`->` takes the first argument and inserts it as the second item in the
+next form, or creates a list with the first argument as the second
+item. The return value of that expression is inserted as the second
+item in the next form, making a list if necessary.  This continues
+until all expressions are evaluated and the final value is returned.
 
 ```clojure
 TBD: example
@@ -1316,7 +1331,11 @@ TBD: Simple image accompaniment.
 
 `->>` takes a value and optionally one or more expressions.
 
-`->>` takes the first argument and inserts it as the last item in the next form, or creates a list with the first argument as the last item. The return value of that expression is inserted as the last item in the next form, making a list if necessary.  This continues until all expressions are evaluated and the final value is returned.
+`->>` takes the first argument and inserts it as the last item in the
+next form, or creates a list with the first argument as the last
+item. The return value of that expression is inserted as the last item
+in the next form, making a list if necessary.  This continues until
+all expressions are evaluated and the final value is returned.
 
 TBD: Simple image accompaniment.
 
