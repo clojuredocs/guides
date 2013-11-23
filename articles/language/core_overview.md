@@ -764,7 +764,7 @@ is "true" but nil is not.
   (print "Does this print?")) ;; yes, it prints.
 
 
-;; NEVER FINISHES EXECUTION!!!
+;; NEVER FINISHES EXECUTION!
 ;; "done" is never reached because (rest x) is always a "true" value
 (defn inf
   [x]
