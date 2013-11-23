@@ -834,7 +834,9 @@ returns nil or a supplied default value.
 
 `contains?` takes a map and a key.
 
-`contains` returns true if the provided *key* is present in a collection. `contains` is similar to `get` in that vectors treat the key as an index. `contains` will always return false for lists.
+`contains` returns true if the provided *key* is present in a
+collection. `contains` is similar to `get` in that vectors treat the
+key as an index. `contains` will always return false for lists.
 
 ```clojure
 (contains? {:a 1 :b 2 :c 3} :c)
