@@ -401,7 +401,12 @@ TBD: Simple image accompaniment.
 
 `reduce` takes a function, an optional initial value and a collection.
 
-`reduce` takes the first item of the collection and either the second item of the collection or the provided initial value, then evaluates the function with those arguments. The function is then evaluated with that result and the next item in the collection. This is repeated until the collection is exhausted and the value of the final function call is returned.
+`reduce` takes the first item of the collection and either the second
+item of the collection or the provided initial value, then evaluates
+the function with those arguments. The function is then evaluated with
+that result and the next item in the collection. This is repeated
+until the collection is exhausted and the value of the final function
+call is returned.
 
 ```clojure
 TBD: examples
@@ -419,7 +424,10 @@ TBD: Simple image accompaniment.
 
 `reductions` takes a function, an optional initial value and a collection.
 
-`reductions` returns a lazy sequence consisting of the first item in the collection, or the provided initial value followed by the result of the function evaluated with the previous result and the next item in the collection.
+`reductions` returns a lazy sequence consisting of the first item in
+the collection, or the provided initial value followed by the result
+of the function evaluated with the previous result and the next item
+in the collection.
 
 ```clojure
 TBD: examples
