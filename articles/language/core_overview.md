@@ -1350,7 +1350,11 @@ TBD: Simple image accompaniment.
 
 `get-in` takes an associative collection, a sequence of keys and an optional default value.
 
-`get-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value and returns the final result. If any key is not present when evaluated then either nil, or a provided default value is returned.
+`get-in` takes the first value in the sequence of keys and retrieves
+the value, then applies each subsequent key to to the most recently
+returned value and returns the final result. If any key is not present
+when evaluated then either nil, or a provided default value is
+returned.
 
 ```clojure
 TBD: example
