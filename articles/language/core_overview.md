@@ -1369,11 +1369,19 @@ TBD: Simple image accompaniment.
 ([m [k & ks] f & args])
 ```
 
-`update-in` takes an associative collection, a sequence of keys, a function and optional arguments to supply to that function.
+`update-in` takes an associative collection, a sequence of keys, a
+function and optional arguments to supply to that function.
 
-`update-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value. The function and optional arguments are applied to the value and a new nested collection is returned with the key having the result of that function.
+`update-in` takes the first value in the sequence of keys and
+retrieves the value, then applies each subsequent key to to the most
+recently returned value. The function and optional arguments are
+applied to the value and a new nested collection is returned with the
+key having the result of that function.
 
-`update-in` will create new hash-maps if a key in the sequence of keys does not exist. The returned collection will have a nested structure correlating to the provided sequence along with the result of the function and optional arguments as the value of the final key.
+`update-in` will create new hash-maps if a key in the sequence of keys
+does not exist. The returned collection will have a nested structure
+correlating to the provided sequence along with the result of the
+function and optional arguments as the value of the final key.
 
 ```clojure
 TBD: example
@@ -1390,9 +1398,15 @@ TBD: Simple image accompaniment.
 
 `assoc-in` takes an associative collection, a sequence of keys and a value.
 
-`assoc-in` takes the first value in the sequence of keys and retrieves the value, then applies each subsequent key to to the most recently returned value. The final key is assigned the provided value and a new nested collection is returned.
+`assoc-in` takes the first value in the sequence of keys and retrieves
+the value, then applies each subsequent key to to the most recently
+returned value. The final key is assigned the provided value and a new
+nested collection is returned.
 
-`update-in` will create new hash-maps if a key in the sequence of keys does not exist. The returned collection will have a nested structure correlating to the provided sequence along with the provided value as the value of the final key.
+`update-in` will create new hash-maps if a key in the sequence of keys
+does not exist. The returned collection will have a nested structure
+correlating to the provided sequence along with the provided value as
+the value of the final key.
 
 ```clojure
 TBD: example
