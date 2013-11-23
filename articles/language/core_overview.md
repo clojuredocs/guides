@@ -754,7 +754,10 @@ you are sure ordering is guaranteed.
 ;; ⇒ '()
 ```
 
-The behaviour of `rest` should be contrasted with `next`. `next` returns nil if the collection only has a single item. This is important when considering "truthiness" of values since an empty seq is "true" but nil is not.
+The behaviour of `rest` should be contrasted with `next`. `next`
+returns nil if the collection only has a single item. This is
+important when considering "truthiness" of values since an empty seq
+is "true" but nil is not.
 
 ```clojure
 (if (rest '("stuff"))
@@ -780,7 +783,9 @@ The behaviour of `rest` should be contrasted with `next`. `next` returns nil if 
 
 `get` takes an associative collection, a sequence of keys and an optional default value.
 
-`get` returns the value for the specified key in a map or record, index of a vector or value in a set. If the key is not present, `get` returns nil or a supplied default value.
+`get` returns the value for the specified key in a map or record,
+index of a vector or value in a set. If the key is not present, `get`
+returns nil or a supplied default value.
 
 ```clojure
 ;; val of a key in a map
