@@ -908,9 +908,11 @@ key as an index. `contains` will always return false for lists.
 
 `take` takes a number and a collection.
 
-`take` returns a lazy sequence starting with the first value of the collection and n sequential items after that.
+`take` returns a lazy sequence starting with the first value of the
+collection and n sequential items after that.
 
-If the number of items in the collection is less than the provided number, the entire collection is returned lazily.
+If the number of items in the collection is less than the provided
+number, the entire collection is returned lazily.
 
 ```clojure
 TBD: example
@@ -938,9 +940,11 @@ TBD: example
 ([pred coll])
 ```
 
-`take-while` takes a function that accepts a single-argument and a collection.
+`take-while` takes a function that accepts a single-argument and a
+collection.
 
-`take-while` returns a lazy sequence of sequential items until the function returns nil/false value for that item.
+`take-while` returns a lazy sequence of sequential items until the
+function returns nil/false value for that item.
 
 ```clojure
 TBD: example
