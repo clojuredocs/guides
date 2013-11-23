@@ -957,9 +957,11 @@ TBD: example
 ([pred coll])
 ```
 
-'drop-while` takes a function that accepts a single-argument and a collection.
+'drop-while` takes a function that accepts a single-argument and a
+collection.
 
-`drop-while` returns a lazy sequence starting at the first item in the collection that the function returns nil/false.
+`drop-while` returns a lazy sequence starting at the first item in the
+collection that the function returns nil/false.
 
 <a id="filter_desc"></a>
 ### filter
@@ -968,9 +970,11 @@ TBD: example
 ([pred coll])
 ```
 
-`filter` takes a function that accepts a single argument and a collection.
+`filter` takes a function that accepts a single argument and a
+collection.
 
-`filters` returns a lazy sequence of items that return `true` for the provided predicate. Contrast to `remove`
+`filters` returns a lazy sequence of items that return `true` for the
+provided predicate. Contrast to `remove`.
 
 ```clojure
 (filter even? (range 10))
@@ -980,9 +984,14 @@ TBD: example
 ;; ⇒ ("Paul" "Rudd")
 ```
 
-When using sets with `filter`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`.
+When using sets with `filter`, remember that if nil or false is in the
+set and in the collection, then the predicate will return itself:
+`nil`.
 
-In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned. This will cause that item to /not/ be included in the returned lazy-sequence.
+In this example, when nil and false are tested with the predicate, the
+predicate returns nil. This is because if the item is present in the
+set it is returned. This will cause that item to /not/ be included in
+the returned lazy-sequence.
 
 ```clojure
 (filter #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
@@ -994,9 +1003,11 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 `(keep f coll)`
 
-`keep` takes a function that accepts a single argument and a collection.
+`keep` takes a function that accepts a single argument and a
+collection.
 
-`keep` returns a lazy sequence of non-nil results of the function applied to each item in the collection in sequence.
+`keep` returns a lazy sequence of non-nil results of the function
+applied to each item in the collection in sequence.
 
 ```clojure
 TBD: examples
@@ -1009,9 +1020,11 @@ TBD: examples
 ([pred coll])
 ```
 
-`remove` takes a function that accepts a single argument and a collection.
+`remove` takes a function that accepts a single argument and a
+collection.
 
-`remove` returns a lazy sequence of items that return `false` or `nil` for the provided predicate. Contrast to `filter`.
+`remove` returns a lazy sequence of items that return `false` or `nil`
+for the provided predicate. Contrast to `filter`.
 
 ```clojure
 (remove even? (range 10))
@@ -1022,10 +1035,14 @@ TBD: examples
 ;; ⇒ (:h :k :z :s)
 ```
 
-When using sets with `remove`, remember that if nil or false is in the set and in the collection, then the predicate will return itself: `nil`.
-This will cause that item to be included in the returned lazy sequence.
+When using sets with `remove`, remember that if nil or false is in the
+set and in the collection, then the predicate will return itself:
+`nil`.  This will cause that item to be included in the returned lazy
+sequence.
 
-In this example, when nil and false are tested with the predicate, the predicate returns nil. This is because if the item is present in the set it is returned.
+In this example, when nil and false are tested with the predicate, the
+predicate returns nil. This is because if the item is present in the
+set it is returned.
 
 ```clojure
 (remove #{:nothing :something nil} [:nothing :something :things :someone nil false :pigeons])
@@ -1042,9 +1059,11 @@ In this example, when nil and false are tested with the predicate, the predicate
 
 `some` takes a function that accepts a single argument and a collection.
 
-`some` will apply a predicate to each value in a collection until a non-false/nil result is returned then immediately return that result.
+`some` will apply a predicate to each value in a collection until a
+non-false/nil result is returned then immediately return that result.
 
-Since collections are "true" values, this makes it possible to return the first result itself rather than simply `true`.
+Since collections are "true" values, this makes it possible to return
+the first result itself rather than simply `true`.
 
 ```clojure
 (some even? [1 2 3 4 5])
@@ -1055,14 +1074,17 @@ Since collections are "true" values, this makes it possible to return the first 
 ;; ⇒ 2
 ```
 
-Since maps can be used as functions, you can use a map as a predicate. This will return the value of the first key in the collection that is also in the map.
+Since maps can be used as functions, you can use a map as a
+predicate. This will return the value of the first key in the
+collection that is also in the map.
 
 ```clojure
 (some {:a 1 :b 5} [:h :k :d :b])
 ;; ⇒ 5
 ```
 
-Sets can also be used as functions and will return the first item in the collection that is present in the set.
+Sets can also be used as functions and will return the first item in
+the collection that is present in the set.
 
 ```clojure
 (some #{4} (range 20))
@@ -1078,7 +1100,8 @@ Sets can also be used as functions and will return the first item in the collect
 
 `every` takes a function that accepts a single argument and a collection.
 
-`every` returns true if the predicate returns true for every item in the collection, otherwise it returns false.
+`every` returns true if the predicate returns true for every item in
+the collection, otherwise it returns false.
 
 ```clojure
 (every? even? (range 0 10 2))
@@ -1100,15 +1123,25 @@ Sets can also be used as functions and will return the first item in the collect
 ([n step pad coll])
 ```
 
-`partition` takes a number, an optional step, an optional padding collection and a collection. If the padding collection is provided, a step must be provided.
+`partition` takes a number, an optional step, an optional padding
+collection and a collection. If the padding collection is provided, a
+step must be provided.
 
-`partition` sequentially takes a provided number of items from the collection in sequence and puts them into lists. This lazy sequence of lists is returned.
+`partition` sequentially takes a provided number of items from the
+collection in sequence and puts them into lists. This lazy sequence of
+lists is returned.
 
-If a step is provided, the lists in the returned lazy sequence start at offsets in the provided collection of that number items in the list.
+If a step is provided, the lists in the returned lazy sequence start
+at offsets in the provided collection of that number items in the
+list.
 
-If a padding collection is provided, the last item in the returned lazy sequence will be padded with the padding collection to achieve the desired partitioning size.
+If a padding collection is provided, the last item in the returned
+lazy sequence will be padded with the padding collection to achieve
+the desired partitioning size.
 
-If there is no padding collection provided and there is not enough items to fill the last list in the returned lazy sequence, those items will be not used.
+If there is no padding collection provided and there is not enough
+items to fill the last list in the returned lazy sequence, those items
+will be not used.
 
 ```clojure
 TBD: example
