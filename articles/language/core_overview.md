@@ -126,10 +126,11 @@ No matter which order you put func<10 and func<20 in, there will be a reference 
 `defn` takes a symbol, an optional doc string, an optional meta-data
 map, a vector of arguments and a variable number of expressions.
 
-`defn` allows for succinct definition of a function and metadata about
-its argslist and doc-string. `defn` inherently allows for quick
-documentation of functions that can be retrieved with `doc`. This
-feature should be used almost universally.
+`defn` is the primary way of defining functions. It allows for
+convenient definition of metadata about its argslist and documentation
+(docstrings). `defn` inherently allows for quick documentation of
+functions that can be retrieved with `doc`. This feature should be
+used almost universally.
 
 Without `defn`, a var would be directly bound to a function definition
 and explicit metadata about the doc string and argslits would be added
