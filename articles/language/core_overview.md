@@ -1357,7 +1357,8 @@ when evaluated then either nil, or a provided default value is
 returned.
 
 ```clojure
-TBD: example
+user> (get-in {:profile {:personal {:age 28}}} [:profile :personal :age])
+;= 28
 ```
 
 TBD: Simple image accompaniment.
