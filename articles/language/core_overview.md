@@ -637,9 +637,11 @@ Returns a count of the number of items in a collection. An argument of nil retur
 ;; ⇒ 0
 ```
 
-Note that count does not return in constant time for all collections. This can be determined with `counted?`.
-Keep in mind that lazy sequences must be realized to get a count of the items. This is often not intended and
-can cause a variety of otherwise cryptic errors.
+Note that count does not return in constant time for all
+collections. This can be determined with `counted?`.  Keep in mind
+that lazy sequences must be realized to get a count of the items. This
+is often not intended and can cause a variety of otherwise cryptic
+errors.
 
 ``` clojure
 (counted? "Hello")
@@ -711,9 +713,11 @@ Do not confuse `empty?` with `empty`. This can be a source of great confusion:
 
 `first` takes a collection.
 
-`first` returns the first item in the collection. `first` returns nil if the argument is empty or is nil.
+`first` returns the first item in the collection. `first` returns nil
+if the argument is empty or is nil.
 
-Note that for collections that do not guarantee order like some maps and sets, the behaviour of `first` should not be relied on.
+Note that for collections that do not guarantee order like some maps
+and sets, the behaviour of `first` should not be relied on.
 
 ```clojure
 (first (range 10))
@@ -735,9 +739,12 @@ Note that for collections that do not guarantee order like some maps and sets, t
 
 `rest` takes a collection.
 
-`rest` returns a seq of items starting with the second element in the collection. `rest` returns an empty seq if the collection only contains a single item.
+`rest` returns a seq of items starting with the second element in the
+collection. `rest` returns an empty seq if the collection only
+contains a single item.
 
-`rest` should also not be relied on when using maps and sets unless you are sure ordering is guaranteed.
+`rest` should also not be relied on when using maps and sets unless
+you are sure ordering is guaranteed.
 
 ```clojure
 (rest [13 1 16 -4])
