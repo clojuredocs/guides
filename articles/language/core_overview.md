@@ -1384,7 +1384,8 @@ correlating to the provided sequence along with the result of the
 function and optional arguments as the value of the final key.
 
 ```clojure
-TBD: example
+(update-in {:profile {:personal {:age 28}}} [:profile :personal :age] inc)
+;= {:profile {:personal {:age 29}}}
 ```
 
 TBD: Simple image accompaniment.
