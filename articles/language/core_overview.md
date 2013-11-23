@@ -140,7 +140,8 @@ manually.
 (def func (fn [x] x))
 
 ;; same as:
-(defn func [x] x)
+(defn func [x]
+  x)
 
 ;; with metadata added by defn
 (def ^{:doc "documentation!"} ^{:arglists '([x])} func (fn [x] x))
