@@ -472,27 +472,32 @@ TBD: Simple image accompaniment.
 
 `conj` takes a collection and a variable number of arguments.
 
-`conj` is short for "conjoin". As the name implies, `conj` returns the collection with those arguments added.
+`conj` is short for "conjoin". As the name implies, `conj` returns the
+collection with those arguments added.
 
-Adding items to a collection occurs at different places depending on the concrete type of collection.
+Adding items to a collection occurs at different places depending on
+the concrete type of collection.
 
-List addition occurs at the beginning of the list. This is because accessing the head of the list is a constant time operation, and accessing
-the tail requires traversal of the entire list.
+List addition occurs at the beginning of the list. This is because
+accessing the head of the list is a constant time operation, and
+accessing the tail requires traversal of the entire list.
 
 ```clojure
 (conj '(1 2) 3)
 ;; ⇒ (3 1 2)
 ```
 
-Vectors have constant time access across the entire data structure. `'conj' thusly appends to the end of a vector.
+Vectors have constant time access across the entire data
+structure. `'conj' thusly appends to the end of a vector.
 
 ```clojure
 (conj [1 2] 3)
 ;; ⇒ [1 2 3]
 ```
 
-Maps do not have guaranteed ordering, so the location that items are added is irrelevant. `conj` requires vectors of [key value] pairs to be
-added to the map.
+Maps do not have guaranteed ordering, so the location that items are
+added is irrelevant. `conj` requires vectors of [key value] pairs to
+be added to the map.
 
 ```clojure
 (conj {:a 1 :b 2 :c 3} [:d 4])
@@ -502,7 +507,9 @@ added to the map.
 ;; ⇒ {:giraffes 13, :ants 400, :cats 1, :dogs 2}
 ```
 
-Sets also do not have guaranteed ordering. `conj` returns a set with the item added. As the concept of sets implies, added items will not duplicate equivalent items if they are present in the set.
+Sets also do not have guaranteed ordering. `conj` returns a set with
+the item added. As the concept of sets implies, added items will not
+duplicate equivalent items if they are present in the set.
 
 ```clojure
 (conj #{1 4} 5)
@@ -521,7 +528,8 @@ Sets also do not have guaranteed ordering. `conj` returns a set with the item ad
 
 `empty` takes a collection
 
-`empty` returns an empty collection of the same type as the collection provided.
+`empty` returns an empty collection of the same type as the collection
+provided.
 
 ```clojure
 (empty [1 2 3])
