@@ -146,7 +146,10 @@ manually.
 (def ^{:doc "documentation!"} ^{:arglists '([x])} func (fn [x] x))
 
 ;;same as
-(defn func "documentation!" [x] x)
+(defn func
+  "documentation!"
+  [x]
+  x)
 ```
 
 ``` clojure
