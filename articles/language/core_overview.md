@@ -1427,7 +1427,8 @@ TBD: Simple image accompaniment.
 key which is also present in the sequence of keys.
 
 ```clojure
-TBD: example
+(select-keys {:a 1 :b 2 :c 3} [:a :b])
+;= {:b 2, :a 1}
 ```
 
 ### keys
