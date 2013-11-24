@@ -8,7 +8,9 @@ This (incomplete) guide provides detailed information about using Clojure's JDBC
 
 ## An Overview
 
-java.jdbc is intended to be a low-level wrapper Clojure around various Java JDBC drivers and supports a wide range of databases. java.jdbc.sql provides a basic DSL for generating simple SQL statements (`insert`, `select`, `update`, `delete`) with basic `where` clauses, simple `join`s and some `order-by` functionality. Libraries such as [HoneySQL](https://github.com/jkk/honeysql) and [Korma](http://sqlkorma.com) provide more sophisticated DSLs you can use with java.jdbc if you want. java.jdbc.ddl provides a basic DSL for generating simple SQL DDL statements (`create-table`, `drop-table`).
+java.jdbc is intended to be a low-level wrapper Clojure around various Java JDBC drivers and supports a wide range of databases. Libraries such as [HoneySQL](https://github.com/jkk/honeysql), [SQLingvo](https://github.com/r0man/sqlingvo) and [Korma](http://sqlkorma.com) provide more sophisticated DSLs you can use with java.jdbc if you want.
+
+The API changed substantially between the 0.2.3 release and the 0.3.0 release, to remove dependencies on dynamic global variables and provide a more functional, more idiomatic API. This documentation covers the new API. The old API has moved to java.jdbc.deprecated and is deprecated and provided for backward compatibility only. The deprecated API documentation can be found in the [java.jdbc reference](http://clojure.github.io/java.jdbc/) which is auto-generated from the docstrings in the namespaces.
 
 The general approach with java.jdbc is to set up a data source (see below) as a "database spec" and pass that to the various CRUD - create, read, update, delete - functions that java.jdbc provides. Each operation with open a connection and execute the SQL inside a transaction. You can also choose to manage the connection yourself, and use a "database spec" that contains the open connection (see below for more details).
 
@@ -39,15 +41,14 @@ If you want to manage connections yourself, you can use a db-spec containing the
 Reading all data from a table can be as simple as:
 
     (ns dbexample
-      (:require [clojure.java.jdbc :as jdbc]
-                [clojure.java.jdbc.sql :as sql]))
+      (:require [clojure.java.jdbc :as jdbc]))
     
     (def db-spec ... ) ;; see above
     
     (jdbc/query db-spec
-      (sql/select * :table))
+      ["SELECT * FROM table"])
 
-If you don't want to use the basic SQL DSL, you can provide a vector containing the SQL string as the first element followed by any parameters for that SQL:
+If you don't want raw SQL, take a look at the various DSL libraries listed above. You can follow the SQL string with any parameters for that SQL:
 
     (jdbc/query db-spec
       ["SELECT col1, col2 FROM table WHERE status = ?" 1])
@@ -56,18 +57,14 @@ For more detail, read the [Using SQL](using_sql.html) guide which was originally
 
 ## Manipulating Tables With DDL
 
-The java.jdbc.ddl namespace provides a basic DSL for simple SQL DDL operations to create and drop tables.
+java.jdbc provides `create-table` and `drop-table` by way of DDL. Anything beyond that can be done using `db-do-commands` with a DDL string of SQL to manipulate tables.
 
 For more detail, read the [Using DDL](using_ddl.html) guide which was originally part of the contrib library repository.
-
-## Mapping Between SQL Entities And Clojure Identifiers
-
-Basic [Name Mapping](name_mapping.html) Guide (originally from contrib repo).
 
 ## How To Use Connection Pooling
 
 Basic [Connection Pooling](connection_pooling.html) Guide (originally from contrib repo).
 
-## How To Use The Basic SQL DSL In java.jdbc.sql
+## How To Use Some Common DSLs With java.jdbc
 
 ## Where To Go Beyond java.jdbc

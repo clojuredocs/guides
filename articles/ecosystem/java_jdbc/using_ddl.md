@@ -8,11 +8,11 @@ Currently you can create and drop tables using clojure.java.jdbc. To see how to 
 For DDL operations, use the *db-do-commands* function, passing in the db-spec and the SQL string to be executed.
 
 ## Creating a table
-To create a table, use *create-table* to generate the DDL with the table name and a vector for each column spec. Currently, table-level specifications are not supported.
+
+To create a table, use *create-table-ddl* to generate the DDL with the table name and a vector for each column spec. Currently, table-level specifications are not supported.
 
     (ns ddl-example
-      (:require [clojure.java.jdbc :as jdbc]
-                [clojure.java.jdbc.ddl :as ddl]))
+      (:require [clojure.java.jdbc :as jdbc]))
     
     (def db-spec ... )
     
@@ -20,7 +20,7 @@ To create a table, use *create-table* to generate the DDL with the table name an
       "Create a table"
       [db-spec]
       (jdbc/db-do-commands db-spec
-        (ddl/create-table
+        (jdbc/create-table-ddl
           :fruit
           [:name "varchar(32)" "PRIMARY KEY"]
           [:appearance "varchar(32)"]
@@ -28,17 +28,19 @@ To create a table, use *create-table* to generate the DDL with the table name an
           [:grade :real])))
 
 ## Dropping a table
-To drop a table, use *drop-table* to generate the DDL with the table name.
+
+To drop a table, use *drop-table-ddl* to generate the DDL with the table name.
 
     (defn drop-fruit
       "Drop a table"
       [db-spec]
       (try
         (jdbc/db-do-commands db-spec
-          (ddl/drop-table :fruit))
+          (jdbc/drop-table-ddl :fruit))
         (catch Exception _)))
 
 ## Accessing table metadata
+
 To retrieve the metadata for a table, you can operate on the connection itself. In future, functions may be added to make this easier.
 
     (defn db-get-tables

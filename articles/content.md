@@ -219,9 +219,8 @@ This guide covers:
  * Setting up a data source
  * Manipulating data with SQL
  * Manipulating tables with DDL
- * Mapping between SQL entities and Clojure identifiers
  * How to use connection pooling
- * How to use the basic SQL DSL in java.jdbc.sql
+ * How to use some common DSLs with java.jdbc
  * Where to go beyond java.jdbc
 
 
