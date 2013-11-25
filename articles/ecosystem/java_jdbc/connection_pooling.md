@@ -4,6 +4,7 @@ layout: article
 ---
 
 clojure.java.jdbc does not provide connection pooling directly but it is relatively easy to add to your project. The following example shows how to configure connection pooling use c3p0. Below, we show how to use BoneCP instead.
+
 ## Add the c3p0 dependency
 
 For more information on c3p0, consult the [c3p0 documentation](http://www.mchange.com/projects/c3p0/).

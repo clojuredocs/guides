@@ -3,8 +3,12 @@ title: "Mapping between SQL entities and Clojure identifiers"
 layout: article
 ---
 
+*(pending a rewrite since the DSL has gone away - the `:identifiers` and `:entities` stuff still applies to a handful of functions but most of the supporting infrastructure has disappeared)*
+
 Entity names in SQL may be specified as strings or as keywords. It's convenient to represent records as Clojure maps with keywords for the keys but this means that a mapping is required when moving from Clojure to SQL and back again. Historically, clojure.contrib.sql simply called (name) on keywords passed in and used clojure.core/resultset-seq to convert Java ResultSet objects back to Clojure maps, which had the side-effect of lowercasing all entity names as they became keywords. Whilst that is still the default behavior of clojure.java.jdbc, it is now possible to override this behavior in a couple of ways.
+
 ## Quoted Entities
+
 The first problem that the old approach exposed was when table names or column names were the same as a SQL keyword. Databases provide a way to quote identifier names so that entity names do not get treated as SQL keywords (often referred to as 'stropping'). Unfortunately, the way quoting works tends to be vendor-specific so that Microsoft SQL Server accepts \[name\] and "name" whilst MySQL traditionally uses \`name\` (although recent versions also accept "name"). In order to support multiple approaches to quoting, clojure.java.jdbc supports the concept of identifier functions and entity functions. The former are used to convert entity names in result sets into Clojure identifiers. The latter are used to convert Clojure identifiers (table names, keys in maps) into SQL entity names.
 
 The function clojure.java.jdbc.sql/quoted can be used to create an entity function. It takes a quote spec and returns a function that will quote its argument appropriately. Other entity functions are clojure.java.jdbc.sql/as-is which leaves names untouched (and is the default) and clojure.java.jdbc.sql/lower-case which lowercases name (and is the default identifier function for result-set-seq.
