@@ -41,7 +41,9 @@ If you want to manage connections yourself, you can use a db-spec containing the
 Since you rarely want every database operation to create a new connection, there are two ways to reuse connections:
 
 * Connection Pooling - This is the recommended approach and is fairly straightforward, with a number of connection pooling libraries available. See *How To Use Connection Pooling* below for more information).
-* Grouping Operations using `with-db-connection` - If you don't want to deal with a connection pooling library, you use this macro to automatically open a connection and maintain it for a body of code:
+* Grouping Operations using `with-db-connection` - If you don't want to deal with a connection pooling library, you use this macro to automatically open a connection and maintain it for a body of code.
+
+Using `with-db-connection`:
 
     (ns dbexample
       (:require [clojure.java.jdbc :as jdbc]))
