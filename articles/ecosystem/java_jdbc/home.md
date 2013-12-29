@@ -41,18 +41,15 @@ If you want to manage connections yourself, you can use a db-spec containing the
 Since you rarely want every database operation to create a new connection, there are two ways to reuse connections:
 
 * Connection Pooling - This is the recommended approach and is fairly straightforward, with a number of connection pooling libraries available. See *How To Use Connection Pooling* below for more information).
-* Grouping Operations with an Open Connection - If you don't want to deal with a connection pooling library, you can manage connections yourself and use a "database spec" that contains that connection.
-
-The library provides `get-connection` and `add-connection` to allow you to manage connections yourself like this:
+* Grouping Operations using `with-db-connection` - If you don't want to deal with a connection pooling library, you use this macro to automatically open a connection and maintain it for a body of code:
 
     (ns dbexample
       (:require [clojure.java.jdbc :as jdbc]))
     
     (def db-spec ... ) ;; see above
     
-    (with-open [con (jdbc/get-connection db-spec)]
-      (let [db-con (jdbc/add-connection db-spec con)
-            ;; fetch some rows using this connection
+    (with-db-connection [db-con db-spec]
+      (let [;; fetch some rows using this connection
             rows (jdbc/query db-con ["SELECT * FROM table WHERE id = ?" 42])]
         ;; insert a copy of the first row using the same connection
         (jdbc/insert! db-con :table (dissoc (first rows) :id))))
@@ -113,7 +110,7 @@ java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic `CR
     
     (jdbc/db-do-commands db-spec "CREATE INDEX col1_ix ON table ( col1 )")
 
-For more detail, read the [Using DDL](using_ddl.html) guide which was originally part of the contrib library repository.
+For more detail, read the [Using DDL and Metadata](using_ddl.html) guide which was originally part of the contrib library repository.
 
 ## How To Use Connection Pooling
 

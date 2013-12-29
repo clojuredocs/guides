@@ -1,53 +1,62 @@
 ---
-title: "Manipulating tables with DDL"
+title: Using DDL and Metadata"
 layout: article
 ---
 
-Currently you can create and drop tables using clojure.java.jdbc. To see how to manipulate data with SQL, see [Manipulating data with SQL](using_sql.html).
+## Using DDL
 
-For DDL operations, use the *db-do-commands* function, passing in the db-spec and the SQL string to be executed.
+DDL operations can be executed using the `db-do-commands` function. The general approach is:
 
-## Creating a table
+    (j/db-do-commands db-spec sql-command-1 sql-command-2 .. sql-command-n)
 
-To create a table, use *create-table-ddl* to generate the DDL with the table name and a vector for each column spec. Currently, table-level specifications are not supported.
+The commands are executed as a single, batched statement, wrapped in a transaction. If you want to avoid the transaction, use this approach:
 
-    (ns ddl-example
-      (:require [clojure.java.jdbc :as jdbc]))
-    
-    (def db-spec ... )
-    
-    (defn create-fruit
-      "Create a table"
-      [db-spec]
-      (jdbc/db-do-commands db-spec
-        (jdbc/create-table-ddl
-          :fruit
-          [:name "varchar(32)" "PRIMARY KEY"]
-          [:appearance "varchar(32)"]
-          [:cost :int]
-          [:grade :real])))
+    (j/db-do-commands db-spec false sql-command-1 sql-command-2 .. sql-command-n)
 
-## Dropping a table
+### Creating tables
 
-To drop a table, use *drop-table-ddl* to generate the DDL with the table name.
+For the common operations of creating and dropping tables, java.jdbc provides a little assistance that recognizes `:entities` so you can use keywords (or string) and have your chosen naming strategy applied, just as you can for several of the SQL functions.
 
-    (defn drop-fruit
-      "Drop a table"
-      [db-spec]
-      (try
-        (jdbc/db-do-commands db-spec
-          (jdbc/drop-table-ddl :fruit))
-        (catch Exception _)))
+    (j/create-table-ddl :fruit
+                        [:name "varchar(32)" :primary :key]
+                        [:appearance "varchar(32)"]
+                        [:cost :int]
+                        [:grade :real]
+                        :table-spec "ENGINE=InnoDB"
+                        :entities clojure.string/upper-case)
 
-## Accessing table metadata
+This will generate:
 
-To retrieve the metadata for a table, you can operate on the connection itself. In future, functions may be added to make this easier.
+    CREATE TABLE FRUIT
+        (NAME varchar(32) primary key,
+         APPEARANCE varchar(32),
+         COST int,
+         GRADE real) ENGINE=InnoDB
 
-    (defn db-get-tables
-      "Demonstrate getting table info"
-      [db]
-      (into []
-            (j/result-set-seq
-               (-> (j/get-connection db)
-                   (.getMetaData)
-                   (.getTables nil nil nil (into-array ["TABLE" "VIEW"]))))))
+which you can pass to `db-do-commands`.
+
+*Note: there was a bug in java.jdbc 0.3.0 that would upper case all of the column spec, and this bug is fixed in 0.3.1.*
+
+### Dropping tables
+
+Similarly there is a `drop-table-ddl` function which takes a table name and an `:entities` option to generate DDL to drop a table.
+
+    (j/drop-table-ddl :fruit :entities clojure.string/upper-case)
+
+This will generate:
+
+    DROP TABLE FRUIT
+
+## Accessing metadata
+
+java.jdbc provides two functions for working with database metadata:
+
+* `with-db-metadata` for creating an active metadata object backed by an open connection
+* `metadata-result` for turning metadata results into Clojure data structures
+
+For example:
+
+    (j/with-db-metadata [md db]
+      (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"]))))
+
+This returns a sequence of maps describing all the tables and views in the current database. `metadata-result` only transforms `ResultSet` objects, other results are returned as-is. `metadata-result` can also accept `:identifiers` and `:as-arrays?` options, like the `query` function, and those options control how the metatadata is transformed and/or returned.
