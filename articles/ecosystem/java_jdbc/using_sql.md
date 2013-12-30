@@ -283,3 +283,31 @@ will produce:
         VALUES ( ?, ?, ? )
 
 with the parameters `"Apple", "Round", "99"`.
+
+## Protocol extensions for transforming values
+
+By default, java.jdbc leaves it up to Java interop and the JDBC driver library to perform the appropriate transformations of Clojure values to SQL values and vice versa. When Clojure values are passed through to the JDBC driver, java.jdbc uses `PreparedStatement/setObject` for all values by default. When Clojure values are read from a `ResultSet` they are left untransformed, except that `Boolean` values are coerced to canonical `true` / `false` values in Clojure (some driver / data type combinations can produce `(Boolean. false)` values otherwise, which do not behave like `false` in all situations).
+
+java.jdbc provides three protocols that you can extend, in order to modify these behaviors.
+
+* `ISQLValue` / `sql-value` - simple transformations of Clojure values to SQL values
+* `ISQLParameter` / `set-parameter` - a more sophisticated transformation of Clojure values to SQL values that lets you override how the value is stored in the `PreparedStatement`
+* `IResultSetReadColumn` / `result-set-read-column` - simple transformations of SQL values to Clojure values when processing a `ResultSet` object
+
+If you are using a database that returns certain SQL types as custom Java types (e.g., PostgreSQL), you can extend `IResultSetReadColumn` to that type and define `result-set-read-column` to perform the necessary conversion to a usable Clojure data structure. The `result-set-read-column` function is called with three arguments:
+
+* The SQL value itself
+* The `ResultSet` metadata object
+* The index of the column in the row / metadata
+
+By default `result-set-read-column` just returns its first argument (the `Boolean` implementation ensure the result is either `true` or `false`).
+
+If you are using a database that require special treatment of null values, e.g., TeraData, you can extend `ISQLParameter` to nil and define `set-parameter` to use `.setNull` instead of `.setObject`. The `set-parameter` function is called with three arguments:
+
+* The Clojure value itself
+* The `PreparedStatement` object
+* The index of the parameter being set
+
+By default `set-parameter` calls `sql-value` on the Clojure value and then calls `.setObject` to store the result of that call into the specified parameter in the SQL statement.
+
+For general transformations of Clojure values to SQL values, extending `ISQLValue` and defining `sql-value` may be sufficient. The `sql-value` function is called with a single argument: the Clojure value. By default `sql-value` just returns its argument.
