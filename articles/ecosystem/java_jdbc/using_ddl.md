@@ -1,5 +1,5 @@
 ---
-title: Using DDL and Metadata
+title: "Using DDL and Metadata"
 layout: article
 ---
 
