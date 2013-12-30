@@ -1,6 +1,7 @@
 .bundle
 .DS_Store
 .rvmrc
+.ruby-version
 _site
 bin
 source/tmp/*
