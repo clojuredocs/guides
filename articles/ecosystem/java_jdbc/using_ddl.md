@@ -15,7 +15,7 @@ The commands are executed as a single, batched statement, wrapped in a transacti
 
 ### Creating tables
 
-For the common operations of creating and dropping tables, java.jdbc provides a little assistance that recognizes `:entities` so you can use keywords (or string) and have your chosen naming strategy applied, just as you can for several of the SQL functions.
+For the common operations of creating and dropping tables, java.jdbc provides a little assistance that recognizes `:entities` so you can use keywords (or strings) and have your chosen naming strategy applied, just as you can for several of the SQL functions.
 
     (j/create-table-ddl :fruit
                         [:name "varchar(32)" :primary :key]
@@ -34,8 +34,6 @@ This will generate:
          GRADE real) ENGINE=InnoDB
 
 which you can pass to `db-do-commands`.
-
-*Note: there was a bug in java.jdbc 0.3.0 that would upper case all of the column spec, and this bug is fixed in 0.3.1.*
 
 ### Dropping tables
 
