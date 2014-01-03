@@ -12,13 +12,11 @@ java.jdbc is intended to be a low-level Clojure wrapper around various Java JDBC
 
 The API changed substantially between the 0.2.3 release and the 0.3.0 release, to remove dependencies on dynamic global variables and provide a more functional, more idiomatic API. This documentation covers the new API. The old API has moved to java.jdbc.deprecated and is deprecated and provided for backward compatibility only. The deprecated API documentation can be found in the [java.jdbc reference](http://clojure.github.io/java.jdbc/) which is auto-generated from the docstrings in the namespaces.
 
-The general approach with java.jdbc is to set up a data source (see below) as a "database spec" and pass that to the various CRUD - create, read, update, delete - functions that java.jdbc provides. By default, each operation will open a connection and execute the SQL inside a transaction. You can also choose to manage the connection yourself, and use a "database spec" that contains the open connection (see below for more details).
-
-You can also group several operations inside a transaction (there are some examples under *Manipulating Data With SQL* below).
+The general approach with java.jdbc is to set up a data source (see below) as a "database spec" and pass that to the various CRUD - create, read, update, delete - functions that java.jdbc provides. By default, each operation will open a connection and execute the SQL inside a transaction. You can also run multiple operations against the same connection, either within a transaction or via connection pooling, or just with a shared connection (see below for more details).
 
 ## Setting Up A Data Source
 
-A "database spec" is a Clojure map that specifies how to access the data source. Mostly commonly, you would specify the driver class name, the subprotocol, the hostname, port and database name (the "subname") and the username and password, e.g.,
+A "database spec" is a Clojure map that specifies how to access the data source. Most commonly, you would specify the driver class name, the subprotocol, the hostname, port and database name (the "subname") and the username and password, e.g.,
 
     (def db-spec 
       {:classname "com.mysql.jdbc.Driver"
@@ -74,16 +72,16 @@ You can follow the SQL string with any parameters for that SQL:
 The `query` function returns a fully-realized sequence of rows from the database. Under the hood, `query` converts the JDBC `ResultSet` into a (lazy) sequence of rows and then realizes that sequence. Two hooks are provided for you to process that sequence of rows:
 
 * You can process each row inside the `query` function by passing `:row-fn f`. This will call `f` on each row as the underlying `ResultSet` is processed. The result of `query` will be the sequence of the result of `f` applied to each row in turn. The default for `:row-fn` is `identity`.
-* You can also process the entire `ResultSet` inside the `query` function by passing `:result-set-fn g`. This will call `g` on the entire (lazy) sequence of processed rows. The result of `query` will be the result of that call to `g`. To avoid the connection being closed before the result of `query` is fully consume, `g` should be an eager function. The default for `:result-set-fn` is `doall`.
+* You can also process the entire `ResultSet` inside the `query` function by passing `:result-set-fn g`. This will call `g` on the entire (lazy) sequence of processed rows. The result of `query` will be the result of that call to `g`. To avoid the connection being closed before the result of `query` is fully consumed, `g` should be an eager function. The default for `:result-set-fn` is `doall`.
 
 By default, `query` converts all of the column names in the `ResultSet` to lowercase keywords in the maps. This can be controlled by an optional `:identifiers` argument which is described, along with other options for `query`, in [Using SQL](using_sql.html).
 
 The four basic CRUD operations are:
 
-    (jdbc/insert! db-spec :table {:col1 42 :col2 "123"})
-    (jdbc/query!  db-spec ["SELECT * FROM table WHERE id = ?" 13])
-    (jdbc/update! db-spec :table {:col1 77 :col2 "456"} ["id = ?" 13])
-    (jdbc/delete! db-spec :table ["id = ?" 13])
+    (jdbc/insert! db-spec :table {:col1 42 :col2 "123"}) ;; Create
+    (jdbc/query!  db-spec ["SELECT * FROM table WHERE id = ?" 13]) ;; Read
+    (jdbc/update! db-spec :table {:col1 77 :col2 "456"} ["id = ?" 13]) ;; Update
+    (jdbc/delete! db-spec :table ["id = ?" 13]) ;; Delete
 
 The table name can be specified as a string or a keyword.
 
@@ -99,20 +97,26 @@ In addition, there is a more general operation to run SQL commands:
 
     (jdbc/execute! db-spec ["UPDATE table SET col1 = NOW() WHERE id = ?" 77])
 
-For more detail, read the [Using SQL](using_sql.html) guide which was originally part of the contrib library repository.
+For more detail, read the [Using SQL](using_sql.html) guide.
 
 ## Manipulating Tables With DDL
 
-java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic `CREATE TABLE` and `DROP TABLE` DDL strings. Anything beyond that can be done using `db-do-commands` with a DDL string of SQL to manipulate tables:
+java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic `CREATE TABLE` and `DROP TABLE` DDL strings. Anything beyond that can be constructed manually as a string. DDL can be executed using `db-do-commands`:
 
     (ns dbexample
       (:require [clojure.java.jdbc :as jdbc]))
     
     (def db-spec ... ) ;; see above
     
-    (jdbc/db-do-commands db-spec "CREATE INDEX col1_ix ON table ( col1 )")
+    (jdbc/db-do-commands db-spec
+                         (jdbc/create-table-ddl :fruit
+                                                [:name "varchar(32)"]
+                                                [:appearance "varchar(32)"]
+                                                [:cost :int]
+                                                [:grade :real]))
+    (jdbc/db-do-commands db-spec "CREATE INDEX name_ix ON fruit ( name )")
 
-For more detail, read the [Using DDL and Metadata](using_ddl.html) guide which was originally part of the contrib library repository.
+For more detail, read the [Using DDL and Metadata](using_ddl.html) guide.
 
 ## How To Use Connection Pooling
 
@@ -128,7 +132,7 @@ Some examples of [HoneySQL](https://github.com/jkk/honeysql) and [SQLingvo](http
 
 ## Where To Go Beyond java.jdbc
 
-Some Domain Specific Languages that generate SQL are mentioned above. You may also be interested in [Korma](http://sqlkorma.com) which goes beyond a SQL DSL to provide "entities" and "relationships" (in the style of classical Object-Relational Mappers, but without the pain).
+Some Domain Specific Languages that generate SQL are mentioned above. In particular, [Korma](http://sqlkorma.com) goes beyond a SQL DSL to provide "entities" and "relationships" (in the style of classical Object-Relational Mappers, but without the pain).
 
 Another common need with SQL is for database migration libraries. Some of the more popular options are:
 
