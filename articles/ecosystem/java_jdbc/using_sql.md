@@ -172,7 +172,7 @@ You can specify the transaction isolation level as part of the `with-db-transcti
 
 Possible values for `:isolation` are `:none`, `:read-committed`, `:read-uncommitted`, `:repeatable-read`, and `:serializable`. Be aware that not all databases support all isolation levels.
 
-In addition, you can also set the current transaction-aware connection to rollback, and rest that setting, as well as test whether the connection is currently set to rollback, using the following functions:
+In addition, you can also set the current transaction-aware connection to rollback, and reset that setting, as well as test whether the connection is currently set to rollback, using the following functions:
 
     (j/db-set-rollback-only! t-con)   ; this transaction will rollback instead of commit
     (j/db-unset-rollback-only! t-con) ; this transaction commit if successful
@@ -211,8 +211,8 @@ Transactions are rolled back if an exception is thrown, as shown in these exampl
                  [:name :appearance]
                  ["Grape" "yummy"]
                  ["Pear" "bruised"])
-      ;; At this point the insert-values call is complete, but the transaction
-      ;; is not. The exception will cause it to roll back leaving the database
+      ;; At this point the insert! call is complete, but the transaction is
+      ;; not. The exception will cause it to roll back leaving the database
       ;; untouched.
       (throw (Exception. "sql/test exception")))))
 
@@ -266,7 +266,7 @@ For example:
                {:name "Apple" :appearance "Round" :cost 99}
                :entities (j/quoted \`))
 
-will produce:
+will execute:
 
     INSERT INTO `fruit` ( `name`, `appearance`, `cost` )
         VALUES ( ?, ?, ? )
@@ -277,7 +277,7 @@ with the parameters `"Apple", "Round", "99"` whereas:
                {:name "Apple" :appearance "Round" :cost 99}
                :entities (j/quoted [\[ \]]))
 
-will produce:
+will execute:
 
     INSERT INTO [fruit] ( [name], [appearance], [cost] )
         VALUES ( ?, ?, ? )
@@ -302,7 +302,7 @@ If you are using a database that returns certain SQL types as custom Java types 
 
 By default `result-set-read-column` just returns its first argument (the `Boolean` implementation ensure the result is either `true` or `false`).
 
-If you are using a database that require special treatment of null values, e.g., TeraData, you can extend `ISQLParameter` to nil and define `set-parameter` to use `.setNull` instead of `.setObject`. The `set-parameter` function is called with three arguments:
+If you are using a database that requires special treatment of null values, e.g., TeraData, you can extend `ISQLParameter` to `nil` (and `Object`) and define `set-parameter` to use `.setNull` instead of `.setObject`. The `set-parameter` function is called with three arguments:
 
 * The Clojure value itself
 * The `PreparedStatement` object
