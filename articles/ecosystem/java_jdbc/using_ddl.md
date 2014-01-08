@@ -55,6 +55,6 @@ java.jdbc provides two functions for working with database metadata:
 For example:
 
     (j/with-db-metadata [md db-spec]
-      (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"]))))
+      (doall (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"])))))
 
 This returns a sequence of maps describing all the tables and views in the current database. `metadata-result` only transforms `ResultSet` objects, other results are returned as-is. `metadata-result` can also accept `:identifiers` and `:as-arrays?` options, like the `query` function, and those options control how the metatadata is transformed and/or returned.
