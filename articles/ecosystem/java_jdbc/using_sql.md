@@ -47,7 +47,7 @@ Since `query` returns a fully realized result set, it can be difficult to proces
 Of course, a simple sum like this could be computed directly in SQL instead:
 
     (j/query db-spec ["SELECT SUM(cost) FROM fruit WHERE cost < ?" 50]
-             :result-set-fn first
+             :result-set-fn first)
     ;; {:sum(cost) 437}
 
 We know we will only get one row back so passing `first` to `:result-set-fn` is a quick way to get just that row.
@@ -88,7 +88,7 @@ Rows (and partial rows) can be inserted easily using the `insert!` function. You
 
 If you want to insert a single row (or partial row) and get back the generated keys, you can use `insert!` and specify the columns and their values as a map. This performs a single insert statement. A single-element sequence containing a map of the generated keys will be returned.
 
-    (j/insert! db-spec :fruit {:name "Pear" :appearance "green" :cost 99}))
+    (j/insert! db-spec :fruit {:name "Pear" :appearance "green" :cost 99})
     ;; returns a database-specific map as the only element of a sequence, e.g.,
     ;; ({:generated_key 50}) might be returned for MySQL
 
@@ -102,7 +102,7 @@ If you use `insert!` and specify each row as a map of columns and their values, 
 
     (j/insert! db-spec :fruit
                {:name "Pomegranate" :appearance "fresh" :cost 585}
-               {:name "Kiwifruit" :grade 93}))
+               {:name "Kiwifruit" :grade 93})
     ;; returns a sequence of database-specific maps, e.g., for MySQL:
     ;; ({generated_key 51} {generated_key 52})
 
@@ -113,7 +113,7 @@ If you use `insert!` and specify the columns you wish to insert followed by each
                  [1 "Apple" "red" 59 87]
                  [2 "Banana" "yellow" 29 92.2]
                  [3 "Peach" "fuzzy" 139 90.0]
-                 [4 "Orange" "juicy" 89 88.6]))
+                 [4 "Orange" "juicy" 89 88.6])
     ;; (1 1 1 1) - row counts modified
 
 It is generally safer to specify the columns you wish to insert so you can control the order, and choose to omit certain columns:
@@ -121,7 +121,7 @@ It is generally safer to specify the columns you wish to insert so you can contr
     (j/insert! db-spec :fruit
                [:name :cost]
                ["Mango" 722]
-               ["Feijoa" 441]))
+               ["Feijoa" 441])
     ;; (1 1) - row counts modified
 
 ## Updating rows
@@ -214,7 +214,7 @@ Transactions are rolled back if an exception is thrown, as shown in these exampl
       ;; At this point the insert! call is complete, but the transaction is
       ;; not. The exception will cause it to roll back leaving the database
       ;; untouched.
-      (throw (Exception. "sql/test exception")))))
+      (throw (Exception. "sql/test exception")))
 
 As noted above, transactions can also be set explicitly to rollback instead of commit:
 
@@ -236,7 +236,7 @@ As noted above, transactions can also be set explicitly to rollback instead of c
     ;; outside the transaction, the following will show the original rows
     ;; without those two inserted inside the (rolled-back) transaction:
     (j/query db-spec ["SELECT * FROM fruit"]
-             :row-fn println))
+             :row-fn println)
 
 ## Clojure identifiers and SQL entities
 
@@ -256,7 +256,7 @@ If you want to prevent java.jdbc's conversion of SQL entity names to lowercase i
 It you're working with a database that has underscores in column names, you might want to specify a function that converts those to dashes in Clojure keywords:
 
     (j/query db-spec ["SELECT * FROM mixedTable"]
-             :identifiers #(.replace % \_ \-)
+             :identifiers #(.replace % \_ \-))
 
 For several databases, you will often want entities to be quoted in some way (sometimes referred to as "stropping"). A utility function `quoted` is provided that accepts either a single character or a vector pair of characters, and returns a function suitable for use with the `:entities` option.
 
