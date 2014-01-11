@@ -58,7 +58,7 @@ your shell-specific config) you can add [this](https://gist.github.com/3887459) 
 issues when launching Emacs from the GUI on OS X
 ([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
-```scheme
+```el
 ;; fix the PATH variable
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -123,7 +123,7 @@ Most Emacs packages are kept at [Marmalade](http://marmalade-repo.org),
 the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
-```scheme
+```el
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -141,7 +141,7 @@ your configuration file. This is helpful if you take your dotfiles to
 a new machine; you don't have to remember everything you've installed
 by hand.
 
-```scheme
+```el
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -276,7 +276,7 @@ Let's start up a live repl session.
 M-x cider-jack-in
 ```
 
-This should open up a new window looking at our \*cider\* buffer.
+This should open up a new window looking at our `*cider-repl*` buffer.
 
 First thing to do is add a simple test (in fact the only test we will
 be adding because by default, we get it right first time). Open the
@@ -325,7 +325,7 @@ problem with the assertion in the mini-buffer:
         {}))
 ```
 
-The failure message will also be shown in the `*cider*` buffer.
+The failure message will also be shown in the `*cider-repl*` buffer.
 
 Anyway, our map was empty as expected. Let's fix that:
 
@@ -375,7 +375,7 @@ clojure-mode and clojure-test-mode.
 One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
 open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
-two so you have the `core.clj` and `*cider*` buffers open.
+two so you have the `core.clj` and `*cider-repl*` buffers open.
 Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
 decided you want to pull out the anonymous function to be a named
@@ -443,7 +443,7 @@ stack and return to where you were. For all the definitions in a
 single file you can use `M-x imenu` to list them and jump to one.
 
 When you are finished with the repl (or if for some reason it has
-gotten into a bad state), you can simply kill the `*cider*`
+gotten into a bad state), you can simply kill the `*cider-repl*`
 buffer by typing `C-x k` and re-run `cider-jack-in` to start another.
 
 ## Appendix ##
