@@ -288,7 +288,7 @@ This guide covers:
 ### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
 A brief tutorial/walkthrough of building a small web app using Ring,
-Compojure, Hiccup, and SQLite.
+Compojure, Hiccup, and H2.
 
 ### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
 
