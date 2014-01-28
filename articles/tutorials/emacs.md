@@ -58,7 +58,7 @@ your shell-specific config) you can add [this](https://gist.github.com/3887459) 
 issues when launching Emacs from the GUI on OS X
 ([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
 
-```el
+```cl
 ;; fix the PATH variable
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -123,7 +123,7 @@ Most Emacs packages are kept at [Marmalade](http://marmalade-repo.org),
 the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
-```el
+```cl
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -141,7 +141,7 @@ your configuration file. This is helpful if you take your dotfiles to
 a new machine; you don't have to remember everything you've installed
 by hand.
 
-```el
+```cl
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
