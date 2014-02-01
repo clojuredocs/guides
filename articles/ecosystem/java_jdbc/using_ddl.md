@@ -52,9 +52,9 @@ java.jdbc provides two functions for working with database metadata:
 * `with-db-metadata` for creating an active metadata object backed by an open connection
 * `metadata-result` for turning metadata results into Clojure data structures
 
-For example:
+For example (for versions prior to 0.3.3 you need to wrap the `metadata-result` with `doall`):
 
     (j/with-db-metadata [md db-spec]
-      (doall (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"])))))
+      (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"]))))
 
 This returns a sequence of maps describing all the tables and views in the current database. `metadata-result` only transforms `ResultSet` objects, other results are returned as-is. `metadata-result` can also accept `:identifiers` and `:as-arrays?` options, like the `query` function, and those options control how the metatadata is transformed and/or returned.
