@@ -1164,7 +1164,7 @@ instead of:
 (def concert {:band     "The Blues Brothers"
               :location "Palace Hotel Ballroom"
               :promos   "Ladies night, tonight"
-              :perks    "Free parking"}
+              :perks    "Free parking"})
 
 (let [band     (concert :band)
       location (concert :location)
