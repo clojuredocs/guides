@@ -114,10 +114,10 @@ development.
 Emacs can be configured through a folder in your home folder called
 [~/.emacs.d](http://www.emacswiki.org/emacs/DotEmacsDotD), and
 configuration options are pretty much endless. To help you through
-this, Phil Hagelberg has created a starter kit with lots of sensible
-defaults for you called
-[emacs-starter-kit](https://github.com/technomancy/emacs-starter-kit)
-if you'd prefer a prepackaged set of config to starting from scratch.
+this, Phil Hagelberg has created a small library enables a few
+non-intrusive helpful features called
+[better-defaults](https://github.com/technomancy/better-defaults)
+which might be useful if you are not already an Emacs pro.
 
 Most Emacs packages are kept at [Marmalade](http://marmalade-repo.org),
 the community package host. Add this code to your config in
@@ -142,10 +142,7 @@ a new machine; you don't have to remember everything you've installed
 by hand.
 
 ```cl
-(defvar my-packages '(starter-kit
-                      starter-kit-lisp
-                      starter-kit-bindings
-                      starter-kit-eshell
+(defvar my-packages '(better-defaults
                       clojure-mode
                       clojure-test-mode
                       cider))
