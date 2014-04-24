@@ -1081,7 +1081,7 @@ the section on [Laziness](#laziness).
 
 We say that `let` expressions and function bodies (and also `loop`
 expressions, which you'll read about later in [Looping and
-Recursion](#looping_and_recursion)) have an "implicit do": within them
+Recursion](#looping-and-recursion)) have an "implicit do": within them
 you can list expressions one after another, and they all get evaluated
 in order (presumably for the side-effects), but the last one is what
 determines the overall resulting value of the `let` expression.
@@ -1164,7 +1164,7 @@ instead of:
 (def concert {:band     "The Blues Brothers"
               :location "Palace Hotel Ballroom"
               :promos   "Ladies night, tonight"
-              :perks    "Free parking"}
+              :perks    "Free parking"})
 
 (let [band     (concert :band)
       location (concert :location)
