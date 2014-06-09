@@ -41,7 +41,7 @@ We can specify multiple arities:
 Here we can call a function of this type with either one or two arguments.
 In this case, the ordered intersection type acts as a simple overloading on arity.
 
-Finer invariants can be expressed by specifying multiple arities of the same arity:
+Finer invariants can be expressed by specifying multiple signatures of the same arity:
 
 ```clojure
 (Fn [Symbol -> Number]
