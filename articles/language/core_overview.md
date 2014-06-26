@@ -252,7 +252,7 @@ The point of recursion is the nearest `fn` or `loop` form determined lexically.
 ;; ⇒ [0 1 2 3 4 5 6 7 8 9]
 ```
 
-Example - Getting factorial of a positive integer:
+Example: getting factorial of a positive integer:
 
 ```clojure
 (defn factorial
@@ -294,7 +294,7 @@ The implicit `let` that `loop` provides binds each symbol to the init-expression
 ;; ⇒ [0 1 2 3 4 5 6 7 8 9]
 ```
 
-Example - Getting factorial of a positive integer:
+Example: getting factorial of a positive integer:
 
 ```clojure
 (defn factorial
