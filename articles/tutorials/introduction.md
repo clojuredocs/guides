@@ -1106,8 +1106,6 @@ which provides an "implicit do": it's spelled "`when`" (and likewise
 with `if-not` ↔ `when-not`).
 
 
-
-
 ## Destructuring
 
 Clojure provides a little bit of extra syntactic support for assigning

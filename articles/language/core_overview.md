@@ -57,7 +57,11 @@ This example basically demonstrates the lexical scoping of the let form.
 
 Let bindings are immutable and can be destructured.
 
-TBD: link to the section about destructuring
+See: Sections about destructuring in
+[Introduction](/articles/tutorials/introduction.html#destructuring) and
+[Functions](/articles/language/functions.html#destructuring-of-function-arguments)
+pages.
+
 
 <a id="def_desc"></a>
 ### def
