@@ -263,8 +263,6 @@ Example - Getting factorial of a positive integer:
        acc
        (recur (dec n) (* n acc)))))
 
-(println (factorial 10))
-
 (factorial 10)
 ;; ⇒ 3628800
 ```
