@@ -174,9 +174,6 @@ A larger example:
     (comment Omitted for clarity)))
 ```
 
-
-
-
 ## Destructuring of Function Arguments
 
 Sometimes function arguments are data structures: vectors, sequences, maps. To access parts of such
