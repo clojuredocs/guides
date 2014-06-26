@@ -1472,3 +1472,4 @@ Please see the [Concurrency and Parallelism Guide](articles/language/concurrency
 
 Robert Randolph <audiolabs@gmail.com> (original author)
 Michael Klishin <michael@defprotocol.org>
+Nguyễn Hà Dương <cmpitg@gmail.com>
