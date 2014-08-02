@@ -178,6 +178,15 @@ can use the `doto` macro:
   (.push 42)
   (.push 13)
   (.push 7))  ; ⇒ #<Stack [42, 13, 7]>
+
+(let [pt (Point. 0 0)]
+  (doto pt
+    (.move  10 0)))  ; ⇒ #<Point java.awt.Point[x=10, y=0]
+
+(let [pt (Point. 0 0)]
+  (doto pt
+    (.move  10 0)
+    (.translate  0 10)))  ; ⇒ #<Point java.awt.point[x=10,y=10]
 ```
 
 The `doto` macro returns its first argument as a result.

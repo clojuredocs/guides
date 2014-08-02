@@ -219,9 +219,8 @@ This guide covers:
  * Setting up a data source
  * Manipulating data with SQL
  * Manipulating tables with DDL
- * Mapping between SQL entities and Clojure identifiers
  * How to use connection pooling
- * How to use the basic SQL DSL in java.jdbc.sql
+ * How to use some common DSLs with java.jdbc
  * Where to go beyond java.jdbc
 
 
@@ -289,7 +288,7 @@ This guide covers:
 ### [Basic Web Development](/articles/tutorials/basic_web_development.html)
 
 A brief tutorial/walkthrough of building a small web app using Ring,
-Compojure, Hiccup, and SQLite.
+Compojure, Hiccup, and H2.
 
 ### [Parsing XML in Clojure](/articles/tutorials/parsing_xml_with_zippers.html)
 

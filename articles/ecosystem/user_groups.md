@@ -26,7 +26,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Los Angeles Clojure User Group](http://clj-la.org/)
  * [MadClojure (Madison Clojure User Group)](http://www.meetup.com/Madison-Clojure/)
  * [Minnesota Clojure User Group](http://clojure.mn/)
- * [Montréal Clojure User Group](http://www.bonjure.org/)
+ * [Montréal Clojure User Group](https://groups.google.com/forum/#!forum/montreal-clojure-user-group)
  * [National Capital Area Clojure User Group](http://www.meetup.com/Cap-Clug/)
  * [New York City Clojure User Group](http://www.meetup.com/Clojure-NYC/)
  * [Philadelphia Clojure User Group](http://groups.google.com/group/phl-clojure-language-club)

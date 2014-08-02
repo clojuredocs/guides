@@ -36,10 +36,6 @@ Functions are typically defined using the [defn](http://clojuredocs.org/clojure_
     (/ (Math/floor (* d factor)) factor)))
 ```
 
-Type hints sometimes allow the compiler to avoid reflective method calls and/or produce significantly more efficient bytecode.
-However, as a rule of thumb, it is usually not necessary to use type hints. Start writing your code without them. The compiler
-is also free to ignore provided hints.
-
 Functions can have doc strings (documentation strings) and it is a good idea to document functions that
 are part of the public API:
 
@@ -59,6 +55,10 @@ In Clojure, function arguments may have optional type hints:
   (let [factor (Math/pow 10 precision)]
     (/ (Math/floor (* d factor)) factor)))
 ```
+
+Type hints sometimes allow the compiler to avoid reflective method calls and/or produce significantly more efficient bytecode.
+However, as a rule of thumb, it is usually not necessary to use type hints. Start writing your code without them. The compiler
+is also free to ignore provided hints.
 
 
 Functions can also define *preconditions* and *postconditions* that put restrictions on argument values and
@@ -173,9 +173,6 @@ A larger example:
   ([start end step]
     (comment Omitted for clarity)))
 ```
-
-
-
 
 ## Destructuring of Function Arguments
 

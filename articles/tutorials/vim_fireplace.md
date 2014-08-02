@@ -59,7 +59,12 @@ TODO: Someone should write Vim installation instructions and basic usage here.
 TODO: Ubuntu vim install instructions
 
 ### Windows
-TODO: Windows vim install instructions
+* Search and install gvim anywhere on your computer.
+* Make sure that `echo %HOME%` and `echo %userprofile%` is set to something typical as `C:\Users\user`.
+* Check your vim runtimepath with `:echo &rtp` in vim. This is where your vim searches.
+* Note: The UNIX `.vimrc` is the windows` _vimrc` and the UNIX `.vim` is the Windows `vimfiles`!
+* Now make sure that both `.vimrc` and `vimfiles` live in the desired location (as e.g. `C:\Users\user`) so that the vim runtimepath can find it.
+* Test it by putting something as A) in the `_vimrc` as `set number` and as B) in the `vimfiles\colors\` as the solarized color scheme (and refer to it in _vimrc with `colorscheme solarized`).
 
 ## Installing fireplace.vim
 Because fireplace.vim handles only the dynamic aspects of Clojure development, a separate plugin, [vim-clojure-static](https://github.com/guns/vim-clojure-static) (extracted from VimClojure and maintained by [Sung Pae](https://github.com/guns)) includes support for syntax highlighting, indentation, etc. You'll want to install both for a pleasant experience.

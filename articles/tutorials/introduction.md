@@ -725,7 +725,7 @@ shares data structures.  It keeps track of all their pieces and
 re-uses them pervasively. For example, if you have a 1,000,000-item
 list and want to tack on one more item, you just tell Clojure, "give
 me a new one but with this item added" --- and Clojure dutifully gives
-you back a 1,000,001-item list in no time flat. Unbeknownced to you
+you back a 1,000,001-item list in no time flat. Unbeknownst to you
 it's re-using the original list.
 
 Clojure data structures are said to be *persistent*.
@@ -1081,7 +1081,7 @@ the section on [Laziness](#laziness).
 
 We say that `let` expressions and function bodies (and also `loop`
 expressions, which you'll read about later in [Looping and
-Recursion](#looping_and_recursion)) have an "implicit do": within them
+Recursion](#looping-and-recursion)) have an "implicit do": within them
 you can list expressions one after another, and they all get evaluated
 in order (presumably for the side-effects), but the last one is what
 determines the overall resulting value of the `let` expression.
@@ -1104,8 +1104,6 @@ determines the overall resulting value of the `let` expression.
 There's a version of `if` which supports no "else" expression and
 which provides an "implicit do": it's spelled "`when`" (and likewise
 with `if-not` ↔ `when-not`).
-
-
 
 
 ## Destructuring
@@ -1164,7 +1162,7 @@ instead of:
 (def concert {:band     "The Blues Brothers"
               :location "Palace Hotel Ballroom"
               :promos   "Ladies night, tonight"
-              :perks    "Free parking"}
+              :perks    "Free parking"})
 
 (let [band     (concert :band)
       location (concert :location)

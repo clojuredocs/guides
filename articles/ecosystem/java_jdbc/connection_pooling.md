@@ -3,7 +3,8 @@ title: "How to use connection pooling"
 layout: article
 ---
 
-clojure.java.jdbc does not provide connection pooling directly but it is relatively easy to add to your project. The following example shows how to configure connection pooling use c3p0. Below, we show how to use BoneCP instead.
+java.jdbc does not provide connection pooling directly but it is relatively easy to add to your project. The following example shows how to configure connection pooling use c3p0. Below, we show how to use BoneCP instead.
+
 ## Add the c3p0 dependency
 
 For more information on c3p0, consult the [c3p0 documentation](http://www.mchange.com/projects/c3p0/).
@@ -21,7 +22,8 @@ In Maven, it would be:
     </dependency>
 
 ## Create the pooled datasource from your db-spec
-Define your db-spec as usual, for example (for MySQL):
+
+Define your `db-spec` as usual, for example (for MySQL):
 
     (def db-spec 
       {:classname "com.mysql.jdbc.Driver"
@@ -56,7 +58,7 @@ Now you can create a single connection pool:
     
     (defn db-connection [] @pooled-db)
 
-And then call (db-connection) wherever you need access to it.
+And then call `(db-connection)` wherever you need access to it. If you're using a component lifecycle for your application, such as Stuart Sierra has advocated, you won't need `pooled-db` or `db-connection`, you'll just create `(pool db-spec)` as part of your application's initialization and pass it around as part of your system configuration.
 
 ## Add the BoneCP dependencies
 
@@ -80,8 +82,11 @@ In Maven, it would be:
       <version>0.7.1.RELEASE</version>
     </dependency>
 
+and whatever logging system you chose.
+
 ## Create the pooled datasource from your db-spec
-Define your db-spec as usual, for example (for MySQL):
+
+Define your `db-spec` as usual, for example (for MySQL):
 
     (def db-spec 
       {:classname "com.mysql.jdbc.Driver"
@@ -122,4 +127,4 @@ Now you can create a single connection pool:
     
     (defn db-connection [] @pooled-db)
 
-And then call (db-connection) wherever you need access to it.
+And then call `(db-connection)` wherever you need access to it. As above, adjust for your application lifecycle.

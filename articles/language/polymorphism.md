@@ -286,9 +286,9 @@ Implementation for circles looks very similar, we choose `:circle` as a reasonab
 ``` clojure
 (defmethod area :circle
   [_ radius]
-  (* radius Math/PI Math/PI))
+  (* radius radius Math/PI))
 
-(area :circle 3)     ;= 29.608813203268074
+(area :circle 3)     ;= 28.274333882308138
 ```
 
 For the record, `Math/PI` in this example refers to `java.lang.Math/PI`, a field that stores the value of Pi.
@@ -318,14 +318,14 @@ Putting it all together:
 
 (defmethod area :circle
   [_ radius]
-  (* radius Math/PI Math/PI))
+  (* radius radius Math/PI))
 
 (defmethod area :triangle
   [_ b h]
   (* 1/2 b h))
 
 (area :square 4)     ;= 16
-(area :circle 3)     ;= 29.608813203268074
+(area :circle 3)     ;= 28.274333882308138
 (area :triangle 3 5) ;= 15/2
 ```
 

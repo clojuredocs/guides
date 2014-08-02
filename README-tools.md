@@ -6,7 +6,6 @@ The clojure-doc.org site is generated using jekyll. To run the site generator yo
 If installing Ruby from source, a prerequisite is the libyaml dev package.
 
 
-
 ## Install Tools & Dependencies
 
 Install [Bundler](http://gembundler.com). Ruby 1.9.3 or JRuby are recommended:
@@ -24,15 +23,16 @@ by running the following in the CDS repository root:
 > run the gem-installed `jekyll` to view your local version of
 > the site.
 
+
 ## How To Run A Development Server
 
 Before you run `jekyll` the first time, you will need to create an empty folder called
 `_site` in the CDS repository root.
 
+    mkdir -p _site
     ./bin/jekyll serve --watch
 
 The server will be started at [localhost:4000](http://localhost:4000).
-
 
 
 ## How To Regenerate The Site
