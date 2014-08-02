@@ -56,6 +56,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [Göteborg Clojure User Group](http://www.meetup.com/got-clj/), [@Gotclj](https://twitter.com/Gotclj)
  * [Hamburg Clojure User Group](http://www.meetup.com/ClojureUserGroupHH/)
  * [Italian Clojure User Group](http://groups.google.com/group/clojure-italy)
+ * [Lithuanian Clojure User Group](https://groups.google.com/forum/#!forum/clojure-lt)
  * [London Clojurians](http://londonclojurians.org/)
  * [Lyon Clojure User Group](http://clojure-lyon.eventbrite.fr/)
  * [Manchester Clojure Dojo](http://manchester.clojuredojo.com/)
