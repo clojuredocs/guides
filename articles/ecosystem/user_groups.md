@@ -1,4 +1,4 @@
--F--
+---
 title: "Clojure User Groups"
 layout: article
 ---
