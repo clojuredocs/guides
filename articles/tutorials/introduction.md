@@ -910,7 +910,7 @@ the-answer (a symbol) → a var → 42 (a value).
 When Clojure sees "`the-answer`", it automatically looks up the var,
 then from there finds and returns the value 42.
 
-Recall that [locals](#let_and_locals) don't involve vars at all:
+Recall that [locals](#let-and-locals) don't involve vars at all:
 those symbols refer directly to their values.
 
 
