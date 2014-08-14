@@ -77,6 +77,18 @@ Installation is covered thoroughly in the [fireplace README](https://github.com/
 
 Once installed, there's really nothing to configure. Yay!
 
+## Vim Basics
+
+`vimtutor` is a ~30 minute tutorial on the bare basics of using Vim. It is included with Vim and it will get your some real experience editing text with Vim.
+
+On Unix-based systems(ie: Mac, Linux), if Vim has been properly installed, you can start `vimtutor` from the shell.
+
+On MS-Windows you can find it in the Program/Vim menu or execute vimtutor.bat from your Vim installation directory.
+
+For more information on vimtutor and how to use it on other platforms, run `:help tutor` inside vim.
+
+It is also recommended to have a cheat sheet handy when starting out so you have the commands in front of you if you need them. There are a lot of options available, but [this one](http://www.viemu.com/vi-vim-cheat-sheet.gif) is fairly clean and makes a lot of sense after running through `vimtutor`.
+
 ## Basics
 
 Let's go through the process of creating a simple project to demonstrate some of fireplace.vim's capabilities.
