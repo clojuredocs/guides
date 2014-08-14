@@ -56,7 +56,11 @@ TODO: Someone should write Vim installation instructions and basic usage here.
 * If you'd rather launch it from the dock, you can navigate to `~/Applications` and double-click `MacVim.app` assuming you've run `brew linkapps`
 
 ### Debian/Ubuntu
-TODO: Ubuntu vim install instructions
+* Install: `sudo apt-get install vim`
+* Create your .vimrc and a couple of vim-related dirs:
+    * `touch ~/.vimrc && mkdir ~/.vim && mkdir ~/.vim/bundle`
+* Install [pathogen](https://github.com/tpope/vim-pathogen) to make the future of vim plugin installs a breeze.
+* Enjoy the wonderful world of vim.
 
 ### Windows
 * Search and install gvim anywhere on your computer.
