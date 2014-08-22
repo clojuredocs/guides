@@ -80,6 +80,14 @@ or:
              :result-set-fn first)
     ;; produces the same result, via SQL
 
+Here is an example that manipulates rows to add computed columns:
+
+    (defn add-tax [row] (assoc row :tax (* 0.08 (:cost row))))
+    
+    (j/query db-spec ["SELECT * FROM fruit"]
+             :row-fn add-tax)
+    ;; produces all the rows with a new :tax column added
+
 ## Inserting data
 
 Rows (and partial rows) can be inserted easily using the `insert!` function. You can insert a single row, or multiple rows. Depending on how you call `insert!`, the insertion will be done either through multiple SQL statements or through a single, batched SQL statement. That will also determine whether or not you get back any generated keys.
