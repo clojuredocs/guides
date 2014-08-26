@@ -12,10 +12,8 @@ Github](https://github.com/clojuredocs/guides).
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.4 and Emacs 24. Most packages should work
-on earlier versions of Emacs, but they will be more work to install
-since the package manager is new in 24.
-
+This guide covers Clojure 1.5+ and Emacs 24.x. Earlier Clojure and Emacs releases
+are not supported.
 
 ## Overview
 
@@ -43,8 +41,8 @@ $ brew install emacs --cocoa --srgb
 $ brew linkapps Emacs
 ```
 
-This should install the latest version of Emacs and symlink Emacs.app
-to your ~/Applications folder.
+This should install the latest version of Emacs and symlink `Emacs.app`
+to your `~/Applications` folder.
 
 After compiling, Emacs will be living happily somewhere in your
 cellar. You can check this:
@@ -70,6 +68,10 @@ issues when launching Emacs from the GUI on OS X
 
 This makes sure that all of the stuff you have on your PATH actually
 gets respected in the GUI Emacs, no matter how you start it.
+
+There's also a package called
+[exec-path-from-shell](https://github.com/purcell/exec-path-from-shell)
+that automates this. OS X users are advised to install it!
 
 ### Debian/Ubuntu ###
 
@@ -111,6 +113,8 @@ So Emacs is installed, but running it now would be a somewhat
 barebones experience and not particularly useful for Clojure
 development.
 
+### Manual setup
+
 Emacs can be configured through a folder in your home folder called
 [~/.emacs.d](http://www.emacswiki.org/emacs/DotEmacsDotD), and
 configuration options are pretty much endless. To help you through
@@ -119,21 +123,29 @@ non-intrusive helpful features called
 [better-defaults](https://github.com/technomancy/better-defaults)
 which might be useful if you are not already an Emacs pro.
 
-Most Emacs packages are kept at [Marmalade](http://marmalade-repo.org),
+Most Emacs packages are kept at [MELPA Stable](http://melpa-stable.milkbox.net),
 the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
 ```cl
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
 (package-initialize)
 ```
 
 Run `M-x package-refresh-contents` to pull in the package listing.
 
-M-x means meta-x, and meta is mapped to the alt key on most keyboards,
+`M-x` means `meta-x`, and meta is mapped to the alt key on most keyboards,
 though Mac OS X usually maps it to the command key.
+
+You'll need to following packages:
+
+* [clojure-mode](https://github.com/clojure-emacs/clojure-mode) - a major mode for editing Clojure and ClojureScript code
+* [CIDER](https://github.com/clojure-emacs/cider) - a Clojure interactive development environment and REPL for Emacs
+* [projectile](https://github.com/bbatsov/projectile) - for navigating inside your projects swiftly
+
+Before continuing any further you should briefly consult their documentation.
 
 You can either install each package one-by-one with `M-x
 package-install` or specify all your packages in Emacs Lisp as part of
@@ -143,12 +155,12 @@ by hand.
 
 ```cl
 (defvar my-packages '(better-defaults
+                      projectile
                       clojure-mode
-                      clojure-test-mode
                       cider))
 
 (dolist (p my-packages)
-  (when (not (package-installed-p p))
+  (unless (package-installed-p p)
     (package-install p)))
 ```
 
@@ -163,6 +175,16 @@ invoke `M-x package-list-packages`. To manually install a package,
 move the point to line of the package with the keyboard and press 'i'
 for 'install'. After selecting all the packages you are interested in,
 press 'x' for 'eXecute' to install.
+
+### Preconfigured setup ###
+
+There are also some ready-made Emacs configurations that are optimized
+for Clojure development -
+[Prelude](https://github.com/bbatsov/prelude)(developed by the
+maintainer of CIDER and clojure-mode) and
+[Emacs Live](https://github.com/overtone/emacs-live).
+
+If you want a more powerful Emacs setup you should definitely check them out.
 
 ### Basics ###
 
@@ -267,7 +289,34 @@ Should be fairly self-explanatory, though Leiningen's built-in
 tutorial (available via `lein help tutorial`) provides a detailed
 explanation of the project structure.
 
-Let's start up a live repl session.
+Before we continue we have to make our project play with CIDER, which
+requires a bit of one time setup.  Open the `project.clj` file and add
+the `cider-nrepl` plugin there. The file will initially look like this
+(more or less):
+
+```clojure
+(defproject command-line-args "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.6.0"]])
+```
+
+You need to get to this (keep in mind that by the time you read this `cider-nrepl`
+will likely have a newer version):
+
+```clojure
+(defproject command-line-args "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.6.0"]]
+  :profiles {:dev {:plugins [[cider/cider-nrepl "0.7.0"]]}})
+```
+
+Let's start up a live REPL session.
 
 ```
 M-x cider-jack-in
@@ -308,10 +357,8 @@ C-f`) and adding the following definition:
 
 Compile this with `C-c C-k`, save it (`C-x C-s`), switch back to the
 test buffer (`C-x b ENTER`) and try compiling again (`C-c C-k`). This
-time it will succeed, so try running the tests with `C-c C-,` and you
-should get a message in the mini-buffer (the small line at the bottom of
-your screen) telling you one test has failed AND you should have a red
-bar across the `is` assertion. To check what the problem was, we can
+time it will succeed, so try running the tests with `C-c ,` and you
+should get a test report buffer showing some failure information. To check what the problem was, we can
 move our cursor over the red bar and press `C-c '`. This shows the
 problem with the assertion in the mini-buffer:
 
@@ -321,8 +368,6 @@ problem with the assertion in the mini-buffer:
          :environment "production"}
         {}))
 ```
-
-The failure message will also be shown in the `*cider-repl*` buffer.
 
 Anyway, our map was empty as expected. Let's fix that:
 
@@ -365,7 +410,7 @@ instance, if you delete a function definition but still call it from
 other functions, you won't notice until your process is restarted.
 
 So that is an extremely simple example of a workflow using Emacs with
-clojure-mode and clojure-test-mode.
+`clojure-mode` and `cider-test`.
 
 ## Using the REPL ##
 
@@ -431,17 +476,17 @@ gives you the docstring for a given function:
       Same as print followed by (newline)
     nil
 
-However there is a shortcut `C-c C-d` when your cursor is over a
-function name. This will show the Clojure doc in a new window. If
+However there is a shortcut `C-c C-d d` when your cursor is over a
+function name. This will show the Clojure (or Javadoc) doc in a new window. If
 instead you want to jump to the source of the function you can use
 `M-.`, which is awesome. This works on your own functions as well as
 those which come from third-party libraries. Use `M-,` to pop the
 stack and return to where you were. For all the definitions in a
 single file you can use `M-x imenu` to list them and jump to one.
 
-When you are finished with the repl (or if for some reason it has
+When you are finished with the REPL (or if for some reason it has
 gotten into a bad state), you can simply kill the `*cider-repl*`
-buffer by typing `C-x k` and re-run `cider-jack-in` to start another.
+buffer by typing `M-x cider-quit` and re-run `cider-jack-in` to start another.
 
 ## Appendix ##
 
