@@ -113,7 +113,7 @@ So Emacs is installed, but running it now would be a somewhat
 barebones experience and not particularly useful for Clojure
 development.
 
-### Manual setup
+### Manual setup ###
 
 Emacs can be configured through a folder in your home folder called
 [~/.emacs.d](http://www.emacswiki.org/emacs/DotEmacsDotD), and
@@ -139,11 +139,11 @@ Run `M-x package-refresh-contents` to pull in the package listing.
 `M-x` means `meta-x`, and meta is mapped to the alt key on most keyboards,
 though Mac OS X usually maps it to the command key.
 
-You'll need to following packages:
+You'll need to install the following packages:
 
 * [clojure-mode](https://github.com/clojure-emacs/clojure-mode) - a major mode for editing Clojure and ClojureScript code
 * [CIDER](https://github.com/clojure-emacs/cider) - a Clojure interactive development environment and REPL for Emacs
-* [projectile](https://github.com/bbatsov/projectile) - for navigating inside your projects swiftly
+* [projectile](https://github.com/bbatsov/projectile)(optional) - for navigating inside your projects swiftly
 
 Before continuing any further you should briefly consult their documentation.
 
