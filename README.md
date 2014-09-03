@@ -2,7 +2,7 @@
 
 An assorted collection of tutorials, guides, and other documentation
 (by various authors) for the Clojure programming language and its
-ecosystem. [Read the guides online](clojure-doc.org).
+ecosystem. [Read the guides online](http://clojure-doc.org).
 
 
 ## Goals
