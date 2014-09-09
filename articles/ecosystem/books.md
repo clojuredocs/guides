@@ -14,8 +14,8 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ## Overview
 
-As of September 2013, Clojure has 9 books published (or available for
-preview) about it, plus one about ClojureScript. This guide lists them
+As of September 2014, Clojure has over a dozen books published (or available for
+preview) about it, plus one about ClojureScript. This guide lists some of them
 in reverse chronological order and intended to provide a very brief
 overview of each. It is by no means comprehensive and may be quite
 opinionated. The goal is to identify books that are more useful to
@@ -27,6 +27,90 @@ of Clojure (1.3+).
 ## Books About Clojure
 
 Note: books are listed in reverse chronological order.
+
+
+### Mastering Clojure Macros
+
+By Colin Jones.
+
+#### Notes
+
+A book that walks you step-by-step from the basic building blocks of macros to creating new language features.
+
+#### Where You Can Buy It
+
+ * [Pragmatic Programmers](https://pragprog.com/book/cjclojure/mastering-clojure-macros):  eBook, paperback
+ * [Paperback on Amazon](http://www.amazon.com/Mastering-Clojure-Macros-Cleaner-Smarter/dp/1941222226)
+
+
+
+### The Joy of Clojure, 2nd Edition
+
+By Michael Fogus and Chris Houser.
+
+#### Notes
+
+Updated for Clojure 1.6 with new content.
+
+#### Where You Can Buy It
+
+ * [Official Site](http://joyofclojure.com/)
+ * From [Manning](http://www.manning.com/fogus2/): eBook, paperback
+ * [Paperback on Amazon](http://www.amazon.com/The-Joy-Clojure-Michael-Fogus/dp/1617291412)
+
+
+
+### Mastering Clojure Data Analysis
+
+By Eric Rochester.
+
+#### Notes
+
+This book presents a more in-depth look into Data Analysis than the author's 
+other book [Clojure Data Analysis Cookbook](#Clojure Data Analysis Cookbook).  
+Several topics (Network Analysis, GIS Analysis, Topic Modeling, Sentiment 
+Analysis, etc) are examined with examples using Clojure to process real-world data.
+
+#### Where You Can Buy It
+
+ * [Packt Publishing](https://www.packtpub.com/big-data-and-business-intelligence/mastering-clojure-data-analysis):  eBook, paperback
+ * [Kindle version on Amazon](http://www.amazon.com/Mastering-Clojure-Data-Analysis-Rochester-ebook/dp/B00KLAJ66S)
+ * [Paperback on Amazon](http://www.amazon.com/Mastering-Clojure-Data-Analysis-Rochester/dp/1783284137)
+
+
+
+### Clojure for Machine Learning
+
+By Akhil Wali.
+
+#### Notes
+
+An introduction to machine learning problems, techniques and algorithms and 
+how they can be applied against real-world problems using Clojure. 
+
+#### Where You Can Buy It
+
+ * [Packt Publishing](https://www.packtpub.com/big-data-and-business-intelligence/clojure-machine-learning): eBook, paperback
+ * [Kindle version on Amazon](http://www.amazon.com/Clojure-Machine-Learning-Akhil-Wali-ebook/dp/B00JXLF78M)
+ * [Paperback on Amazon](http://www.amazon.com/Clojure-Machine-Learning-Akhil-Wali/dp/1783284358)
+
+
+
+### Web Development with Clojure: Build Bulletproof Web Apps with Less Code
+
+By Dmitri Sotnikov.
+
+#### Notes
+
+This book shows you how to leverage Clojure web-development libraries to 
+create web applications using an example-based approach.  
+
+#### Where You Can Buy It
+
+ * From [Pragmatic Programmers](https://pragprog.com/book/dswdcloj/web-development-with-clojure): eBook, paperback
+ * [Kindle version on Amazon](http://www.amazon.com/Web-Development-Clojure-Build-Bulletproof/dp/1937785645)
+ * [Paperback on Amazon](http://www.amazon.com/Clojure-Machine-Learning-Akhil-Wali/dp/1783284358)
+
 
 
 ### Clojure High Performance Programming
@@ -128,7 +212,7 @@ to `test.generative`, a Clojure testing framework similar to QuickCheck. A good 
 
 
 
-### The Joy of Clojure
+### The Joy of Clojure, 1st Ed
 
 By Michael Fogus and Chris Houser.
 
