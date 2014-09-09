@@ -35,7 +35,7 @@ and feel free to submit a link to your CLJUG site or mailing list once you have 
  * [San Francisco Bay Area Clojure User Group](http://www.meetup.com/The-Bay-Area-Clojure-User-Group/)
  * [Santa Barbara Clojure User Group](http://www.meetup.com/Santa-Barbara-Clojure-Users-Group/)
  * [Seattle Clojure User Group, Seajure](http://seajure.github.com/)
- * [St. Louis Clojure Discussion Group](http://clojurecljub.wordpress.com/)
+ * [St. Louis Clojure Meetup](http://www.meetup.com/stl-clojure/)
  * [TriClojure Meetup](http://meetup.com/TriClojure/)
  * [Western Mass. Developer Group](http://wmassdevs.com/)
 
