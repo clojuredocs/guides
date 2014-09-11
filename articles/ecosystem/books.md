@@ -67,7 +67,7 @@ By Eric Rochester.
 #### Notes
 
 This book presents a more in-depth look into Data Analysis than the author's 
-other book [Clojure Data Analysis Cookbook](#Clojure Data Analysis Cookbook).  
+other book [Clojure Data Analysis Cookbook](#clojure-data-analysis-cookbook).  
 Several topics (Network Analysis, GIS Analysis, Topic Modeling, Sentiment 
 Analysis, etc) are examined with examples using Clojure to process real-world data.
 
