@@ -979,6 +979,26 @@ p
 Promises combine many of the benefits of callback-oriented asynchronous programming
 and the simpler blocking function calls model provided by dereferencing.
 
+The main thread will be blocked if it try to dereference a un-delivered promise till the promise is delivered.
+
+``` clojure 
+(def p (promise))
+
+(defn deliver_promise []
+  (future (do 
+    (Thread/sleep 5000)
+    (deliver p "Clojre rocks"))))
+  
+
+(deliver_promise)
+
+(println (str "Start to get promise at : " (new java.util.Date)))
+;; deferencing will block the main thread till the promise is delivered.
+;; in this case, it will wait about 5 seconds.
+(println @p)
+(println (str "Get promise at : " (new java.util.Date)))
+
+```
 
 ## Watches and Validators
 
