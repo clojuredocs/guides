@@ -123,14 +123,14 @@ non-intrusive helpful features called
 [better-defaults](https://github.com/technomancy/better-defaults)
 which might be useful if you are not already an Emacs pro.
 
-Most Emacs packages are kept at [MELPA Stable](http://melpa-stable.milkbox.net),
+Most Emacs packages are kept at [MELPA](http://melpa.milkbox.net),
 the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
 ```cl
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 ```
 
