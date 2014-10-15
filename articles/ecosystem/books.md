@@ -320,6 +320,25 @@ keep this in mind.
  * [Paperback on Amazon](http://www.amazon.com/Clojure-Action-Amit-Rathore/dp/1935182595/ref=sr_1_3?ie=UTF8&qid=1350284538&sr=8-3&keywords=Clojure)
 
 
+### Clojure - Grundlagen, Concurrent Programming, Java
+
+By Stefan Kamphausen, Tim Oliver Kaiser
+
+#### Notes
+
+ * Written in German
+ * **This book covers Clojure 1.2**. There were breaking changes in
+   the language between Clojure 1.2 and 1.3, keep this in mind.  The
+   chapter on the contrib library in particular can be considered
+   outdated.
+
+#### Where You Can Buy It
+
+ * From
+   [dpunkt.verlag](http://www.dpunkt.de/buecher/3372/clojure.html),
+   eBook (PDF) or paperback.
+ * From [Buch.de](http://www.buch.de/shop/home/suchartikel/clojure/ISBN3-89864-684-X/)
+ * [Paperback on Amazon](http://www.amazon.de/Clojure-Grundlagen-Concurrent-Programming-Java/dp/389864684X/)
 
 
 
