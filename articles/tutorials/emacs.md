@@ -127,10 +127,19 @@ Most Emacs packages are kept at [MELPA](http://melpa.milkbox.net),
 the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
+For the stable repository:
 ```cl
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(package-initialize)
+```
+
+For the latest packages:
+```cl
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 ```
 
@@ -489,6 +498,8 @@ gotten into a bad state), you can simply kill the `*cider-repl*`
 buffer by typing `M-x cider-quit` and re-run `cider-jack-in` to start another.
 
 ## Appendix ##
+
+[MELPA documentation](http://stable.melpa.org/#/getting-started)
 
 CIDER keyboard shortcuts can be found in [CIDER documentation](https://github.com/clojure-emacs/cider#keyboard-shortcuts).
 
