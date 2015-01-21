@@ -368,7 +368,7 @@ The dispatch function returns a vector of two items: the current implementation 
 
 ```clojure
 (def ^{:dynamic true}
-  "The current script language implementation to generate"
+  ;; The current script language implementation to generate
   *current-implementation*)
 ```
 
@@ -488,7 +488,7 @@ We will also implement with-implementation as a macro, but for different reasons
 ```clojure
 (defmacro with-implementation
   [impl & body]
-  `(binding [*current-implementation* impl]
+  `(binding [*current-implementation* ~impl]
     ~@body))
 ```
 
