@@ -39,8 +39,8 @@ Since `query` returns a fully realized result set, it can be difficult to proces
 
     (j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
              :result-set-fn (fn [rs]
-                              (reduce (fn [i m]
-                                        (+ i (:cost m)))
+                              (reduce (fn [total row-map]
+                                        (+ total (:cost row-map)))
                               0 rs)))
     ;; produces the total cost of all the cheap fruits
 
