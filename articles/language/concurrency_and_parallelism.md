@@ -1050,7 +1050,7 @@ Those tasks can be executed in the calling thread, in newly created threads, or 
 in a thread pool. Thread pools also can have different implementations: for example,
 be fixed size or growing dynamically, using different error handling strategies and so on.
 
-Executors are most often instantiates using static methods of the `java.util.concurrent.Executors` class. To submit an operation to the pool, use the `ExecutorService#submit` method.
+Executors are most often instantiated using static methods of the `java.util.concurrent.Executors` class. To submit an operation to the pool, use the `ExecutorService#submit` method.
 
 ``` clojure
 (import '[java.util.concurrent Executors ExecutorService Callable])
