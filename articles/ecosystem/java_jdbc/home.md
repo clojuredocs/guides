@@ -8,7 +8,7 @@ This (incomplete) guide provides detailed information about using Clojure's JDBC
 
 ## An Overview
 
-java.jdbc is intended to be a low-level Clojure wrapper around various Java JDBC drivers and supports a wide range of databases. Libraries such as [HoneySQL](https://github.com/jkk/honeysql), [SQLingvo](https://github.com/r0man/sqlingvo) and [Korma](http://sqlkorma.com) provide more sophisticated DSLs you can use with java.jdbc if you want.
+java.jdbc is intended to be a low-level Clojure wrapper around various Java JDBC drivers and supports a wide range of databases. The [java.jdbc source is on GitHub](https://github.com/clojure/java.jdbc/) and there is a dedicated [java.jdbc mailing list](https://groups.google.com/forum/#!forum/clojure-java-jdbc). Libraries such as [HoneySQL](https://github.com/jkk/honeysql), [SQLingvo](https://github.com/r0man/sqlingvo) and [Korma](http://sqlkorma.com) provide more sophisticated DSLs you can use with java.jdbc if you want.
 
 The API changed substantially between the 0.2.3 release and the 0.3.0 release, to remove dependencies on dynamic global variables and provide a more functional, more idiomatic API. This documentation covers the new API. The old API has moved to java.jdbc.deprecated and is deprecated and provided for backward compatibility only. The deprecated API documentation can be found in the [java.jdbc reference](http://clojure.github.io/java.jdbc/) which is auto-generated from the docstrings in the namespaces.
 
