@@ -37,7 +37,7 @@ correctly.
 Once brew is installed, you can install Emacs 24 using:
 
 ```bash
-$ brew install emacs --cocoa --srgb
+$ brew install emacs --with-cocoa --srgb
 $ brew linkapps Emacs
 ```
 
