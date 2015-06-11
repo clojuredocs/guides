@@ -595,7 +595,7 @@ Getting values from data structures:
 Data structures in Clojure are actually *immutable* --- you can't
 change them. Though it may sound batty, it actually works out nicely
 in practice, and we'll read more about in the
-[Immutability](#values_immutability_and_persistence) section
+[Immutability](#values,-immutability,-and-persistence) section
 below. For now, just note that data structures can't be mutated, but
 we *can* get a new modified copy of a data structure:
 
