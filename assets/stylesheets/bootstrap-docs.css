@@ -418,7 +418,6 @@ body {
   text-shadow: 0 1px 0 #fff;
   background-color: #f7f5fa;
   border-radius: 5px;
-	margin-left: -80px;
 }
 
 /* All levels of nav */
@@ -426,6 +425,7 @@ body {
   display: block;
   color: #716b7a;
   padding: 5px 20px;
+  width: 212px;
 }
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
