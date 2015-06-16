@@ -183,12 +183,12 @@ it.
 ```
 
 We'll have more to say about [regular
-expressions](#regular_expressions) later on.
+expressions](#regular-expressions) later on.
 
 Keywords are just scalars that evaluate to themselves and are useful
 where in other languages you might use little strings as identifiers
 (for example, as the keys in a hashmap). More about keywords in the
-next section ([Data Structures](#data_structures)).
+next section ([Data Structures](#data-structures)).
 
 ``` clojure
 'foo   ; A symbol.
@@ -200,7 +200,7 @@ to what the symbol refers (the quote isn't part of the identifier of
 the symbol). When you want to represent the name of a thing --- rather
 than the value to which it refers --- you use a symbol. Their utility
 will become clearer later on when we briefly mention
-[Macros](#macros).
+[Macros](#macros-and-special-forms).
 
 > **Terminology:** By "object" we just mean the internal thing that
 > Clojure uses to represent a value --- *not* "object" as in "object
@@ -212,7 +212,7 @@ will become clearer later on when we briefly mention
 > generic sense. A symbol refers to an object (it is not the object
 > itself).  Clojure *also* happens to support something called
 > *reference types*. We'll cover them later on in the [Reference
-> Types](#reference_types) section.
+> Types](#reference-types) section.
 
 
 
@@ -249,11 +249,11 @@ in your programs:
 ```
 
 Lists are most often used when treating code itself as just a bunch of
-nested lists --- see [Macros](#macros).
+nested lists --- see [Macros](#macros-and-special-forms).
 
 BTW, don't mind that single-quote mark before the list's open paren;
 it's just there to tell Clojure that this isn't a function call
-(discussed in [Functions](#functions), below), but rather, an actual
+(discussed in [Function Calls](#function-calls), below), but rather, an actual
 list.
 
 > Note: In Clojure, we use the term "vector" rather than "array".
@@ -449,7 +449,7 @@ expression, in the previous example), but the overall value of the
 > Note that the `println` expression just evaluates to nil. We don't
 > use its value for anything --- we only care about its *side-effects*
 > (printing out to the console). More about
-> [Side-Effects](#side_effects) shortly.
+> [Side-Effects](#side-effects) shortly.
 
 
 
@@ -493,7 +493,7 @@ provide a handy alias for them --- by *requiring* them like so:
 Now we can use all the functions in the clojure.string library by
 prefixing them with "str/". We'll do exactly this in the section below
 on [Functions for working with
-strings](#functions_for_working_with_strings).
+strings](#functions-for-working-with-strings).
 
 
 
@@ -532,7 +532,7 @@ and maps:
 ```
 
 (We cover `apply` in the [Bread and Butter
-functions](#bread_and_butter_functions) section.)
+functions](#bread-and-butter-functions) section.)
 
 If you need to convert to a sequential collection but don't need fast
 random access to items via index, you can use `seq` instead of `vec`
@@ -805,7 +805,7 @@ in Clojure you lose the loop and it becomes:
 
 This sort of thing comes up again and again, and we'll cover more
 examples of it in the [Bread and Butter
-functions](#bread_and_butter_functions) section.
+functions](#bread-and-butter-functions) section.
 
 
 
