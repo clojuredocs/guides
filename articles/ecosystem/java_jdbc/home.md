@@ -79,7 +79,7 @@ By default, `query` converts all of the column names in the `ResultSet` to lower
 The four basic CRUD operations are:
 
     (jdbc/insert! db-spec :table {:col1 42 :col2 "123"}) ;; Create
-    (jdbc/query!  db-spec ["SELECT * FROM table WHERE id = ?" 13]) ;; Read
+    (jdbc/query   db-spec ["SELECT * FROM table WHERE id = ?" 13]) ;; Read
     (jdbc/update! db-spec :table {:col1 77 :col2 "456"} ["id = ?" 13]) ;; Update
     (jdbc/delete! db-spec :table ["id = ?" 13]) ;; Delete
 
