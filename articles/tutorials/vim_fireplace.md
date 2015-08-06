@@ -162,7 +162,7 @@ Next add the following definition in the `command-line-args.core` namespace:
 
 _Tip: Use `ctrl-w f` (ctrl-w followed by the f key) to split the view into two windows opening the file under the cursor in a new split._
 
-Save the file, `:w`, and then switch back to `test/command_line_args/core_test.clj`. Now we can try requiring the test namespace again. This time we'll use `cpR` (that's with a big 'R'), which performs a `(require ... :reload-all)` on the current namespace. That should succeed, so we can run the tests with the command `:Eval (clojure.test/run-tests)` which will print out a test failure with something like this:
+Save the file, `:w`, and then switch back to `test/command_line_args/core_test.clj`. Now we can try requiring the test namespace again. This time we'll type `:Require!`, which performs a `(require ... :reload-all)` on the current namespace. That should succeed, so we can run the tests with the command `:Eval (clojure.test/run-tests)` which will print out a test failure with something like this:
 
 ```
 Testing command-line-args.core-test
@@ -179,7 +179,7 @@ Ran 1 tests containing 1 assertions.
 Note that we know a few fireplace commands now:
 
 * `gf` - Jumps to the namespace under the cursor
-* `cpr` and `cpR` - `(require :reload)` or `(require :reload-all)` the current namespace.
+* `cpr` and `:Require!` - `(require :reload)` or `(require :reload-all)` the current namespace.
 * `:Eval (clojure code)` - Evaluate arbitrary Clojure code in the current namespace.
 * `:lopen` - Not really a fireplace command, but it opens the stacktrace for the last exception in the buffer.
 
