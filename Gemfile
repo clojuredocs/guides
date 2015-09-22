@@ -7,3 +7,4 @@ gem "jekyll", "~> 2.2.0"
 # gem install iconv -- --with-iconv-dir=~/.rvm/usr
 gem "iconv"
 gem "albino"
+gem "safe_yaml", "~> 1.0.4"
