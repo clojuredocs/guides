@@ -128,6 +128,7 @@ the community package host. Add this code to your config in
 `~/.emacs.d/init.el` to tell Emacs to look there:
 
 For the stable repository:
+
 ```cl
 (require 'package)
 (add-to-list 'package-archives
@@ -136,6 +137,7 @@ For the stable repository:
 ```
 
 For the latest packages:
+
 ```cl
 (require 'package)
 (add-to-list 'package-archives
