@@ -115,7 +115,7 @@ to see your changes.
 Other getting started documentation you might find useful:
 
   * [Clojure Distilled](http://yogthos.github.io/ClojureDistilled.html):
-    introduction to core concpets necessary for working with Clojure
+    introduction to core concepts necessary for working with Clojure
   * [A Brief Beginner's Guide to
     Clojure](http://www.unexpected-vortices.com/clojure/brief-beginners-guide/index.html):
     contains a bit more overview and background material for learning your way
