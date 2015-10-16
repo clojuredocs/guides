@@ -462,7 +462,7 @@ method signatures in the interface.
 
 ## Extending Java Classes With proxy
 
-`proxy` is one of two ways to generate instances of anonymous classeses in Clojure.
+`proxy` is one of two ways to generate instances of anonymous classes in Clojure.
 `proxy` takes two vectors: one listing its superclass and (optional) interfaces, another constructor signatures, as well as
 method implementations. Method implementations are basically identical to `reify` except that the `this` argument is
 not necessary.
