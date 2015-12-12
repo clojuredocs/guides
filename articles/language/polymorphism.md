@@ -6,7 +6,7 @@ layout: article
 This guide covers:
 
  * What are polymorphic functions
- * Type-based polymoprhism with protocols
+ * Type-based polymorphism with protocols
  * Ad-hoc polymorphism with multimethods
  * How to create your own data types that behave like core Clojure data types
 
