@@ -375,14 +375,14 @@ will cause Clojure compiler to compile it as a constant:
 
 ## How to Look up and Invoke a Function by Name
 
-It is possible to look up a function in particular namespace by-name with `clojure.core/resolve`. This takes
+It is possible to look up a function in particular namespace by-name with `clojure.core/ns-resolve`. This takes
 quoted names of the namespace and function. The returned value can be used just like any other
 function, for example, passed as an argument to a higher order function:
 
 ``` clojure
-(resolve 'clojure.set 'difference)  ; ⇒ #'clojure.set/difference
+(ns-resolve 'clojure.set 'difference)  ; ⇒ #'clojure.set/difference
 
-(let [f (resolve 'clojure.set 'difference)]
+(let [f (ns-resolve 'clojure.set 'difference)]
    (f #{1 2 3} #{3 4 5 6}))  ; ⇒ #{1 2}
 ```
 
