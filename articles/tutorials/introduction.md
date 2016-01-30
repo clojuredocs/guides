@@ -1020,6 +1020,8 @@ know about a function's existence, use `declare`:
 ``` clojure
 ;; pseudocode
 
+(declare do-it)
+
 (do-it)
 
 (declare my-func-a)
