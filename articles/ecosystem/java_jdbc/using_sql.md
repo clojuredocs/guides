@@ -28,26 +28,28 @@ To obtain a fully realized result set as a sequence of maps, you can use `query`
 You can also return the result set as a sequence of vectors. The first vector will contain the column names, and each subsequent vector will represent a row of data with values in the same order as the columns.
 
     (j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
-             :as-arrays? true)
+             {:as-arrays? true})
     ;; ([:id :name :appearance :cost :grade]
     ;;  [2 "Banana" "yellow" 29 92.2]
     ;;  ...)
+
+Note: prior to version 0.5.5 options could be specified as top-level (unrolled) keyword/value arguments but that does not compose well and was deprecated in 0.5.5 (and support will be removed in 0.6.0).
 
 ### Processing a result set lazily
 
 Since `query` returns a fully realized result set, it can be difficult to process very large results. Fortunately java.jdbc provides a way to process a large result set lazily while the connection is open, by passing a function via the `:result-set-fn` option. Note that the function you pass must force realization of the result to avoid the connection closing while the result set is still being processed. A `reduce`-based function is a good choice.
 
     (j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
-             :result-set-fn (fn [rs]
-                              (reduce (fn [total row-map]
-                                        (+ total (:cost row-map)))
-                              0 rs)))
+             {:result-set-fn (fn [rs]
+                               (reduce (fn [total row-map]
+                                         (+ total (:cost row-map)))
+                               0 rs))})
     ;; produces the total cost of all the cheap fruits
 
 Of course, a simple sum like this could be computed directly in SQL instead:
 
     (j/query db-spec ["SELECT SUM(cost) FROM fruit WHERE cost < ?" 50]
-             :result-set-fn first)
+             {:result-set-fn first})
     ;; {:sum(cost) 437}
 
 We know we will only get one row back so passing `first` to `:result-set-fn` is a quick way to get just that row.
@@ -61,7 +63,7 @@ Remember that if you also specify `:as-arrays? true`, your result set function w
 In addition to processing the entire result set, we can also process each row with the `:row-fn` option. Again, we pass a function but this time it will be invoked on each row, as the result set is realized.
 
     (j/query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]
-             :row-fn :name)
+             {:row-fn :name})
     ;; ("Apple" "Banana" ...)
 
 The result is still a fully realized sequence, but each row has been transformed by the `:name` function you passed in.
@@ -69,15 +71,15 @@ The result is still a fully realized sequence, but each row has been transformed
 You can combine this with `:result-set-fn` to simplify processing of result sets:
 
     (j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
-             :row-fn :cost
-             :result-set-fn (partial reduce +))
+             {:row-fn :cost
+              :result-set-fn (partial reduce +)})
     ;; produces the total cost of all the cheap fruits
 
 or:
 
     (j/query db-spec ["SELECT SUM(cost) AS total FROM fruit WHERE cost < ?" 50]
-             :row-fn :total
-             :result-set-fn first)
+             {:row-fn :total
+              :result-set-fn first})
     ;; produces the same result, via SQL
 
 Here is an example that manipulates rows to add computed columns:
@@ -85,7 +87,7 @@ Here is an example that manipulates rows to add computed columns:
     (defn add-tax [row] (assoc row :tax (* 0.08 (:cost row))))
     
     (j/query db-spec ["SELECT * FROM fruit"]
-             :row-fn add-tax)
+             {:row-fn add-tax})
     ;; produces all the rows with a new :tax column added
 
 ## Inserting data
@@ -175,10 +177,12 @@ The `with-db-transaction` macro creates a transaction-aware connection from the 
 
 You can specify the transaction isolation level as part of the `with-db-transction` binding:
 
-    (j/with-db-transaction [t-con db-spec :isolation :serializable]
+    (j/with-db-transaction [t-con db-spec {:isolation :serializable}]
       ...)
 
 Possible values for `:isolation` are `:none`, `:read-committed`, `:read-uncommitted`, `:repeatable-read`, and `:serializable`. Be aware that not all databases support all isolation levels.
+
+Note: prior to version 0.5.5, the `:isolation` option could be specified without `{ }` but that was deprecated in 0.5.5 (and will be removed in 0.6.0).
 
 In addition, you can also set the current transaction-aware connection to rollback, and reset that setting, as well as test whether the connection is currently set to rollback, using the following functions:
 
@@ -250,7 +254,7 @@ As noted above, transactions can also be set explicitly to rollback instead of c
 
 As hinted at above, java.jdbc converts SQL entity names in result sets to keywords in Clojure by making them lowercase, and converts strings and keywords that specify table and column names (in maps) to SQL entities *as-is* by default.
 
-You can override this behavior by specifying `:identifiers` on the `query` and `metadata-result` functions and by specifying `:entities` on the `delete!`, `insert!`, `update!`, `create-table-ddl`, and `drop-table-ddl` functions.
+You can override this behavior by specifying an options map, containing `:identifiers` on the `query` and `metadata-result` functions or `:entities` on the `delete!`, `insert!`, `update!`, `create-table-ddl`, and `drop-table-ddl` functions.
 
 * `:identifiers` is for converting `ResultSet` column names to keywords. It defaults to `clojure.string/lower-case`.
 * `:entities` is for converting Clojure keywords/string to SQL entity names. It defaults to `identity`.
@@ -258,13 +262,13 @@ You can override this behavior by specifying `:identifiers` on the `query` and `
 If you want to prevent java.jdbc's conversion of SQL entity names to lowercase in a `query` result, you can specify `:identifiers identity`:
 
     (j/query db-spec ["SELECT * FROM mixedTable"]
-             :identifiers identity)
+             {:identifiers identity})
     ;; produces result set with column names exactly as they appear in the DB
 
 It you're working with a database that has underscores in column names, you might want to specify a function that converts those to dashes in Clojure keywords:
 
     (j/query db-spec ["SELECT * FROM mixedTable"]
-             :identifiers #(.replace % \_ \-))
+             {:identifiers #(.replace % \_ \-)})
 
 For several databases, you will often want entities to be quoted in some way (sometimes referred to as "stropping"). A utility function `quoted` is provided that accepts either a single character or a vector pair of characters, and returns a function suitable for use with the `:entities` option.
 
@@ -272,7 +276,7 @@ For example:
 
     (j/insert! db-spec :fruit
                {:name "Apple" :appearance "Round" :cost 99}
-               :entities (j/quoted \`))
+               :options {:entities (j/quoted \`)})
 
 will execute:
 
@@ -283,7 +287,7 @@ with the parameters `"Apple", "Round", "99"` whereas:
 
     (j/insert! db-spec :fruit
                {:name "Apple" :appearance "Round" :cost 99}
-               :entities (j/quoted [\[ \]]))
+               :options {:entities (j/quoted [\[ \]])})
 
 will execute:
 
@@ -291,6 +295,8 @@ will execute:
         VALUES ( ?, ?, ? )
 
 with the parameters `"Apple", "Round", "99"`.
+
+Note that `insert!` and `create-table-ddl` are the only functions that require `:options` as a "flag" to introduce the options map. In all the other functions, the options map is simply the last argument in the call (and can be omitted when the defaults are acceptable).
 
 ## Protocol extensions for transforming values
 

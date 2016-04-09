@@ -5,7 +5,6 @@ layout: article
 
 This (incomplete) guide provides detailed information about using Clojure's JDBC wrapper, the java.jdbc contrib library.
 
-
 ## An Overview
 
 java.jdbc is intended to be a low-level Clojure wrapper around various Java JDBC drivers and supports a wide range of databases. The [java.jdbc source is on GitHub](https://github.com/clojure/java.jdbc/) and there is a dedicated [java.jdbc mailing list](https://groups.google.com/forum/#!forum/clojure-java-jdbc). Libraries such as [HoneySQL](https://github.com/jkk/honeysql), [SQLingvo](https://github.com/r0man/sqlingvo) and [Korma](http://sqlkorma.com) provide more sophisticated DSLs you can use with java.jdbc if you want.
