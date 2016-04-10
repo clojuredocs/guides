@@ -18,14 +18,14 @@ The commands are executed as a single, batched statement, wrapped in a transacti
 For the common operations of creating and dropping tables, java.jdbc provides a little assistance that recognizes `:entities` so you can use keywords (or strings) and have your chosen naming strategy applied, just as you can for several of the SQL functions.
 
     (j/create-table-ddl :fruit
-                        [:name "varchar(32)" :primary :key]
-                        [:appearance "varchar(32)"]
-                        [:cost :int]
-                        [:grade :real]
-                        :options {:table-spec "ENGINE=InnoDB"
-                                  :entities clojure.string/upper-case})
+                        [[:name "varchar(32)" :primary :key]
+                         [:appearance "varchar(32)"]
+                         [:cost :int]
+                         [:grade :real]]
+                        {:table-spec "ENGINE=InnoDB"
+                         :entities clojure.string/upper-case})
 
-Note that the `:options` syntax is new in version 0.5.5. Earlier versions just accepted that keyword arguments unrolled, but that was deprecated in 0.5.5 and will be removed in 0.6.0:
+Note that the vector of columns syntax is new in version 0.5.6. Earlier versions just accepted each column spec as a separate argument followed by the keyword arguments unrolled, but that was deprecated in 0.5.5 and will be removed in 0.6.0:
 
     (j/create-table-ddl :fruit
                         [:name "varchar(32)" :primary :key]

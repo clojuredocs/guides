@@ -296,7 +296,7 @@ will execute:
 
 with the parameters `"Apple", "Round", "99"`.
 
-Note that `insert!` and `create-table-ddl` are the only functions that require `:options` as a "flag" to introduce the options map. In all the other functions, the options map is simply the last argument in the call (and can be omitted when the defaults are acceptable).
+Note that `insert!` and `create-table-ddl` are the only functions in version 0.5.5 that require `:options` as a "flag" to introduce the options map. In all the other functions, the options map is simply the last argument in the call (and can be omitted when the defaults are acceptable).
 
 ## Protocol extensions for transforming values
 

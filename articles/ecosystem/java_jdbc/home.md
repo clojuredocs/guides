@@ -109,10 +109,10 @@ java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic `CR
     
     (jdbc/db-do-commands db-spec
                          (jdbc/create-table-ddl :fruit
-                                                [:name "varchar(32)"]
-                                                [:appearance "varchar(32)"]
-                                                [:cost :int]
-                                                [:grade :real]))
+                                                [[:name "varchar(32)"]
+                                                 [:appearance "varchar(32)"]
+                                                 [:cost :int]
+                                                 [:grade :real]]))
     (jdbc/db-do-commands db-spec "CREATE INDEX name_ix ON fruit ( name )")
 
 For more detail, read the [Using DDL and Metadata](using_ddl.html) guide.
