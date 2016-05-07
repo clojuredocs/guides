@@ -490,13 +490,18 @@ Since maps and records can not contain multiple equivalent keys, supplying `asso
 ;; ⇒ #user.Hand{:index 3.75, :middle 4, :ring 3.5, :pinky 2, :thumb 2}
 ```
 When using `assoc` with a vector, the key is the index and the value is the value to assign to that index in the returned vector.
-The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. `assoc` can not be used to add an item to a vector.
+The key must be <= (count vector) or a "IndexOutOfBoundsException" will occur. 
 
 ```clojure
 (assoc [1 2 76] 2 3) ; ⇒ [1 2 3]
 
 ;; index 5 does not exist. valid indexes for this vector are: 0, 1, 2
 (assoc [1 2 3] 5 6) ;; IndexOutOfBoundsException   clojure.lang.PersistentVector.assocN (PersistentVector.java:136)
+```
+When the key is equal to (count vector) `assoc` will add an item to the vector.
+
+```clojure
+(assoc [1 2 3] 3 4) ; ⇒ [1 2 3 4]
 ```
 
 ### dissoc
