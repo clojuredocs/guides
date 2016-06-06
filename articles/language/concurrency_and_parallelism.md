@@ -175,7 +175,7 @@ is `43` but it is still the same counter --- the same identity. This is differen
 or Ruby, where variables serve as identities that (typically) point to a mutable value
 and which are modified in place.
 
-*TBD: add images to illustrate these concepts*
+![identity_value](/assets/images/language/concurrency_and_parallelism/identity_value.png)
 
 Identities in Clojure can be of several types, known as *reference types*.
 
