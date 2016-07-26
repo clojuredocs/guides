@@ -105,13 +105,13 @@ There are much better methods of value-based dispatch or code architecture in ge
 
 (defn func<10 [x]
   (cond
-   (< x 10) (func10 (inc x))
-   (< x 20) (func20 x)
+   (< x 10) (func<10 (inc x))
+   (< x 20) (func<20 x)
    :else "too far!"))
 
 (defn func<20 [x]
   (cond
-   (< x 10) (func10 x)
+   (< x 10) (func<10 x)
    (< x 20) "More than 10, less than 20"
    :else "too far!"))
 ```
