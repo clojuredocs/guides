@@ -888,9 +888,10 @@ key as an index. `contains` will always return false for lists.
 (contains? ["John" "Mary" "Paul"] "Paul")
 ;; ⇒ false
 
-;; lists always return false. Contain won't traverse a collection for a result.
+;; lists are not supported. contains? won't traverse a collection for a result.
 (contains? '(1 2 3) 0)
-;; ⇒ false
+;; ⇒ java.lang.IllegalArgumentException: contains? not supported on type: clojure.lang.PersistentList
+
 ```
 
 <a id="keys_desc"></a>
