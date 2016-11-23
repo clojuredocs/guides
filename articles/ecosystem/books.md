@@ -29,6 +29,61 @@ of Clojure (1.3+).
 Note: books are listed in reverse chronological order.
 
 
+### Clojure Programming Cookbook
+
+By Makoto Hashimoto, Nicolas Modrzyk
+
+#### Notes
+
+Handle every problem you come across in the world of Clojure programming with this expert collection of recipes
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/application-development/clojure-programming-cookbook):  eBook, paperback
+
+
+
+### Mastering Clojure
+
+By Akhil Wali
+
+#### Notes
+Understand the philosophy of the Clojure language and dive into its inner workings to unlock its advanced features, methodologies, and constructs
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/application-development/mastering-clojure):  eBook, paperback
+
+
+
+### Clojure for Java Developers
+
+By Eduardo Díaz
+
+#### Notes
+
+Discover Clojure’s features and advantages and use them in your existing projects
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/application-development/clojure-java-developers):  eBook, paperback
+
+
+
+### Clojure for Finance
+
+By Timothy Washington
+
+#### Notes
+
+A practical step-by-step tutorial that provides a basic overview of the concepts but focuses on providing the skills required to analyze data.
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/big-data-and-business-intelligence/clojure-finance):  eBook, paperback
+
+
+
 ### Mastering Clojure Macros
 
 By Colin Jones.
@@ -362,6 +417,21 @@ and includes several updates.
 
 
 ## Books About ClojureScript
+
+
+### Learning ClojureScript
+
+By W. David Jarvis, Rafik Naccache & Allen Rohner
+
+#### Notes
+
+Master the art of agile single page web application development with ClojureScript
+
+#### Where You Can Buy It
+
+* [Packt](https://www.packtpub.com/web-development/learning-clojurescript):  eBook, paperback
+
+
 
 ### ClojureScript: Up and Running
 
