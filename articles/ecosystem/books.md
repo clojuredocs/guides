@@ -28,6 +28,55 @@ of Clojure (1.3+).
 
 Note: books are listed in reverse chronological order.
 
+### Clojure Programming Cookbook
+
+By Makoto Hashimoto, Nicolas Modrzyk
+
+#### Notes
+
+Handle every problem you come across in the world of Clojure programming with this expert collection of recipes
+
+This book is divided into three high impact sections. The first section gives you an introduction to live programming and best practices. We show you how to interact with your connections by manipulating, transforming, and merging collections. You’ll learn how to work with macros, protocols, multi-methods, and transducers. We’ll also teach you how to work with languages such as Java, and Scala.
+The next section deals with intermediate-level content and enhances your Clojure skills, here we’ll teach you concurrency programming with Clojure for high performance. We will provide you with advanced best practices, tips on Clojure programming, and show you how to work with Clojure while developing applications.
+In the final section you will learn how to test, deploy and analyze websocket behavior when your app is deployed in the cloud. Finally, we will take you through DevOps. Developing with Clojure has never been easier with these recipes by your side!
+
+#### Where You Can Buy It
+
+* [Packt Publishing](https://www.packtpub.com/application-development/clojure-programming-cookbook):  paperback, eBook
+
+
+
+### Mastering Clojure
+
+By Akhil Wali
+
+#### Notes
+
+Understand the philosophy of the Clojure language and dive into its inner workings to unlock its advanced features, methodologies, and constructs
+
+Mastering Clojure gives you an insight into the nitty-gritty details and more advanced features of the Clojure programming language to create more scalable, maintainable, and elegant applications. You’ll start off by learning the details of sequences, concurrency primitives, and macros. Packed with a lot of examples, you’ll get a walkthrough on orchestrating concurrency and parallelism, which will help you understand Clojure reducers, and we’ll walk through composing transducers so you know about functional composition and process transformation inside out. We also explain how reducers and transducers can be used to handle data in a more performant manner.
+
+#### Where You Can Buy It
+
+* [Packt Publishing](https://www.packtpub.com/application-development/mastering-clojure):  paperback, eBook
+
+
+
+### Clojure for Java Developers
+
+By Eduardo Díaz
+
+#### Notes
+
+Transition smoothly from Java to the most widely used functional JVM-based language – Clojure
+
+Clojure for Java developers aims at unleashing the true potential of the Clojure language to use it in your projects. The book begins with the installation and setup of the Clojure environment before moving on to explore the language in-depth. Get acquainted with its various features such as functional programming, concurrency, etc. with the help of example projects. Additionally, you will also, learn how the tooling works, and how it interacts with the Java environment.
+
+#### Where You Can Buy It
+
+* [Packt Publishing](https://www.packtpub.com/application-development/clojure-java-developers):  paperback, eBook
+
+
 
 ### Mastering Clojure Macros
 
@@ -362,6 +411,23 @@ and includes several updates.
 
 
 ## Books About ClojureScript
+
+### Learning ClojureScript
+
+By W. David Jarvis, Rafik Naccache, Allen Rohner
+
+#### Notes
+
+Master the art of agile single page web application development with ClojureScript
+
+You will first learn how to construct an interactive development experience for ClojureScript.. You will be guided through ClojureScript language concepts, looking at the basics first, then being introduced to advanced concepts such as functional programming or macro writing. After that, we elaborate on the subject of single page web applications, showcasing how to build a simple one, then covering different possible enhancements. We move on to study more advanced ClojureScript concepts, where you will be shown how to address some complex algorithmic cases. Finally, you'll learn about optional type-checking for your programs, how you can write portable code, test it, and put the advanced compilation mode of the Google Closure Compiler to good use.
+
+#### Where You Can Buy It
+
+* [Packt Publishing](https://www.packtpub.com/web-development/learning-clojurescript):  paperback, eBook
+
+
+
 
 ### ClojureScript: Up and Running
 
