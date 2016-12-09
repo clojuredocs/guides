@@ -29,6 +29,18 @@ of Clojure (1.3+).
 Note: books are listed in reverse chronological order.
 
 
+### Clojure Standard Library (An Annotated Guide)
+
+By Renzo Borgatti
+
+#### Notes
+
+The book illustrates the functions and macros contained in the Clojure standard library adding examples and implementation notes. Currently in early access.
+
+#### Where You Can Buy It
+
+ * [Manning](https://www.manning.com/books/clojure-standard-library): eBook
+
 ### Clojure Programming Cookbook
 
 By Makoto Hashimoto, Nicolas Modrzyk
@@ -121,9 +133,9 @@ By Eric Rochester.
 
 #### Notes
 
-This book presents a more in-depth look into Data Analysis than the author's 
-other book [Clojure Data Analysis Cookbook](#clojure-data-analysis-cookbook).  
-Several topics (Network Analysis, GIS Analysis, Topic Modeling, Sentiment 
+This book presents a more in-depth look into Data Analysis than the author's
+other book [Clojure Data Analysis Cookbook](#clojure-data-analysis-cookbook).
+Several topics (Network Analysis, GIS Analysis, Topic Modeling, Sentiment
 Analysis, etc) are examined with examples using Clojure to process real-world data.
 
 #### Where You Can Buy It
@@ -140,8 +152,8 @@ By Akhil Wali.
 
 #### Notes
 
-An introduction to machine learning problems, techniques and algorithms and 
-how they can be applied against real-world problems using Clojure. 
+An introduction to machine learning problems, techniques and algorithms and
+how they can be applied against real-world problems using Clojure.
 
 #### Where You Can Buy It
 
@@ -157,8 +169,8 @@ By Dmitri Sotnikov.
 
 #### Notes
 
-This book shows you how to leverage Clojure web-development libraries to 
-create web applications using an example-based approach.  
+This book shows you how to leverage Clojure web-development libraries to
+create web applications using an example-based approach.
 
 #### Where You Can Buy It
 
@@ -181,7 +193,7 @@ benchmarking, data structures, laziness impact, and more.
 
  * [Packt Publishing](http://www.packtpub.com/clojure-high-performance-programming/book): eBook, paperback
  * [Amazon](http://www.amazon.com/Clojure-Performance-Programming-Shantanu-Kumar-ebook/dp/B00GTE1RVW/): eBook (Kindle), paperback
- 
+
 
 
 ### Clojure For The Brave and True
