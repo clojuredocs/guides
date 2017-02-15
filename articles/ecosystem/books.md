@@ -29,6 +29,21 @@ of Clojure (1.3+).
 Note: books are listed in reverse chronological order.
 
 
+
+### Clojure: High Performance JVM Programming
+
+By Eduardo Díaz, Shantanu Kumar, Akhil Wali
+
+#### Notes
+
+Explore the world of lightning fast Clojure apps with asynchronous channels, logic, reactive programming and more.
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/application-development/clojure-high-performance-jvm-programming):  eBook, paperback
+
+
+
 ### Clojure Standard Library (An Annotated Guide)
 
 By Renzo Borgatti
@@ -40,6 +55,8 @@ The book illustrates the functions and macros contained in the Clojure standard 
 #### Where You Can Buy It
 
  * [Manning](https://www.manning.com/books/clojure-standard-library): eBook
+
+
 
 ### Clojure Programming Cookbook
 
