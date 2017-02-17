@@ -202,7 +202,7 @@ concurrency semantics and cover different kind of operations:
     <tr>
       <td style="font-weight: bold;">Synchronous</td>
       <td><a href="#refs">Refs</a></td>
-      <td><a href"#atoms">Atoms</a></td>
+      <td><a href="#atoms">Atoms</a></td>
     </tr>
     <tr>
       <td style="font-weight: bold;">Asynchronous</td>
