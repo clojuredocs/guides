@@ -42,7 +42,7 @@ little webapp:
 clojars](https://clojars.org/ring)) is a foundational Clojure web
 application library. It:
 
-  * sets things up such that an http request comes into your webapp as
+  * sets things up such that an http request comes into your webapp 
     as a regular Clojure hashmap, and likewise makes it so that you
     can return a response as a hashmap.
   * provides [a
