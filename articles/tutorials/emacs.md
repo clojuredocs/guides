@@ -78,11 +78,19 @@ that automates this. OS X users are advised to install it!
 Newer Debian-based systems (post-wheezy) ship Emacs 24 in apt:
 
 ```bash
-$ sudo aptitude install emacs24
+$ sudo apt install emacs24
 ```
 
-On older systems you can add unofficial package sources for
-`emacs-snapshot`, either for [Debian](http://emacs.naquadah.org/) or
+### Arch/Antergos ###
+
+The latest version of Emacs(*i.e.* v25.1) is available in Arch's official repositories.
+
+```bash
+$ sudo pacman -S emacs
+```
+
+On older systems you can add unofficial package sources for `emacs-snapshot`,
+either for [Debian](http://emacs.naquadah.org/) or
 [Ubuntu](https://launchpad.net/~cassou/+archive/emacs).
 
 ### MS Windows ###
@@ -204,7 +212,7 @@ built-in Emacs tutorial. To do this press `C-h t` or hold down Control
 and press `h` and then press `t` by itself.
 
 With that in mind, these are the basic keystrokes you're going to be
-using most often:
+using most often with the default binary of Emacs 24+:
 
 ```
 File/buffer/window commands
@@ -296,9 +304,9 @@ Take a look at the project structure:
     - core_test.clj
 ```
 
-Should be fairly self-explanatory, though Leiningen's built-in
-tutorial (available via `lein help tutorial`) provides a detailed
-explanation of the project structure.
+Should be fairly self-explanatory, though Leiningen's built-in tutorial
+(available via `lein help tutorial`) provides a detailed explanation of
+the project structure.
 
 Before we continue we have to make our project play with CIDER, which
 requires a bit of one time setup.  Open the `project.clj` file and add
@@ -356,22 +364,21 @@ the command line to a local called args, and asserting that the
 return value from a function called `parse-args` is equal to those
 command line args turned into a simple map.
 
-Compile the file with `C-c C-k`. We should get an error message at the
-bottom of the emacs window complaining that clojure can't find
+Compile the file with `C-c C-k`(`M-x cider-load-buffer`). We should get an error
+message at the bottom of the emacs window complaining that clojure can't find
 parse-args.  Let's try to fix the exception by opening `core.clj` (`C-x
-C-f`) and adding the following definition:
+C-f`/`M-x find-file`) and adding the following definition:
 
 ```clojure
 (defn parse-args [args]
   {})
 ```
 
-Compile this with `C-c C-k`, save it (`C-x C-s`), switch back to the
-test buffer (`C-x b ENTER`) and try compiling again (`C-c C-k`). This
-time it will succeed, so try running the tests with `C-c ,` and you
-should get a test report buffer showing some failure information. To check what the problem was, we can
-move our cursor over the red bar and press `C-c '`. This shows the
-problem with the assertion in the mini-buffer:
+Compile this with `C-c C-k`, save it (`C-x C-s`/`M-x save-buffer`), switch back
+to the test buffer (`C-x b RET`/`M-x switch-to-buffer RET`) and try compiling
+again (`C-c C-k`). This time it will succeed, so try running the tests with
+`C-c C-t t`(*i.e* `M-x cider-test-run-test`) and you should get a test report
+buffer showing some failure information:
 
 ```clojure
 (not (= {:server "localhost",
@@ -427,7 +434,7 @@ So that is an extremely simple example of a workflow using Emacs with
 
 One thing we haven't looked at is how useful having an open running
 REPL in Emacs can be for development. If you still have your project
-open, split the window (`C-x 2` (horizontal) or `C-x 3` (vertical)) in
+open, split the window (`C-x 2` (horizontally) or `C-x 3` (vertically)) in
 two so you have the `core.clj` and `*cider-repl*` buffers open.
 Let's say you are editing the core.clj and you want to play around with
 the functions as you define them. Looking at `parse-args` you have
@@ -455,20 +462,20 @@ Let's go ahead and create our new function in `core.clj`:
   (into {} (map keywordize (partition 2 args))))
 ```
 
-Now we have a couple of options, we could re-compile the whole file
-again (`C-c C-k`) or we could evaluate each function on its own by going
-to the end of the s-exp and using `C-x C-e` which sends the s-exp to the
-running REPL. Now switching back to the core.clj namespace (`C-c M-n`)
-and switching back to the REPL buffer we can try out our keywordize
-function:
+Now we have a couple of options, we could re-compile the whole file again
+(`C-c C-k`) or we could evaluate each function on its own by going to the end
+of the s-exp and using `C-x C-e`(*i.e.* `cider-eval-last-sexp`) which sends the
+s-exp to the running REPL. Now switching back to the core.clj namespace
+(`C-c M-n`) and switching back to the REPL buffer we can try out our
+`keywordize` function:
 
     command-line-args.core> (keywordize ["--oh" "hai"])
     [:oh "hai"]
 
-If your REPL is starting to get cluttered you can `C-c M-o` to clear
-it which is nice. The ability to continually change the code and play
-around with it is one of the things that makes Emacs and a lisp a
-great combination for development.
+If your REPL is starting to get cluttered you can `M-x cider-repl-clear-buffer`
+to clear by first switching to the REPL buffer. The ability to continually
+change the code and play around with it is one of the things that makes Emacs
+and a lisp a great combination for development.
 
 If you find yourself wanting to repeat a command you just typed at the
 REPL, you can use `M-p` scroll back through history and `M-n` to go
