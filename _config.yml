@@ -1,6 +1,6 @@
 source:      .
 destination: ./_site
-plugins:     ./_plugins
+plugins_dir:     ./_plugins
 exclude: [bin, CNAME, Gemfile, Gemfile.lock, README.md]
 permalink: /:title
 highlighter: pygments
