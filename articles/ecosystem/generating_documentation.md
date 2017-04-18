@@ -39,7 +39,7 @@ docstrings and other project metadata.
 If you'd like to generate nice-looking html API docs for your library,
 use [codox](https://github.com/weavejester/codox). Usage instructions
 are in the codox readme. Running codox (it's a lein plug-in and is run
-via `lein doc` in your project) will create a "doc" subdirectory
+via `lein codox` in your project) will create a "doc" subdirectory
 containing the resulting html.
 
 
