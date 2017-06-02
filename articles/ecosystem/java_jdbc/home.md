@@ -6,7 +6,7 @@ layout: article
 This guide is intended to help you use Clojure's JDBC wrapper, the java.jdbc
 contrib library.
 
-## An Overview
+## Overview
 
 java.jdbc is intended to be a low-level Clojure wrapper around various Java
 JDBC drivers and supports a wide range of databases. The [java.jdbc source is
@@ -25,7 +25,7 @@ either within a transaction or via connection pooling, or just with a shared
 connection. You can read more about reusing connections on the [Reusing
 Connections][reusing-connections] page.
 
-## Higher-level DSL and Migration Libraries
+## Higher-level DSL and migration libraries
 
 If you need more abstraction than the java.jdbc wrapper provides, you may want
 to consider using a library that provides a DSL. All of the following libraries
@@ -46,9 +46,9 @@ more popular options are:
 * [Migratus](https://github.com/pjstadig/migratus)
 * [Ragtime](https://github.com/weavejester/ragtime)
 
-## A Quick java.jdbc Walkthrough
+## A brief java.jdbc walkthrough
 
-### Setting Up A Data Source
+### Setting up a data source
 
 A "database spec" is a Clojure map that specifies how to access the data
 source. Most commonly, you would specify the driver class name, the
@@ -70,12 +70,9 @@ connection (via `:name` and `:environment` keys); and the whole db-spec can
 also simply be a string representation of a JDBC URI or a Java URI object
 constructed from such a thing.
 
-If you want to manage connections yourself, you can use a db-spec containing
-the key `:connection` which will be reused for each operation.
+### A "Hello World" Query
 
-### Manipulating Data With SQL
-
-Reading all data from a table can be as simple as:
+Querying the database can be as simple as:
 
 ```clojure
 (ns dbexample
@@ -83,95 +80,82 @@ Reading all data from a table can be as simple as:
 
 (def db-spec ... ) ;; see above
 
-(jdbc/query db-spec ["SELECT * FROM table"])
+(jdbc/query db-spec ["SELECT 3*5 AS result"])
+=> {:result 15}
 ```
 
-You can follow the SQL string with any parameters for that SQL:
+Of course, we will want to do more with our database than have it perform
+simple calculations. Once we can successfully connect to it, we will likely
+want to create tables and manipulate data.
+
+### Creating tables
+
+java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic
+`CREATE TABLE` and `DROP TABLE` DDL strings. Anything beyond that can be
+constructed manually as a string.
 
 ```clojure
-(jdbc/query db-spec ["SELECT col1, col2 FROM table WHERE status = ?" 1])
+(ns dbexample
+  (:require [clojure.java.jdbc :as jdbc]))
+
+(def db-spec ... ) ;; see above
+
+(def fruit-table-ddl
+  (jdbc/create-table-ddl :fruit
+                         [[:name "varchar(32)"]
+                          [:appearance "varchar(32)"]
+                          [:cost :int]
+                          [:grade :real]]))
 ```
 
-The `query` function returns a fully-realized sequence of rows from the
-database. Under the hood, `query` converts the JDBC `ResultSet` into a (lazy)
-sequence of rows and then realizes that sequence. Two hooks are provided for
-you to process that sequence of rows:
-
-* You can process each row inside the `query` function by passing `:row-fn f`.
-  This will call `f` on each row as the underlying `ResultSet` is processed.
-  The result of `query` will be the sequence of the result of `f` applied to
-  each row in turn. The default for `:row-fn` is `identity`.
-* You can also process the entire `ResultSet` inside the `query` function by
-  passing `:result-set-fn g`. This will call `g` on the entire (lazy) sequence
-  of processed rows. The result of `query` will be the result of that call to
-  `g`. To avoid the connection being closed before the result of `query` is
-  fully consumed, `g` should be an eager function. The default for
-  `:result-set-fn` is `doall`.
-
-By default, `query` converts all of the column names in the `ResultSet` to
-lowercase keywords in the maps. This can be controlled by an optional
-`:identifiers` argument which is described, along with other options for
-`query`, in [Using SQL][using-sql].
-
-The four basic CRUD operations are:
+We can use the function `db-do-commands` to create our table and indexes in a
+single transaction:
 
 ```clojure
-(jdbc/insert! db-spec :table {:col1 42 :col2 "123"}) ;; Create
-(jdbc/query   db-spec ["SELECT * FROM table WHERE id = ?" 13]) ;; Read
+(jdbc/db-do-commands db-spec
+                     [fruit-table-ddl
+                      "CREATE INDEX name_ix ON fruit ( name )"])
+```
+
+For more details on DDL functionality within java.jdbc, see the [Using DDL and
+Metadata Guide][using-ddl].
+
+### Querying the database
+
+The four basic CRUD operations java.jdbc provides are:
+
+```clojure
+(jdbc/insert! db-spec :table {:col1 42 :col2 "123"})               ;; Create
+(jdbc/query   db-spec ["SELECT * FROM table WHERE id = ?" 13])     ;; Read
 (jdbc/update! db-spec :table {:col1 77 :col2 "456"} ["id = ?" 13]) ;; Update
-(jdbc/delete! db-spec :table ["id = ?" 13]) ;; Delete
+(jdbc/delete! db-spec :table ["id = ?" 13])                        ;; Delete
 ```
 
 The table name can be specified as a string or a keyword.
 
-`insert!` can take multiple maps to insert multiple rows. It can also take a
+`insert!` takes a single record to insert. If you wish to insert multiple rows
+(in map form) at once, you can use `insert-multi!`. `insert!` can also take a
 vector of column names (as strings or keywords), followed by one or more
 vectors of column values to insert into those respective columns, much like an
 `INSERT` statement in SQL. Entries in the map that have the value `nil` will
 cause `NULL` values to be inserted into the corresponding columns.
+
+`query` allows us to run selection queries on the database. Since you provide
+the query string directly, you have as much flexibility as you like to perform
+complex queries.
 
 `update!` takes a map of columns to update, with their new values, and a SQL
 clause used to select which rows to update (prepended by `WHERE` in the
 generated SQL). As with `insert!`, `nil` values in the map cause the
 corresponding columns to be set to `NULL`.
 
-`delete!` takes a SQL clause used to select which rows to delete, just like
+`delete!` takes a SQL clause used to select which rows to delete, similar to
 `update!`.
 
-By default, the table name and column names are used as-is in the underlying
-SQL. That can be controlled by an optional `:entities` argument which is
-described in [Using SQL][using-sql].
-
-In addition, there is a more general operation to run SQL commands:
-
-```clojure
-(jdbc/execute! db-spec ["UPDATE table SET col1 = NOW() WHERE id = ?" 77])
-```
-
-For more detail, read the [Using SQL][using-sql] guide.
-
-### Manipulating Tables With DDL
-
-java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic
-`CREATE TABLE` and `DROP TABLE` DDL strings. Anything beyond that can be
-constructed manually as a string. DDL can be executed using `db-do-commands`:
-
-```clojure
-(ns dbexample
-  (:require [clojure.java.jdbc :as jdbc]))
-
-(def db-spec ... ) ;; see above
-
-(jdbc/db-do-commands db-spec
-                     (jdbc/create-table-ddl :fruit
-                                            [[:name "varchar(32)"]
-                                             [:appearance "varchar(32)"]
-                                             [:cost :int]
-                                             [:grade :real]]))
-(jdbc/db-do-commands db-spec "CREATE INDEX name_ix ON fruit ( name )")
-```
-
-For more detail, read the [Using DDL and Metadata][using-ddl] guide.
+By default, the table name and column names are converted to strings
+corresponding to the keyword names in the underlying SQL. We can control how we
+transform keywords into SQL names using an optional `:entities` argument which
+is described in more detail in the [Using SQL][using-sql] section.
 
 ## More detailed java.jdbc documentation
 
