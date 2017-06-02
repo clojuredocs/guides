@@ -3,11 +3,14 @@ title: "How to use connection pooling"
 layout: article
 ---
 
-java.jdbc does not provide connection pooling directly but it is relatively easy to add to your project. The following example shows how to configure connection pooling use c3p0. Below, we show how to use BoneCP instead.
+java.jdbc does not provide connection pooling directly but it is relatively
+easy to add to your project. The following example shows how to configure
+connection pooling use c3p0. Below, we show how to use BoneCP instead.
 
 ## Add the c3p0 dependency
 
-For more information on c3p0, consult the [c3p0 documentation](http://www.mchange.com/projects/c3p0/).
+For more information on c3p0, consult the [c3p0
+documentation](http://www.mchange.com/projects/c3p0/).
 
 If you're using Leiningen, you can just add the following to your dependencies:
 
@@ -25,7 +28,7 @@ In Maven, it would be:
 
 Define your `db-spec` as usual, for example (for MySQL):
 
-    (def db-spec 
+    (def db-spec
       {:classname "com.mysql.jdbc.Driver"
        :subprotocol "mysql"
        :subname "//127.0.0.1:3306/mydb"
@@ -42,37 +45,45 @@ Define a function that creates a pooled datasource:
     (defn pool
       [spec]
       (let [cpds (doto (ComboPooledDataSource.)
-                   (.setDriverClass (:classname spec)) 
+                   (.setDriverClass (:classname spec))
                    (.setJdbcUrl (str "jdbc:" (:subprotocol spec) ":" (:subname spec)))
                    (.setUser (:user spec))
                    (.setPassword (:password spec))
                    ;; expire excess connections after 30 minutes of inactivity:
                    (.setMaxIdleTimeExcessConnections (* 30 60))
                    ;; expire connections after 3 hours of inactivity:
-                   (.setMaxIdleTime (* 3 60 60)))] 
+                   (.setMaxIdleTime (* 3 60 60)))]
         {:datasource cpds}))
 
 Now you can create a single connection pool:
 
     (def pooled-db (delay (pool db-spec)))
-    
+
     (defn db-connection [] @pooled-db)
 
-And then call `(db-connection)` wherever you need access to it. If you're using a component lifecycle for your application, such as Stuart Sierra has advocated, you won't need `pooled-db` or `db-connection`, you'll just create `(pool db-spec)` as part of your application's initialization and pass it around as part of your system configuration.
+And then call `(db-connection)` wherever you need access to it. If you're using
+a component lifecycle for your application, such as Stuart Sierra has
+advocated, you won't need `pooled-db` or `db-connection`, you'll just create
+`(pool db-spec)` as part of your application's initialization and pass it
+around as part of your system configuration.
 
 ## Add the BoneCP dependencies
 
-For more information on BoneCP, consult the [BoneCP documentation](http://jolbox.com).
+For more information on BoneCP, consult the [BoneCP
+documentation](http://jolbox.com).
 
 If you're using Leiningen, you can just add the following to your dependencies:
 
     [com.jolbox/bonecp "0.7.1.RELEASE"]
 
-You will also need to add a dependency for the SLF4J adapter that matches the logging system you use. For example, for `log4j` and the `"0.7.1.RELEASE"` of BoneCP, you would need to add:
+You will also need to add a dependency for the SLF4J adapter that matches the
+logging system you use. For example, for `log4j` and the `"0.7.1.RELEASE"` of
+BoneCP, you would need to add:
 
     [org.slf4j/slf4j-log4j12 "1.5.0"]
 
-The adapter version must match the version of SLF4J that BoneCP brings in as a transitive dependency. Note: BoneCP also brings in Guava as a dependency.
+The adapter version must match the version of SLF4J that BoneCP brings in as a
+transitive dependency. Note: BoneCP also brings in Guava as a dependency.
 
 In Maven, it would be:
 
@@ -88,7 +99,7 @@ and whatever logging system you chose.
 
 Define your `db-spec` as usual, for example (for MySQL):
 
-    (def db-spec 
+    (def db-spec
       {:classname "com.mysql.jdbc.Driver"
        :subprotocol "mysql"
        :subname "//127.0.0.1:3306/mydb"
@@ -118,13 +129,14 @@ Define a function that creates a pooled datasource:
                    ;; allow connections to be idle for 3 hours (default is 60 minutes):
                    (.setIdleMaxAgeInMinutes (* 3 60))
                    ;; consult the BoneCP documentation for your database:
-                   (.setConnectionTestStatement "/* ping *\\/ SELECT 1"))] 
+                   (.setConnectionTestStatement "/* ping *\\/ SELECT 1"))]
         {:datasource cpds}))
 
 Now you can create a single connection pool:
 
     (def pooled-db (delay (pool db-spec)))
-    
+
     (defn db-connection [] @pooled-db)
 
-And then call `(db-connection)` wherever you need access to it. As above, adjust for your application lifecycle.
+And then call `(db-connection)` wherever you need access to it. As above,
+adjust for your application lifecycle.
