@@ -18,13 +18,14 @@ and separates content into several groups:
 
 ## Essentials
 
-### [Getting Started](/articles/tutorials/getting_started.html)
-
-If you're new to Clojure, this is a good place to start. 
-
 Note that the editing environments are listed in alphabetical order and indicate no preference or endorsement. The last 
 ["State of the Union" Clojure survey](http://blog.cognitect.com/blog/2017/1/31/state-of-clojure-2016-results) indicated 
 that Emacs is still the most popular editing environment, followed by Cursive, Vim, and Atom. 
+
+
+### [Getting Started](/articles/tutorials/getting_started.html)
+
+If you're new to Clojure, this is a good place to start. 
 
 
 ### [Introduction](/articles/tutorials/introduction.html)
