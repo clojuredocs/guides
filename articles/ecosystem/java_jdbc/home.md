@@ -128,12 +128,18 @@ The four basic CRUD operations java.jdbc provides are:
 
 The table name can be specified as a string or a keyword.
 
-`insert!` takes a single record to insert. If you wish to insert multiple rows
-(in map form) at once, you can use `insert-multi!`. `insert!` can also take a
-vector of column names (as strings or keywords), followed by one or more
-vectors of column values to insert into those respective columns, much like an
-`INSERT` statement in SQL. Entries in the map that have the value `nil` will
-cause `NULL` values to be inserted into the corresponding columns.
+`insert!` takes a single record in hashmap form to insert. `insert!` can also
+take a vector of column names (as strings or keywords), followed by a vector of
+column values to insert into those respective columns, much like an `INSERT`
+statement in SQL. Entries in the map that have the value `nil` will cause
+`NULL` values to be inserted into the corresponding columns.
+
+If you wish to insert multiple rows (in hashmap form) at once, you can use
+`insert-multi!`; however, `insert-multi!` will write a separate insertion
+statement for each row, so it is suggested you use the column-based form of
+`insert-multi!` over the row-based form. Passing multiple column values to
+`insert-multi!` will generate a single batched insertion statement and yield
+better performance.
 
 `query` allows us to run selection queries on the database. Since you provide
 the query string directly, you have as much flexibility as you like to perform
