@@ -14,10 +14,11 @@ on GitHub][github] and there is a dedicated [java.jdbc mailing
 list][mailing-list]. The detailed [java.jdbc reference][reference] is
 automatically generated from the java.jdbc source.
 
-The general approach with java.jdbc is to set up a data source as a "database
+Generally, when using java.jdbc, you will set up a data source as a "database
 spec" and pass that to the various CRUD (create, read, update, delete)
 functions that java.jdbc provides. These operations are detailed within the
-[Using SQL][using-sql] page.
+[Using SQL][using-sql] page, but a quick overview is provided by the
+walkthrough below.
 
 By default, each operation opens a connection and executes the SQL inside a
 transaction. You can also run multiple operations against the same connection,
@@ -51,9 +52,9 @@ more popular options are:
 ### Setting up a data source
 
 A "database spec" is a Clojure map that specifies how to access the data
-source. Most commonly, you would specify the driver class name, the
-subprotocol, the hostname, port and database name (the "subname") and the
-username and password, for example
+source. Most commonly, you specify the driver class name, the subprotocol, the
+hostname, port and database name as the "subname", and the username and
+password. For example,
 
 ```clojure
 (def db-spec
@@ -63,12 +64,6 @@ username and password, for example
    :user "myaccount"
    :password "secret"})
 ```
-
-The library also supports a db-spec containing a `:connection-uri` which
-provides a raw URI string that is passed directly to the JDBC driver; a JNDI
-connection (via `:name` and `:environment` keys); and the whole db-spec can
-also simply be a string representation of a JDBC URI or a Java URI object
-constructed from such a thing.
 
 ### A "Hello World" Query
 
@@ -114,7 +109,7 @@ single transaction:
 ```clojure
 (jdbc/db-do-commands db-spec
                      [fruit-table-ddl
-                      "CREATE INDEX name_ix ON fruit ( name )"])
+                      "CREATE INDEX name_ix ON fruit ( name );"])
 ```
 
 For more details on DDL functionality within java.jdbc, see the [Using DDL and
@@ -157,11 +152,31 @@ corresponding to the keyword names in the underlying SQL. We can control how we
 transform keywords into SQL names using an optional `:entities` argument which
 is described in more detail in the [Using SQL][using-sql] section.
 
+### Dropping our tables
+
+To clean out the database from our example, we can generate a the command to
+drop the fruit table:
+
+```clojure
+(def drop-fruit-table-ddl (jdbc/drop-table-ddl :fruit))
+```
+
+Ensure you tear down your tables and indexes in the opposite order of creation:
+
+```clojure
+(jdbc/db-do-commands db-spec
+                     ["DROP INDEX name_ix;"
+                      drop-fruit-table-ddl])
+```
+
+These are all the commands we need to write a simple migration for our database!
+
 ## More detailed java.jdbc documentation
 
-* Using SQL: a more detailed guide on using SQL with java.jdbc
-* Using DDL: how to create your tables using the java.jdbc DDL
-* Reusing Connections: how to reuse your database connections
+* [Using SQL:][using-sql] a more detailed guide on using SQL with java.jdbc
+* [Using DDL:][using-ddl] how to create your tables using the java.jdbc DDL
+* [Reusing Connections:][reusing-connections] how to reuse your database
+  connections
 
 [github]: https://github.com/clojure/java.jdbc/
 [mailing-list]: https://groups.google.com/forum/#!forum/clojure-java-jdbc
