@@ -52,15 +52,13 @@ more popular options are:
 ### Setting up a data source
 
 A "database spec" is a Clojure map that specifies how to access the data
-source. Most commonly, you specify the driver class name, the subprotocol, the
-hostname, port and database name as the "subname", and the username and
-password. For example,
+source. Most commonly, you specify the database type, the the database name,
+and the username and password. For example,
 
 ```clojure
 (def db-spec
-  {:classname "com.mysql.jdbc.Driver"
-   :subprotocol "mysql"
-   :subname "//127.0.0.1:3306/mydb"
+  {:dbtype "mysql"
+   :dbname "mydb"
    :user "myaccount"
    :password "secret"})
 ```
