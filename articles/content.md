@@ -20,7 +20,11 @@ and separates content into several groups:
 
 ### [Getting Started](/articles/tutorials/getting_started.html)
 
-If you're new to Clojure, this is a good place to start.
+If you're new to Clojure, this is a good place to start. 
+
+Note that the editing environments are listed in alphabetical order and indicate no preference or endorsement. The last 
+["State of the Union" Clojure survey](http://blog.cognitect.com/blog/2017/1/31/state-of-clojure-2016-results) indicated 
+that Emacs is still the most popular editing environment, followed by Cursive, Vim, and Atom. 
 
 
 ### [Introduction](/articles/tutorials/introduction.html)
@@ -28,20 +32,26 @@ If you're new to Clojure, this is a good place to start.
 A swift introduction to the Clojure language, covering most of the
 basics.
 
+### [Atom for Clojure Development](https://atom.io/packages/proto-repl)
+
+The ProtoREPL package for Clojure development in Atom.
+
+### [Cursive for Clojure Development](https://cursive-ide.com/userguide/)
+
+The user guide for Cursive, the Clojure plugin for IntelliJ.
+
+### [Eclipse for Clojure Development](/articles/tutorials/eclipse.html)
+
+A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 ### [Emacs for Clojure Development](/articles/tutorials/emacs.html)
 
 A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
 
-
 ### [Vim for Clojure Development](/articles/tutorials/vim_fireplace.html)
 
 A brief introduction to Clojure development in Vim with fireplace.vim.
 
-
-### [Eclipse for Clojure Development](/articles/tutorials/eclipse.html)
-
-A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 
 
