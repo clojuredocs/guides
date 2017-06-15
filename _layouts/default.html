@@ -65,7 +65,7 @@
     </header>
 
 
-    <div class='container content''>
+    <div class='container content'>
       {{ content }}
     </div>
 
@@ -73,6 +73,8 @@
       <div class="container">
 
         <p>This website was developed by the &nbsp;<a href='http://github.com/clojuredocs'>Clojure Documentation Team</a>.
+          This page was last updated on {{page.last-modified-date|date:'%B %-d, %Y'}}
+          at {{page.last-modified-date|date:'%H:%M'}}.
         </p>
 
       </div>
