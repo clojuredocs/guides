@@ -42,7 +42,7 @@ little webapp:
 clojars](https://clojars.org/ring)) is a foundational Clojure web
 application library. It:
 
-  * sets things up such that an http request comes into your webapp 
+  * sets things up such that an http request comes into your webapp
     as a regular Clojure hashmap, and likewise makes it so that you
     can return a response as a hashmap.
   * provides [a
@@ -50,7 +50,7 @@ application library. It:
     describing exactly what those request and response maps should
     look like.
   * brings along a web server
-    ([Jetty](http://jetty.codehaus.org/jetty/)) and connects your
+    ([Jetty](http://www.eclipse.org/jetty/)) and connects your
     webapp to it.
 
 For this tutorial, we won't actually need to deal with these maps
@@ -144,18 +144,12 @@ Add the following extra dependencies to your project.clj's
 `:dependencies` vector:
 
 ```clojure
-[hiccup "1.0.2"]
-[org.clojure/java.jdbc "0.2.3"]
-[com.h2database/h2 "1.3.170"]
+[hiccup "1.0.5"]
+[org.clojure/java.jdbc "0.6.0"]
+[com.h2database/h2 "1.4.193"]
 ```
 
-Update the version of Clojure dependency to 1.5.1:
-
-```clojure
-[org.clojure/clojure "1.5.1"]
-```
-
-(You might also remove the "-SNAPSHOT" from the project's version
+(You might also remove the `-SNAPSHOT` from the project's version
 string.)
 
 
@@ -200,32 +194,29 @@ subdirectory of your project, create a table we'll use for our webapp, and add
 one record to start us off with:
 
 ```clojure
-(require '[clojure.java.jdbc :as sql])
-(sql/with-connection
-  {:classname "org.h2.Driver"
-   :subprotocol "h2:file"
-   :subname "db/my-webapp"}
+(require '[clojure.java.jdbc :as jdbc])
+(jdbc/with-db-connection [conn {:dbtype "h2" :dbname "./my-webapp"}]
 
-  (sql/create-table :locations
-    [:id "bigint primary key auto_increment"]
-    [:x "integer"]
-    [:y "integer"])
+  (jdbc/db-do-commands conn
+    (jdbc/create-table-ddl :locations
+      [[:id "bigint primary key auto_increment"]
+       [:x "integer"]
+       [:y "integer"]]))
 
-  (sql/insert-records :locations
+  (jdbc/insert! conn :locations
     {:x 8 :y 9}))
 ```
 
 and hit `ctrl-d` to exit.
 
 For more about how to use the database functions, see the
-[clojure.java.jdbc](https://github.com/clojure/java.jdbc) readme and
-docs.
+[Using java.jdbc](/articles/ecosystem/java_jdbc/home.html) on this site.
 
 
 
 ## Set up your routes
 
-In the default src/my_webapp/handler.clj file you're provided, we
+In the default `src/my_webapp/handler.clj` file you're provided, we
 specify our webapp's *routes* inside the `defroutes` macro. That is,
 we assign a function to handle each of the url paths we'd like to
 support, and then at the end provide a "not found" page for any other
@@ -235,32 +226,32 @@ Make your handler.clj file look like this:
 
 ```clojure
 (ns my-webapp.handler
-  (:require [my-webapp.views :as views]
-            [compojure.core :as cc]
-            [compojure.handler :as handler]
-            [compojure.route :as route]))
+  (:require [my-webapp.views :as views] ; add this require
+            [compojure.core :refer :all]
+            [compojure.route :as route]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
-(cc/defroutes app-routes
-  (cc/GET "/"
+(defroutes app-routes ; replace the generated app-routes with this
+  (GET "/"
        []
        (views/home-page))
-  (cc/GET "/add-location"
+  (GET "/add-location"
        []
        (views/add-location-page))
-  (cc/POST "/add-location"
+  (POST "/add-location"
         {params :params}
         (views/add-location-results-page params))
-  (cc/GET "/location/:loc-id"
+  (GET "/location/:loc-id"
        [loc-id]
        (views/location-page loc-id))
-  (cc/GET "/all-locations"
+  (GET "/all-locations"
        []
        (views/all-locations-page))
   (route/resources "/")
   (route/not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (wrap-defaults app-routes site-defaults))
 ```
 
 Each of those expressions in `defroutes` like `(GET ...)` or `(POST ...)` are
@@ -284,19 +275,20 @@ destructuring](https://github.com/weavejester/compojure/wiki/Destructuring-Synta
 
 ## Create your Views
 
-Create a src/my_webapp/views.clj file and make it look like:
+Create a `src/my_webapp/views.clj` file and make it look like:
 
 ```clojure
 (ns my-webapp.views
   (:require [my-webapp.db :as db]
             [clojure.string :as str]
-            [hiccup.page :as hic-p]))
+            [hiccup.page :as page]
+            [ring.util.anti-forgery :as util]))
 
 (defn gen-page-head
   [title]
   [:head
    [:title (str "Locations: " title)]
-   (hic-p/include-css "/css/styles.css")])
+   (page/include-css "/css/styles.css")])
 
 (def header-links
   [:div#header-links
@@ -310,7 +302,7 @@ Create a src/my_webapp/views.clj file and make it look like:
 
 (defn home-page
   []
-  (hic-p/html5
+  (page/html5
    (gen-page-head "Home")
    header-links
    [:h1 "Home"]
@@ -318,11 +310,12 @@ Create a src/my_webapp/views.clj file and make it look like:
 
 (defn add-location-page
   []
-  (hic-p/html5
+  (page/html5
    (gen-page-head "Add a Location")
    header-links
    [:h1 "Add a Location"]
    [:form {:action "/add-location" :method "POST"}
+    (util/anti-forgery-field) ; prevents cross-site scripting attacks
     [:p "x value: " [:input {:type "text" :name "x"}]]
     [:p "y value: " [:input {:type "text" :name "y"}]]
     [:p [:input {:type "submit" :value "submit location"}]]]))
@@ -330,7 +323,7 @@ Create a src/my_webapp/views.clj file and make it look like:
 (defn add-location-results-page
   [{:keys [x y]}]
   (let [id (db/add-location-to-db x y)]
-    (hic-p/html5
+    (page/html5
      (gen-page-head "Added a Location")
      header-links
      [:h1 "Added a Location"]
@@ -341,7 +334,7 @@ Create a src/my_webapp/views.clj file and make it look like:
 (defn location-page
   [loc-id]
   (let [{x :x y :y} (db/get-xy loc-id)]
-    (hic-p/html5
+    (page/html5
      (gen-page-head (str "Location " loc-id))
      header-links
      [:h1 "A Single Location"]
@@ -352,7 +345,7 @@ Create a src/my_webapp/views.clj file and make it look like:
 (defn all-locations-page
   []
   (let [all-locs (db/get-all-locations)]
-    (hic-p/html5
+    (page/html5
      (gen-page-head "All Locations in the db")
      header-links
      [:h1 "All Locations"]
@@ -362,81 +355,69 @@ Create a src/my_webapp/views.clj file and make it look like:
         [:tr [:td (:id loc)] [:td (:x loc)] [:td (:y loc)]])])))
 ```
 
-Here we've implemented each function used in handler.clj.
+Here we've implemented each function used in `handler.clj`.
 
 Again, note that each of the functions with names ending in "-page"
-(the ones being called in handler.clj) is returning just a plain
+(the ones being called in `handler.clj`) is returning just a plain
 string consisting of html markup. In handler.clj's `defroutes`,
 Compojure is helpfully taking care of placing that into a response
 hashmap for us.
 
 Rather than clog up this file with database-related calls, we've put
-them all into their own db.clj file (described next).
+them all into their own `db.clj` file (described next).
 
 
 
 ## Create some db access functions
 
-Create a src/my_webapp/db.clj file and make it look like:
+Create a `src/my_webapp/db.clj` file and make it look like:
 
 ```clojure
 (ns my-webapp.db
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as jdbc]))
 
-(def db-spec {:classname "org.h2.Driver"
-              :subprotocol "h2:file"
-              :subname "db/my-webapp"})
+(def db-spec {:dbtype "h2" :dbname "./my-webapp"})
 
 (defn add-location-to-db
   [x y]
-  (let [results (sql/with-connection db-spec
-                  (sql/insert-record :locations
-                                     {:x x :y y}))]
+  (let [results (jdbc/insert! db-spec :locations {:x x :y y})]
     (assert (= (count results) 1))
-    (first (vals results))))
+    (first (vals (first results)))))
 
 (defn get-xy
   [loc-id]
-  (let [results (sql/with-connection db-spec
-                  (sql/with-query-results res
-                    ["select x, y from locations where id = ?" loc-id]
-                    (doall res)))]
+  (let [results (jdbc/query db-spec
+                            ["select x, y from locations where id = ?" loc-id])]
     (assert (= (count results) 1))
     (first results)))
 
 (defn get-all-locations
   []
-  (let [results (sql/with-connection db-spec
-                  (sql/with-query-results res
-                    ["select id, x, y from locations"]
-                    (doall res)))]
-    results))
+  (jdbc/query db-spec "select id, x, y from locations"))
 ```
 
-Note that `sql/with-query-results` returns a seq of maps. Each map
+Note that `jdbc/query` returns a seq of maps. Each map
 entry's key is a column name (as a Clojure keyword), and its value is
 the value for that column.
 
-You'll also notice that we put results from db queries into a `doall`.
-This is because `sql/with-query-results` returns a lazy sequence, and we
-want to fully-realize it before leaving the `sql/with-connection`
-expression.
+You'll also notice that we used a plain string in `get-all-locations`,
+rather than putting it in a vector. `java.jdbc` allows us to omit the vector
+wrapping when we have a simple SQL query with no parameters.
 
 Of course, you can try out all these calls yourself in the REPL,
 if you like:
 
-    ~/temp/my-webapp$ lein repl
-    ...
-    user=> (require 'my-webapp.db)
-    nil
-    user=> (ns my-webapp.db)
-    nil
-    my-webapp.db=> (sql/with-connection db-spec
-              #_=>   (sql/with-query-results res
-              #_=>     ["select x, y from locations where id = 1"]
-              #_=>     (doall res)))
-    ({:y 9, :x 8})
-
+```
+~/temp/my-webapp$ lein repl
+...
+user=> (require 'my-webapp.db)
+nil
+user=> (ns my-webapp.db)
+nil
+my-webapp.db=> (jdbc/query db-spec
+          #_=>     "select x, y from locations where id = 1")
+({:y 9, :x 8})
+```
 
 ## Run your webapp during development
 
@@ -445,7 +426,10 @@ You can run your webapp via lein:
     lein ring server
 
 It should start up and also open a browser window for you pointed at
-<http://localhost:3000>. If you don't want it to automatically open a
+<http://localhost:3000>. You should be able to stop the webapp by
+hitting `ctrl-c`.
+
+If you don't want it to automatically open a
 browser window, run it like so:
 
     lein ring server-headless
@@ -459,12 +443,12 @@ changes:
 
 ### Changes in project.clj
 
-In your project.clj's defproject:
+In your `project.clj` file:
 
-  * add to `:dependencies`:
+  * add to `:dependencies` (the version should generally match `compojure`s version):
 
     ```clojure
-    [ring/ring-jetty-adapter "x.y.z"] ; See clojars for current version.
+    [ring/ring-jetty-adapter "1.5.1"] ; e.g., for compojure version 1.5.1
     ```
 
   * and also add `:main my-webapp.handler`
@@ -472,11 +456,23 @@ In your project.clj's defproject:
 
 ### Changes in handler.clj
 
-In src/my_webapp/handler.clj:
+In `src/my_webapp/handler.clj`:
 
   * in your `ns` macro:
       * add `[ring.adapter.jetty :as jetty]` to the `:require`, and
       * add `(:gen-class)` to the end
+
+The `ns` form should now look like this:
+
+```clojure
+(ns my-webapp.handler
+  (:require [my-webapp.views :as views]
+            [compojure.core :refer :all]
+            [compojure.route :as route]
+            [ring.adapter.jetty :as jetty] ; add this require
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]])
+  (:gen-class)) ; and add this gen-class
+```
 
   * and at the bottom, add the following `-main` function:
 
@@ -493,13 +489,22 @@ In src/my_webapp/handler.clj:
 
 ### Build and Run it
 
-Now create an uberjar of your webapp (via `lein uberjar`), copy it
-(target/my-webapp-0.1.0-standalone.jar) to wherever you like, and run
-it in the usual way:
+Now create an uberjar of your webapp:
 
-    java -jar my-webapp-0.1.0-standalone.jar 8080
+```
+lein uberjar
+```
 
-(or on whatever port number you wish).
+And now you can run it directly:
+
+    java -jar target/my-webapp-0.1.0-standalone.jar 8080
+
+(or on whatever port number you wish). If you run the JAR file from another
+folder, remember to copy the `my-webapp.mv.db` file to that folder!
+
+_NOTE: if you did not remove "-SNAPSHOT" from the project's version string
+when you first edited `project.clj`, then the JAR file will have `-SNAPSHOT`
+in its name._
 
 
 
@@ -514,3 +519,5 @@ it in the usual way:
 John Gabriele <jmg3000@gmail.com> (original author)
 
 Ivan Kryvoruchko <gildraug@gmail.com>
+
+Sean Corfield <sean@corfield.org>
