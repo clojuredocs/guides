@@ -46,10 +46,6 @@ of data with values in the same order as the columns.
 ;;  ...)
 ```
 
-Note: prior to version 0.5.5 options could be specified as top-level (unrolled)
-keyword/value arguments but that does not compose well and was deprecated in
-0.5.5 (and support will be removed in 0.6.0).
-
 ### Processing a result set lazily
 
 Since `query` returns a fully realized result set, it can be difficult to
@@ -163,20 +159,20 @@ a map of the generated keys will be returned for each insert (as a sequence).
 In the latter case, a single, batched insert will be performed and a sequence
 of row insert counts will be returned (generally a sequence of ones).
 
-If you use `insert!` and specify each row as a map of columns and their values,
+If you use `insert-multi!` and specify each row as a map of columns and their values,
 then you can specify a mixture of complete and partial rows, and you will get
 back the generated keys for each row (assuming the database has that
 capability).
 
 ```clojure
-(j/insert! db-spec :fruit
-           {:name "Pomegranate" :appearance "fresh" :cost 585}
-           {:name "Kiwifruit" :grade 93})
+(j/insert-multi! db-spec :fruit
+                 [{:name "Pomegranate" :appearance "fresh" :cost 585}
+                  {:name "Kiwifruit" :grade 93}])
 ;; returns a sequence of database-specific maps, e.g., for MySQL:
 ;; ({generated_key 51} {generated_key 52})
 ```
 
-If you use `insert!` and specify the columns you wish to insert followed by
+If you use `insert-multi!` and specify the columns you wish to insert followed by
 each row as a vector of column values, then you must specify the same columns
 in each row, and you will not get generated keys back, just row counts. If you
 wish to insert complete rows, you may omit the column name vector (passing
@@ -184,12 +180,12 @@ wish to insert complete rows, you may omit the column name vector (passing
 table so be careful!
 
 ```clojure
-  (j/insert! db-spec :fruit
-             nil ; column names not supplied
-             [1 "Apple" "red" 59 87]
-             [2 "Banana" "yellow" 29 92.2]
-             [3 "Peach" "fuzzy" 139 90.0]
-             [4 "Orange" "juicy" 89 88.6])
+  (j/insert-multi! db-spec :fruit
+                   nil ; column names not supplied
+                   [[1 "Apple" "red" 59 87]
+                    [2 "Banana" "yellow" 29 92.2]
+                    [3 "Peach" "fuzzy" 139 90.0]
+                    [4 "Orange" "juicy" 89 88.6]])
 ;; (1 1 1 1) - row counts modified
 ```
 
@@ -197,10 +193,10 @@ It is generally safer to specify the columns you wish to insert so you can
 control the order, and choose to omit certain columns:
 
 ```clojure
-(j/insert! db-spec :fruit
-           [:name :cost]
-           ["Mango" 722]
-           ["Feijoa" 441])
+(j/insert-multi! db-spec :fruit
+                 [:name :cost]
+                 [["Mango" 722]
+                  ["Feijoa" 441]])
 ;; (1 1) - row counts modified
 ```
 
@@ -275,9 +271,6 @@ Possible values for `:isolation` are `:none`, `:read-committed`,
 `:read-uncommitted`, `:repeatable-read`, and `:serializable`. Be aware that not
 all databases support all isolation levels.
 
-Note: prior to version 0.5.5, the `:isolation` option could be specified
-without `{ }` but that was deprecated in 0.5.5 (and will be removed in 0.6.0).
-
 In addition, you can also set the current transaction-aware connection to
 rollback, and reset that setting, as well as test whether the connection is
 currently set to rollback, using the following functions:
@@ -325,10 +318,10 @@ examples.
 
 ```clojure
 (j/with-db-transaction [t-con db-spec]
-  (j/insert! t-con :fruit
-             [:name :appearance]
-             ["Grape" "yummy"]
-             ["Pear" "bruised"])
+  (j/insert-multi! t-con :fruit
+                   [:name :appearance]
+                   [["Grape" "yummy"]
+                    ["Pear" "bruised"]])
   ;; At this point the insert! call is complete, but the transaction is
   ;; not. The exception will cause it to roll back leaving the database
   ;; untouched.
@@ -344,10 +337,10 @@ commit:
   ;; is-rollback-only false
   (j/db-set-rollback-only! t-con)
   ;; the following insert will be rolled back when the transaction ends:
-  (j/insert! t-con :fruit
-             [:name :appearance]
-             ["Grape" "yummy"]
-             ["Pear" "bruised"])
+  (j/insert!-multi t-con :fruit
+                   [:name :appearance]
+                   [["Grape" "yummy"]
+                    ["Pear" "bruised"]])
   (prn "is-rollback-only" (j/db-is-rollback-only t-con))
   ;; is-rollback-only true
   ;; the following will display the inserted rows:
@@ -397,7 +390,9 @@ keywords:
 
 For several databases, you will often want entities to be quoted in some way
 (sometimes referred to as "stropping"). A utility function `quoted` is provided
-that accepts either a single character or a vector pair of characters, and
+that accepts either a single character, a vector pair of characters, or a keyword
+as a symbolic name for the type of quoting you want (`:ansi`, `:mysql`,
+`:oracle`, `:sqlserver`), and
 returns a function suitable for use with the `:entities` option.
 
 For example:
@@ -405,7 +400,7 @@ For example:
 ```clojure
 (j/insert! db-spec :fruit
            {:name "Apple" :appearance "Round" :cost 99}
-           :options {:entities (j/quoted \`)})
+           {:entities (j/quoted \`)}) ; or (j/quoted :mysql)
 ```
 
 will execute:
@@ -420,7 +415,7 @@ with the parameters `"Apple", "Round", "99"` whereas:
 ```clojure
 (j/insert! db-spec :fruit
            {:name "Apple" :appearance "Round" :cost 99}
-           :options {:entities (j/quoted [\[ \]])})
+           {:entities (j/quoted [\[ \]])}) ; or (j/quoted :sqlserver)
 ```
 
 will execute:
@@ -431,11 +426,6 @@ INSERT INTO [fruit] ( [name], [appearance], [cost] )
 ```
 
 with the parameters `"Apple", "Round", "99"`.
-
-Note that `insert!` and `create-table-ddl` are the only functions in version
-0.5.5 that require `:options` as a "flag" to introduce the options map. In all
-the other functions, the options map is simply the last argument in the call
-(and can be omitted when the defaults are acceptable).
 
 ## Protocol extensions for transforming values
 
