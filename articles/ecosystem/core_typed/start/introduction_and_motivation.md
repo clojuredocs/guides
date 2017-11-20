@@ -78,7 +78,7 @@ while making some compromises (it does the latter).
 
 This might seem discouraging, but in practice core.typed will catch all type errors in your code.
 The problem is some Clojure idioms are so flexible it is often impossible to distinguish
-between indended and unintended usage.
+between intended and unintended usage.
 
 A small example: `map` accepts either `nil` or a `Seqable` as a second argument. It is perfectly
 valid to provide an argument that is always `nil`, but it's probably not what the user intended.
