@@ -6,6 +6,13 @@ layout: article
 This guide is intended to help you use Clojure's JDBC wrapper, the java.jdbc
 contrib library.
 
+## Contents
+
+* [Overview][overview]
+* [Using SQL][using-sql]
+* [Using DDL][using-ddl]
+* [Reusing Connections][reusing-connections]
+
 ## Overview
 
 java.jdbc is intended to be a low-level Clojure wrapper around various Java
@@ -187,6 +194,7 @@ These are all the commands we need to write a simple migration for our database!
 [reference]: http://clojure.github.io/java.jdbc/
 [korma]: http://sqlkorma.com
 
+[overview]: home.html
 [using-sql]: using_sql.html
 [using-ddl]: using_ddl.html
 [reusing-connections]: reusing_connections.html

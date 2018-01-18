@@ -3,6 +3,15 @@ title: "How to reuse database connections"
 layout: article
 ---
 
+## Contents
+
+* [Overview][overview]
+* [Using SQL][using-sql]
+* [Using DDL][using-ddl]
+* [Reusing Connections][reusing-connections]
+
+## Reusing Connections
+
 Since you rarely want every database operation to create a new connection,
 there are two ways to reuse connections:
 
@@ -116,3 +125,8 @@ a [component](https://github.com/stuartsierra/component) lifecycle for your
 application, you won't need `pooled-db` or `db-connection`. You'll just create
 `(pool db-spec)` as part of your application's initialization and pass it
 around as part of your system configuration.
+
+[overview]: home.html
+[using-sql]: using_sql.html
+[using-ddl]: using_ddl.html
+[reusing-connections]: reusing_connections.html

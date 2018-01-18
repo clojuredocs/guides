@@ -3,6 +3,13 @@ title: "Using DDL and Metadata"
 layout: article
 ---
 
+## Contents
+
+* [Overview][overview]
+* [Using SQL][using-sql]
+* [Using DDL][using-ddl]
+* [Reusing Connections][reusing-connections]
+
 ## Using DDL
 
 DDL operations can be executed using the `db-do-commands` function. The general
@@ -83,3 +90,8 @@ current database. `metadata-result` only transforms `ResultSet` objects, other
 results are returned as-is. `metadata-result` can also accept an options map
 containing `:identifiers` and `:as-arrays?`, like the `query` function,
 and those options control how the metatadata is transformed and/or returned.
+
+[overview]: home.html
+[using-sql]: using_sql.html
+[using-ddl]: using_ddl.html
+[reusing-connections]: reusing_connections.html

@@ -3,6 +3,15 @@ title: "Manipulating data with SQL"
 layout: article
 ---
 
+## Contents
+
+* [Overview][overview]
+* [Using SQL][using-sql]
+* [Using DDL][using-ddl]
+* [Reusing Connections][reusing-connections]
+
+## Using SQL
+
 Here are some examples of using java.jdbc to manipulate data with SQL.
 These examples assume a simple table called fruit (see [Using DDL and
 Metadata](using_ddl.html)). These examples all assume the following in your
@@ -479,3 +488,8 @@ For general transformations of Clojure values to SQL values, extending
 `ISQLValue` and defining `sql-value` may be sufficient. The `sql-value`
 function is called with a single argument: the Clojure value. By default
 `sql-value` just returns its argument.
+
+[overview]: home.html
+[using-sql]: using_sql.html
+[using-ddl]: using_ddl.html
+[reusing-connections]: reusing_connections.html
