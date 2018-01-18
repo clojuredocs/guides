@@ -240,14 +240,14 @@ If you want to delete any rows from a table that match a simple predicate, the
 
 ```clojure
 (j/delete! db-spec :fruit ["grade < ?" 25.0])
-;; produces a sequence of the new of rows deleted, e.g., (1)
+;; produces a sequence of the number of rows deleted, e.g., (1)
 ```
 
 You can also use `execute!` for deleting rows:
 
 ```clojure
 (j/execute! db-spec ["DELETE FROM fruit WHERE grade < ?" 25.0])
-;; produces a sequence of the new of rows deleted, e.g., (1)
+;; produces a sequence of the number of rows deleted, e.g., (1)
 ```
 
 ## Using transactions

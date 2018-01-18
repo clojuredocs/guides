@@ -45,7 +45,7 @@ expressions into it as you go.
 > previous expression evaluates to.
 
 This introduction is a whirlwind tutorial of most of the basics of
-Clojure. Its goal is to rapidly get you acquainted with the core
+Clojure. Its goal is to rapidly get you familiar with the core
 areas of the language without wasting your time and also without getting
 too bogged down in details or advanced topics (the various topics will
 get more comprehensive coverage in the topic guides anyway).
@@ -56,7 +56,7 @@ simple language, and you're going to love it.
 
 
 
-## Preliminaries
+## The Basics
 
 Clojure is a general-purpose programming language, and a quite
 practical one at that.

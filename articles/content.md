@@ -47,7 +47,7 @@ A brief introduction to Counterclockwise, a Clojure plugin for Eclipse.
 
 ### [Emacs for Clojure Development](/articles/tutorials/emacs.html)
 
-A brief introduction to Emacs, Clojure mode, SLIME and Clojure development workflow with Emacs.
+A brief introduction to Emacs, Clojure mode, CIDER and Clojure development workflow with Emacs.
 
 ### [Vim for Clojure Development](/articles/tutorials/vim_fireplace.html)
 
