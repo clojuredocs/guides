@@ -30,6 +30,21 @@ Note: books are listed in reverse chronological order.
 
 
 
+### Clojure: Microservices with Clojure
+
+By Anuj Kumar
+
+#### Notes
+
+The common patterns and practices of the microservice architecture and their application using the Clojure programming language.
+
+#### Where You Can Buy It
+
+ * [Packt](https://www.packtpub.com/application-development/microservices-clojure):  eBook, paperback
+ * [Amazon](https://www.amazon.com/dp/1788622243):  eBook, paperback
+
+
+
 ### Clojure: High Performance JVM Programming
 
 By Eduardo Díaz, Shantanu Kumar, Akhil Wali
