@@ -40,8 +40,8 @@ The common patterns and practices of the microservice architecture and their app
 
 #### Where You Can Buy It
 
- * [Packt](https://www.packtpub.com/application-development/microservices-clojure):  eBook, paperback
- * [Amazon](https://www.amazon.com/dp/1788622243):  eBook, paperback
+ * [Packt](https://www.packtpub.com/application-development/microservices-clojure): eBook, paperback
+ * [Amazon](https://www.amazon.com/dp/1788622243): eBook, paperback
 
 
 
