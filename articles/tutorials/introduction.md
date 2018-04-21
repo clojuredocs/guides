@@ -1256,7 +1256,7 @@ manually looping over a collection. Some examples using `map`:
 ;; ⇒ ("=10=" "=20=" "=30=")
 
 ;; And `map` knows how to apply the function you give it
-;; to mulitple collections in a coordinated way:
+;; to multiple collections in a coordinated way:
 (map (fn [x y] (str x y)) [:a :b :c] [1 2 3])
 ;; ⇒ (":a1" ":b2" ":c3")
 ```
