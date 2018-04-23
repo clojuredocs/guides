@@ -70,6 +70,20 @@ and the username and password. For example,
    :password "secret"})
 ```
 
+Some DBs require a different format for the "database spec".  Here is an example that will 
+work for the [H2 database](http://www.h2database.com):
+
+```
+(def db-spec
+  {:classname   "org.h2.Driver"
+   :subprotocol "h2:mem"                  ; the prefix `jdbc:` is added automatically
+   :subname     "demo;DB_CLOSE_DELAY=-1"  ; `;DB_CLOSE_DELAY=-1` very important!!!
+                    ; http://www.h2database.com/html/features.html#in_memory_databases
+   :user        "sa"                      ; default "system admin" user
+   :password    ""                        ; default password => empty string
+  })
+```
+
 ### A "Hello World" Query
 
 Querying the database can be as simple as:
