@@ -84,6 +84,22 @@ work for the [H2 database](http://www.h2database.com):
   })
 ```
 
+Note that file-based H2 databases are supported directly via the simple "database spec":
+
+```clojure
+(def db-spec
+  {:dbtype "h2"
+   :dbname "/path/to/my/database"})
+```
+
+and in `java.jdbc` 0.7.6 and later, the in-memory version is supported:
+
+```clojure
+(def db-spec
+  {:dbtype "h2:mem"
+   :dbname "mydb"})
+```
+
 ### A "Hello World" Query
 
 Querying the database can be as simple as:
