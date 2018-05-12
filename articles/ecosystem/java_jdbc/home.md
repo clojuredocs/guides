@@ -42,6 +42,7 @@ are built on top of java.jdbc and provide such abstraction:
 * [HoneySQL](https://github.com/jkk/honeysql)
 * [SQLingvo](https://github.com/r0man/sqlingvo)
 * [Korma][korma]
+* [Walkable](https://github.com/walkable-server/walkable)
 
 In particular, [Korma][korma] goes beyond a SQL DSL to provide "entities" and
 "relationships" (in the style of classical Object-Relational Mappers, but
