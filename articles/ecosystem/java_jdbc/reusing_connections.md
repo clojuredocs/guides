@@ -16,8 +16,13 @@ Since you rarely want every database operation to create a new connection,
 there are two ways to reuse connections:
 
 * Grouping Operations using `with-db-connection`: If you don't want to deal
-  with a connection pooling library, you use this macro to automatically open a
-  connection and maintain it for a body of code.
+  with a connection pooling library, you can use this macro to automatically open a
+  connection and maintain it for a body of code, with each operation executed in its
+  own transaction, then close the connection.
+* Grouping Operations using `with-db-transaction`: If you want to execute multiple
+  operations in a single transaction, you can use this macro to automatically open a
+  connection, start a transaction, execute multiple operations, commit the transaction,
+  and then close the connection.
 * Connection Pooling: This is the recommended approach and is fairly
   straightforward, with a number of connection pooling libraries available. See
   *How To Use Connection Pooling* below for more information.
@@ -40,16 +45,50 @@ add a dependency on an external connection pooling library:
     (jdbc/insert! db-con :table (dissoc (first rows) :id))))
 ```
 
+The `query` and the `insert!` are each run in their own transaction and committed
+if they succeed. If you want to run multiple operations in a single transaction
+see the next section about `with-db-transaction`.
+
+## Using `with-db-transaction`
+
+This macro provides a way to reuse connections, committing or rolling back
+multiple operations in a single transaction:
+
+```clojure
+(ns dbexample
+  (:require [clojure.java.jdbc :as jdbc]))
+
+(def db-spec ... ) ;; see above
+
+(with-db-transaction [t-con db-spec]
+  (let [;; fetch some rows using this connection
+        rows (jdbc/query t-con ["SELECT * FROM table WHERE id = ?" 42])]
+    ;; insert a copy of the first row using the same connection
+    (jdbc/insert! t-con :table (dissoc (first rows) :id))))
+```
+
+If any operation inside `with-db-transaction` fails (throws an exception), then
+all of the operations performed so far are rolled back. If all the operations
+succeed, then the entire transaction is committed.
+
+Transactions are not nested (since not all databases support that) so if this is
+used another active transaction, the outer transaction (and connection) are used
+as-is. If the isolation levels of the outer and inner transaction do not match
+you will get an `IllegalStateException`.
+
+See also `db-set-rollback-only!`, `db-unset-rollback-only!`, and `db-is-rollback-only`
+for additional control over the commit/rollback behavior of the enclosing transaction.
+
 ## Using Connection Pooling
 
-java.jdbc does not provide connection pooling directly but it is relatively
+`java.jdbc` does not provide connection pooling directly but it is relatively
 easy to add to your project. There are several connection pooling libraries out
 there, but here we will provide instructions for the popular `c3p0` library.
 
 The basic idea is to add your chosen connection pooling library to your
 project, import the appropriate class(es), define a function that consumes a
 "database spec" and produces a map containing a `:datasource` key whose value
-is the constructed pooled `DataSource` object, then use that in place of your
+is the constructed pooled `DataSource` object, then use that hash map in place of your
 bare `db-spec` variable. You are responsible for creating the pooled data
 source object and passing the map containing it into any functions that need a
 database connection.
@@ -77,7 +116,7 @@ For a Maven-based project, you would add:
 
 ### Create the pooled datasource from your db-spec
 
-Define your `db-spec` as usual, for example (for MySQL):
+Define your `db-spec` using the long form, for example (for MySQL):
 
 ```clojure
 (def db-spec
@@ -88,11 +127,15 @@ Define your `db-spec` as usual, for example (for MySQL):
    :password "secret"})
 ```
 
+We have to use the long form here because c3p0 operates on the class name, subprotocol,
+and subname elements. Of course, you don't really need to define a `db-spec` here
+because you're not going to use it with `java.jdbc` directly, only with c3p0.
+
 Import the c3p0 class as part of your namespace declaration, for example:
 
 ```clojure
 (ns example.db
-  (:import com.mchange.v2.c3p0.ComboPooledDataSource))
+  (:import (com.mchange.v2.c3p0 ComboPooledDataSource)))
 ```
 
 Define a function that creates a pooled datasource:

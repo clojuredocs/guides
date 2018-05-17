@@ -3,8 +3,8 @@ title: "Using java.jdbc"
 layout: article
 ---
 
-This guide is intended to help you use Clojure's JDBC wrapper, the java.jdbc
-contrib library.
+This guide is intended to help you use Clojure's JDBC wrapper, the `java.jdbc`
+Contrib library.
 
 ## Contents
 
@@ -15,15 +15,15 @@ contrib library.
 
 ## Overview
 
-java.jdbc is intended to be a low-level Clojure wrapper around various Java
-JDBC drivers and supports a wide range of databases. The [java.jdbc source is
+`java.jdbc` is intended to be a low-level Clojure wrapper around various Java
+JDBC drivers and supports a wide range of databases. The [`java.jdbc` source is
 on GitHub][github] and there is a dedicated [java.jdbc mailing
-list][mailing-list]. The detailed [java.jdbc reference][reference] is
-automatically generated from the java.jdbc source.
+list][mailing-list]. The detailed [`java.jdbc` reference][reference] is
+automatically generated from the `java.jdbc` source.
 
-Generally, when using java.jdbc, you will set up a data source as a "database
+Generally, when using `java.jdbc`, you will set up a data source as a "database
 spec" and pass that to the various CRUD (create, read, update, delete)
-functions that java.jdbc provides. These operations are detailed within the
+functions that `java.jdbc` provides. These operations are detailed within the
 [Using SQL][using-sql] page, but a quick overview is provided by the
 walkthrough below.
 
@@ -35,9 +35,9 @@ Connections][reusing-connections] page.
 
 ## Higher-level DSL and migration libraries
 
-If you need more abstraction than the java.jdbc wrapper provides, you may want
+If you need more abstraction than the `java.jdbc` wrapper provides, you may want
 to consider using a library that provides a DSL. All of the following libraries
-are built on top of java.jdbc and provide such abstraction:
+are built on top of `java.jdbc` and provide such abstraction:
 
 * [HoneySQL](https://github.com/jkk/honeysql)
 * [SQLingvo](https://github.com/r0man/sqlingvo)
@@ -55,7 +55,7 @@ more popular options are:
 * [Migratus](https://github.com/pjstadig/migratus)
 * [Ragtime](https://github.com/weavejester/ragtime)
 
-## A brief java.jdbc walkthrough
+## A brief `java.jdbc` walkthrough
 
 ### Setting up a data source
 
@@ -71,7 +71,7 @@ and the username and password. For example,
    :password "secret"})
 ```
 
-Some DBs require a different format for the "database spec".  Here is an example that will 
+Some DBs require a different format for the "database spec".  Here is an example that will
 work for the [H2 database](http://www.h2database.com):
 
 ```
@@ -121,7 +121,7 @@ want to create tables and manipulate data.
 
 ### Creating tables
 
-java.jdbc provides `create-table-ddl` and `drop-table-ddl` to generate basic
+`java.jdbc` provides `create-table-ddl` and `drop-table-ddl` to generate basic
 `CREATE TABLE` and `DROP TABLE` DDL strings. Anything beyond that can be
 constructed manually as a string.
 
@@ -148,12 +148,12 @@ single transaction:
                       "CREATE INDEX name_ix ON fruit ( name );"])
 ```
 
-For more details on DDL functionality within java.jdbc, see the [Using DDL and
+For more details on DDL functionality within `java.jdbc`, see the [Using DDL and
 Metadata Guide][using-ddl].
 
 ### Querying the database
 
-The four basic CRUD operations java.jdbc provides are:
+The four basic CRUD operations `java.jdbc` provides are:
 
 ```clojure
 (jdbc/insert! db-spec :table {:col1 42 :col2 "123"})               ;; Create
@@ -164,13 +164,13 @@ The four basic CRUD operations java.jdbc provides are:
 
 The table name can be specified as a string or a keyword.
 
-`insert!` takes a single record in hashmap form to insert. `insert!` can also
+`insert!` takes a single record in hash map form to insert. `insert!` can also
 take a vector of column names (as strings or keywords), followed by a vector of
 column values to insert into those respective columns, much like an `INSERT`
 statement in SQL. Entries in the map that have the value `nil` will cause
 `NULL` values to be inserted into the corresponding columns.
 
-If you wish to insert multiple rows (in hashmap form) at once, you can use
+If you wish to insert multiple rows (in hash map form) at once, you can use
 `insert-multi!`; however, `insert-multi!` will write a separate insertion
 statement for each row, so it is suggested you use the column-based form of
 `insert-multi!` over the row-based form. Passing multiple column values to
@@ -215,8 +215,8 @@ These are all the commands we need to write a simple migration for our database!
 
 ## More detailed java.jdbc documentation
 
-* [Using SQL:][using-sql] a more detailed guide on using SQL with java.jdbc
-* [Using DDL:][using-ddl] how to create your tables using the java.jdbc DDL
+* [Using SQL:][using-sql] a more detailed guide on using SQL with `java.jdbc`
+* [Using DDL:][using-ddl] how to create your tables using the `java.jdbc` DDL
 * [Reusing Connections:][reusing-connections] how to reuse your database
   connections
 
