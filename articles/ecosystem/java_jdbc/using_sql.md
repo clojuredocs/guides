@@ -12,8 +12,8 @@ layout: article
 
 ## Using SQL
 
-Here are some examples of using java.jdbc to manipulate data with SQL.
-These examples assume a simple table called fruit (see [Using DDL and
+Here are some examples of using `java.jdbc` to manipulate data with SQL.
+These examples assume a simple table called `fruit` (see [Using DDL and
 Metadata](using_ddl.html)). These examples all assume the following in your
 `ns` declaration:
 
@@ -23,7 +23,7 @@ Metadata](using_ddl.html)). These examples all assume the following in your
 
 ## Reading and processing rows
 
-java.jdbc provides a simple `query` function to allow you to read rows from
+`java.jdbc` provides a simple `query` function to allow you to read rows from
 tables, as well as optionally performing processing on them at the same time.
 
 ### Reading rows
@@ -58,7 +58,7 @@ of data with values in the same order as the columns.
 ### Processing a result set lazily
 
 Since `query` returns a fully realized result set, it can be difficult to
-process very large results. Fortunately java.jdbc provides a way to process a
+process very large results. Fortunately, `java.jdbc` provides a way to process a
 large result set lazily while the connection is open, by passing a function via
 the `:result-set-fn` option. Note that the function you pass must force
 realization of the result to avoid the connection closing while the result set
@@ -292,7 +292,7 @@ currently set to rollback, using the following functions:
 
 ## Updating or Inserting rows conditionally
 
-java.jdbc does not provide a built-in function for updating existing rows or
+`java.jdbc` does not provide a built-in function for updating existing rows or
 inserting a new row (the older API supported this but the logic was too
 simplistic to be generally useful). If you need that functionality, it can
 easily be done like this:
@@ -364,7 +364,7 @@ commit:
 
 ## Clojure identifiers and SQL entities
 
-As hinted at above, java.jdbc converts SQL entity names in result sets to
+As hinted at above, `java.jdbc` converts SQL entity names in result sets to
 keywords in Clojure by making them lowercase, and converts strings and keywords
 that specify table and column names (in maps) to SQL entities *as-is* by
 default.
@@ -379,7 +379,7 @@ functions.
 * `:entities` is for converting Clojure keywords/string to SQL entity names. It
   defaults to `identity`.
 
-If you want to prevent java.jdbc's conversion of SQL entity names to lowercase
+If you want to prevent `java.jdbc`'s conversion of SQL entity names to lowercase
 in a `query` result, you can specify `:identifiers identity`:
 
 ```clojure
@@ -438,16 +438,16 @@ with the parameters `"Apple", "Round", "99"`.
 
 ## Protocol extensions for transforming values
 
-By default, java.jdbc leaves it up to Java interop and the JDBC driver library
+By default, `java.jdbc` leaves it up to Java interop and the JDBC driver library
 to perform the appropriate transformations of Clojure values to SQL values and
 vice versa. When Clojure values are passed through to the JDBC driver,
-java.jdbc uses `PreparedStatement/setObject` for all values by default. When
+`java.jdbc` uses `PreparedStatement/setObject` for all values by default. When
 Clojure values are read from a `ResultSet` they are left untransformed, except
 that `Boolean` values are coerced to canonical `true` / `false` values in
 Clojure (some driver / data type combinations can produce `(Boolean. false)`
 values otherwise, which do not behave like `false` in all situations).
 
-java.jdbc provides three protocols that you can extend, in order to modify
+`java.jdbc` provides three protocols that you can extend, in order to modify
 these behaviors.
 
 * `ISQLValue` / `sql-value` - simple transformations of Clojure values to SQL
