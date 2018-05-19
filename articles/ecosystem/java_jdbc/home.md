@@ -71,10 +71,11 @@ and the username and password. For example,
    :password "secret"})
 ```
 
-Some DBs require a different format for the "database spec".  Here is an example that will
-work for the [H2 database](http://www.h2database.com):
+Some DBs require a different format for the "database spec". Here is an example
+that was required for an in-memory [H2 database](http://www.h2database.com) prior
+to `java.jdbc` release 0.7.6:
 
-```
+```clojure
 (def db-spec
   {:classname   "org.h2.Driver"
    :subprotocol "h2:mem"                  ; the prefix `jdbc:` is added automatically
@@ -85,7 +86,8 @@ work for the [H2 database](http://www.h2database.com):
   })
 ```
 
-Note that file-based H2 databases are supported directly via the simple "database spec":
+Note that file-based H2 databases have been supported directly via the simple
+"database spec" for a long time:
 
 ```clojure
 (def db-spec
@@ -93,13 +95,47 @@ Note that file-based H2 databases are supported directly via the simple "databas
    :dbname "/path/to/my/database"})
 ```
 
-and in `java.jdbc` 0.7.6 and later, the in-memory version is supported:
+As of `java.jdbc` 0.7.6, the in-memory version is supported directly:
 
 ```clojure
 (def db-spec
   {:dbtype "h2:mem"
    :dbname "mydb"})
 ```
+
+Out of the box, `java.jdbc` understands the following `:dbtype` values (with
+their default class names):
+
+* `"derby"` - `org.apache.derby.jdbc.EmbeddedDriver`
+* `"h2"` - `org.h2.Driver`
+* `"h2:mem"` - `org.h2.Driver`
+* `"hsqldb"` or `"hsql"` - `org.hsqldb.jdbcDriver`
+* `"jtds:sqlserver"` or `"jtds"` - `net.sourceforge.jtds.jdbc.Driver`
+* `"mysql"` - `com.mysql.jdbc.Driver`
+* `"oracle:oci"` - `oracle.jdbc.OracleDriver`
+* `"oracle:thin"` or `"oracle"` - `oracle.jdbc.OracleDriver`
+* `"postgresql"` or `"postgres"` - `org.postgresql.Driver`
+* `"pgsql"` - `com.impossibl.postgres.jdbc.PGDriver`
+* `"redshift"` - `com.amazon.redshift.jdbc.Driver`
+* `"sqlite"` - `org.sqlite.JDBC`
+* `"sqlserver"` - `"mssql"` - `com.microsoft.sqlserver.jdbc.SQLServerDriver`
+
+You must specify the appropriate JDBC driver dependency in your project -- these
+drivers are not included with `java.jdbc`.
+
+You can overide the default class name by specifying `:classname` as well as
+`:dbtype`.
+
+For databases that require a hostname or IP address, `java.jdbc` assumes
+`"127.0.0.1"` but that can be overidden with the `:host` option.
+
+For databases that require a port, `java.jdbc` has the following defaults,
+which can be overridden with the `:port` option:
+
+* Microsoft SQL Server - 1433
+* MySQL - 3306
+* Oracle - 1521
+* PostgreSQL - 5432
 
 ### A "Hello World" Query
 

@@ -233,6 +233,11 @@ You can insert a single row, or multiple rows. Depending on how you call
 through a single, batched SQL statement. That will also determine whether or
 not you get back any generated keys.
 
+If you need a more complex form of insertion, you can use `execute!` and, if
+your database / driver supports it, you can pass `:return-keys` as an option
+to get back the generated keys. As of `java.jdbc` 0.7.6, this can be a vector
+of column names to return (for drivers that support that) or a simple Boolean.
+
 ### Inserting a row
 
 If you want to insert a single row (or partial row) and get back the generated
@@ -254,7 +259,9 @@ There are two ways to insert multiple rows: as a sequence of maps, or as a
 sequence of vectors. In the former case, multiple inserts will be performed and
 a map of the generated keys will be returned for each insert (as a sequence).
 In the latter case, a single, batched insert will be performed and a sequence
-of row insert counts will be returned (generally a sequence of ones).
+of row insert counts will be returned (generally a sequence of ones). The latter
+approach is likely to be substantially faster if you are inserting a large number
+of rows.
 
 If you use `insert-multi!` and specify each row as a map of columns and their values,
 then you can specify a mixture of complete and partial rows, and you will get
@@ -366,7 +373,8 @@ You can specify the transaction isolation level as part of the
 
 Possible values for `:isolation` are `:none`, `:read-committed`,
 `:read-uncommitted`, `:repeatable-read`, and `:serializable`. Be aware that not
-all databases support all isolation levels.
+all databases support all isolation levels. Inside a transaction, you can call
+`get-isolation-level` to return the current level.
 
 In addition, you can also set the current transaction-aware connection to
 rollback, and reset that setting, as well as test whether the connection is
@@ -458,14 +466,17 @@ that specify table and column names (in maps) to SQL entities *as-is* by
 default.
 
 You can override this behavior by specifying an options map, containing
-`:identifiers` on the `query` and `metadata-result` functions or `:entities` on
-the `delete!`, `insert!`, `update!`, `create-table-ddl`, and `drop-table-ddl`
-functions.
+`:identifiers`, `:keywordize?` and/or `:qualifier`, on any function that
+returns or transforms a result set,
+and `:entities`, on any function that transforms Clojure data into SQL.
 
-* `:identifiers` is for converting `ResultSet` column names to keywords. It
+* `:identifiers` is for converting `ResultSet` column names to keywords (or strings). It
   defaults to `clojure.string/lower-case`.
+* `:keywordize?` controls whether to convert identifiers to keywords (the default) or not.
+* `:qualifier` optionally specifies a namespace to qualify keywords with (when
+  `:keywordize?` is not falsey).
 * `:entities` is for converting Clojure keywords/string to SQL entity names. It
-  defaults to `identity`.
+  defaults to `identity` (after calling `name` on the keyword or string).
 
 If you want to prevent `java.jdbc`'s conversion of SQL entity names to lowercase
 in a `query` result, you can specify `:identifiers identity`:
