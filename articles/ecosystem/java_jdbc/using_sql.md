@@ -58,9 +58,15 @@ of data with values in the same order as the columns.
 ### Processing a result set lazily
 
 Since `query` returns a fully realized result set, it can be difficult to
-process very large results. Fortunately, `java.jdbc` provides a way to process a
-large result set lazily while the connection is open, by passing a function via
-the `:result-set-fn` option. Note that the function you pass must force
+process very large results. Fortunately, `java.jdbc` provides a number of ways to process a
+large result set lazily while the connection is open, either by passing a function via
+the `:result-set-fn` option or, since release 0.7.0, via `reducible-query`.
+
+**`query` and `:result-set-fn`**
+
+_If you are using release 0.7.0 or later, consider using `reducible-query` instead -- see below._
+
+For `:result-set-fn`, the function you pass must force
 realization of the result to avoid the connection closing while the result set
 is still being processed. A `reduce`-based function is a good choice.
 
@@ -70,7 +76,7 @@ is still being processed. A `reduce`-based function is a good choice.
                            (reduce (fn [total row-map]
                                      (+ total (:cost row-map)))
                            0 rs))})
-;; produces the total cost of all the cheap fruits
+;; produces the total cost of all the cheap fruits: 437
 ```
 
 Of course, a simple sum like this could be computed directly in SQL instead:
@@ -84,19 +90,87 @@ Of course, a simple sum like this could be computed directly in SQL instead:
 We know we will only get one row back so passing `first` to `:result-set-fn` is
 a quick way to get just that row.
 
-With `:result-set-fn`, we can process very large result sets because the rows
-are fetched from the database in chunks, as your function realizes the result
-set sequence.
-
 Remember that if you also specify `:as-arrays? true`, your result set function
 will be passed a sequence of vectors in which the first vector contains the
 column names and subsequent vectors represent the values in the rows, matching
 the order of the column names.
 
+**`reducible-query`**
+
+This is the recommended approach since release 0.7.0 but it does come with a few
+restrictions:
+
+You cannot use any of the following options that `query` accepts:
+`as-arrays?`, `:explain`, `:explain-fn`, `:result-set-fn`, or `:row-fn`.
+
+On the other hand, you have access to a much faster way to process result sets:
+you can specify `:raw? true` and no conversion from Java's `ResultSet` to
+Clojure's sequence of hash maps will be performed. In particular, it's as if you
+specified `:identifiers identity :keywordize? false :qualifier nil`, and the
+sequence representation of each row is not available. That means no `keys`,
+no `vals`, no `seq` calls, just simple key lookup (for convenience, you can
+still use keyword lookup for columns, but you can also call `get` with either a
+string or a keyword).
+
+So how does this work? `reducible-query` produces a `clojure.lang.IReduce` which,
+when reduced with a function `f`, performs the query and reduces the `ResultSet`
+using `f`, opening and closing the connection and/or transaction during the
+reduction. For example:
+
+```clojure
+;; our reducing function requires two arguments: we must provide initial val
+(reduce (fn [total {:keys [cost]}] (+ total cost))
+        0
+        (j/reducible-query db-spec
+                           ["SELECT * FROM fruit WHERE cost < ?" 50]
+                           {:raw? true}))
+;; separating the key selection from the reducing function: we can omit val
+(transduce (map :cost)
+           + ; can be called with 0, 1, or 2 arguments!
+           (j/reducible-query db-spec
+                              ["SELECT * FROM fruit WHERE cost < ?" 50]
+                              {:raw? true}))
+;; 437
+```
+
+Since `reducible-query` doesn't actually run the query until you reduce its result,
+you can create it once and run it as many times as you want. This will avoid the
+overhead of option and parameter validation and handling for repeated reductions,
+since those are performed just once in the call to `reducible-query`. Note that
+the SQL parameters are fixed by that call, so this only works for running the
+_identical_ query multiple times.
+
+A reducible companion to `result-set-seq` also exists, in case you already have
+a Java `ResultSet` and want to create a `clojure.lang.IReduce`. `reducible-result-set`
+accept almost the same options as `result-set-seq`: `identifiers`, `keywordize?`,
+`qualifier`, and `read-columns`. It does not accept `as-arrays?` (for the same
+reason that `reducible-query` does not). Unlike `result-set-seq`, which produces
+a lazy sequence that can be consumed multiple times (with the first pass realizing
+it for subsequent passes), `reducible-result-set` is reducible just once: the
+underlying `ResultSet` is mutable and is consumed during the first reduction!
+
+It should go without saying that both `reducible-query` and
+`reducible-result-set` respect `reduced` / `reduced?`.
+
+**Additional Options?**
+
+Note: some databases require additional options to be passed in to ensure that
+result sets are chunked and lazy. In particular, you may need to pass
+`:auto-commit?`, set appropriately, as an option to whichever function will open your database
+connection (`with-db-connection`, `with-db-transaction`, or the `query` / `reducible-query` itself
+if you are passing a bare database spec and expecting `query` / `reducible-query` to open and close
+the connection directly). You may also need to specify `:fetch-size`, `:result-type`,
+and possibly other options -- consult your database's documentation for the JDBC
+driver you are using.
+
 ### Processing each row lazily
 
-In addition to processing the entire result set, we can also process each row
-with the `:row-fn` option. Again, we pass a function but this time it will be
+As seen above, using `reduce`, `transduce`, etc with a `reducible-query` allow
+you to easily and efficiently process each row as you process the entire
+result set, but sometimes you just want a sequence of transformed rows.
+
+We can process each row with the `:row-fn` option. Again, like with `:result-set-fn`,
+we pass a function but this time it will be
 invoked on each row, as the result set is realized.
 
 ```clojure
@@ -136,6 +210,20 @@ Here is an example that manipulates rows to add computed columns:
          {:row-fn add-tax})
 ;; produces all the rows with a new :tax column added
 ```
+
+All of the above can be achieved via `reducible-query` and the appropriate
+reducing function and/or transducer, but with those simple row/result set
+functions, the result is often longer / uglier:
+
+```clojure
+(into [] (map :name) (j/reducible-query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]))
+(transduce (map :cost) + (j/reducible-query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]))
+;; :row-fn :total :result-set-fn first left as an exercise for the reader!
+(into [] (map add-tax) (j/reducible-query db-spec ["SELECT * FROM fruit"]))
+```
+
+If the result set is likely to be large and the reduction can use a `:raw? true`
+result set, `reducible-query` may be worth the verbosity for the performance gain.
 
 ## Inserting data
 
@@ -189,12 +277,12 @@ wish to insert complete rows, you may omit the column name vector (passing
 table so be careful!
 
 ```clojure
-  (j/insert-multi! db-spec :fruit
-                   nil ; column names not supplied
-                   [[1 "Apple" "red" 59 87]
-                    [2 "Banana" "yellow" 29 92.2]
-                    [3 "Peach" "fuzzy" 139 90.0]
-                    [4 "Orange" "juicy" 89 88.6]])
+(j/insert-multi! db-spec :fruit
+                 nil ; column names not supplied
+                 [[1 "Apple" "red" 59 87]
+                  [2 "Banana" "yellow" 29 92.2]
+                  [3 "Peach" "fuzzy" 139 90.0]
+                  [4 "Orange" "juicy" 89 88.6]])
 ;; (1 1 1 1) - row counts modified
 ```
 
@@ -286,7 +374,7 @@ currently set to rollback, using the following functions:
 
 ```clojure
 (j/db-set-rollback-only! t-con)   ; this transaction will rollback instead of commit
-(j/db-unset-rollback-only! t-con) ; this transaction commit if successful
+(j/db-unset-rollback-only! t-con) ; this transaction will commit if successful
 (j/db-is-rollback-only t-con)     ; returns true if transaction is set to rollback
 ```
 
@@ -295,7 +383,7 @@ currently set to rollback, using the following functions:
 `java.jdbc` does not provide a built-in function for updating existing rows or
 inserting a new row (the older API supported this but the logic was too
 simplistic to be generally useful). If you need that functionality, it can
-easily be done like this:
+sometimes be done like this:
 
 ```clojure
 (defn update-or-insert!
