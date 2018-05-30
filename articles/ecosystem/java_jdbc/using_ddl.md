@@ -16,14 +16,14 @@ DDL operations can be executed using the `db-do-commands` function. The general
 approach is:
 
 ```clojure
-(j/db-do-commands db-spec [sql-command-1 sql-command-2 .. sql-command-n])
+(jdbc/db-do-commands db-spec [sql-command-1 sql-command-2 .. sql-command-n])
 ```
 
 The commands are executed as a single, batched statement, wrapped in a
 transaction. If you want to avoid the transaction, use this approach:
 
 ```clojure
-(j/db-do-commands db-spec false [sql-command-1 sql-command-2 .. sql-command-n])
+(jdbc/db-do-commands db-spec false [sql-command-1 sql-command-2 .. sql-command-n])
 ```
 
 This is necessary for some databases that do not allow DDL operations to be
@@ -37,13 +37,13 @@ strings) and have your chosen naming strategy applied, just as you can for
 several of the SQL functions.
 
 ```clojure
-(j/create-table-ddl :fruit
-                    [[:name "varchar(32)" :primary :key]
-                     [:appearance "varchar(32)"]
-                     [:cost :int]
-                     [:grade :real]]
-                    {:table-spec "ENGINE=InnoDB"
-                     :entities clojure.string/upper-case})
+(jdbc/create-table-ddl :fruit
+                       [[:name "varchar(32)" :primary :key]
+                        [:appearance "varchar(32)"]
+                        [:cost :int]
+                        [:grade :real]]
+                       {:table-spec "ENGINE=InnoDB"
+                        :entities clojure.string/upper-case})
 ```
 This will generate:
 
@@ -70,8 +70,8 @@ Similarly there is a `drop-table-ddl` function which takes a table name and an
 optional `:entities` option to generate DDL to drop a table.
 
 ```clojure
-(j/drop-table-ddl :fruit) ; drop table fruit
-(j/drop-table-ddl :fruit {:entities clojure.string/upper-case}) ; drop table FRUIT
+(jdbc/drop-table-ddl :fruit) ; drop table fruit
+(jdbc/drop-table-ddl :fruit {:entities clojure.string/upper-case}) ; drop table FRUIT
 ```
 
 This will generate:
@@ -98,8 +98,8 @@ DDL string (this approach is needed for Microsoft SQL Server).
 For example:
 
 ```clojure
-(j/with-db-metadata [md db-spec]
-  (j/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"]))))
+(jdbc/with-db-metadata [md db-spec]
+  (jdbc/metadata-result (.getTables md nil nil nil (into-array ["TABLE" "VIEW"]))))
 ```
 
 This returns a sequence of maps describing all the tables and views in the

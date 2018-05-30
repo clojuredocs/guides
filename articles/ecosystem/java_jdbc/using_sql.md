@@ -18,7 +18,7 @@ Metadata](using_ddl.html)). These examples all assume the following in your
 `ns` declaration:
 
 ```clojure
-(:require [clojure.java.jdbc :as j])
+(:require [clojure.java.jdbc :as jdbc])
 ```
 
 ## Reading and processing rows
@@ -33,12 +33,12 @@ To obtain a fully realized result set as a sequence of maps, you can use
 the SQL:
 
 ```clojure
-(j/query db-spec ["SELECT * FROM fruit"])
+(jdbc/query db-spec ["SELECT * FROM fruit"])
 ;; ({:id 1 :name "Apple" :appearance "red" :cost 59 :grade 87}
 ;;  {:id 2 :name "Banana" :appearance "yellow" :cost 29 :grade 92.2}
 ;;  ...)
 
-(j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50])
+(jdbc/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50])
 ;; ({:id 2 :name "Banana" :appearance "yellow" :cost 29 :grade 92.2}
 ;;  ...)
 ```
@@ -48,7 +48,7 @@ will contain the column names, and each subsequent vector will represent a row
 of data with values in the same order as the columns.
 
 ```clojure
-(j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
+(jdbc/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
          {:as-arrays? true})
 ;; ([:id :name :appearance :cost :grade]
 ;;  [2 "Banana" "yellow" 29 92.2]
@@ -71,19 +71,19 @@ realization of the result to avoid the connection closing while the result set
 is still being processed. A `reduce`-based function is a good choice.
 
 ```clojure
-(j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
-         {:result-set-fn (fn [rs]
-                           (reduce (fn [total row-map]
-                                     (+ total (:cost row-map)))
-                           0 rs))})
+(jdbc/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
+            {:result-set-fn (fn [rs]
+                              (reduce (fn [total row-map]
+                                        (+ total (:cost row-map)))
+                              0 rs))})
 ;; produces the total cost of all the cheap fruits: 437
 ```
 
 Of course, a simple sum like this could be computed directly in SQL instead:
 
 ```clojure
-(j/query db-spec ["SELECT SUM(cost) FROM fruit WHERE cost < ?" 50]
-         {:result-set-fn first})
+(jdbc/query db-spec ["SELECT SUM(cost) FROM fruit WHERE cost < ?" 50]
+            {:result-set-fn first})
 ;; {:sum(cost) 437}
 ```
 
@@ -121,15 +121,15 @@ reduction. For example:
 ;; our reducing function requires two arguments: we must provide initial val
 (reduce (fn [total {:keys [cost]}] (+ total cost))
         0
-        (j/reducible-query db-spec
-                           ["SELECT * FROM fruit WHERE cost < ?" 50]
-                           {:raw? true}))
+        (jdbc/reducible-query db-spec
+                              ["SELECT * FROM fruit WHERE cost < ?" 50]
+                              {:raw? true}))
 ;; separating the key selection from the reducing function: we can omit val
 (transduce (map :cost)
            + ; can be called with 0, 1, or 2 arguments!
-           (j/reducible-query db-spec
-                              ["SELECT * FROM fruit WHERE cost < ?" 50]
-                              {:raw? true}))
+           (jdbc/reducible-query db-spec
+                                 ["SELECT * FROM fruit WHERE cost < ?" 50]
+                                 {:raw? true}))
 ;; 437
 ```
 
@@ -174,8 +174,8 @@ we pass a function but this time it will be
 invoked on each row, as the result set is realized.
 
 ```clojure
-(j/query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]
-         {:row-fn :name})
+(jdbc/query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]
+            {:row-fn :name})
 ;; ("Apple" "Banana" ...)
 ```
 
@@ -186,18 +186,18 @@ You can combine this with `:result-set-fn` to simplify processing of result
 sets:
 
 ```clojure
-(j/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
-         {:row-fn :cost
-          :result-set-fn (partial reduce +)})
+(jdbc/query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]
+            {:row-fn :cost
+             :result-set-fn (partial reduce +)})
 ;; produces the total cost of all the cheap fruits
 ```
 
 or:
 
 ```clojure
-(j/query db-spec ["SELECT SUM(cost) AS total FROM fruit WHERE cost < ?" 50]
-         {:row-fn :total
-          :result-set-fn first})
+(jdbc/query db-spec ["SELECT SUM(cost) AS total FROM fruit WHERE cost < ?" 50]
+            {:row-fn :total
+             :result-set-fn first})
 ;; produces the same result, via SQL
 ```
 
@@ -206,8 +206,8 @@ Here is an example that manipulates rows to add computed columns:
 ```clojure
 (defn add-tax [row] (assoc row :tax (* 0.08 (:cost row))))
 
-(j/query db-spec ["SELECT * FROM fruit"]
-         {:row-fn add-tax})
+(jdbc/query db-spec ["SELECT * FROM fruit"]
+            {:row-fn add-tax})
 ;; produces all the rows with a new :tax column added
 ```
 
@@ -216,10 +216,10 @@ reducing function and/or transducer, but with those simple row/result set
 functions, the result is often longer / uglier:
 
 ```clojure
-(into [] (map :name) (j/reducible-query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]))
-(transduce (map :cost) + (j/reducible-query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]))
+(into [] (map :name) (jdbc/reducible-query db-spec ["SELECT name FROM fruit WHERE cost < ?" 50]))
+(transduce (map :cost) + (jdbc/reducible-query db-spec ["SELECT * FROM fruit WHERE cost < ?" 50]))
 ;; :row-fn :total :result-set-fn first left as an exercise for the reader!
-(into [] (map add-tax) (j/reducible-query db-spec ["SELECT * FROM fruit"]))
+(into [] (map add-tax) (jdbc/reducible-query db-spec ["SELECT * FROM fruit"]))
 ```
 
 If the result set is likely to be large and the reduction can use a `:raw? true`
@@ -246,7 +246,7 @@ This performs a single insert statement. A single-element sequence containing a
 map of the generated keys will be returned.
 
 ```clojure
-(j/insert! db-spec :fruit {:name "Pear" :appearance "green" :cost 99})
+(jdbc/insert! db-spec :fruit {:name "Pear" :appearance "green" :cost 99})
 ;; returns a database-specific map as the only element of a sequence, e.g.,
 ;; ({:generated_key 50}) might be returned for MySQL
 ```
@@ -269,9 +269,9 @@ back the generated keys for each row (assuming the database has that
 capability).
 
 ```clojure
-(j/insert-multi! db-spec :fruit
-                 [{:name "Pomegranate" :appearance "fresh" :cost 585}
-                  {:name "Kiwifruit" :grade 93}])
+(jdbc/insert-multi! db-spec :fruit
+                    [{:name "Pomegranate" :appearance "fresh" :cost 585}
+                     {:name "Kiwifruit" :grade 93}])
 ;; returns a sequence of database-specific maps, e.g., for MySQL:
 ;; ({generated_key 51} {generated_key 52})
 ```
@@ -284,12 +284,12 @@ wish to insert complete rows, you may omit the column name vector (passing
 table so be careful!
 
 ```clojure
-(j/insert-multi! db-spec :fruit
-                 nil ; column names not supplied
-                 [[1 "Apple" "red" 59 87]
-                  [2 "Banana" "yellow" 29 92.2]
-                  [3 "Peach" "fuzzy" 139 90.0]
-                  [4 "Orange" "juicy" 89 88.6]])
+(jdbc/insert-multi! db-spec :fruit
+                    nil ; column names not supplied
+                    [[1 "Apple" "red" 59 87]
+                     [2 "Banana" "yellow" 29 92.2]
+                     [3 "Peach" "fuzzy" 139 90.0]
+                     [4 "Orange" "juicy" 89 88.6]])
 ;; (1 1 1 1) - row counts modified
 ```
 
@@ -297,10 +297,10 @@ It is generally safer to specify the columns you wish to insert so you can
 control the order, and choose to omit certain columns:
 
 ```clojure
-(j/insert-multi! db-spec :fruit
-                 [:name :cost]
-                 [["Mango" 722]
-                  ["Feijoa" 441]])
+(jdbc/insert-multi! db-spec :fruit
+                    [:name :cost]
+                    [["Mango" 722]
+                     ["Feijoa" 441]])
 ;; (1 1) - row counts modified
 ```
 
@@ -314,17 +314,17 @@ parameters).
 
 ```clojure
 ;; update fruit set cost = 49 where grade < ?
-(j/update! db-spec :fruit
-           {:cost 49}
-           ["grade < ?" 75])
+(jdbc/update! db-spec :fruit
+              {:cost 49}
+              ["grade < ?" 75])
 ;; produces a sequence of the number of rows updated, e.g., (2)
 ```
 
 For a more complex update:
 
 ```clojure
-(j/execute! db-spec
-            ["update fruit set cost = ( 2 * grade ) where grade > ?" 50.0])
+(jdbc/execute! db-spec
+               ["update fruit set cost = ( 2 * grade ) where grade > ?" 50.0])
 ;; produces a sequence of the number of rows updated, e.g., (3)
 ```
 
@@ -334,14 +334,14 @@ If you want to delete any rows from a table that match a simple predicate, the
 `delete!` function can be used.
 
 ```clojure
-(j/delete! db-spec :fruit ["grade < ?" 25.0])
+(jdbc/delete! db-spec :fruit ["grade < ?" 25.0])
 ;; produces a sequence of the number of rows deleted, e.g., (1)
 ```
 
 You can also use `execute!` for deleting rows:
 
 ```clojure
-(j/execute! db-spec ["DELETE FROM fruit WHERE grade < ?" 25.0])
+(jdbc/execute! db-spec ["DELETE FROM fruit WHERE grade < ?" 25.0])
 ;; produces a sequence of the number of rows deleted, e.g., (1)
 ```
 
@@ -351,12 +351,12 @@ You can write multiple operations in a transaction to ensure they are either
 all performed, or all rolled back.
 
 ```clojure
-(j/with-db-transaction [t-con db-spec]
-  (j/update! t-con :fruit
-             {:cost 49}
-             ["grade < ?" 75])
-  (j/execute! t-con
-              ["update fruit set cost = ( 2 * grade ) where grade > ?" 50.0]))
+(jdbc/with-db-transaction [t-con db-spec]
+  (jdbc/update! t-con :fruit
+                {:cost 49}
+                ["grade < ?" 75])
+  (jdbc/execute! t-con
+                 ["update fruit set cost = ( 2 * grade ) where grade > ?" 50.0]))
 ```
 
 The `with-db-transaction` macro creates a transaction-aware connection from the
@@ -367,7 +367,7 @@ You can specify the transaction isolation level as part of the
 `with-db-transction` binding:
 
 ```clojure
-(j/with-db-transaction [t-con db-spec {:isolation :serializable}]
+(jdbc/with-db-transaction [t-con db-spec {:isolation :serializable}]
   ...)
 ```
 
@@ -381,9 +381,9 @@ rollback, and reset that setting, as well as test whether the connection is
 currently set to rollback, using the following functions:
 
 ```clojure
-(j/db-set-rollback-only! t-con)   ; this transaction will rollback instead of commit
-(j/db-unset-rollback-only! t-con) ; this transaction will commit if successful
-(j/db-is-rollback-only t-con)     ; returns true if transaction is set to rollback
+(jdbc/db-set-rollback-only! t-con)   ; this transaction will rollback instead of commit
+(jdbc/db-unset-rollback-only! t-con) ; this transaction will commit if successful
+(jdbc/db-is-rollback-only t-con)     ; returns true if transaction is set to rollback
 ```
 
 ## Updating or Inserting rows conditionally
@@ -397,10 +397,10 @@ sometimes be done like this:
 (defn update-or-insert!
   "Updates columns or inserts a new row in the specified table"
   [db table row where-clause]
-  (j/with-db-transaction [t-con db]
-    (let [result (j/update! t-con table row where-clause)]
+  (jdbc/with-db-transaction [t-con db]
+    (let [result (jdbc/update! t-con table row where-clause)]
       (if (zero? (first result))
-        (j/insert! t-con table row)
+        (jdbc/insert! t-con table row)
         result))))
 
 (update-or-insert! mysql-db :fruit
@@ -422,11 +422,11 @@ Transactions are rolled back if an exception is thrown, as shown in these
 examples.
 
 ```clojure
-(j/with-db-transaction [t-con db-spec]
-  (j/insert-multi! t-con :fruit
-                   [:name :appearance]
-                   [["Grape" "yummy"]
-                    ["Pear" "bruised"]])
+(jdbc/with-db-transaction [t-con db-spec]
+  (jdbc/insert-multi! t-con :fruit
+                      [:name :appearance]
+                      [["Grape" "yummy"]
+                       ["Pear" "bruised"]])
   ;; At this point the insert! call is complete, but the transaction is
   ;; not. The exception will cause it to roll back leaving the database
   ;; untouched.
@@ -437,25 +437,25 @@ As noted above, transactions can also be set explicitly to rollback instead of
 commit:
 
 ```clojure
-(j/with-db-transaction [t-con db-spec]
-  (prn "is-rollback-only" (j/db-is-rollback-only t-con))
+(jdbc/with-db-transaction [t-con db-spec]
+  (prn "is-rollback-only" (jdbc/db-is-rollback-only t-con))
   ;; is-rollback-only false
-  (j/db-set-rollback-only! t-con)
+  (jdbc/db-set-rollback-only! t-con)
   ;; the following insert will be rolled back when the transaction ends:
-  (j/insert!-multi t-con :fruit
-                   [:name :appearance]
-                   [["Grape" "yummy"]
-                    ["Pear" "bruised"]])
-  (prn "is-rollback-only" (j/db-is-rollback-only t-con))
+  (jdbc/insert!-multi t-con :fruit
+                      [:name :appearance]
+                      [["Grape" "yummy"]
+                       ["Pear" "bruised"]])
+  (prn "is-rollback-only" (jdbc/db-is-rollback-only t-con))
   ;; is-rollback-only true
   ;; the following will display the inserted rows:
-  (j/query t-con ["SELECT * FROM fruit"]
-           :row-fn println))
+  (jdbc/query t-con ["SELECT * FROM fruit"]
+              :row-fn println))
 (prn)
 ;; outside the transaction, the following will show the original rows
 ;; without those two inserted inside the (rolled-back) transaction:
-(j/query db-spec ["SELECT * FROM fruit"]
-         :row-fn println)
+(jdbc/query db-spec ["SELECT * FROM fruit"]
+            :row-fn println)
 ```
 
 ## Clojure identifiers and SQL entities
@@ -482,8 +482,8 @@ If you want to prevent `java.jdbc`'s conversion of SQL entity names to lowercase
 in a `query` result, you can specify `:identifiers identity`:
 
 ```clojure
-(j/query db-spec ["SELECT * FROM mixedTable"]
-         {:identifiers identity})
+(jdbc/query db-spec ["SELECT * FROM mixedTable"]
+            {:identifiers identity})
 ;; produces result set with column names exactly as they appear in the DB
 ```
 
@@ -492,8 +492,8 @@ might want to specify a function that converts those to dashes in Clojure
 keywords:
 
 ```clojure
-(j/query db-spec ["SELECT * FROM mixedTable"]
-         {:identifiers #(.replace % \_ \-)})
+(jdbc/query db-spec ["SELECT * FROM mixedTable"]
+            {:identifiers #(.replace % \_ \-)})
 ```
 
 For several databases, you will often want entities to be quoted in some way
@@ -506,9 +506,9 @@ returns a function suitable for use with the `:entities` option.
 For example:
 
 ```clojure
-(j/insert! db-spec :fruit
-           {:name "Apple" :appearance "Round" :cost 99}
-           {:entities (j/quoted \`)}) ; or (j/quoted :mysql)
+(jdbc/insert! db-spec :fruit
+              {:name "Apple" :appearance "Round" :cost 99}
+              {:entities (jdbc/quoted \`)}) ; or (jdbc/quoted :mysql)
 ```
 
 will execute:
@@ -521,9 +521,9 @@ INSERT INTO `fruit` ( `name`, `appearance`, `cost` )
 with the parameters `"Apple", "Round", "99"` whereas:
 
 ```clojure
-(j/insert! db-spec :fruit
-           {:name "Apple" :appearance "Round" :cost 99}
-           {:entities (j/quoted [\[ \]])}) ; or (j/quoted :sqlserver)
+(jdbc/insert! db-spec :fruit
+              {:name "Apple" :appearance "Round" :cost 99}
+              {:entities (jdbc/quoted [\[ \]])}) ; or (jdbc/quoted :sqlserver)
 ```
 
 will execute:
