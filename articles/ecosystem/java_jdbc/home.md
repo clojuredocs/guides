@@ -71,7 +71,7 @@ and the username and password. For example,
    :password "secret"})
 ```
 
-See [**Database Support**][#database-support] below for a complete list of
+See [**Database Support**](#database-support) below for a complete list of
 databases and drivers supported by `java.jdbc` out of the box.
 
 ### A "Hello World" Query
