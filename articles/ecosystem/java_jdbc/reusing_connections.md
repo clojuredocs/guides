@@ -38,7 +38,7 @@ add a dependency on an external connection pooling library:
 
 (def db-spec ... ) ;; see above
 
-(with-db-connection [db-con db-spec]
+(jdbc/with-db-connection [db-con db-spec]
   (let [;; fetch some rows using this connection
         rows (jdbc/query db-con ["SELECT * FROM table WHERE id = ?" 42])]
     ;; insert a copy of the first row using the same connection
@@ -60,7 +60,7 @@ multiple operations in a single transaction:
 
 (def db-spec ... ) ;; see above
 
-(with-db-transaction [t-con db-spec]
+(jdbc/with-db-transaction [t-con db-spec]
   (let [;; fetch some rows using this connection
         rows (jdbc/query t-con ["SELECT * FROM table WHERE id = ?" 42])]
     ;; insert a copy of the first row using the same connection
