@@ -308,33 +308,6 @@ Should be fairly self-explanatory, though Leiningen's built-in tutorial
 (available via `lein help tutorial`) provides a detailed explanation of
 the project structure.
 
-Before we continue we have to make our project play with CIDER, which
-requires a bit of one time setup.  Open the `project.clj` file and add
-the `cider-nrepl` plugin there. The file will initially look like this
-(more or less):
-
-```clojure
-(defproject command-line-args "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]])
-```
-
-You need to get to this (keep in mind that by the time you read this `cider-nrepl`
-will likely have a newer version):
-
-```clojure
-(defproject command-line-args "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]]
-  :profiles {:dev {:plugins [[cider/cider-nrepl "0.7.0"]]}})
-```
-
 Let's start up a live REPL session.
 
 ```
