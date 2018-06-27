@@ -116,7 +116,7 @@ There are many concurrency hazards, some of the most common and well known are:
 </table>
 
 These hazards are not exclusive to threads and can happen with OS
-processes, runtime processes and any other executaion processes. They
+processes, runtime processes and any other execution processes. They
 are also not specific to a particular runtime or VM (e.g., the JVM) or
 programming language. Admittedly, some languages make it significantly
 easier to write correct, safe concurrent programs, but none are
