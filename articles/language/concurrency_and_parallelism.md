@@ -938,9 +938,9 @@ with `clojure.core/realized?`:
 ;; ⇒ 49995000
 ```
 
-Clojure futures are evaluated in a fixed size thread pool that is also used by agents
-(updated via `clojure.core/send`). This works well in many cases but may result in
-throughput lower than expected in applications that heavily use agents and futures at the same time.
+Clojure futures are evaluated in an unbounded, cached thread pool that is also used by agents
+(updated via `clojure.core/send-off`). This works well in many cases but may result in
+exhaustion of the heap or thrashing if too many futures are created.
 
 Finally, Clojure futures implement `java.util.concurrent.Future` and can be used with Java APIs
 that accept them.
