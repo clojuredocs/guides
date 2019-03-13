@@ -15,7 +15,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 ## Overview
 
 As of September 2014, Clojure has over a dozen books published (or available for
-preview) about it, plus one about ClojureScript. This guide lists some of them
+preview) about it, plus two about ClojureScript. This guide lists some of them
 in reverse chronological order and intended to provide a very brief
 overview of each. It is by no means comprehensive and may be quite
 opinionated. The goal is to identify books that are more useful to
@@ -27,6 +27,20 @@ of Clojure (1.3+).
 ## Books About Clojure
 
 Note: books are listed in reverse chronological order.
+
+
+
+### Getting Clojure: Build Your Functional Skills One Idea at a Time
+
+By Russ Olsen
+
+### Notes
+
+An accessible introduction to Clojure that focuses on the ideas behind the language as well as the practical details of writing code.
+
+### Where You Can Buy It
+
+* [The Pramatic Bookshelf](https://pragprog.com/book/roclojure/getting-clojure#): eBook, paperback
 
 
 
