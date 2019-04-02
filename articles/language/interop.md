@@ -101,8 +101,8 @@ Java classes are instantiated using the `new` special form:
 (new java.util.Date)  ; ⇒ #inst "2012-10-09T21:23:57.278-00:00"
 ```
 
-However, Clojure reader provides a bit of syntactic sugar and you are much more likely
-to see it used:
+However, the Clojure reader provides a bit of syntactic sugar and you are much more likely
+to see this:
 
 ``` clojure
 (java.util.Date.)     ; ⇒ #inst "2012-10-09T21:24:43.878-00:00"
