@@ -12,8 +12,9 @@ Github](https://github.com/clojuredocs/guides).
 
 ## What Version of Clojure Does This Guide Cover?
 
-This guide covers Clojure 1.5+ and Emacs 24.x. Earlier Clojure and Emacs releases
-are not supported.
+This guide covers Clojure 1.5+ and Emacs 24+ for MS Windows and Linux,
+and Emacs 26+ for macOS. Earlier Clojure and Emacs releases
+are not supported by these instructions.
 
 ## Overview
 
@@ -25,53 +26,28 @@ workflow to use while developing a simple library.
 
 ## Installing Emacs ##
 
-### OSX ###
+### macOS ###
 
-By far the easiest way to get going with Emacs on OSX is to use
-[Homebrew](http://mxcl.github.com/homebrew/). Instructions for
-installation are
-[here](https://github.com/mxcl/homebrew/wiki/installation). You also
-need to ensure you have XCode installed for Homebrew to work
-correctly.
+The easiest way to get going with Emacs on macOS is to
+use [Homebrew](https://brew.sh). Instructions for installing Homebrew
+are provided on the landing page, and requirements (such as Xcode) are
+listed on the [installation details](https://docs.brew.sh/Installation)
+page.
 
-Once brew is installed, you can install Emacs 24 using:
-
-```bash
-$ brew install emacs --with-cocoa
-$ brew linkapps Emacs
-```
-
-This should install the latest version of Emacs and symlink `Emacs.app`
-to your `~/Applications` folder.
-
-After compiling, Emacs will be living happily somewhere in your
-cellar. You can check this:
+Once brew is installed, you can install Emacs using:
 
 ```bash
-$ ls /usr/local/Cellar/emacs/24.x
+$ brew cask install emacs
 ```
 
-If you have customizations to your environment (say in `.profile` or
-your shell-specific config) you can add [this](https://gist.github.com/3887459) function to fix the path
-issues when launching Emacs from the GUI on OS X
-([Thanks to Steve Purcell on the Clojure mailing list for this](http://www.mail-archive.com/clojure@googlegroups.com/msg36929.html)):
+This will install Emacs into your `/Applications/Emacs.app` folder and
+provide a symlink to the application as `/usr/local/bin/emacs`.
 
-```cl
-;; fix the PATH variable
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(when window-system (set-exec-path-from-shell-PATH))
+After installing, Emacs can be launched the same as other Mac applications
+*or* from the terminal via:
+```bash
+$ emacs
 ```
-
-This makes sure that all of the stuff you have on your PATH actually
-gets respected in the GUI Emacs, no matter how you start it.
-
-There's also a package called
-[exec-path-from-shell](https://github.com/purcell/exec-path-from-shell)
-that automates this. OS X users are advised to install it!
 
 ### Debian/Ubuntu ###
 
