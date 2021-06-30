@@ -91,11 +91,11 @@ like. For example:
     ...)
 
 The maintainers of Clojars 
-[require](https://github.com/clojars/clojars-web/wiki/Verified-Group-Names) 
-that new libs be published using verified groups, such as org.my-domain.
+[require that new libs be published using verified groups](https://github.com/clojars/clojars-web/wiki/Verified-Group-Names), 
+such as org.my-domain.
 
 Read more about groups at
-<https://github.com/ato/clojars-web/wiki/Groups>.
+<https://github.com/clojars/clojars-web/wiki/Groups>.
 
 
 ## Update the README
@@ -272,7 +272,7 @@ KEY BLOCK-----" and "-----END PGP PUBLIC KEY BLOCK-----") into the
 form on your Clojars profile page.
 
 For more info on working with Clojars, see [the Clojars
-wiki](https://github.com/ato/clojars-web/wiki/About).
+wiki](https://github.com/clojars/clojars-web/wiki/About).
 
 Once your Clojars account is all set up, and it has your public keys,
 upload your library to Clojars like so:
@@ -345,7 +345,7 @@ grab those changes as well:
 For more detailed documentation on various aspects of the procedures
 described here, see:
 
-  * the [Clojars wiki](https://github.com/ato/clojars-web/wiki)
+  * the [Clojars wiki](https://github.com/clojars/clojars-web/wiki)
   * the
     [Leiningen tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
     and [deploy
