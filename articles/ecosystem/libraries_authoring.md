@@ -84,22 +84,18 @@ namespacing (not the same thing as Clojure namespaces) --- it
 identifies to which group/organization a project belongs. Some
 examples of group-id's: clojurewerkz, sonian, and org.*your-domain*.
 
-Read more about groups at
-<https://github.com/ato/clojars-web/wiki/Groups>.
-
 You may choose to explicitly use a group-id for your project, if you
 like. For example:
 
     (defproject org.my-domain/my-project-name ...
     ...)
 
-Some authors like to use a single group-id for most of the libs they
-publish. The maintainers of Clojars recommend using the default
-"artifact-id = group-id" (as we've done with trivial-library-example)
-for libraries intended for broad community use and for those which are
-expected to live long enough to perhaps have different maintainers
-over time. You are free to handle the matter as you wish.
+The maintainers of Clojars 
+[require that new libs be published using verified groups](https://github.com/clojars/clojars-web/wiki/Verified-Group-Names), 
+such as org.my-domain.
 
+Read more about groups at
+<https://github.com/clojars/clojars-web/wiki/Groups>.
 
 
 ## Update the README
@@ -276,7 +272,7 @@ KEY BLOCK-----" and "-----END PGP PUBLIC KEY BLOCK-----") into the
 form on your Clojars profile page.
 
 For more info on working with Clojars, see [the Clojars
-wiki](https://github.com/ato/clojars-web/wiki/About).
+wiki](https://github.com/clojars/clojars-web/wiki/About).
 
 Once your Clojars account is all set up, and it has your public keys,
 upload your library to Clojars like so:
@@ -349,7 +345,7 @@ grab those changes as well:
 For more detailed documentation on various aspects of the procedures
 described here, see:
 
-  * the [Clojars wiki](https://github.com/ato/clojars-web/wiki)
+  * the [Clojars wiki](https://github.com/clojars/clojars-web/wiki)
   * the
     [Leiningen tutorial](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md)
     and [deploy
