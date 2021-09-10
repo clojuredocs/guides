@@ -229,10 +229,10 @@ Compare this with what the macro expands to when the unquote is removed:
 (defmacro unless
   [condition & forms]
   `(if (not condition)
-     (do ~@forms)))
+     ~@forms))
 
 (macroexpand-1 '(unless (= 1 2) true false))
-;= (if (clojure.core/not user/condition) (do true false))
+;= (if (clojure.core/not user/condition) true false)
 ```
 
 ### Implementation Details
