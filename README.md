@@ -1,5 +1,7 @@
 # CDS: A Clojure Doc Site
 
+**NOTE: Since we are no longer able to update the server running clojure-doc.org, the Clojure Guides have been copied to https://github.com/clojure-doc/clojure-doc.github.io and you can view the new site at https://clojure-doc.github.io -- please feel free to use that GitHub repository for Discussions, filing Issues, and submitting Pull Requests.**
+
 An assorted collection of tutorials, guides, and other documentation
 (by various authors) for the Clojure programming language and its
 ecosystem. [Read the guides online](http://clojure-doc.org).
